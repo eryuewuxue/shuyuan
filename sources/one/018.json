@@ -1,0 +1,45 @@
+[
+  {
+    "bookSourceName": "八一中文网",
+    "bookSourceUrl": "http://www.wangshuwx.com",
+    "bookSourceType": 0,
+    "bookSourceComment": "八一中文网 wangshuwx.com 书源\n\n【网站结构说明】\n1. 搜索页与列表页结构不同，需独立配置：\n   - 搜索页：table.grid 下的 tr#nr 为结果行（6列：书名/最新章节/作者/字数/更新/状态）\n   - 发现页：div.ll 下的 div.item 为书籍卡片（含封面/书名/作者/简介）\n2. 详情页与目录页为同一页面（bookUrl指向的页面已含章节列表），无需tocUrl\n3. 正文页底部有\"上一章/章节目录/下一章\"按钮，下一章为真正的下一章节（章节ID递增），需设置nextContentUrl\n4. 网站编码UTF-8，搜索使用GET请求\n\n【搜索URL】/modules/article/search.php?searchkey={{key}}\n【发现URL】/{分类拼音}/{分类ID}_{{page}}.html（玄幻=1/修真=2/都市=3/穿越=4/网游=5/科幻=6/其他=7）\n【正文净化】清理script/style标签、HTML注释、本章未完提示、收藏广告、网站名等",
+    "enabled": true,
+    "enabledExplore": true,
+    "exploreUrl": "玄幻小说::/xuanhuanxiaoshuo/1_{{page}}.html\n修真小说::/xiuzhenxiaoshuo/2_{{page}}.html\n都市小说::/dushixiaoshuo/3_{{page}}.html\n穿越小说::/chuanyuexiaoshuo/4_{{page}}.html\n网游小说::/wangyouxiaoshuo/5_{{page}}.html\n科幻小说::/kehuanxiaoshuo/6_{{page}}.html\n其他小说::/qitaxiaoshuo/7_{{page}}.html",
+    "searchUrl": "/modules/article/search.php?searchkey={{key}}",
+    "ruleSearch": {
+      "bookList": "@css:tr#nr",
+      "name": "tag.td.0@tag.a@text",
+      "author": "tag.td.2@text",
+      "bookUrl": "tag.td.0@tag.a@href",
+      "kind": "tag.td.5@text",
+      "lastChapter": "tag.td.1@tag.a@text"
+    },
+    "ruleExplore": {
+      "bookList": "class.ll@class.item",
+      "name": "tag.dt@tag.a@text",
+      "author": "tag.dt@tag.span@text",
+      "bookUrl": "tag.dt@tag.a@href",
+      "coverUrl": "tag.img@src",
+      "intro": "tag.dd@text"
+    },
+    "ruleBookInfo": {
+      "name": "id.info@tag.h1@text",
+      "author": "id.info@tag.p.0@text##作.*?：",
+      "coverUrl": "id.fmimg@tag.img@src",
+      "intro": "id.intro@text",
+      "kind": "@css:meta[property=og:novel:category]@content",
+      "lastChapter": "@css:meta[property=og:novel:latest_chapter_name]@content"
+    },
+    "ruleToc": {
+      "chapterList": "id.list@tag.dd@tag.a",
+      "chapterName": "text",
+      "chapterUrl": "href"
+    },
+    "ruleContent": {
+      "content": "id.content@html##<script[\\s\\S]*?</script>|<style[\\s\\S]*?</style>|<!--[\\s\\S]*?-->|本章未完[\\s\\S]*?继续阅读|请收藏.*?com|八一中文网|wangshuwx\\.com",
+      "nextContentUrl": "text.下一章@href"
+    }
+  }
+]
