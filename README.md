@@ -15,17 +15,19 @@
 
 ```
 发布页/
-├── index.html            # 发布页主体（单文件，样式脚本内联）
+├── index.html              # 发布页主体（单文件，样式脚本内联）
 ├── assets/
-│   └── qrcode.min.js     # 二维码生成库（本地引用，无外链）
-├── sources/
-│   ├── 小说源.json
-│   ├── 起飞源.json
-│   ├── 听书源.json
-│   ├── 漫画源.json
-│   ├── 视频源.json
-│   ├── 综合源.json
-│   └── 全部书源.json     # 全部合集（用于“一键导入全部”）
+│   └── qrcode.min.js       # 二维码生成库（本地引用，无外链）
+├── sources/                # 全部为 ASCII 文件名，深链兼容性最好
+│   ├── novel.json          # 小说源（39）
+│   ├── qifei.json          # 起飞源（4）
+│   ├── audio.json          # 听书源（3）
+│   ├── comic.json          # 漫画源（6）
+│   ├── video.json          # 视频源（9）
+│   ├── mix.json            # 综合源（2）
+│   ├── all.json            # 全部合集（63，用于“一键导入全部”）
+│   └── one/                # 每个书源一个独立 JSON（001.json~063.json）
+│       └── manifest.json   # 单源清单（id/名称/域名/分组 映射）
 └── README.md
 ```
 
@@ -51,6 +53,8 @@
 
 ```
 https://cdn.jsdelivr.net/gh/<用户名>/<仓库名>@main/<分组>.json
+# 例如 https://cdn.jsdelivr.net/gh/eryuewuxue/shuyuan@main/novel.json
+# 单个书源：https://cdn.jsdelivr.net/gh/eryuewuxue/shuyuan@main/one/001.json
 ```
 
 在阅读 App → 我的 → 书源管理 → 右上角 ⋮ → 网络导入，粘贴该地址即可。
@@ -58,8 +62,8 @@ https://cdn.jsdelivr.net/gh/<用户名>/<仓库名>@main/<分组>.json
 ## 🔧 更新书源
 
 1. 把新的书源 JSON 文件放到工作区 `D:\桌面\书源制作合集\`（或 `书源\` 子目录）；
-2. 按分组调整 `sources/` 内对应 JSON（保持为书源数组格式）；
-3. 重新 `git push`，GitHub Pages 自动生效（jsDelivr 需刷新缓存：`https://purge.jsdelivr.net/gh/用户名/仓库@main/分组.json`）。
+2. 重新生成 `sources/`（分组 JSON + one/ 单源 JSON + manifest，保持 ASCII 文件名）；
+3. 同步到 GitHub（`git push` 或 API 直传），Pages 自动生效（jsDelivr 需刷新缓存）。
 
 ## ⚠️ 说明
 
