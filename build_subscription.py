@@ -51,7 +51,7 @@ def generate():
     )
 
     subscription = {
-        "sourceName": "二月无雪书源更新",
+        "sourceName": "书源发布",
         "sourceUrl": BASE_URL + "subscription.json",
         "sourceGroup": "书源发布",
         "sourceIcon": BASE_URL + "assets/icon.png",
