@@ -1,0 +1,54 @@
+[
+  {
+    "bookSourceName": "飞库文学网",
+    "bookSourceUrl": "https://feiku6.com",
+    "bookSourceGroup": "文学·名著·小说",
+    "bookSourceType": 0,
+    "bookSourceComment": "飞库文学网（https://feiku6.com）\n\n【发现】2个排行榜：总排行/日排行（月/周排行API需验证，暂不提供）\n【搜索】首次搜索自动弹出极验拼图验证，验证后自动加载结果\n【详情】og:meta标签提取\n【目录】JS解析catalog.js动态加载\n【正文】#artWrap@html净化（含音频标签清理）",
+    "enabled": true,
+    "enabledExplore": true,
+    "enabledCookieJar": true,
+    "exploreUrl": "总排行::https://feiku6.com/api/book/getRanking,{\"method\":\"POST\",\"body\":\"type=sum\"}\n日排行::https://feiku6.com/api/book/getRanking,{\"method\":\"POST\",\"body\":\"type=day\"}",
+    "ruleExplore": {
+      "bookList": "$.data.bookList",
+      "name": "$.bName",
+      "author": "$.aName",
+      "coverUrl": "$.bImg",
+      "intro": "$.bDesc##&nbsp;|\\r\\n|\\n",
+      "lastChapter": "$.lcName",
+      "bookUrl": "https://feiku6.com/book/{{$.bUrl}}.html"
+    },
+    "searchUrl": "https://feiku6.com/searchBook.html?keyword={{key}}",
+    "ruleSearch": {
+      "bookList": "id.books@tag.li",
+      "name": "tag.h3@tag.a@text",
+      "bookUrl": "tag.h3@tag.a@href",
+      "coverUrl": "class.g_thumb@tag.img@data-original",
+      "author": "class.c_small@tag.a.1@text",
+      "kind": "class.c_small@tag.a.0@text",
+      "intro": "class.g_ells@text##^\\s+",
+      "lastChapter": "class.db@tag.a@text"
+    },
+    "bookUrlPattern": "https?://feiku6\\.com/book/[\\w-]+\\.html",
+    "ruleBookInfo": {
+      "name": "@CSS:meta[property=\"og:novel:book_name\"]@content",
+      "author": "@CSS:meta[property=\"og:novel:author\"]@content",
+      "kind": "@CSS:meta[property=\"og:novel:category\"]@content",
+      "coverUrl": "@CSS:meta[property=\"og:image\"]@content",
+      "intro": "@CSS:meta[property=\"og:description\"]@content##&amp;nbsp;|&nbsp;|\\r\\n|\\n",
+      "lastChapter": "@CSS:meta[property=\"og:novel:latest_chapter_name\"]@content",
+      "tocUrl": "<js>var m=baseUrl.match(/\\/book\\/([^.]+)\\.html/);result='https://feiku6.com/files/book/scripts/'+m[1]+'/catalog.js';</js>"
+    },
+    "ruleToc": {
+      "chapterList": "<js>var s=String(result);var i=s.indexOf('{');var j=s.lastIndexOf('}')+1;var json=s.substring(i,j);var obj=JSON.parse(json);var cust=obj.customer_url;var vols=obj.bookVolumeList;var arr=[];for(var v=0;v<vols.length;v++){var chs=vols[v].bookChapterList;for(var c=0;c<chs.length;c++){arr.push({name:chs[c].chapter_name,url:'https://feiku6.com/read/'+cust+'/'+chs[c].id+'.html'});}}result=JSON.stringify(arr);</js>\n$[*]",
+      "chapterName": "$.name",
+      "chapterUrl": "$.url"
+    },
+    "ruleContent": {
+      "content": "@CSS:#artWrap@html##<script[\\s\\S]*?</script>|<style[\\s\\S]*?</style>|<!--[\\s\\S]*?-->|<audio[\\s\\S]*?</audio>|<source[^>]*>",
+      "nextContentUrl": "@CSS:#nexturl@href##javascript:.*"
+    },
+    "loginCheckJs": "var body=result.body();var url=result.url();if(url&&url.indexOf('searchBook')>-1&&body&&body.indexOf('id=\"books\"')>-1&&body.indexOf('pr pb20')===-1){java.longToast('请完成拼图验证，看到结果后点击返回');result=java.startBrowserAwait(url,'极验拼图验证',false);}\nresult",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36\",\"Referer\":\"https://feiku6.com/\",\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\",\"Accept-Language\":\"zh-CN,zh;q=0.9\"}"
+  }
+]
