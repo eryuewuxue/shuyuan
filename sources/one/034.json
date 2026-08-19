@@ -1,0 +1,56 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：1097919737",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "秘密韩漫🔞（vpn）",
+    "bookSourceType": 2,
+    "bookSourceUrl": "https://mimihanman.com",
+    "customButton": false,
+    "customOrder": 104,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar result=[];\nvar tab=infoMap[\"分类\"]||\"分类\";\nvar cats=[[\"都市\",\"cid=5\"],[\"恋爱\",\"cid=6\"],[\"校园\",\"cid=8\"],[\"萝莉\",\"cid=9\"],[\"正太\",\"cid=12\"],[\"淫荡\",\"cid=13\"],[\"出版漫画\",\"cid=35\"]];\nvar ranks=[[\"人气榜\",\"order=hits\"],[\"收藏榜\",\"order=shits\"],[\"最新更新\",\"order=addtime\"]];\nresult.push({title:\"分类\",type:\"select\",chars:[\"分类\",\"排行\"],default:tab,action:\"java.refreshExplore()\",style:{layout_flexGrow:1,layout_flexBasisPercent:1}});\nif(tab==\"分类\"){for(var i=0;i<cats.length;i++){result.push({title:cats[i][0],url:\"/index.php/api/data/comic?order=addtime&\"+cats[i][1]+\"&page={{page}}\",style:{layout_flexGrow:1,layout_flexBasisPercent:0.333}})}}else if(tab==\"排行\"){for(var i=0;i<ranks.length;i++){result.push({title:ranks[i][0],url:\"/index.php/api/data/comic?\"+ranks[i][1]+\"&page={{page}}\",style:{layout_flexGrow:1,layout_flexBasisPercent:0.333}})}}\nJSON.stringify(result);\n</js>",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Linux; Android 12; SM-G991B) AppleWebKit/537.36\",\"Referer\":\"https://mimihanman.com/\"}",
+    "lastUpdateTime": 1786085038026,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "div.pt-novel@text##.*作者：|分类.*|更新.*|热度.*",
+      "coverUrl": "div.baseinfo img@src",
+      "intro": "div.intro@text",
+      "kind": "div.pt-novel@text##.*分类：|更新.*|热度.*",
+      "name": "h1.pt-name@text"
+    },
+    "ruleContent": {
+      "content": "@js:\nvar imgs=result.match(/src=\"(https:\\/\\/mh[^\"]+)\"/g);\nvar list=[];\nif(imgs){for(var i=0;i<imgs.length;i++){list.push('<img src=\"'+imgs[i].replace(/src=\"|\"/g,'')+'\">')}}\nlist.join(\"\\n\");"
+    },
+    "ruleExplore": {
+      "author": "$.author",
+      "bookList": "$.data[*]",
+      "bookUrl": "$.url",
+      "coverUrl": "$.pic",
+      "intro": "$.content",
+      "kind": "$.tags",
+      "lastChapter": "$.chapter_name",
+      "name": "$.name"
+    },
+    "ruleSearch": {
+      "author": "$.author",
+      "bookList": "$.data[*]",
+      "bookUrl": "$.url",
+      "coverUrl": "$.pic",
+      "intro": "$.content",
+      "kind": "$.tags",
+      "lastChapter": "$.chapter_name",
+      "name": "$.name"
+    },
+    "ruleToc": {
+      "chapterList": "ul#newchaperlist li a",
+      "chapterName": "text",
+      "chapterUrl": "href"
+    },
+    "searchUrl": "https://mimihanman.com/index.php/api/data/comic?key={{key}}&page={{page}}",
+    "weight": 0
+  }
+]
