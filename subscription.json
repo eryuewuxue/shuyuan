@@ -3,120 +3,23 @@
     "sourceName": "二月无雪书源更新",
     "sourceUrl": "https://eryuewuxue.github.io/shuyuan/subscription.json",
     "sourceGroup": "书源发布",
-    "sourceComment": "更新时间：2026-08-19 16:07；订阅本源后可快速进入发布页并导入各分组书源。",
+    "sourceIcon": "https://eryuewuxue.github.io/shuyuan/assets/icon.png",
     "enabled": true,
     "enabledCookieJar": false,
     "customOrder": 0,
     "lastUpdateTime": 0,
-    "concurrentRate": "",
+    "loadWithBaseUrl": true,
+    "articleStyle": 0,
+    "singleUrl": true,
+    "sortUrl": "更新列表::https://eryuewuxue.github.io/shuyuan/subscription.html",
     "headerMap": {},
     "loginUrl": "",
-    "bookSourceComment": "",
-    "ruleArticles": {
-      "sourceRegex": ".*",
-      "searchUrl": "/search?wd={{key}}",
-      "articles": {
-        "articleList": "class.book-list@tag.article",
-        "articleTitle": "class.title@text",
-        "articleUrl": "class.title@href",
-        "articleDate": ""
-      },
-      "detail": {
-        "content": "id.content@html",
-        "nextPageUrl": ""
-      }
-    },
-    "ruleExplore": {},
-    "exploreUrl": "https://eryuewuxue.github.io/shuyuan/",
-    "searchUrl": "https://eryuewuxue.github.io/shuyuan/",
-    "ruleSearch": {},
-    "items": [
-      {
-        "title": "二月无雪书源发布页",
-        "url": "https://eryuewuxue.github.io/shuyuan/",
-        "group": "发布页",
-        "description": "打开书源发布页，查看全部书源与导入入口。"
-      },
-      {
-        "title": "小说源（13 个）",
-        "url": "https://eryuewuxue.github.io/shuyuan/sources/novel.json",
-        "group": "书源导入",
-        "description": "网络导入二月无雪小说源，共 13 个。"
-      },
-      {
-        "title": "漫画源（2 个）",
-        "url": "https://eryuewuxue.github.io/shuyuan/sources/comic.json",
-        "group": "书源导入",
-        "description": "网络导入二月无雪漫画源，共 2 个。"
-      },
-      {
-        "title": "听书源（1 个）",
-        "url": "https://eryuewuxue.github.io/shuyuan/sources/audio.json",
-        "group": "书源导入",
-        "description": "网络导入二月无雪听书源，共 1 个。"
-      },
-      {
-        "title": "视频源（5 个）",
-        "url": "https://eryuewuxue.github.io/shuyuan/sources/video.json",
-        "group": "书源导入",
-        "description": "网络导入二月无雪视频源，共 5 个。"
-      },
-      {
-        "title": "福利源（15 个）",
-        "url": "https://eryuewuxue.github.io/shuyuan/sources/adult.json",
-        "group": "书源导入",
-        "description": "网络导入二月无雪福利源，共 15 个。"
-      },
-      {
-        "title": "全部书源（36 个）",
-        "url": "https://eryuewuxue.github.io/shuyuan/sources/all.json",
-        "group": "书源导入",
-        "description": "网络导入二月无雪全部书源，共 36 个。"
-      }
-    ],
-    "articles": [
-      {
-        "title": "二月无雪书源发布页",
-        "url": "https://eryuewuxue.github.io/shuyuan/",
-        "group": "发布页",
-        "description": "打开书源发布页，查看全部书源与导入入口。"
-      },
-      {
-        "title": "小说源（13 个）",
-        "url": "https://eryuewuxue.github.io/shuyuan/sources/novel.json",
-        "group": "书源导入",
-        "description": "网络导入二月无雪小说源，共 13 个。"
-      },
-      {
-        "title": "漫画源（2 个）",
-        "url": "https://eryuewuxue.github.io/shuyuan/sources/comic.json",
-        "group": "书源导入",
-        "description": "网络导入二月无雪漫画源，共 2 个。"
-      },
-      {
-        "title": "听书源（1 个）",
-        "url": "https://eryuewuxue.github.io/shuyuan/sources/audio.json",
-        "group": "书源导入",
-        "description": "网络导入二月无雪听书源，共 1 个。"
-      },
-      {
-        "title": "视频源（5 个）",
-        "url": "https://eryuewuxue.github.io/shuyuan/sources/video.json",
-        "group": "书源导入",
-        "description": "网络导入二月无雪视频源，共 5 个。"
-      },
-      {
-        "title": "福利源（15 个）",
-        "url": "https://eryuewuxue.github.io/shuyuan/sources/adult.json",
-        "group": "书源导入",
-        "description": "网络导入二月无雪福利源，共 15 个。"
-      },
-      {
-        "title": "全部书源（36 个）",
-        "url": "https://eryuewuxue.github.io/shuyuan/sources/all.json",
-        "group": "书源导入",
-        "description": "网络导入二月无雪全部书源，共 36 个。"
-      }
-    ]
+    "bookSourceComment": "更新时间：2026-08-19 16:07；共 36 个书源。",
+    "ruleArticles": "class.article",
+    "ruleTitle": "tag.h2@text",
+    "ruleLink": "tag.a@href",
+    "rulePubDate": "class.pub-date@text",
+    "ruleDescription": "class.description@text",
+    "ruleContent": "id.content@html"
   }
 ]
