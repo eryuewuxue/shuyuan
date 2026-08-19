@@ -1,7 +1,9 @@
-{
-  "sourceName": "二月无雪书源发布",
-  "sourceUrl": "https://eryuewuxue.github.io/shuyuan/",
-  "sourceIcon": "https://eryuewuxue.github.io/shuyuan/assets/icon.png",
-  "singleUrl": true,
-  "type": 0
-}
+[
+  {
+    "sourceName": "二月无雪书源发布",
+    "sourceUrl": "https://eryuewuxue.github.io/shuyuan/",
+    "sourceIcon": "https://eryuewuxue.github.io/shuyuan/assets/icon.png",
+    "singleUrl": true,
+    "type": 0
+  }
+]
