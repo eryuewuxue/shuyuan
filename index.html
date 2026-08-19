@@ -40,13 +40,17 @@
   .icon-btn:active{transform:scale(.95)}
   .title{font-size:24px;font-weight:800;letter-spacing:.5px}
   .sub{font-size:12.5px;color:var(--muted);margin-top:5px}
-  .stats{
-    display:inline-flex;gap:6px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--muted);
+  .stats{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .stat-row{display:flex;gap:8px}
+  .stat{
+    flex:1;background:var(--glass);border:1px solid var(--glass-border);border-radius:14px;
+    padding:8px 12px;text-align:center;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   }
-  .stats span{
-    background:var(--glass);border:1px solid var(--glass-border);border-radius:99px;padding:4px 11px;
-    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  }
+  .stat.narrow{flex:0 0 1;min-width:0}
+  .stat.wide{flex:1.55}
+  .stat.mid{flex:1.1}
+  .stat .lbl{display:block;font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .stat b{display:block;font-size:16px;font-weight:800;color:var(--text);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .actions{display:flex;gap:10px;margin-top:16px}
   .btn{
     flex:1;border:none;border-radius:99px;font-size:14px;font-weight:700;padding:13px 10px;
@@ -225,9 +229,14 @@
       </div>
     </div>
     <div class="stats">
-      <span>📚 共 <b id="statTotal">--</b> 个书源</span>
-      <span>🗂 <b id="statGroups">--</b> 个分组</span>
-      <span>🕒 <b id="statTime">--</b></span>
+      <div class="stat-row">
+        <div class="stat narrow"><span class="lbl">分组</span><b id="statGroups">--</b></div>
+        <div class="stat narrow"><span class="lbl">最近更新时间</span><b id="statTime">--</b></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat wide"><span class="lbl">总访问量</span><b id="statTotalVisits">--</b></div>
+        <div class="stat mid"><span class="lbl">今日访问量</span><b id="statTodayVisits">--</b></div>
+      </div>
     </div>
     <div class="actions">
       <button class="btn btn-dark" id="btnImportAll">一键导入全部</button>
@@ -382,7 +391,7 @@
       var b = document.createElement("button");
       b.className = "tab" + (active ? " active" : "");
       b.dataset.group = key;
-      b.innerHTML = '<span>' + icon + '</span>' + label + '<em>' + count + '</em>';
+      b.innerHTML = '<span>' + icon + '</span>' + '<em>' + count + '</em>' + '<span>' + label + '</span>';
       b.addEventListener("click", function(){ switchTab(key); });
       el.appendChild(b);
     }
@@ -468,7 +477,7 @@
   }
   function emptyHTML(q){
     return '<div class="empty"><span class="e-ico">🔍</span>' +
-      (q ? '没有找到「' + esc(q) + '」' : '该分组暂无书源') + '</div>';
+      (q ? '没有找到「' + esc(q) + '」' : '书源整理中，敬请期待') + '</div>';
   }
   function htmlToNode(html){
     var t = document.createElement("template");
@@ -545,10 +554,10 @@
     if (hash){
       GROUPS.forEach(function(g){ if (g.key === hash) state.cur = g.key; });
     }
-    $("statTotal").textContent = totalCount();
     $("statGroups").textContent = GROUPS.length;
     $("statTime").textContent = BUILD_DATE;
     $("footTime").textContent = BUILD_DATE;
+    initVisitCount();
     renderTabs();
     renderContent();
     if (isFile()){
@@ -562,6 +571,23 @@
   }).catch(function(e){
     $("content").innerHTML = '<div class="empty"><span class="e-ico">😵</span>书源加载失败<br><span style="font-size:11px">' + esc(e && e.message) + '</span></div>';
   });
+
+  /* 访问量统计：本地计数（无服务器静态站，按设备统计） */
+  function initVisitCount(){
+    var today = new Date();
+    var y = today.getFullYear(), m = String(today.getMonth()+1).padStart(2,"0"), d = String(today.getDate()).padStart(2,"0");
+    var todayStr = y + "-" + m + "-" + d;
+    var total = parseInt(localStorage.getItem("sy_total")||"0")||0;
+    var tdate = localStorage.getItem("sy_date")||"";
+    var tday = parseInt(localStorage.getItem("sy_today")||"0")||0;
+    if (tdate !== todayStr){ tdate = todayStr; tday = 0; }
+    total++; tday++;
+    localStorage.setItem("sy_total", String(total));
+    localStorage.setItem("sy_date", tdate);
+    localStorage.setItem("sy_today", String(tday));
+    $("statTotalVisits").textContent = total;
+    $("statTodayVisits").textContent = tday;
+  }
 
   function totalCount(){
     var n = 0;
