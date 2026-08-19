@@ -1,0 +1,59 @@
+[
+  {
+    "bookSourceName": "燃文小说API",
+    "bookSourceGroup": "小说",
+    "bookSourceUrl": "https://m.ranwen.net",
+    "bookSourceType": 0,
+    "bookSourceComment": "燃文小说API书源：搜索使用JS抓取动态参数后POST /api/search，避免WebView异步渲染导致搜索为空。网站编码UTF-8。",
+    "enabled": true,
+    "enabledExplore": true,
+    "enabledCookieJar": true,
+    "concurrentRate": "3",
+    "charset": "utf-8",
+    "header": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "loginUrl": "",
+    "bookUrlPattern": "https?://(www|m)\\.ranwen\\.net/files/article/\\d+/\\d+/?",
+    "searchUrl": "@js:\nvar base=\"https://m.ranwen.net\";\nvar k=java.encodeURI(String(key),\"UTF8\");\nvar html=java.ajax(base+\"/user/search.html?q=\"+k);\nfunction getVar(n){\n  var reg=new RegExp(\"var\\\\s+\"+n+\"\\\\s*=\\\\s*\\\"([^\\\"]*)\\\"\");\n  var m=html.match(reg);\n  return m?m[1]:\"\";\n}\nvar ns=\"vw,abw,ru,jrt,van,fw,cwl,gpr,uyoo,tz,euu,tsn,eju,um,fp,dvm,jpk,deblkx,ht,azy,sna,wqx,fpp,rup,jwj,bgt,qp,yf,cw,wq,sign\".split(\",\");\nvar body=\"q=\"+k;\nfor(var i=0;i<ns.length;i++){\n  var n=ns[i];\n  body+=\"&\"+n+\"=\"+java.encodeURI(String(getVar(n)),\"UTF8\");\n}\nvar opt={\n  \"method\":\"POST\",\n  \"body\":String(body),\n  \"charset\":\"utf-8\",\n  \"headers\":{\n    \"X-Requested-With\":\"XMLHttpRequest\",\n    \"Content-Type\":\"application/x-www-form-urlencoded; charset=UTF-8\",\n    \"Referer\":base+\"/user/search.html?q=\"+k\n  }\n};\nbase+\"/api/search,\"+JSON.stringify(opt)",
+    "ruleSearch": {
+      "bookList": "$.data.search[*]",
+      "name": "$.title##<[^>]+>",
+      "author": "$.author##<[^>]+>|&nbsp;|&#160;|作者：|^\\s+|\\s+$",
+      "intro": "$.intro",
+      "bookUrl": "$.book_list_url##www\\.ranwen\\.net##m.ranwen.net",
+      "coverUrl": "$.cover",
+      "kind": "$.cate_name",
+      "lastChapter": "$.latest_chapter_name",
+      "updateTime": "$.uptime"
+    },
+    "ruleBookInfo": {
+      "name": "meta[property=\"og:novel:book_name\"]@content",
+      "author": "meta[property=\"og:novel:author\"]@content##<[^>]+>|&nbsp;|&#160;|作者：|^\\s+|\\s+$",
+      "coverUrl": "meta[property=\"og:image\"]@content",
+      "intro": "meta[property=\"og:description\"]@content",
+      "kind": "meta[property=\"og:novel:category\"]@content",
+      "lastChapter": "meta[property=\"og:novel:latest_chapter_name\"]@content||meta[property=\"og:novel:last_chapter_name\"]@content",
+      "updateTime": "meta[property=\"og:novel:update_time\"]@content",
+      "status": "meta[property=\"og:novel:status\"]@content",
+      "tocUrl": ""
+    },
+    "ruleToc": {
+      "chapterList": "<js>\nvar doc=org.jsoup.Jsoup.parse(String(result), baseUrl);\nvar as=doc.select('ul.chapter li a,#list dd a');\nvar seen={};\nvar arr=[];\nfor(var i=0;i<as.size();i++){\n  var a=as.get(i);\n  var u=String(a.attr('href'));\n  var n=String(a.text());\n  if(u!='' && !seen[u]){\n    seen[u]=1;\n    arr.push({name:n,url:u});\n  }\n}\nJSON.stringify(arr)\n</js>\n$.[*]",
+      "chapterName": "$.name",
+      "chapterUrl": "$.url"
+    },
+    "ruleContent": {
+      "content": "id.text@html",
+      "nextContentUrl": "text.下一章@href"
+    },
+    "exploreUrl": "强推::/\n玄幻小说::/xuanhuan/\n修真小说::/xiuzhen/\n都市小说::/dushi/\n历史小说::/lishi/\n网游小说::/wangyou/\n科幻小说::/kehuan/\n言情小说::/yanqing/\n同人小说::/tongren/\n周点击榜::/paihang/weekvisit.html\n月点击榜::/paihang/monthvisit.html\n总点击榜::/paihang/allvisit.html\n日推荐榜::/paihang/dayvote.html\n周推荐榜::/paihang/weekvote.html\n月推荐榜::/paihang/monthvote.html\n总推荐榜::/paihang/allvote.html\n总收藏榜::/paihang/goodnum.html\n总字数榜::/paihang/size.html\n最新入库::/paihang/postdate.html\n全本::/quanben/allvisit.html",
+    "ruleExplore": {
+      "bookList": "article",
+      "name": "h2.title@text",
+      "author": "p.0@text##<[^>]+>|&nbsp;|&#160;|作者：|^\\s+|\\s+$",
+      "coverUrl": "img@src",
+      "intro": "p.intro@text##简介：",
+      "bookUrl": "a@href",
+      "kind": ""
+    }
+  }
+]
