@@ -1,0 +1,51 @@
+[
+  {
+    "bookSourceName": "xyushuwu5书源",
+    "bookSourceUrl": "https://www.xyushuwu5.com",
+    "bookSourceType": 0,
+    "bookSourceComment": "新御书屋(xyushuwu5.com) - GBK编码，POST搜索，10个发现分类",
+    "enabled": true,
+    "enabledExplore": true,
+    "searchUrl": "/modules/article/search.php,{\"method\":\"POST\",\"body\":\"searchkey={{key}}&searchtype=articlename\",\"charset\":\"gbk\"}",
+    "exploreUrl": "校园言情::/xiaoyuan/\n都市言情::/dushi/\n古代爱情::/gudai/\n罗曼史::/luoman/\n耽美::/danmei/\n百合::/baihe/\n同人::/tongren/\n排行榜单::/paihangbang/\n收藏榜单::/collect/\n完本小说::/wanbenxiaoshuo/",
+    "ruleSearch": {
+      "bookList": "class.txt-list@tag.li",
+      "name": "tag.span.1@tag.a@text",
+      "author": "tag.span.3@text",
+      "bookUrl": "tag.span.1@tag.a@href",
+      "coverUrl": "",
+      "kind": "tag.span.0@text##\\[|\\]",
+      "lastChapter": "tag.span.2@tag.a@text",
+      "wordCount": ""
+    },
+    "ruleExplore": {
+      "bookList": "class.txt-list@tag.li",
+      "name": "tag.span.1@tag.a@text",
+      "author": "tag.span.3@text",
+      "bookUrl": "tag.span.1@tag.a@href",
+      "coverUrl": "",
+      "kind": "tag.span.0@text##\\[|\\]",
+      "lastChapter": "tag.span.2@tag.a@text"
+    },
+    "ruleBookInfo": {
+      "name": "h1@text",
+      "author": "div.fix@tag.p.0@text##作者：",
+      "coverUrl": "div.imgbox@tag.img@src",
+      "intro": "div.desc@text",
+      "kind": "div.fix@tag.p.1@text##类别：",
+      "lastChapter": "class.section-list.0@tag.li.0@tag.a@text",
+      "wordCount": ""
+    },
+    "ruleToc": {
+      "chapterList": "id.section-list@tag.li@tag.a",
+      "chapterName": "text",
+      "chapterUrl": "href",
+      "nextTocUrl": ""
+    },
+    "ruleContent": {
+      "content": "id.content@html##<div class=\"btn-fb\">[\\s\\S]*?</div>|<div class=\"hotcmd-box\">[\\s\\S]*?</div>|『加入书签，方便阅读』|加入书签，方便阅读|请记住本书首发域名.*|一秒记住.*|手机用户请浏览.*|本章未完.*点击下一页继续阅读.*|<div class=\"m-setting\">[\\s\\S]*?</div>|<div class=\"reader-fun\">[\\s\\S]*?</div>",
+      "nextContentUrl": "text.下一章@href",
+      "webJs": ""
+    }
+  }
+]
