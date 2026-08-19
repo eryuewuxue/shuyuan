@@ -1,0 +1,59 @@
+[
+  {
+    "bookSourceName": "七猫短剧",
+    "bookSourceUrl": "https://www.qmao.net",
+    "bookSourceType": 4,
+    "bookSourceComment": "七猫短剧-全网热门短剧免费看\n系统：maccms（苹果CMS）\n视频源：360zy播放器（m3u8）\nURL规律说明：\n1. 搜索URL：/vodsearch/{关键词}----------{页码}---.html\n   首页搜索无页码参数：/vodsearch/{关键词}-------------.html\n   翻页时：第2页起使用 /vodsearch/{关键词}----------{页码}---.html\n2. 发现URL（网阅小说风格）：使用JS生成频道下拉+多个子分类按钮\n   - 频道下拉：短剧/电影/电视剧/动漫/首页推荐\n   - 每个频道下有5个子分类按钮：全部（带{{page}}可翻页）、最新(第1页)、热门(第2页)、精选(第3页)、更多(第5页)\n   - 分类URL：/vodtype/{分类ID}-{页码}.html（电影=1, 电视剧=2, 动漫=3, 短剧=4）\n   - 注意：vodshow子分类筛选页（如情感/科幻/热血等）已全部关闭，仅使用主分类\n3. 分类页列表结构：.BrowseList_itemBox（首页推荐用.SecondList_secondListItem）\n   ruleExplore使用||多选择器语法同时兼容两种页面\n4. 详情页与目录页同页（voddetail页面含pcDrama_catalogItem集数列表），无需tocUrl\n5. 播放页通过player_aaaa变量存储m3u8地址（JSON格式），使用JS解析\n6. 短剧通常单集即合集，目录多为1条'合全集'\n7. 详情页本身没有演员/作者字段，演员信息在播放页player_aaaa.vod_data.vod_actor中",
+    "enabled": true,
+    "enabledExplore": true,
+    "enabledCookieJar": false,
+    "header": "",
+    "loginUrl": "",
+    "loginCheckJs": "",
+    "customOrder": 0,
+    "weight": 0,
+    "lastUpdateTime": 0,
+    "respondTime": 180000,
+    "searchUrl": "https://www.qmao.net/vodsearch/{{key}}----------{{page}}---.html",
+    "exploreUrl": "<js>\nvar result = [];\nvar mainCat = infoMap[\"频道\"] || \"短剧\";\n\nresult.push({\n    \"title\": \"频道\",\n    \"type\": \"select\",\n    \"chars\": [\"短剧\", \"电影\", \"电视剧\", \"动漫\", \"首页推荐\"],\n    \"default\": mainCat,\n    \"action\": \"java.refreshExplore()\",\n    \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\n\nvar cats = {\n    \"短剧\": [\n        [\"短剧·全部\", \"https://www.qmao.net/vodtype/4-{{page}}.html\"],\n        [\"短剧·最新\", \"https://www.qmao.net/vodtype/4-1.html\"],\n        [\"短剧·热门\", \"https://www.qmao.net/vodtype/4-2.html\"],\n        [\"短剧·精选\", \"https://www.qmao.net/vodtype/4-3.html\"],\n        [\"短剧·更多\", \"https://www.qmao.net/vodtype/4-5.html\"]\n    ],\n    \"电影\": [\n        [\"电影·全部\", \"https://www.qmao.net/vodtype/1-{{page}}.html\"],\n        [\"电影·最新\", \"https://www.qmao.net/vodtype/1-1.html\"],\n        [\"电影·热门\", \"https://www.qmao.net/vodtype/1-2.html\"],\n        [\"电影·精选\", \"https://www.qmao.net/vodtype/1-3.html\"],\n        [\"电影·更多\", \"https://www.qmao.net/vodtype/1-5.html\"]\n    ],\n    \"电视剧\": [\n        [\"电视剧·全部\", \"https://www.qmao.net/vodtype/2-{{page}}.html\"],\n        [\"电视剧·最新\", \"https://www.qmao.net/vodtype/2-1.html\"],\n        [\"电视剧·热门\", \"https://www.qmao.net/vodtype/2-2.html\"],\n        [\"电视剧·精选\", \"https://www.qmao.net/vodtype/2-3.html\"],\n        [\"电视剧·更多\", \"https://www.qmao.net/vodtype/2-5.html\"]\n    ],\n    \"动漫\": [\n        [\"动漫·全部\", \"https://www.qmao.net/vodtype/3-{{page}}.html\"],\n        [\"动漫·最新\", \"https://www.qmao.net/vodtype/3-1.html\"],\n        [\"动漫·热门\", \"https://www.qmao.net/vodtype/3-2.html\"],\n        [\"动漫·精选\", \"https://www.qmao.net/vodtype/3-3.html\"],\n        [\"动漫·更多\", \"https://www.qmao.net/vodtype/3-5.html\"]\n    ],\n    \"首页推荐\": [\n        [\"每日推荐\", \"https://www.qmao.net/\"]\n    ]\n};\n\nvar selected = cats[mainCat];\nfor (var i = 0; i < selected.length; i++) {\n    result.push({\n        \"title\": selected[i][0],\n        \"url\": selected[i][1],\n        \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.25}\n    });\n}\n\nJSON.stringify(result);\n</js>",
+    "ruleSearch": {
+      "bookList": ".TagBookList_tagItem",
+      "name": ".TagBookList_bookName@text",
+      "author": ".TagBookList_bookAuthor span.1@text",
+      "kind": ".TagBookList_tagsBox a@text",
+      "lastChapter": ".TagBookList_totalChapterNum@text",
+      "intro": ".TagBookList_intro@text",
+      "coverUrl": "img.image_imageItem@src",
+      "bookUrl": "a.TagBookList_bookImageBox@href"
+    },
+    "ruleExplore": {
+      "bookList": ".BrowseList_itemBox||.SecondList_secondListItem",
+      "name": ".BrowseList_bookName span.0@text||.SecondList_bookName@text",
+      "kind": ".BrowseList_tagsBox a@text||.SecondList_bookType a@text",
+      "lastChapter": ".BrowseList_totalChapterNum@text||.SecondList_totalChapterNum@text",
+      "intro": ".BrowseList_bookIntro@text",
+      "coverUrl": "img.image_imageItem@src||img.image_imageDark@src",
+      "bookUrl": "a.BrowseList_imageBox@href||a.image_imageScaleBox@href"
+    },
+    "ruleBookInfo": {
+      "name": ".DramaDetail_bookName@text",
+      "author": "",
+      "kind": ".DramaDetail_tagsBox a@text",
+      "intro": ".DramaDetail_intro@text",
+      "coverUrl": ".DramaDetail_bookCover@src",
+      "lastChapter": ".pcDrama_catalogItem@text",
+      "tocUrl": ""
+    },
+    "ruleToc": {
+      "chapterList": ".pcDrama_catalogItem",
+      "chapterName": "text",
+      "chapterUrl": "href",
+      "nextTocUrl": ""
+    },
+    "ruleContent": {
+      "content": "@js:\nvar html = String(result);\nvar m = html.match(/var player_aaaa=(\\{[\\s\\S]*?\\})\\s*<\\/script>/);\nif (!m) {\n    m = html.match(/var player_aaaa=(\\{[\\s\\S]*?\\})/);\n}\nif (m) {\n    try {\n        var data = JSON.parse(m[1]);\n        result = data.url || '';\n    } catch (e) {\n        var u = m[1].match(/\"url\"\\s*:\\s*\"([^\"]+)\"/);\n        result = u ? u[1] : '';\n    }\n} else {\n    var u2 = html.match(/\"url\"\\s*:\\s*\"([^\"]+)\"/);\n    result = u2 ? u2[1] : '';\n}\nresult = String(result).replace(/\\\\\\//g, '/');\nresult",
+      "nextContentUrl": "",
+      "sourceRegex": ".*\\.(m3u8|mp4|flv).*"
+    }
+  }
+]
