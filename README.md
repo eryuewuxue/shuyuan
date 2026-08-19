@@ -2,6 +2,7 @@
 
 - 发布页：https://eryuewuxue.github.io/shuyuan/
 - 交流群：1097919737
+- 阅读订阅源：https://eryuewuxue.github.io/shuyuan/subscription.json
 
 ## 分组
 
