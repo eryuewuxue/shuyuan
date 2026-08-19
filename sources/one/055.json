@@ -1,0 +1,75 @@
+[
+  {
+    "bookSourceGroup": "视频",
+    "bookSourceName": "520短剧",
+    "bookSourceType": 4,
+    "bookSourceUrl": "https://520story.net",
+    "bookSourceComment": "520story.net 短剧/影视站（MacCMS）。目录按线路分卷（shorttv / 暴风资源）。正文自动适配三种来源：①短剧直链 mp4（含锁定集：从前端公开数据拼 CDN 直链）；②暴风资源线路的 m3u8。若站点后续给 CDN 加签名/鉴权，锁定集拼链会失效。",
+    "bookUrlPattern": "",
+    "customOrder": 0,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "[{\"title\": \"短剧速看\", \"url\": \"/vod/type/id/35/{{page>1?'page/'+page+'/':''}}\", \"style\": {\"layout_flexBasisPercent\": 0.5, \"layout_flexGrow\": 1}}, {\"title\": \"狂飙速看\", \"url\": \"/vod/type/id/68/{{page>1?'page/'+page+'/':''}}\", \"style\": {\"layout_flexBasisPercent\": 0.5, \"layout_flexGrow\": 1}}, {\"title\": \"电影\", \"url\": \"/vod/type/id/36/{{page>1?'page/'+page+'/':''}}\", \"style\": {\"layout_flexBasisPercent\": 0.5, \"layout_flexGrow\": 1}}, {\"title\": \"连续剧\", \"url\": \"/vod/type/id/37/{{page>1?'page/'+page+'/':''}}\", \"style\": {\"layout_flexBasisPercent\": 0.5, \"layout_flexGrow\": 1}}, {\"title\": \"综艺\", \"url\": \"/vod/type/id/38/{{page>1?'page/'+page+'/':''}}\", \"style\": {\"layout_flexBasisPercent\": 0.5, \"layout_flexGrow\": 1}}, {\"title\": \"动漫\", \"url\": \"/vod/type/id/39/{{page>1?'page/'+page+'/':''}}\", \"style\": {\"layout_flexBasisPercent\": 0.5, \"layout_flexGrow\": 1}}, {\"title\": \"全部影视\", \"url\": \"/vod/show/{{page>1?'page/'+page+'/':''}}\", \"style\": {\"layout_flexBasisPercent\": 0.5, \"layout_flexGrow\": 1}}]",
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\"}",
+    "lastUpdateTime": 0,
+    "loginUrl": "",
+    "respondTime": 30000,
+    "ruleBookInfo": {
+      "author": "",
+      "coverUrl": ".dj-poster img@src",
+      "init": "",
+      "intro": ".dj-desc.1@text",
+      "kind": ".dj-pill.hot@text",
+      "lastChapter": "",
+      "name": "h1@text",
+      "tocUrl": "",
+      "updateTime": "",
+      "wordCount": ""
+    },
+    "ruleContent": {
+      "content": "@js:(function(){\nvar r=result.replace(/\\\\\"/g,'\"').replace(/\\\\\\//g,'/');\nvar m=r.match(/hlsUrl\":\"(https:[^\"]+)/);\nif(m) return m[1];\nvar mu=r.match(/\"url\":\"(https:[^\"]+\\.m3u8[^\"]*)\"/);\nif(mu) return mu[1];\nvar em=r.match(/\"episode\":\\s*\\{[^}]*?\"id\":\"([^\"]+)\"/);\nvar eid=em?em[1]:'';\nvar u1=(baseUrl||'').replace(/\\/\\d+$/,'/1');\nvar h1='';\ntry{ h1=java.connect(u1, {\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\"}).body(); }catch(e){}\nif(!h1){ try{ h1=java.ajax(u1); }catch(e){} }\nvar r1=String(h1).replace(/\\\\\"/g,'\"').replace(/\\\\\\//g,'/');\nvar pm=r1.match(/hlsUrl\":\"(https:[^\"]+)/);\nvar prefix=pm?pm[1].replace(/[^\\/]+\\/video\\.mp4$/,''):'';\nreturn prefix+eid+'/video.mp4';\n})()",
+      "nextContentUrl": "",
+      "sourceRegex": "",
+      "webJs": ""
+    },
+    "ruleExplore": {
+      "author": "",
+      "bookList": ".dj-card",
+      "bookUrl": "a@href",
+      "checkKeyWord": "",
+      "coverUrl": ".dj-poster img@src",
+      "intro": "",
+      "kind": "p@text",
+      "lastChapter": "",
+      "name": "h3@text",
+      "updateTime": "",
+      "wordCount": ""
+    },
+    "ruleSearch": {
+      "author": "",
+      "bookList": ".dj-card",
+      "bookUrl": "a@href",
+      "checkKeyWord": "",
+      "coverUrl": ".dj-poster img@src",
+      "intro": "",
+      "kind": "p@text",
+      "lastChapter": "",
+      "name": "h3@text",
+      "updateTime": "",
+      "wordCount": ""
+    },
+    "ruleToc": {
+      "volumeList": ".dj-panel:has(.dj-episodes)",
+      "volumeName": ".dj-section-title@text",
+      "chapterList": ".dj-episode",
+      "chapterName": "@text",
+      "chapterUrl": "@href##/cx/[^/]+/##/webpc/watch/",
+      "nextTocUrl": "",
+      "reverseTocUrl": ""
+    },
+    "searchUrl": "/vod/search/?wd={{key}}",
+    "weight": 0
+  }
+]
