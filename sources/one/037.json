@@ -1,0 +1,43 @@
+[
+  {
+    "bookSourceComment": "69小说吧 - 成人小说网站,无搜索功能,通过发现页浏览",
+    "bookSourceName": "69小说吧",
+    "bookSourceUrl": "https://69xsb.com",
+    "bookSourceType": 0,
+    "enabled": true,
+    "enabledExplore": true,
+    "exploreUrl": "全部小说::https://69xsb.com/sort/{{page}}/\n全本小说::https://69xsb.com/quanben/sort/{{page}}/\n玄幻奇幻::https://69xsb.com/sort/1/{{page}}/\n武侠仙侠::https://69xsb.com/sort/2/{{page}}/\n都市青春::https://69xsb.com/sort/3/{{page}}/\n科幻悬疑::https://69xsb.com/sort/4/{{page}}/\n穿越历史::https://69xsb.com/sort/5/{{page}}/\n耽美纯情::https://69xsb.com/sort/6/{{page}}/",
+    "ruleBookInfo": {
+      "name": "h1@text",
+      "author": "a[href*='/author/']@text",
+      "coverUrl": "",
+      "intro": "text##^.*简介：|《.*》是.*精心创作的.*|69小说吧实时更新.*|.*并不代表69小说吧.*|永久地址.*",
+      "kind": "",
+      "lastChapter": "a[href*='.html'][href*='/book/']@text",
+      "wordCount": "text##(.*)万字##$1",
+      "tocUrl": "",
+      "status": "text##连载|完结##$1"
+    },
+    "ruleToc": {
+      "chapterList": "a[href*='.html'][href*='/book/']",
+      "chapterName": "@text",
+      "chapterUrl": "@href",
+      "nextTocUrl": ""
+    },
+    "ruleContent": {
+      "content": "#rtext@html##最新地址.*|有声小说地址.*|AV视频地址.*|uxx123\\.com|uxxdizhi\\.com|本站永久域名.*|加入收藏.*|加入书签.*|作者有话要说：.*|新坑预告.*|文案还没想好.*|可以说说主角设定.*|直接搜书名吧.*|关于.*的第三部.*|微博.*同步更新.*|新文会准备.*|我会更更隔壁.*|要撸小说网.*|永久地址.*|上一章.*|书页.*|目录.*|书末页.*##",
+      "nextContentUrl": ""
+    },
+    "ruleExplore": {
+      "bookList": "div",
+      "name": "h4 a@text",
+      "bookUrl": "h4 a@href",
+      "intro": "text##简介：.*简介：##",
+      "coverUrl": "",
+      "author": "text##作者：##",
+      "kind": "",
+      "wordCount": "text##字数：##",
+      "lastChapter": ""
+    }
+  }
+]
