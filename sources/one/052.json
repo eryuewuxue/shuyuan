@@ -1,0 +1,56 @@
+[
+  {
+    "bookSourceName": "三四娱乐",
+    "bookSourceUrl": "https://www.san421.com",
+    "bookSourceGroup": "漫画",
+    "bookSourceType": 2,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "header": "{\n\t\"User-Agent\":\"Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36\",\n\t\"Referer\":\"https://www.san421.com/\"\n}",
+    "exploreUrl": "美女写真::https://www.san421.com/meinv/page/{{page}}\n短篇漫画::https://www.san421.com/item/%e7%9f%ad%e7%af%87%e6%bc%ab%e7%94%bb/page/{{page}}\n连载漫画::https://www.san421.com/item/%e8%bf%9e%e8%bd%bd/page/{{page}}\n完结漫画::https://www.san421.com/item/%e5%ae%8c%e7%bb%93/page/{{page}}",
+    "lastUpdateTime": 0,
+    "loginUrl": "",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "",
+      "coverUrl": ".c-img img@src",
+      "intro": "span.dis@text",
+      "kind": "ul.article-meta li.1 a@text",
+      "lastChapter": "h1.article-title span.subtitle@text",
+      "name": "h1.article-title a@text",
+      "tocUrl": ""
+    },
+    "ruleContent": {
+      "content": "{{@class.img-placeholder-wrap@tag.img@data-src}}\n@js:\nvar lines = result.split(\"\\n\");\nvar newLines = [];\nfor (var i = 0; i < lines.length; i++) {\n    if (lines[i]) newLines.push('<img src=\"' + lines[i] + '\">');\n}\nnewLines.join(\"\\n\")",
+      "imageStyle": "FULL"
+    },
+    "ruleExplore": {
+      "author": "",
+      "bookList": ".excerpt",
+      "bookUrl": "header h2 a@href",
+      "coverUrl": ".focus img@src",
+      "intro": ".note@text",
+      "kind": "header p.cat@text",
+      "lastChapter": "header span.subtitle@text",
+      "name": "header h2 a@text"
+    },
+    "ruleSearch": {
+      "author": "",
+      "bookList": ".excerpt",
+      "bookUrl": "header h2 a@href",
+      "coverUrl": ".focus img@src",
+      "intro": ".note@text",
+      "kind": "header p.cat@text",
+      "lastChapter": "header span.subtitle@text",
+      "name": "header h2 a@text"
+    },
+    "ruleToc": {
+      "chapterList": ".chapter-navigation ul li",
+      "chapterName": "a@text",
+      "chapterUrl": "a@href"
+    },
+    "searchUrl": "/?s={{key}}",
+    "weight": 0
+  }
+]
