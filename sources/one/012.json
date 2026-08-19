@@ -1,0 +1,62 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：1097919737",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "米读小说",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://api.midureader.com",
+    "concurrentRate": "1000",
+    "customButton": false,
+    "customOrder": 34,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "@js:\nvar s = [];\nfunction p(t, u, w){ s.push({title:t, url:u, style:{layout_flexGrow:1, layout_flexBasisPercent:w}}); }\nfunction qs(k, u){ var m = (u || '').match(new RegExp('[?&]' + k + '=([^&]*)')); return m ? decodeURIComponent(m[1]) : ''; }\nvar config = {};\ntry { config = JSON.parse(source.getVariable() || '{}'); } catch(e) {}\nvar gender = config.gender || '男频';\ns.push({title:\"⚧ 频道\", type:\"select\", chars:[\"男频\",\"女频\"], default:gender,\n  action:\"(function(){var c={};try{c=JSON.parse(source.getVariable()||'{}');}catch(e){}c.gender=infoMap['⚧ 频道']||'男频';source.setVariable(JSON.stringify(c));java.refreshExplore();})()\",\n  style:{layout_flexGrow:1, layout_flexBasisPercent:1}});\ntry {\n  var sceneId = (gender === '女频') ? 282 : 281;\n  var catUrl = \"https://api.midureader.com/fiction/scene/getCategoryV4,\" + JSON.stringify({method:\"POST\", body:\"app=midu&id=\" + sceneId});\n  var catResp = String(java.ajax(catUrl) || '');\n  var catJson = JSON.parse(catResp);\n  var tags = (catJson && catJson.data && catJson.data.config && catJson.data.config.tagsV3) || [];\n  for (var i = 0; i < tags.length; i++) {\n    var t = tags[i] || {};\n    var name = String(t.name || '').trim();\n    var type = t.type;\n    if (!name || type === '2') continue;\n    var link = t.link || '';\n    var sc = qs('secondChannelId', link);\n    var tg = qs('tagId', link);\n    var url;\n    if (sc) {\n      // 主分类：分类书单接口（second_channel 过滤准确）\n      url = \"https://api.midureader.com/fiction/search/channel,\" + JSON.stringify({method:\"POST\", body:\"app=midu&second_channel=\" + sc + \"&status=&rank=&page={{page-1}}\"});\n    } else if (tg) {\n      // 流派/题材/风格/角色/热门 等标签：关键词搜索\n      url = \"https://api.midureader.com/fiction/search/search,\" + JSON.stringify({method:\"POST\", body:\"app=midu&keyword=\" + encodeURIComponent(name) + \"&page={{page-1}}\"});\n    } else {\n      continue;\n    }\n    p(name, url, 0.4);\n  }\n} catch(e) {}\nJSON.stringify(s);\n",
+    "header": "{\"User-Agent\": \"okhttp/3.12.1\"}",
+    "lastUpdateTime": 1786889684359,
+    "loginUi": "@js:\nvar all = [];\nall.push({\"name\": \"💬 联系交流（点击跳转）\", \"type\": \"button\", \"action\": \"joinQQGroup()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nall.push({\"name\": \"🎨 联系制作（点击跳转）\", \"type\": \"button\", \"action\": \"contactMaker()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nresult = JSON.stringify(all);\n",
+    "loginUrl": "var QQ_GROUP = \"1097919737\";\nvar MAKER_QQ = \"1820480783\";\nfunction login(){\n  try{ java.upLoginData(); }catch(e){}\n  java.toast(\"设置已保存\");\n}\nfunction joinQQGroup(){\n  var u = \"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=group&uin=\" + QQ_GROUP;\n  try{\n    java.openUrl(u);\n    java.toast(\"已尝试打开QQ，若未跳转请手动搜索群号 \" + QQ_GROUP);\n  }catch(e){ java.longToast(\"请手动在QQ中搜索群号 \" + QQ_GROUP); }\n}\nfunction contactMaker(){\n  var u = \"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=friend&uin=\" + MAKER_QQ;\n  try{\n    java.openUrl(u);\n    java.toast(\"已尝试打开QQ，若未跳转请手动添加 \" + MAKER_QQ);\n  }catch(e){ java.longToast(\"请手动在QQ中搜索 \" + MAKER_QQ); }\n}\n",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "$.author||$..emAuthor",
+      "coverUrl": "$..cover",
+      "init": "$.data",
+      "intro": "<useweb>\n<style>*{box-sizing:border-box;margin:0;padding:0}\nbody{background:transparent!important}\n.card{font-family:'Noto Sans CJK SC','Source Han Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:inherit;background:transparent!important;border-radius:18px;padding:18px;box-shadow:none}\n.card,.card *{color:inherit!important}\n.hero{display:flex;gap:16px;align-items:stretch}\n.cover{width:100px;height:138px;object-fit:cover;border-radius:12px;flex-shrink:0;border:1px solid rgba(127,127,127,.25)}\n.hero-main{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center}\n.title{font-size:21px;font-weight:800;line-height:1.35;margin-bottom:8px;background:linear-gradient(90deg,#0f766e,#0ea5a4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}\n.row{display:flex;align-items:baseline;gap:8px;margin-top:4px}\n.off{font-size:12px;font-weight:800;opacity:.6;letter-spacing:1px;flex-shrink:0}\n.hand{font-family:'Noto Serif CJK SC','Source Han Serif SC','SimSun','Songti SC','STSong',serif;font-size:14px;font-weight:700;line-height:1.9}\n.hand.cat{color:inherit!important;opacity:.85}\n.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}\n.badge{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(127,127,127,.12);font-weight:700}\n.badge.hot{background:linear-gradient(90deg,#0f766e,#0ea5a4);color:#fff!important}\n.stats{display:flex;margin:16px 0 4px;background:rgba(127,127,127,.08);border-radius:14px;padding:12px 0;text-align:center}\n.stat{flex:1;position:relative}\n.stat+.stat::before{content:'';position:absolute;left:0;top:22%;height:56%;width:1px;background:rgba(127,127,127,.25)}\n.stat b{display:block;font-size:17px;font-weight:800}\n.stat span{font-size:11px;opacity:.6;font-weight:800}\n.section{margin-top:14px}\n.section h3{font-size:14px;font-weight:800;margin-bottom:7px;display:flex;align-items:center;gap:7px;letter-spacing:1px}\n.section h3::before{content:'';width:4px;height:14px;border-radius:2px;background:linear-gradient(180deg,#0f766e,#0ea5a4)}\n.tags{display:flex;flex-wrap:wrap;gap:6px}\n.tag{font-size:12px;padding:3px 11px;border-radius:8px;background:rgba(127,127,127,.10);font-weight:700}\n.rank{font-size:13px;padding:9px 12px;border-radius:10px;background:rgba(127,127,127,.06);border:1px solid rgba(127,127,127,.22)}\n.rank b{font-weight:800}\n.intro-text{font-size:14px;line-height:2;text-align:justify;text-indent:2em;font-family:'Noto Serif CJK SC','Source Han Serif SC','SimSun','Songti SC','STSong',serif}\n/* 关键信息：灰青突出（作者/评分粉丝值万字/标签/声明四字/二月无雪/24小时内删除） */\n.hand,.stat b,.tag,.notice .off,.notice b{color:#0f766e!important}\nhtml.dark .hand,html.dark .stat b,html.dark .tag,html.dark .notice .off,html.dark .notice b{color:#5eead4!important}\n.notice .off{opacity:1}\n/* 底栏（书源声明）：透明，跟随阅读主题 */\n.notice{margin-top:16px;padding:10px 14px;border:1px dashed rgba(127,127,127,.4);border-radius:12px;font-size:12px;text-align:center;line-height:1.8;background:transparent}\n.notice .hand{font-size:12.5px}</style>\n<div class=\"card\">\n  <div class=\"hero\">\n    <img class=\"cover\" src=\"{{$.cover}}\" onerror=\"this.style.display='none'\"/>\n    <div class=\"hero-main\">\n      <div class=\"title\">{{$.title}}</div>\n      <div class=\"row\"><span class=\"off\">作者</span><span class=\"hand\">{{$.author}}</span></div>\n      <div class=\"row\"><span class=\"off\">分类</span><span class=\"hand cat\">{{$.category}}</span></div>\n      <div class=\"badges\">\n        <span class=\"badge\">{{java.getString('$.end_status')=='1'?'完结':'连载'}}</span>\n        <span class=\"badge hot\">🔥 {{$.hot}}{{$.hotLabel}} 热度</span>\n      </div>\n    </div>\n  </div>\n  <div class=\"stats\">\n    <div class=\"stat\"><b>{{$.score}}</b><span>评分</span></div>\n    <div class=\"stat\"><b>{{$.commentHscore.hscore}}{{$.commentHscore.hscore_unit}}</b><span>粉丝值</span></div>\n    <div class=\"stat\"><b>{{Number(java.getString('$.word_count'))>10000?(Number(java.getString('$.word_count'))/10000).toFixed(1):java.getString('$.word_count')}}</b><span>万字</span></div>\n  </div>\n    {{(function(){var t=String(java.getString('$.tags[*].name')||'');var a=t.split(/\\n+/).filter(function(x){return x&&x!='null'&&x!='undefined'});return a.length?('<div class=\"section\"><h3>作品标签</h3><div class=\"tags\">'+a.map(function(x){return '<span class=\"tag\">'+x+'</span>'}).join('')+'</div></div>'):'';})()}}\n    {{(function(){var n=String(java.getString('$.rankInfo.name')||''),o=String(java.getString('$.rankInfo.order')||''),t=String(java.getString('$.rankInfo.timeDimension')||'');if(!n||n=='null'||!o||o=='null'||o=='0')return '';return '<div class=\"section\"><h3>上榜信息</h3><div class=\"rank\">🏅 <b>'+n+'</b> 第 <b>'+o+'</b> 名（'+t+'）</div></div>';})()}}\n  <div class=\"section\">\n    <h3>内容简介</h3>\n    <div class=\"intro-text\">{{$.description}}</div>\n  </div>\n  <div class=\"notice\"><span class=\"off\">书源声明</span>：<span class=\"hand\">此书源由<b>二月无雪</b>所制，仅供交流学习，禁止分享与二创，请在使用<b>24小时内删除</b>，谢谢配合！</span></div>\n</div>\n</useweb>",
+      "kind": "{{java.getString('$.end_status')=='1'?'完结':'连载'}}\n{{$.category}}\n{{$.score}}分",
+      "name": "$.title",
+      "tocUrl": "@js:\ntry {\n  \"https://book.midureader.com/book/chapter_list/100/{{$.book_id}}.txt\"\n} catch(e) {\n  \"https://book-spare.midureader.com/book/chapter_list/100/{{$.book_id}}.txt\"\n}\n",
+      "wordCount": "$.word_count"
+    },
+    "ruleContent": {
+      "content": "$..content\n@js:\n   if(result!=\"\"){\tresult}\n      else{java.ajax(baseUrl)}"
+    },
+    "ruleExplore": {
+      "author": "$.author||$..leftTags..text## · .*",
+      "bookList": "$.data[*]",
+      "bookUrl": "https://api.midureader.com/fiction/book/getDetail,{\n  \"method\": \"POST\",\n  \"body\": \"app=midu&book_id={{$..book_id}}\"\n}",
+      "coverUrl": "$.cover",
+      "intro": "$.description",
+      "kind": "$..leftTags..text##.*? · (.*?) · .*##$1||$.category",
+      "name": "$.title",
+      "wordCount": "$..leftTags..text##.*·"
+    },
+    "ruleSearch": {
+      "author": "$..author||$..emAuthor",
+      "bookList": "$.data[*]",
+      "bookUrl": "https://api.midureader.com/fiction/book/getDetail,{\n  \"method\": \"POST\",\n  \"body\": \"app=midu&book_id={{$..book_id}}\"\n}",
+      "coverUrl": "$..cover",
+      "intro": "$..description",
+      "kind": "{{java.getString('$.end_status')=='1'?'完结':'连载'}}\n{{$.category}}",
+      "name": "$..title",
+      "wordCount": "$.word_count"
+    },
+    "ruleToc": {
+      "chapterList": "$.[*]",
+      "chapterName": "$.title",
+      "chapterUrl": "@js:\ntry {\n  \"https://book.midureader.com/book/chapter/segment/master/{{$.bookId}}/{{$.chapterId}}/{{$.content_md5}}.txt\"\n} catch(e) {\n  \"https://book.midureader.com/book/chapter/master/{{$.bookId}}_{{$.chapterId}}.txt\"\n}\n"
+    },
+    "searchUrl": "@js:\n\"https://api.midureader.com/fiction/search/search,\" + JSON.stringify({\"method\":\"POST\",\"body\":\"app=midu&keyword={{key}}&page={{page-1}}\"})\n",
+    "weight": 0
+  }
+]
