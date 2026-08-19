@@ -1,0 +1,54 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "海棠书屋wap🔞",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://wap.haitang22.com",
+    "customButton": false,
+    "customOrder": 111,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "玄幻奇幻::https://wap.haitang22.com/sort/1_{{page}}/\n武侠修真::https://wap.haitang22.com/sort/2_{{page}}/\n都市言情::https://wap.haitang22.com/sort/3_{{page}}/\n历史穿越::https://wap.haitang22.com/sort/4_{{page}}/\n网游竞技::https://wap.haitang22.com/sort/5_{{page}}/\n科幻未来::https://wap.haitang22.com/sort/6_{{page}}/\n恐怖悬疑::https://wap.haitang22.com/sort/7_{{page}}/\n其他类型::https://wap.haitang22.com/sort/8_{{page}}/",
+    "lastUpdateTime": 1784812700584,
+    "respondTime": 3858,
+    "ruleBookInfo": {
+      "author": "class.tab@class.p1@text##作者：##",
+      "coverUrl": "class.tu@tag.img@src",
+      "intro": "class.jj@class.p2@text",
+      "lastChapter": "class.tab@class.p3@tag.a@text",
+      "name": "class.catalog1@tag.h1@text"
+    },
+    "ruleContent": {
+      "content": "class.novelcontent@textNodes##^\\s+",
+      "nextContentUrl": "class.page_chapter@class.p4@tag.a@href"
+    },
+    "ruleExplore": {
+      "author": "class.right@class.p4@tag.a@text",
+      "bookList": "class.tt",
+      "bookUrl": "class.right@class.p1@tag.a@href",
+      "coverUrl": "class.left@tag.img@src",
+      "intro": "class.right@class.p5@text",
+      "kind": "class.right@class.p2@text",
+      "name": "class.right@class.p1@tag.a@text",
+      "wordCount": "class.right@class.p3@text"
+    },
+    "ruleSearch": {
+      "author": "tag.a.2@text",
+      "bookList": "class.search_list",
+      "bookUrl": "tag.a.0@href",
+      "kind": "tag.a.1@text",
+      "name": "tag.a.0@text"
+    },
+    "ruleToc": {
+      "chapterList": "class.p2@tag.li",
+      "chapterName": "tag.a@text",
+      "chapterUrl": "tag.a@href",
+      "nextTocUrl": "class.listpage@tag.select@tag.option@value"
+    },
+    "searchUrl": "/s.php,{\"method\":\"POST\",\"body\":\"s={{key}}&type=articlename\",\"charset\":\"gbk\"}",
+    "weight": 0
+  }
+]
