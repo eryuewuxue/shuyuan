@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#F2F4F7">
 <title>二月无雪书源发布页 · Legado 阅读</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%93%9A%3C/text%3E%3C/svg%3E">
+<script src="https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
 <style>
   :root{
     --text:#000000; --muted:#6B7280; --line:rgba(0,0,0,.07);
@@ -236,8 +237,8 @@
       </div>
     </div>
     <div class="stats">
-      <div class="stat"><span class="lbl">总访问量</span><b id="statTotalVisits">--</b></div>
-      <div class="stat"><span class="lbl">今日访问量</span><b id="statTodayVisits">--</b></div>
+      <div class="stat"><span class="lbl">总访问量</span><b id="busuanzi_site_pv">--</b></div>
+      <div class="stat"><span class="lbl">今日访问量</span><b id="busuanzi_today_pv">--</b></div>
       <div class="stat"><span class="lbl">最近更新时间</span><b id="statTime">--</b></div>
       <div class="stat"><span class="lbl">分组</span><b id="statGroups">--</b></div>
     </div>
@@ -577,7 +578,6 @@
     $("statGroups").textContent = GROUPS.map(function(g){ return g.name; }).join(" · ");
     $("statTime").textContent = BUILD_DATE;
     $("footTime").textContent = BUILD_DATE;
-    initVisitCount();
     renderTabs();
     renderContent();
     if (isFile()){
@@ -591,23 +591,6 @@
   }).catch(function(e){
     $("content").innerHTML = '<div class="empty"><span class="e-ico">😵</span>书源加载失败<br><span style="font-size:11px">' + esc(e && e.message) + '</span></div>';
   });
-
-  /* 访问量统计：本地计数（无服务器静态站，按设备统计） */
-  function initVisitCount(){
-    var today = new Date();
-    var y = today.getFullYear(), m = String(today.getMonth()+1).padStart(2,"0"), d = String(today.getDate()).padStart(2,"0");
-    var todayStr = y + "-" + m + "-" + d;
-    var total = parseInt(localStorage.getItem("sy_total")||"0")||0;
-    var tdate = localStorage.getItem("sy_date")||"";
-    var tday = parseInt(localStorage.getItem("sy_today")||"0")||0;
-    if (tdate !== todayStr){ tdate = todayStr; tday = 0; }
-    total++; tday++;
-    localStorage.setItem("sy_total", String(total));
-    localStorage.setItem("sy_date", tdate);
-    localStorage.setItem("sy_today", String(tday));
-    $("statTotalVisits").textContent = total;
-    $("statTodayVisits").textContent = tday;
-  }
 
   function totalCount(){
     var n = 0;
