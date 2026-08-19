@@ -1,0 +1,55 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "禁漫天堂小说🔞",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://4702.zejfxszmh.cc",
+    "customButton": false,
+    "customOrder": 57,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "全部小说::https://4702.zejfxszmh.cc/novel/all?page={{page}}\n都市激情::https://4702.zejfxszmh.cc/novel/all/dsjq?page={{page}}\n校园春色::https://4702.zejfxszmh.cc/novel/all/xycs?page={{page}}\n乡村爱情::https://4702.zejfxszmh.cc/novel/all/xcaq?page={{page}}\n系统异能::https://4702.zejfxszmh.cc/novel/all/xtyn?page={{page}}\n家庭乱伦::https://4702.zejfxszmh.cc/novel/all/jtll?page={{page}}\n穿越重生::https://4702.zejfxszmh.cc/novel/all/cycs?page={{page}}\n经典武侠::https://4702.zejfxszmh.cc/novel/all/jdwx?page={{page}}\n同人改编::https://4702.zejfxszmh.cc/novel/all/trgb?page={{page}}\n科学幻想::https://4702.zejfxszmh.cc/novel/all/kxhx?page={{page}}\n东方玄幻::https://4702.zejfxszmh.cc/novel/all/dfxh?page={{page}}\n娱乐明星::https://4702.zejfxszmh.cc/novel/all/ylmx?page={{page}}\n历史架空::https://4702.zejfxszmh.cc/novel/all/lsjk?page={{page}}\n西方魔幻::https://4702.zejfxszmh.cc/novel/all/xfmh?page={{page}}\n贤者小说::https://4702.zejfxszmh.cc/novel/all/xzxs?page={{page}}",
+    "lastUpdateTime": 1784812716288,
+    "respondTime": 8937,
+    "ruleBookInfo": {
+      "author": "class.detail-page__meta-item.0@tag.a@tag.span@text",
+      "coverUrl": "class.detail-page__poster-frame@tag.img@data-src",
+      "intro": "class.detail-intro__body@class.detail-intro__text.0@text",
+      "kind": "class.detail-page__meta-text--accent@text",
+      "lastChapter": "class.detail-page__meta-item--chapter@tag.a@tag.span@text##第.*章 ",
+      "name": "class.dx-breadcrumbs@tag.li.-1@tag.a@text"
+    },
+    "ruleContent": {
+      "content": "class.article@class.line@text##^\\s+",
+      "nextContentUrl": "class.footer@tag.a.-1@href##下一章"
+    },
+    "ruleExplore": {
+      "author": "class.block@class.flex@tag.span.0@tag.a@text",
+      "bookList": "class.dx-novel-list@tag.li",
+      "bookUrl": "tag.a.0@href",
+      "coverUrl": "class.poster@tag.img@data-src",
+      "kind": "class.block@class.flex@tag.span.1@tag.a@text",
+      "lastChapter": "class.block@tag.a.1@class.flex@tag.span@text",
+      "name": "class.block@tag.h2@text"
+    },
+    "ruleSearch": {
+      "author": "class.block@class.flex@tag.span.0@tag.a@text",
+      "bookList": "class.dx-novel-list@tag.li",
+      "bookUrl": "tag.a.0@href",
+      "coverUrl": "class.poster@tag.img@data-src",
+      "kind": "class.block@class.flex@tag.span.1@tag.a@text",
+      "lastChapter": "class.block@tag.a.1@class.flex@tag.span@text",
+      "name": "class.block@tag.h2@text"
+    },
+    "ruleToc": {
+      "chapterList": "class.detail-page__catalog-item",
+      "chapterName": "class.detail-page__chapter-title@text",
+      "chapterUrl": "tag.a@href"
+    },
+    "searchUrl": "/novel/all?key_word={{key}}&page={{page}}",
+    "weight": 0
+  }
+]
