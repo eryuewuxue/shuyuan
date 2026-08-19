@@ -323,7 +323,10 @@
     <div class="m-actions">
       <button class="m-btn primary" id="qrCopyUrl">复制网址</button>
       <button class="m-btn plain" id="qrCopyLink">复制导入链接</button>
-      <button class="m-btn plain" id="qrOpen">打开导入</button>
+    </div>
+    <div class="m-actions" style="margin-top:9px">
+      <button class="m-btn plain" id="qrOpen">打开导入(legado)</button>
+      <button class="m-btn plain" id="qrYuedu">旧版导入(yuedu)</button>
     </div>
   </div>
 </div>
@@ -335,23 +338,24 @@
   "use strict";
   /* ================= 分组配置 ================= */
   var GROUPS = [
-    {key:"novel",  name:"小说源", icon:"📖", type:"小说", file:"sources/小说源.json",
+    {key:"novel",  name:"小说源", icon:"📖", type:"小说", file:"sources/novel.json",
      desc:"全网小说 · 文学 · 成人", c1:"#3AA6FF", c2:"#0A6CFF"},
-    {key:"qifei",  name:"起飞源", icon:"🚀", type:"起飞", file:"sources/起飞源.json",
+    {key:"qifei",  name:"起飞源", icon:"🚀", type:"起飞", file:"sources/qifei.json",
      desc:"精选主力 · 官方API", c1:"#FF5E3A", c2:"#FF2E63"},
-    {key:"audio",  name:"听书源", icon:"🎧", type:"听书", file:"sources/听书源.json",
+    {key:"audio",  name:"听书源", icon:"🎧", type:"听书", file:"sources/audio.json",
      desc:"有声小说 · 广播剧 · 评书", c1:"#00D2A0", c2:"#00A878"},
-    {key:"comic",  name:"漫画源", icon:"🎨", type:"漫画", file:"sources/漫画源.json",
+    {key:"comic",  name:"漫画源", icon:"🎨", type:"漫画", file:"sources/comic.json",
      desc:"漫画 · 韩漫 · 动漫", c1:"#9B6BFF", c2:"#6C3CFF"},
-    {key:"video",  name:"视频源", icon:"🎬", type:"视频", file:"sources/视频源.json",
+    {key:"video",  name:"视频源", icon:"🎬", type:"视频", file:"sources/video.json",
      desc:"影视 · 短剧", c1:"#FF9F3D", c2:"#FF6A00"},
-    {key:"mix",    name:"综合源", icon:"🧩", type:"综合", file:"sources/综合源.json",
+    {key:"mix",    name:"综合源", icon:"🧩", type:"综合", file:"sources/mix.json",
      desc:"聚合 · 多合一", c1:"#00C9A7", c2:"#0AA5F0"}
   ];
   var BUILD_DATE = "2026-08-19";
-  var ALL_FILE = "sources/全部书源.json";
+  var ALL_FILE = "sources/all.json";
+  var MANIFEST_FILE = "sources/one/manifest.json";
 
-  var state = {data:{}, cur:"all", search:""};
+  var state = {data:{}, cur:"all", search:"", oneMap:{}};
   var $ = function(id){ return document.getElementById(id); };
   var toastTimer = null;
 
@@ -365,7 +369,9 @@
     return base + rel;
   }
   function isFile(){ return location.protocol === "file:"; }
-  function deepLink(url){ return "legado://import/bookSource?src=" + encodeURIComponent(url); }
+  function asciiUrl(u){ return /[^\x00-\x7F]/.test(u) ? encodeURIComponent(u) : u; }
+  function deepLink(url){ return "legado://import/bookSource?src=" + asciiUrl(url); }
+  function deepLinkYuedu(url){ return "yuedu://booksource/importonline?src=" + asciiUrl(url); }
   function toast(msg){
     var t = $("toast");
     t.textContent = msg;
@@ -403,7 +409,22 @@
         console.warn("加载分组失败:", g.file, e);
       });
     });
+    jobs.push(fetchJson(MANIFEST_FILE).then(function(list){
+      state.oneMap = {};
+      (Array.isArray(list)?list:[]).forEach(function(m){
+        state.oneMap[m.name + "\u0001" + m.host] = m.id;
+      });
+    }).catch(function(e){
+      console.warn("加载单源清单失败:", e);
+    }));
     return Promise.all(jobs);
+  }
+
+  /* ================= 单源地址 ================= */
+  function oneUrlOf(s){
+    var id = state.oneMap[(s.bookSourceName||"") + "\u0001" + hostOf(s)];
+    if (!id) return null;
+    return absUrl("sources/one/" + id + ".json");
   }
 
   /* ================= 源信息 ================= */
@@ -450,12 +471,12 @@
   }
 
   /* ================= 渲染 卡片 ================= */
-  function cardHTML(s, g, index){
+  function cardHTML(s, g, index, oneUrl){
     var adult = isAdult(s), api = isApi(s);
     var badges = '<span class="badge b-' + g.type + '">' + g.type + '</span>';
     if (adult) badges += '<span class="badge b-adult">🔞 成人</span>';
     if (api) badges += '<span class="badge b-api">API</span>';
-    var url = absUrl(g.file);
+    var url = oneUrl || absUrl(g.file);
     var dl = deepLink(url);
     return '' +
       '<div class="card" style="animation-delay:' + Math.min(index*35, 420) + 'ms">' +
@@ -512,7 +533,7 @@
       visible += filtered.length;
       main.appendChild(htmlToNode(groupHeadHTML(g, filtered)));
       var wrap = document.createElement("div");
-      filtered.forEach(function(s, i){ wrap.insertAdjacentHTML("beforeend", cardHTML(s, g, i)); });
+      filtered.forEach(function(s, i){ wrap.insertAdjacentHTML("beforeend", cardHTML(s, g, i, oneUrlOf(s))); });
       main.appendChild(wrap);
     }
 
@@ -531,7 +552,7 @@
       if (filtered.length === 0){ main.appendChild(htmlToNode(emptyHTML(q))); return; }
       visible = filtered.length;
       var wrap = document.createElement("div");
-      filtered.forEach(function(s, i){ wrap.insertAdjacentHTML("beforeend", cardHTML(s, g, i)); });
+      filtered.forEach(function(s, i){ wrap.insertAdjacentHTML("beforeend", cardHTML(s, g, i, oneUrlOf(s))); });
       main.appendChild(wrap);
     }
     renderFooter();
@@ -601,6 +622,7 @@
   $("qrCopyUrl").addEventListener("click", function(){ if (currentQR) copyText(currentQR.url, "已复制网络导入网址"); });
   $("qrCopyLink").addEventListener("click", function(){ if (currentQR) copyText(deepLink(currentQR.url), "已复制一键导入链接"); });
   $("qrOpen").addEventListener("click", function(){ if (currentQR) window.location.href = deepLink(currentQR.url); });
+  $("qrYuedu").addEventListener("click", function(){ if (currentQR) window.location.href = deepLinkYuedu(currentQR.url); });
   $("searchInput").addEventListener("input", function(){ state.search = this.value; renderContent(); });
 
   /* ================= 启动 ================= */
