@@ -1,1 +1,268 @@
-[]
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：1097919737",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "西瓜短剧",
+    "bookSourceType": 4,
+    "bookSourceUrl": "https://www.xgshort.com",
+    "customButton": false,
+    "customOrder": 10,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "@js:\neval(String(source.loginUrl));\n\nvar list = [];\nfunction push(title, url, size, extra) {\n  var item = {title: title, url: url, style: {layout_flexGrow: 1, layout_flexBasisPercent: size}};\n  if (extra) { for (var k in extra) { item[k] = extra[k]; } }\n  list.push(item);\n}\n\nvar modeTitle = mode == 'ai' ? 'AI短剧' : '真人短剧';\nvar sortKey = mode == 'ai' ? 'sortAi' : 'sortRen';\nvar chan = channeId();\nvar sort = curSort();\n\npush(modeTitle, '', 1, {\n  type: 'select',\n  chars: ['最近上传', '人气最高', '评分最高'],\n  default: sortName(sort),\n  action: \"var v = String(infoMap.get('\" + modeTitle + \"') || '最近上传'); source.put('\" + sortKey + \"', v == '人气最高' ? '1' : (v == '评分最高' ? '2' : '0')); java.refreshExplore();\"\n});\n\nvar catsRen = [\n  [0, \"全部类型\"],\n  [1, \"男频\"],\n  [2, \"女频\"],\n  [3, \"逆袭\"],\n  [4, \"都市\"],\n  [5, \"穿越\"],\n  [6, \"战神\"],\n  [7, \"赘婿\"],\n  [8, \"霸总\"],\n  [9, \"甜宠\"],\n  [10, \"悬疑\"],\n  [11, \"奇幻\"],\n  [13, \"家庭\"],\n  [14, \"搞笑\"],\n  [15, \"重生\"],\n  [16, \"乡村\"],\n  [17, \"热血\"],\n  [19, \"剧情\"],\n  [20, \"爱情\"],\n  [21, \"罪案\"],\n  [22, \"古装\"],\n  [23, \"宫廷\"],\n  [24, \"动作\"],\n  [25, \"青春\"],\n  [26, \"武侠\"],\n  [27, \"玄幻\"],\n  [28, \"喜剧\"],\n  [29, \"言情\"],\n  [30, \"科幻\"],\n  [31, \"警匪\"],\n  [32, \"惊悚\"],\n  [33, \"商战\"],\n  [34, \"偶像\"],\n  [35, \"其他\"],\n  [37, \"冒险\"],\n  [38, \"犯罪\"],\n  [44, \"经典\"],\n  [45, \"逆 袭\"],\n  [46, \"年代\"],\n  [47, \"总裁\"],\n  [48, \"群像\"],\n  [49, \"民国\"],\n  [50, \"古风\"],\n  [51, \"校园\"],\n  [52, \"女强\"],\n  [55, \"谍战\"],\n  [56, \"反转\"],\n  [57, \"现代\"],\n  [58, \"豪门\"],\n  [59, \"闪婚\"],\n  [60, \"马甲\"],\n  [61, \"架空\"],\n  [62, \"系统\"],\n  [63, \"萌宝\"],\n  [64, \"亲情\"],\n  [65, \"古代\"],\n  [66, \"职场\"],\n  [67, \"神豪\"],\n  [68, \"龙王\"],\n  [69, \"直播\"],\n  [70, \"异能\"],\n  [71, \"皇后\"],\n  [72, \"黑道\"],\n  [73, \"逼婚\"],\n  [74, \"王妃\"],\n  [75, \"虐恋\"],\n  [76, \"追妻\"],\n  [77, \"神医\"],\n  [78, \"团宠\"],\n  [79, \"太子\"],\n  [84, \"医生\"],\n  [85, \"皇子\"],\n  [86, \"律师\"],\n  [87, \"福宝\"],\n  [88, \"御姐\"],\n  [89, \"朝堂\"],\n  [90, \"仙尊\"],\n  [91, \"替嫁\"],\n  [92, \"少帅\"],\n  [93, \"志怪\"],\n  [94, \"女帝\"],\n  [95, \"穿书\"],\n  [96, \"王爷\"],\n  [97, \"校花\"],\n  [98, \"帝王\"],\n  [99, \"玄学\"],\n  [100, \"皇帝\"],\n  [101, \"末世\"],\n  [102, \"天才\"],\n  [103, \"军阀\"],\n  [104, \"大叔\"],\n  [105, \"病娇\"],\n  [106, \"太后\"],\n  [107, \"萌宠\"],\n  [108, \"荒岛\"],\n  [109, \"综艺\"],\n  [110, \"锦鲤\"],\n  [111, \"远古\"],\n  [112, \"公主\"],\n  [113, \"异界\"],\n  [114, \"婆媳\"],\n  [115, \"快穿\"],\n  [116, \"厨娘\"],\n  [118, \"暴富\"],\n  [119, \"影后\"],\n  [120, \"海岛\"],\n  [121, \"世子\"],\n  [122, \"嫔妃\"],\n  [123, \"将军\"],\n  [124, \"后妈\"],\n  [125, \"腹黑\"],\n  [126, \"盗墓\"],\n  [127, \"替身\"],\n  [128, \"特工\"],\n  [129, \"校草\"],\n  [130, \"方言\"],\n  [131, \"黑客\"],\n  [132, \"逃婚\"],\n  [133, \"书生\"],\n  [134, \"甜妹\"],\n  [135, \"作精\"],\n  [136, \"争霸\"],\n  [137, \"年下\"],\n  [138, \"医疗\"],\n  [139, \"未来\"],\n  [140, \"主播\"],\n  [141, \"痞少\"],\n  [142, \"法医\"],\n  [143, \"丧尸\"],\n  [144, \"戏精\"],\n  [147, \"修真\"],\n  [148, \"脑洞\"],\n  [149, \"错爱\"],\n  [150, \"神童\"],\n  [158, \"毒舌\"],\n  [160, \"恋爱\"],\n  [162, \"校霸\"],\n  [163, \"战斗\"],\n  [164, \"种田\"],\n  [165, \"求生\"],\n  [167, \"家族\"],\n  [168, \"诡秘\"],\n  [169, \"高冷\"],\n  [170, \"成长\"],\n  [171, \"赌石\"],\n  [172, \"后宫\"],\n  [173, \"空间\"],\n  [174, \"宠妻\"],\n  [175, \"亲人\"],\n  [176, \"年上\"],\n  [177, \"男强\"],\n  [178, \"虐渣\"],\n];\nvar catsAi = [\n  [0, \"全部类型\"],\n  [1, \"男频\"],\n  [2, \"女频\"],\n  [3, \"逆袭\"],\n  [4, \"都市\"],\n  [5, \"穿越\"],\n  [6, \"战神\"],\n  [10, \"悬疑\"],\n  [11, \"奇幻\"],\n  [13, \"家庭\"],\n  [14, \"搞笑\"],\n  [15, \"重生\"],\n  [16, \"乡村\"],\n  [17, \"热血\"],\n  [19, \"剧情\"],\n  [23, \"宫廷\"],\n  [25, \"青春\"],\n  [26, \"武侠\"],\n  [27, \"玄幻\"],\n  [28, \"喜剧\"],\n  [30, \"科幻\"],\n  [35, \"其他\"],\n  [37, \"冒险\"],\n  [46, \"年代\"],\n  [47, \"总裁\"],\n  [49, \"民国\"],\n  [50, \"古风\"],\n  [51, \"校园\"],\n  [56, \"反转\"],\n  [58, \"豪门\"],\n  [60, \"马甲\"],\n  [61, \"架空\"],\n  [62, \"系统\"],\n  [63, \"萌宝\"],\n  [65, \"古代\"],\n  [66, \"职场\"],\n  [69, \"直播\"],\n  [70, \"异能\"],\n  [79, \"太子\"],\n  [95, \"穿书\"],\n  [101, \"末世\"],\n  [113, \"异界\"],\n  [115, \"快穿\"],\n  [147, \"修真\"],\n  [148, \"脑洞\"],\n  [157, \"灾难\"],\n  [160, \"恋爱\"],\n  [163, \"战斗\"],\n  [164, \"种田\"],\n  [165, \"求生\"],\n  [167, \"家族\"],\n  [168, \"诡秘\"],\n  [179, \"3D\"],\n];\nvar cats = mode == 'ai' ? catsAi : catsRen;\nfor (var i = 0; i < cats.length; i++) {\n  push(cats[i][1], '/api/list/getfiltersdata?channeid=' + chan + '&ids=' + sort + ',' + cats[i][0] + ',0,0,0,0&page={{page}}&size=20', 0.25);\n}\n\nJSON.stringify(list);",
+    "header": "@js:\nvar __t = source.get('token') || '';\nif (!__t) {\n  try {\n    var __body = '{\"deviceId\":\"legado_' + java.randomUUID() + '\"}';\n    var __resp = java.post('https://www.xgshort.com/api/auth/guest-login', __body, {'Content-Type':'application/json'}).body();\n    var __j = JSON.parse(__resp);\n    if (__j && __j.access_token) { __t = __j.access_token; source.put('token', __t); }\n  } catch (e) { java.log('西瓜短剧游客登录失败: ' + e); }\n}\nvar __h = {\n  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',\n  'Referer': 'https://www.xgshort.com/'\n};\nif (__t) { __h['Authorization'] = 'Bearer ' + __t; }\nJSON.stringify(__h);",
+    "lastUpdateTime": 1786514171944,
+    "loginUi": "[{\"name\": \"真人短剧模式\", \"type\": \"button\", \"action\": \"setMode('ren')\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexShrink\": 1, \"layout_flexBasisPercent\": 0.4}}, {\"name\": \"AI短剧模式\", \"type\": \"button\", \"action\": \"setMode('ai')\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexShrink\": 1, \"layout_flexBasisPercent\": 0.4}}, {\"name\": \"网页登录\", \"type\": \"button\", \"action\": \"java.startBrowser('https://www.xgshort.com/', '西瓜短剧网页登录')\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexShrink\": 1, \"layout_flexBasisPercent\": 0.4}}, {\"name\": \"获取Token\", \"type\": \"button\", \"action\": \"var __t = guestLogin(); if (__t) { java.longToast('Token获取成功，小宝宝放心用哦 🥰'); } else { java.longToast('Token获取失败，请检查网络后重试'); }\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexShrink\": 1, \"layout_flexBasisPercent\": 0.4}}]",
+    "loginUrl": "// ===== 西瓜短剧 · 真人/AI 模式 =====\nvar mode = source.get('mode');\nif (!mode || mode == '') { mode = 'ren'; source.put('mode', mode); }\nvar sortRen = source.get('sortRen');\nif (!sortRen || sortRen == '') { sortRen = '0'; source.put('sortRen', sortRen); }\nvar sortAi = source.get('sortAi');\nif (!sortAi || sortAi == '') { sortAi = '0'; source.put('sortAi', sortAi); }\nfunction guestLogin() {\n  try {\n    var __body = '{\"deviceId\":\"legado_' + java.randomUUID() + '\"}';\n    var __resp = java.post('https://www.xgshort.com/api/auth/guest-login', __body, {'Content-Type':'application/json'}).body();\n    var __j = JSON.parse(__resp);\n    if (__j && __j.access_token) { source.put('token', __j.access_token); return __j.access_token; }\n  } catch (e) { java.log('西瓜短剧游客登录失败: ' + e); }\n  return '';\n}\nvar token = source.get('token');\nif (!token || token == '') { token = guestLogin(); }\nfunction sortId(name) { return name == '人气最高' ? '1' : (name == '评分最高' ? '2' : '0'); }\nfunction sortName(id) { return id == '1' ? '人气最高' : (id == '2' ? '评分最高' : '最近上传'); }\nfunction setMode(m) {\n  mode = m;\n  source.put('mode', m);\n  var msg = (m == 'ai' ? '已切换为AI短剧模式' : '已切换为真人短剧模式') + '\\n小宝宝请刷新发现解锁切换效果哦 🥰';\n  java.longToast(msg);\n  return m;\n}\nfunction getMode() {\n  java.longToast('当前模式：' + (mode == 'ai' ? 'AI短剧模式' : '真人短剧模式'));\n  return mode;\n}\nfunction channeId() { return mode == 'ai' ? 71 : 1; }\nfunction curSort() { return mode == 'ai' ? sortAi : sortRen; }\nfunction login() {\n  guestLogin();\n  java.longToast('登录成功：' + (mode == 'ai' ? 'AI短剧模式' : '真人短剧模式'));\n  return true;\n}\n'https://www.xgshort.com';",
+    "respondTime": 30000,
+    "ruleBookInfo": {
+      "author": "$.data.seriesInfo.actor",
+      "coverUrl": "$.data.seriesInfo.coverUrl",
+      "intro": "$.data.seriesInfo.description",
+      "kind": "{{$.data.seriesInfo.channeName}}\n👀{{$.data.seriesInfo.playCount}}播放\n{{$.data.seriesInfo.updateStatus}}\n{{$.data.seriesInfo.tags##[\\[\\]]}}",
+      "lastChapter": "{{$.data.seriesInfo.updateStatus}}",
+      "name": "$.data.seriesInfo.title"
+    },
+    "ruleContent": {
+      "content": "$.data.urls[0].cdnUrl||$.data.urls[0].ossUrl"
+    },
+    "ruleExplore": {
+      "author": "$.author",
+      "bookList": "$.data.list",
+      "bookUrl": "https://www.xgshort.com/api/video/episodes?seriesShortId={{$.shortId}}&page=1&size=200",
+      "coverUrl": "$.coverUrl",
+      "intro": "$.description",
+      "kind": "{{$.type}}\n🔥{{$.score}}分\n👀{{$.playCount}}播放\n{{$.upStatus}}\n{{$.tags##[\\[\\]]}}",
+      "lastChapter": "{{$.upStatus}}",
+      "name": "$.title",
+      "wordCount": "{{$.playCount}}"
+    },
+    "ruleSearch": {
+      "author": "author",
+      "bookList": "<js>\nvar __kw = '';\ntry { var __km = String(baseUrl || '').match(/keyword=([^&]*)/); if (__km) __kw = decodeURIComponent(__km[1]); } catch (e) {}\nfunction __getPage(p) {\n  try {\n    var __u = 'https://www.xgshort.com/api/list/fuzzysearch?keyword=' + java.encodeURI(__kw) + '&page=' + p + '&size=50';\n    return JSON.parse(java.ajax(__u));\n  } catch (e) { return null; }\n}\nvar __cur = 1;\ntry { var __pm = String(baseUrl || '').match(/[?&]page=(\\d+)/); if (__pm) __cur = parseInt(__pm[1]) || 1; } catch (e) {}\nvar __start = (__cur - 1) * 2 + 1;\nvar __mode = source.get('mode') || 'ren';\nvar __want = __mode == 'ai' ? '71' : '1';\nvar __all = [];\nfor (var __p = __start; __p <= __start + 1; __p++) {\n  var __d = __getPage(__p);\n  if (!__d || !__d.data || !__d.data.list) break;\n  __all = __all.concat(__d.data.list);\n  if (__d.data.list.length < 50) break;\n}\nresult = __all.filter(function (__it) {\n  var __c = String(__it.cidMapper != null ? __it.cidMapper : __it.cid);\n  return __c == __want;\n}).map(function (__it) {\n  return {\n    name: __it.title || '',\n    author: __it.author || '',\n    intro: __it.description || '',\n    coverUrl: __it.coverUrl || '',\n    bookUrl: 'https://www.xgshort.com/api/video/episodes?seriesShortId=' + (__it.shortId || '') + '&page=1&size=200',\n    kind: (__it.type || '') + '\\n🔥' + (__it.score || '') + '分\\n👀' + (__it.playCount || '') + '播放\\n' + (__it.upStatus || '') + '\\n' + ((__it.tags || []).join(' ')),\n    lastChapter: __it.upStatus || '',\n    wordCount: String(__it.playCount == null ? '' : __it.playCount)\n  };\n});\n</js>",
+      "bookUrl": "bookUrl",
+      "coverUrl": "coverUrl",
+      "intro": "intro",
+      "kind": "kind",
+      "lastChapter": "lastChapter",
+      "name": "name",
+      "wordCount": "wordCount"
+    },
+    "ruleToc": {
+      "chapterList": "$.data.list",
+      "chapterName": "$.episodeTitle\n@js:'第'+parseInt(result)+'集'",
+      "chapterUrl": "https://www.xgshort.com/api/video/url/query,{\"method\":\"POST\",\"body\":\"{\\\"type\\\":\\\"episode\\\",\\\"accessKey\\\":\\\"{{$.episodeAccessKey}}\\\"}\",\"headers\":{\"Content-Type\":\"application/json\"}}"
+    },
+    "searchUrl": "https://www.xgshort.com/api/list/fuzzysearch?keyword={{key}}&page={{page}}&size=50",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "电影先生",
+    "bookSourceType": 4,
+    "bookSourceUrl": "https://silidm.com",
+    "customButton": false,
+    "customOrder": 46,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar result = [];\nvar mainCat = infoMap[\"片库\"] || \"电影片库\";\n\nresult.push({\n    \"title\": \"片库\",\n    \"type\": \"select\",\n    \"chars\": [\"电影片库\", \"剧集片库\", \"动漫片库\", \"综艺片库\"],\n    \"default\": mainCat,\n    \"action\": \"java.refreshExplore()\",\n    \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\n\nvar cats = {\n    \"电影片库\": [\n        [\"剧情\", \"/show/dy---%E5%89%A7%E6%83%85-----{{page}}---.html\"],\n        [\"喜剧\", \"/show/dy---%E5%96%9C%E5%89%A7-----{{page}}---.html\"],\n        [\"动作\", \"/show/dy---%E5%8A%A8%E4%BD%9C-----{{page}}---.html\"],\n        [\"爱情\", \"/show/dy---%E7%88%B1%E6%83%85-----{{page}}---.html\"],\n        [\"科幻\", \"/show/dy---%E7%A7%91%E5%B9%BB-----{{page}}---.html\"],\n        [\"恐怖\", \"/show/dy---%E6%81%90%E6%80%96-----{{page}}---.html\"],\n        [\"战争\", \"/show/dy---%E6%88%98%E4%BA%89-----{{page}}---.html\"]\n    ],\n    \"剧集片库\": [\n        [\"国产剧\", \"/show/juji---%E5%9B%BD%E4%BA%A7%E5%89%A7-----{{page}}---.html\"],\n        [\"美剧\", \"/show/juji---%E7%BE%8E%E5%89%A7-----{{page}}---.html\"],\n        [\"韩国剧\", \"/show/juji---%E9%9F%A9%E5%9B%BD%E5%89%A7-----{{page}}---.html\"],\n        [\"港剧\", \"/show/juji---%E6%B8%AF%E5%89%A7-----{{page}}---.html\"],\n        [\"台湾剧\", \"/show/juji---%E5%8F%B0%E6%B9%BE%E5%89%A7-----{{page}}---.html\"],\n        [\"日本剧\", \"/show/juji---%E6%97%A5%E6%9C%AC%E5%89%A7-----{{page}}---.html\"],\n        [\"泰国剧\", \"/show/juji---%E6%B3%B0%E5%9B%BD%E5%89%A7-----{{page}}---.html\"]\n    ],\n    \"动漫片库\": [\n        [\"国产动漫\", \"/show/dongman---%E5%9B%BD%E4%BA%A7%E5%8A%A8%E6%BC%AB-----{{page}}---.html\"],\n        [\"日韩动漫\", \"/show/dongman---%E6%97%A5%E9%9F%A9%E5%8A%A8%E6%BC%AB-----{{page}}---.html\"],\n        [\"欧美动漫\", \"/show/dongman---%E6%AC%A7%E7%BE%8E%E5%8A%A8%E6%BC%AB-----{{page}}---.html\"]\n    ],\n    \"综艺片库\": [\n        [\"大陆综艺\", \"/show/zongyi---%E5%A4%A7%E9%99%86%E7%BB%BC%E8%89%BA-----{{page}}---.html\"]\n    ]\n};\n\nvar selected = cats[mainCat];\nfor (var i = 0; i < selected.length; i++) {\n    result.push({\n        \"title\": selected[i][0],\n        \"url\": selected[i][1],\n        \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.25}\n    });\n}\n\nJSON.stringify(result);\n</js>",
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.61 Mobile Safari/537.36\"}",
+    "lastUpdateTime": 1785129687528,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "coverUrl": "class.video-cover@tag.img@data-src",
+      "intro": "class.vod_content@text",
+      "kind": "class.video-info-aux@tag.a.0@text",
+      "name": "class.page-title@text"
+    },
+    "ruleContent": {
+      "content": "<js>\n(function(){\n    var html = String(result);\n    var idx = html.indexOf(\"player_aaaa\");\n    if (idx < 0) return \"\";\n    var start = html.indexOf(\"{\", idx);\n    if (start < 0) return \"\";\n    var depth = 0;\n    var end = start;\n    for (var i = start; i < html.length; i++) {\n        if (html.charAt(i) === \"{\") depth++;\n        else if (html.charAt(i) === \"}\") {\n            depth--;\n            if (depth === 0) {\n                end = i;\n                break;\n            }\n        }\n    }\n    var jsonStr = html.substring(start, end + 1);\n    try {\n        var data = JSON.parse(jsonStr);\n        return data.url || \"\";\n    } catch(e) {\n        return \"\";\n    }\n})()\n</js>",
+      "sourceRegex": ".*\\.(m3u8|mp4).*"
+    },
+    "ruleExplore": {
+      "bookList": "class.module-item",
+      "bookUrl": "class.video-name@tag.a@href",
+      "coverUrl": "class.module-item-pic@tag.img@data-src",
+      "intro": "class.video-text@text",
+      "name": "class.video-name@tag.a@text"
+    },
+    "ruleSearch": {
+      "bookList": "class.module-search-item",
+      "bookUrl": "tag.h3@tag.a@href",
+      "coverUrl": "class.module-item-pic@tag.img@data-src",
+      "intro": "class.video-info-main@text",
+      "name": "tag.h3@tag.a@text"
+    },
+    "ruleToc": {
+      "chapterList": "class.play-source-content.0@tag.a",
+      "chapterName": "text",
+      "chapterUrl": "href"
+    },
+    "searchUrl": "/search/{{key}}----------{{page}}---.html",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "伪七猫短剧",
+    "bookSourceType": 4,
+    "bookSourceUrl": "https://www.qmao.net",
+    "customButton": false,
+    "customOrder": 47,
+    "enabled": true,
+    "enabledCookieJar": false,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar result = [];\nvar mainCat = infoMap[\"频道\"] || \"短剧\";\n\nresult.push({\n    \"title\": \"频道\",\n    \"type\": \"select\",\n    \"chars\": [\"短剧\", \"电影\", \"电视剧\", \"动漫\", \"首页推荐\"],\n    \"default\": mainCat,\n    \"action\": \"java.refreshExplore()\",\n    \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\n\nvar cats = {\n    \"短剧\": [\n        [\"全部\", \"https://www.qmao.net/vodtype/4-{{page}}.html\"],\n        [\"最新\", \"https://www.qmao.net/vodtype/4-1.html\"],\n        [\"热门\", \"https://www.qmao.net/vodtype/4-2.html\"],\n        [\"精选\", \"https://www.qmao.net/vodtype/4-3.html\"],\n        [\"更多\", \"https://www.qmao.net/vodtype/4-5.html\"]\n    ],\n    \"电影\": [\n        [\"全部\", \"https://www.qmao.net/vodtype/1-{{page}}.html\"],\n        [\"最新\", \"https://www.qmao.net/vodtype/1-1.html\"],\n        [\"热门\", \"https://www.qmao.net/vodtype/1-2.html\"],\n        [\"精选\", \"https://www.qmao.net/vodtype/1-3.html\"],\n        [\"更多\", \"https://www.qmao.net/vodtype/1-5.html\"]\n    ],\n    \"电视剧\": [\n        [\"全部\", \"https://www.qmao.net/vodtype/2-{{page}}.html\"],\n        [\"最新\", \"https://www.qmao.net/vodtype/2-1.html\"],\n        [\"热门\", \"https://www.qmao.net/vodtype/2-2.html\"],\n        [\"精选\", \"https://www.qmao.net/vodtype/2-3.html\"],\n        [\"更多\", \"https://www.qmao.net/vodtype/2-5.html\"]\n    ],\n    \"动漫\": [\n        [\"全部\", \"https://www.qmao.net/vodtype/3-{{page}}.html\"],\n        [\"最新\", \"https://www.qmao.net/vodtype/3-1.html\"],\n        [\"热门\", \"https://www.qmao.net/vodtype/3-2.html\"],\n        [\"精选\", \"https://www.qmao.net/vodtype/3-3.html\"],\n        [\"更多\", \"https://www.qmao.net/vodtype/3-5.html\"]\n    ],\n    \"首页推荐\": [\n        [\"每日推荐\", \"https://www.qmao.net/\"]\n    ]\n};\n\nvar selected = cats[mainCat];\nfor (var i = 0; i < selected.length; i++) {\n    result.push({\n        \"title\": selected[i][0],\n        \"url\": selected[i][1],\n        \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.25}\n    });\n}\n\nJSON.stringify(result);\n</js>",
+    "lastUpdateTime": 1785155993276,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "coverUrl": ".DramaDetail_bookCover@src",
+      "intro": ".DramaDetail_intro@text",
+      "kind": ".DramaDetail_tagsBox a@text",
+      "lastChapter": ".pcDrama_catalogItem@text",
+      "name": ".DramaDetail_bookName@text"
+    },
+    "ruleContent": {
+      "content": "@js:\nvar html = String(result);\nvar m = html.match(/var player_aaaa=(\\{[\\s\\S]*?\\})\\s*<\\/script>/);\nif (!m) {\n    m = html.match(/var player_aaaa=(\\{[\\s\\S]*?\\})/);\n}\nif (m) {\n    try {\n        var data = JSON.parse(m[1]);\n        result = data.url || '';\n    } catch (e) {\n        var u = m[1].match(/\"url\"\\s*:\\s*\"([^\"]+)\"/);\n        result = u ? u[1] : '';\n    }\n} else {\n    var u2 = html.match(/\"url\"\\s*:\\s*\"([^\"]+)\"/);\n    result = u2 ? u2[1] : '';\n}\nresult = String(result).replace(/\\\\\\//g, '/');\nresult",
+      "sourceRegex": ".*\\.(m3u8|mp4|flv).*"
+    },
+    "ruleExplore": {
+      "bookList": ".BrowseList_itemBox||.SecondList_secondListItem",
+      "bookUrl": "a.BrowseList_imageBox@href||a.image_imageScaleBox@href",
+      "coverUrl": "img.image_imageItem@src||img.image_imageDark@src",
+      "intro": ".BrowseList_bookIntro@text",
+      "kind": ".BrowseList_tagsBox a@text||.SecondList_bookType a@text",
+      "lastChapter": ".BrowseList_totalChapterNum@text||.SecondList_totalChapterNum@text",
+      "name": ".BrowseList_bookName span.0@text||.SecondList_bookName@text"
+    },
+    "ruleSearch": {
+      "author": ".TagBookList_bookAuthor span.1@text",
+      "bookList": ".TagBookList_tagItem",
+      "bookUrl": "a.TagBookList_bookImageBox@href",
+      "coverUrl": "img.image_imageItem@src",
+      "intro": ".TagBookList_intro@text",
+      "kind": ".TagBookList_tagsBox a@text",
+      "lastChapter": ".TagBookList_totalChapterNum@text",
+      "name": ".TagBookList_bookName@text"
+    },
+    "ruleToc": {
+      "chapterList": ".pcDrama_catalogItem",
+      "chapterName": "text",
+      "chapterUrl": "href"
+    },
+    "searchUrl": "https://www.qmao.net/vodsearch/{{key}}----------{{page}}---.html",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "ISVOD明星影院",
+    "bookSourceType": 4,
+    "bookSourceUrl": "https://isvod.com",
+    "customButton": false,
+    "customOrder": 48,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar result = [];\nvar mainCat = infoMap[\"频道\"] || \"短剧\";\n\nresult.push({\n    \"title\": \"频道\",\n    \"type\": \"select\",\n    \"chars\": [\"短剧\", \"电影\", \"电视剧\", \"综艺\", \"动漫\", \"体育\"],\n    \"default\": mainCat,\n    \"action\": \"java.refreshExplore()\",\n    \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\n\nvar cats = {\n    \"短剧\": [\n        [\"全部短剧\", \"/vodtype/duanju-{{page}}.html\"],\n        [\"古装短剧\", \"/vodshow/duanju---古装--------{{page}}---.html\"],\n        [\"虐恋短剧\", \"/vodshow/duanju---虐恋--------{{page}}---.html\"],\n        [\"逆袭短剧\", \"/vodshow/duanju---逆袭--------{{page}}---.html\"],\n        [\"神豪短剧\", \"/vodshow/duanju---神豪--------{{page}}---.html\"],\n        [\"重生短剧\", \"/vodshow/duanju---重生--------{{page}}---.html\"],\n        [\"复仇短剧\", \"/vodshow/duanju---复仇--------{{page}}---.html\"],\n        [\"穿越短剧\", \"/vodshow/duanju---穿越--------{{page}}---.html\"],\n        [\"甜宠短剧\", \"/vodshow/duanju---甜宠--------{{page}}---.html\"],\n        [\"强者短剧\", \"/vodshow/duanju---强者--------{{page}}---.html\"],\n        [\"萌宝短剧\", \"/vodshow/duanju---萌宝--------{{page}}---.html\"],\n        [\"其它短剧\", \"/vodshow/duanju---其它--------{{page}}---.html\"]\n    ],\n    \"电影\": [\n        [\"全部电影\", \"/vodtype/dianying-{{page}}.html\"],\n        [\"动作片\", \"/vodtype/dongzuopian-{{page}}.html\"],\n        [\"喜剧片\", \"/vodtype/xijupian-{{page}}.html\"],\n        [\"爱情片\", \"/vodtype/aiqingpian-{{page}}.html\"],\n        [\"科幻片\", \"/vodtype/kehuanpian-{{page}}.html\"],\n        [\"恐怖片\", \"/vodtype/kongbupian-{{page}}.html\"],\n        [\"战争片\", \"/vodtype/zhanzhengpian-{{page}}.html\"],\n        [\"剧情片\", \"/vodtype/juqingpian-{{page}}.html\"],\n        [\"动画片\", \"/vodtype/donghuapian-{{page}}.html\"],\n        [\"悬疑片\", \"/vodtype/xuanyi-{{page}}.html\"],\n        [\"纪录片\", \"/vodtype/jilupian-{{page}}.html\"],\n        [\"奇幻片\", \"/vodtype/qihuanpian-{{page}}.html\"]\n    ],\n    \"电视剧\": [\n        [\"全部电视剧\", \"/vodtype/dianshiju-{{page}}.html\"],\n        [\"国产剧\", \"/vodshow/dianshiju---大陆--------{{page}}---.html\"],\n        [\"韩剧\", \"/vodshow/dianshiju---韩国--------{{page}}---.html\"],\n        [\"日剧\", \"/vodshow/dianshiju---日本--------{{page}}---.html\"],\n        [\"欧美剧\", \"/vodshow/dianshiju---美国--------{{page}}---.html\"],\n        [\"港台剧\", \"/vodshow/dianshiju---香港--------{{page}}---.html\"],\n        [\"海外剧\", \"/vodshow/dianshiju---海外--------{{page}}---.html\"]\n    ],\n    \"综艺\": [\n        [\"全部综艺\", \"/vodtype/zongyi-{{page}}.html\"],\n        [\"大陆综艺\", \"/vodshow/zongyi---大陆--------{{page}}---.html\"],\n        [\"日韩综艺\", \"/vodshow/zongyi---日本--------{{page}}---.html\"],\n        [\"欧美综艺\", \"/vodshow/zongyi---美国--------{{page}}---.html\"]\n    ],\n    \"动漫\": [\n        [\"全部动漫\", \"/vodtype/dongman-{{page}}.html\"],\n        [\"国产动漫\", \"/vodshow/dongman---大陆--------{{page}}---.html\"],\n        [\"日本动漫\", \"/vodshow/dongman---日本--------{{page}}---.html\"],\n        [\"欧美动漫\", \"/vodshow/dongman---美国--------{{page}}---.html\"]\n    ],\n    \"体育\": [\n        [\"全部体育\", \"/vodtype/tiyu-{{page}}.html\"],\n        [\"足球\", \"/vodshow/tiyu---足球--------{{page}}---.html\"],\n        [\"篮球\", \"/vodshow/tiyu---篮球--------{{page}}---.html\"]\n    ]\n};\n\nvar selected = cats[mainCat];\nfor (var i = 0; i < selected.length; i++) {\n    result.push({\n        \"title\": selected[i][0],\n        \"url\": selected[i][1],\n        \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.25}\n    });\n}\n\nJSON.stringify(result);\n</js>",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\",\"Referer\":\"https://isvod.com/\",\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\",\"Accept-Language\":\"zh-CN,zh;q=0.9\"}",
+    "lastUpdateTime": 1785061613398,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "class.video-info-actor.0@text##\\s*/\\s*## ",
+      "coverUrl": "class.video-info-itemtitle@tag.img@data-src",
+      "intro": "class.video-info-content@text##收起$##",
+      "kind": "class.video-info-aux@tag.a.0@text",
+      "lastChapter": "class.tag-link-red@text",
+      "name": "tag.h1@text"
+    },
+    "ruleContent": {
+      "content": "@js:var html=String(result);var m=html.match(/player_aaaa\\s*=\\s*(\\{[\\s\\S]*?\\})\\s*<\\/script>/);if(!m){m=html.match(/player_aaaa\\s*=\\s*(\\{[\\s\\S]*?\\})/)}if(m){try{var d=JSON.parse(m[1]);if(d.url){d.url}}catch(e){var u=m[1].match(/\"url\"\\s*:\\s*\"([^\"]+)\"/);if(u){u[1]}}}else{var u=html.match(/https?:\\/\\/[^\\s\"']+\\.m3u8[^\\s\"']*/);if(u){u[0]}}",
+      "sourceRegex": ".*\\.m3u8.*"
+    },
+    "ruleExplore": {
+      "bookList": "class.module-item",
+      "bookUrl": "class.module-item-pic@tag.a@href##/vodplay/(\\d+)-\\d+-\\d+\\.html##/voddetail/$1.html",
+      "coverUrl": "class.module-item-pic@tag.img@data-src",
+      "kind": "class.video-class@text",
+      "lastChapter": "class.video-class@text",
+      "name": "class.module-item-title@text"
+    },
+    "ruleSearch": {
+      "author": "class.video-info-actor.1@text##\\s*/\\s*## ",
+      "bookList": "class.module-search-item",
+      "bookUrl": "class.video-info-header@tag.h3@tag.a@href",
+      "coverUrl": "class.module-item-pic@tag.img@data-src",
+      "kind": "class.video-info-aux@tag.a.0@text",
+      "lastChapter": "class.video-serial@text",
+      "name": "class.video-info-header@tag.h3@tag.a@text"
+    },
+    "ruleToc": {
+      "chapterList": "class.sort-item@tag.a",
+      "chapterName": "tag.span@text",
+      "chapterUrl": "href"
+    },
+    "searchUrl": "/vodsearch/{{key}}----------{{page}}---.html",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：1097919737",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "GScenes短剧",
+    "bookSourceType": 4,
+    "bookSourceUrl": "https://www.gscenes.com",
+    "customButton": false,
+    "customOrder": 50,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "[{\"title\": \"🎬 真人短剧\", \"url\": \"https://www.gscenes.com/api/works?type=real&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·甜虐\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=甜虐&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·都市\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=都市&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·校园\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=校园&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·豪门\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=豪门&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·高甜\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=高甜&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·娱乐圈\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=娱乐圈&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·职场\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=职场&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·误会拉扯\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=误会拉扯&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"🤖 AI短剧\", \"url\": \"https://www.gscenes.com/api/works?type=ai&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·甜虐\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=甜虐&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·都市\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=都市&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·校园\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=校园&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·豪门\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=豪门&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·高甜\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=高甜&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·娱乐圈\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=娱乐圈&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·职场\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=职场&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·误会拉扯\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=误会拉扯&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"🏆 月榜\", \"url\": \"https://www.gscenes.com/api/rankings?board=overall&window=month\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"🏆 周榜\", \"url\": \"https://www.gscenes.com/api/rankings?board=overall&window=week\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"🏆 日榜\", \"url\": \"https://www.gscenes.com/api/rankings?board=overall&window=day\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}]",
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\", \"Referer\": \"https://www.gscenes.com/\"}",
+    "lastUpdateTime": 1786120196649,
+    "loginUrl": "https://www.gscenes.com/ranking/month",
+    "respondTime": 30000,
+    "ruleBookInfo": {
+      "coverUrl": "$.cover_url",
+      "intro": "@js:(function(){var d=(typeof result==='string')?JSON.parse(result):result;var s=d.synopsis||'';if(d.tags&&d.tags.length){s+='\\n\\n标签：'+d.tags.join(' / ');}return s;})()",
+      "kind": "@js:(function(){var d=(typeof result==='string')?JSON.parse(result):result;var s=(d.type==='ai'?'AI短剧':'真人短剧');if(d.tags&&d.tags.length){s+=' · '+d.tags.join(' · ');}return s;})()",
+      "lastChapter": "@js:(function(){var d=(typeof result==='string')?JSON.parse(result):result;return d.status==='complete'?'全'+d.total_episodes+'集':'更新至第'+d.total_episodes+'集';})()",
+      "name": "$.title",
+      "tocUrl": "@js:'/api/works/' + JSON.parse(result).id + '/episodes'"
+    },
+    "ruleContent": {
+      "content": "$.play_url"
+    },
+    "ruleExplore": {
+      "bookList": "$.items%%$.items[*].work",
+      "bookUrl": "https://www.gscenes.com/api/works/{{$.id}}",
+      "coverUrl": "$.cover_url",
+      "intro": "@js:(result.tags || []).join(' / ')",
+      "kind": "@js:(result.type === 'ai' ? 'AI' : '真人') + ' · ' + result.total_episodes + '集'",
+      "name": "$.title"
+    },
+    "ruleSearch": {
+      "author": "@js:(function(){var a = result.actors || ''; if (a === '—' || a === '-') a = ''; return a;})()",
+      "bookList": "$.items",
+      "bookUrl": "https://www.gscenes.com/api/works/{{$.id}}",
+      "coverUrl": "$.cover_url",
+      "intro": "@js:(result.tags || []).join(' / ')",
+      "kind": "@js:(result.type === 'ai' ? 'AI短剧' : '真人短剧') + ' · ' + result.total_episodes + '集' + (result.is_free ? ' · 免费' : ' · VIP')",
+      "name": "$.title"
+    },
+    "ruleToc": {
+      "chapterList": "$.items",
+      "chapterName": "@js:'第' + result.no + '集'",
+      "chapterUrl": "https://www.gscenes.com/api/works/{{$.work_id}}/episodes/{{$.id}}/playback"
+    },
+    "searchUrl": "https://www.gscenes.com/api/search?q={{key}}&limit=50&page={{page}}",
+    "weight": 0
+  }
+]
