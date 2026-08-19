@@ -1,0 +1,55 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "得奇小说网",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.deqixs.org",
+    "customButton": false,
+    "customOrder": 25,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "最新更新::/top/lastupdate/{{page}}.html\n玄幻小说::/sort/1/{{page}}.html\n仙侠小说::/sort/2/{{page}}.html\n都市小说::/sort/3/{{page}}.html\n历史小说::/sort/4/{{page}}.html\n军事小说::/sort/5/{{page}}.html\n科幻小说::/sort/6/{{page}}.html\n言情小说::/sort/7/{{page}}.html\n完结小说::/quanben/{{page}}.html",
+    "lastUpdateTime": 1784812752632,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": ".itemtxt p a@text##作者：##",
+      "coverUrl": ".imga img@src",
+      "intro": ".des@text",
+      "kind": ".itemtxt p span.0@text",
+      "lastChapter": ".itemtxt ul li.0 a@text",
+      "name": "h1 a@text"
+    },
+    "ruleContent": {
+      "content": ".con@html##(本章完|PS：|PS:|求月票|更新不易|看最新章节|看最新无错|最新小说章节|本章节未完|请订阅|速.?读.?谷|章节内容不完整|得奇小说网|deqixs.org|<script[\\s\\S]*?</script>|<style[\\s\\S]*?</style>|&nbsp;|<!--[\\s\\S]*?-->)##",
+      "nextContentUrl": "text.下一页@href"
+    },
+    "ruleExplore": {
+      "author": "p.1 a@text##作者：##",
+      "bookList": ".item",
+      "bookUrl": "h3 a@href",
+      "coverUrl": "img@src",
+      "kind": "p.0 span.0@text",
+      "lastChapter": "ul li.0 a@text",
+      "name": "h3 a@text"
+    },
+    "ruleSearch": {
+      "author": ".author.0@text##作者：##",
+      "bookList": ".bookbox",
+      "bookUrl": ".bookname a@href",
+      "coverUrl": ".bookname a@href@js:let id=result.match(/\\/(\\d+)\\/$/)[1];let sid=Math.floor(parseInt(id)/1000);return '/files/article/image/'+sid+'/'+id+'/'+id+'s.jpg';",
+      "intro": ".update@text##简介：##",
+      "lastChapter": ".cat a@text",
+      "name": ".bookname a@text"
+    },
+    "ruleToc": {
+      "chapterList": "#list ul li a",
+      "chapterName": "text",
+      "chapterUrl": "href"
+    },
+    "searchUrl": "/modules/article/search.php?searchkey={{key}}&action=login",
+    "weight": 0
+  }
+]
