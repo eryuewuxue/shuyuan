@@ -1,0 +1,61 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "淘小说书城",
+    "bookSourceType": 0,
+    "bookSourceUrl": "http://betam.taoyuewenhua.com",
+    "customButton": false,
+    "customOrder": 15,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "@js: var result = []\nvar push = (title, url, size) => result.push({\n  title: title,\n  url: url,\n  style: {\n    layout_flexGrow: 1,\n    layout_flexBasisPercent: size\n  }\n})\npush(\"男生\", null, 1);\npush(\"玄幻\", \"/ajax/book_mall/categories/101000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"奇幻\", \"/ajax/book_mall/categories/102000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"武侠\", \"/ajax/book_mall/categories/103000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"仙侠\", \"/ajax/book_mall/categories/104000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"都市\", \"/ajax/book_mall/categories/105000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"历史\", \"/ajax/book_mall/categories/106000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"军事\", \"/ajax/book_mall/categories/107000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"奇闻怪谈\", \"/ajax/book_mall/categories/108000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"科幻\", \"/ajax/book_mall/categories/109000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"游戏\", \"/ajax/book_mall/categories/110000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"体育\", \"/ajax/book_mall/categories/111000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"N次元\", \"/ajax/book_mall/categories/112000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"现实\", \"/ajax/book_mall/categories/113000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"诸天无限\", \"/ajax/book_mall/categories/115000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"女生\", null, 1);\npush(\"玄幻言情\", \"/ajax/book_mall/categories/201000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"仙侠奇缘\", \"/ajax/book_mall/categories/202000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"古代言情\", \"/ajax/book_mall/categories/203000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"现代言情\", \"/ajax/book_mall/categories/204000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"浪漫青春\", \"/ajax/book_mall/categories/205000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"奇闻怪谈\", \"/ajax/book_mall/categories/206000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"科幻空间\", \"/ajax/book_mall/categories/207000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"游戏竞技\", \"/ajax/book_mall/categories/208000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"N次元\", \"/ajax/book_mall/categories/209000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"同人纯爱\", \"/ajax/book_mall/categories/210000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"短篇\", \"/ajax/book_mall/categories/211000?page={{page-1}}&pageSize=20\", 0.25);\nJSON.stringify(result);",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\",\"Accept\":\"application/json, text/plain, */*\",\"Referer\":\"http://betam.taoyuewenhua.com/\",\"X-Requested-With\":\"XMLHttpRequest\"}",
+    "lastUpdateTime": 1784812665630,
+    "loginUrl": "http://betam.taoyuewenhua.com",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "$.data.authorName",
+      "coverUrl": "$.data.coverUrl",
+      "intro": "$.data.intro",
+      "kind": "$.data.categoryName",
+      "lastChapter": "$.data.latestChapter",
+      "name": "$.data.title",
+      "tocUrl": "@js:var m = String(baseUrl).match(/sourceId=([^&]+)/); '/ajax/or/authopt/ty/chapter_list?sourceName=tf&sourceId=' + m[1] + '&page=0&pageSize=100'",
+      "wordCount": "$.data.allWords"
+    },
+    "ruleContent": {
+      "content": "$.data.content##本章未完.*|请收藏.*|看书.*|本章节未.*|\\n{3,}"
+    },
+    "ruleExplore": {
+      "author": "$.authorName",
+      "bookList": "$.data.bookList[*]",
+      "bookUrl": "/ajax/or/ty/book?sourceName={{$.sourceName}}&sourceId={{$.sourceId}}",
+      "coverUrl": "$.coverUrl",
+      "intro": "$.intro",
+      "kind": "$.categoryName",
+      "name": "$.title",
+      "wordCount": "$.allWords"
+    },
+    "ruleSearch": {
+      "author": "$.authorName",
+      "bookList": "$.data.bookList[*]",
+      "bookUrl": "/ajax/or/ty/book?sourceName={{$.sourceName}}&sourceId={{$.sourceId}}",
+      "coverUrl": "$.coverUrl",
+      "intro": "$.intro",
+      "kind": "$.categoryName",
+      "name": "$.title",
+      "wordCount": "$.allWords"
+    },
+    "ruleToc": {
+      "chapterList": "$.data.chapters[*]",
+      "chapterName": "$.chapterTitle",
+      "chapterUrl": "@js:var m = String(book.bookUrl).match(/sourceId=([^&]+)/); '/ajax/or/authopt/ty/chapter_content?sourceName=tf&sourceId=' + m[1] + '&chapterId=' + String(result.chapterId)",
+      "nextTocUrl": "@js:var json = JSON.parse(result); var chapters = json.data.chapters || []; if (chapters.length < 100) { ''; } else { var url = String(baseUrl); var pageMatch = url.match(/page=(\\d+)/); var currentPage = pageMatch ? parseInt(pageMatch[1]) : 0; url.replace(/page=\\d+/, 'page=' + (currentPage + 1)); }"
+    },
+    "searchUrl": "/ajax/or/authopt/ty/search_books?keywords={{key}}&page={{page-1}}&pageSize=20&ctype=1",
+    "weight": 0
+  }
+]
