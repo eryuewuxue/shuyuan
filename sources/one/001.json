@@ -1,0 +1,52 @@
+[
+  {
+    "bookSourceName": "夜读小说（三合一）",
+    "bookSourceGroup": "成人",
+    "bookSourceUrl": "https://x-novel.com",
+    "bookSourceType": 0,
+    "bookUrlPattern": "https://x-novel.com/novel/\\w+",
+    "customOrder": 0,
+    "enabled": true,
+    "enabledCookieJar": false,
+    "enabledExplore": true,
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\",\"Referer\":\"https://x-novel.com/\"}",
+    "exploreUrl": "@js:\nvar mode = 'novel';\ntry { var m = java.get(\"mode\"); if (m && m != 'null' && m != '') mode = String(m); } catch(e) {}\n\nvar subCn = '分类';\ntry { var s = infoMap[\"sub\"]; if (s && s != 'null' && s != '') subCn = String(s); } catch(e) {}\nvar subMap = {\"分类\":\"cat\", \"系列\":\"series\", \"作者\":\"author\"};\nvar sub = subMap[subCn] || \"cat\";\n\nvar novelData = {\n    \"cat\": \"人妻女友::/tag/wife/{{page}}\\n学生校园::/tag/student/{{page}}\\n动漫游戏::/tag/anime/{{page}}\\n名人明星::/tag/celebrities/{{page}}\\n古典玄幻::/tag/fantasy/{{page}}\\n家庭乱伦::/tag/family/{{page}}\\n多人群交::/tag/group/{{page}}\\n露出暴露::/tag/exposure/{{page}}\\n强暴性虐::/tag/bdsm/{{page}}\\n同性主题::/tag/lgbt/{{page}}\\n绿帽主题::/tag/ntr/{{page}}\\n耽美小说::/tag/boys/{{page}}\\n最新::/novels\\n热门::/novels?sort=hot\\n评分::/novels?sort=rating\",\n    \"series\": \"女校先生::/series/%E5%A5%B3%E6%A0%A1%E5%85%88%E7%94%9F\\n美女养成师::/series/%E7%BE%8E%E5%A5%B3%E5%85%BB%E6%88%90%E5%B8%88\\n豪乳老师刘艳::/series/%E8%B1%AA%E4%B9%B3%E8%80%81%E5%B8%88%E5%88%98%E8%89%B3\\n人生重开模拟器::/series/%E4%BA%BA%E7%94%9F%E9%87%8D%E5%BC%80%E6%A8%A1%E6%8B%9F%E5%99%A8\\n大隐::/series/%E5%A4%A7%E9%9A%90\\n诡秘之主::/series/%E8%AF%91%E7%A7%98%E4%B9%8B%E4%B8%BB\\n淫术炼金士::/series/%E6%B7%AB%E6%9C%AF%E7%82%BC%E9%87%91%E5%A3%AB\\n逍遥小散仙::/series/%E9%80%8D%E9%81%A5%E5%B0%8F%E6%95%A3%E4%BB%99\\n绝色保镖::/series/%E7%BB%9D%E8%89%B2%E4%BF%9D%E9%95%96\\n龙魂侠影::/series/%E9%BE%99%E9%AD%82%E4%BE%A0%E5%BD%B1\\n圣女修道院::/series/%E5%9C%A3%E5%A5%B3%E4%BF%AE%E9%81%93%E9%99%A2\\n北电门房::/series/%E5%8C%97%E7%94%B5%E9%97%A8%E6%88%BF\\n娘子军::/series/%E5%A8%98%E5%AD%90%E5%86%9B\\n阿庆淫传::/series/%E9%98%BF%E5%BA%86%E6%B7%AB%E4%BC%A0\\n阴阳长生法::/series/%E9%98%B4%E9%98%B3%E9%95%BF%E7%94%9F%E6%B3%95\\n刑罚师爷::/series/%E5%88%91%E5%90%8D%E5%B8%88%E7%88%B7\",\n    \"author\": \"英雄::/author/michanll%26%E8%8B%B1%E9%9B%84\\n雪凡snow_xefd::/author/%E9%9B%AA%E5%87%A1snow_xefd\\n娱乐圈老司机::/author/%E5%A8%B1%E4%B9%90%E5%9C%88%E8%80%81%E5%8F%B8%E6%9C%BA\\n萧九::/author/%E8%90%A7%E4%B9%9D\\n风中啸::/author/%E9%A3%8E%E4%B8%AD%E5%95%B8\\n石砚::/author/%E7%9F%B3%E7%A0%9A\\n梦回炎黄::/author/%E6%A2%A6%E5%9B%9E%E7%82%8E%E9%BB%84\\n黑月::/author/%E9%BB%91%E6%9C%88\\ntttjjj_200::/author/tttjjj_200\\n迷男::/author/%E8%BF%B7%E7%94%B7\\n血珊瑚::/author/%E8%A1%80%E7%8F%8A%E7%91%9A\\n帅呆::/author/%E5%B8%85%E5%91%86\\n午夜风流::/author/%E5%8D%88%E5%A4%9C%E9%A3%8E%E6%B5%81\\n知乐::/author/%E7%9F%A5%E4%B9%90\\n爱潜水的乌贼::/author/%E7%88%B1%E6%BD%9C%E6%B0%B4%E7%9A%84%E4%B9%8C%E8%B4%92\"\n};\nvar audioData = \"最新::/tag/audio/{{page}}\\n热门::/tag/audio?sort=hot\";\nvar comicData = \"最新::/tag/comic/{{page}}\\n热门::/tag/comic?sort=hot\";\n\nvar list = [];\nvar push = (title, url, sz) => { var st = {'layout_flexBasisPercent': sz || 0.5, 'layout_flexGrow': 1}; list.push({title, url, style: st}); };\n\nif (mode === 'novel') {\n    list.push({title:\"sub\", viewName:\"'小说'\", type:\"select\", action:\"java.refreshExplore()\", chars:[\"分类\",\"系列\",\"作者\"], default:subCn, style:{layout_flexBasisPercent:1, layout_flexGrow:1}});\n    try {\n        novelData[sub].split(\"\\n\").forEach(x => { var arr = x.split(\"::\"); push(arr[0], \"https://x-novel.com\" + arr[1], 0.25); });\n    } catch(e) { java.longToast(\"加载失败\"); }\n} else if (mode === 'audio') {\n    audioData.split(\"\\n\").forEach(x => { var arr = x.split(\"::\"); push(arr[0], \"https://x-novel.com\" + arr[1]); });\n} else if (mode === 'comic') {\n    comicData.split(\"\\n\").forEach(x => { var arr = x.split(\"::\"); push(arr[0], \"https://x-novel.com\" + arr[1]); });\n}\nJSON.stringify(list);",
+    "ruleExplore": {
+      "bookList": "class.list-card||class.series-list-item||class.authors-list-item",
+      "name": "class.list-card-title@text||class.series-list-name@text||class.authors-list-name@text",
+      "author": "class.list-card-author@text",
+      "intro": "class.tooltip-brief@text||class.series-list-count@text||class.authors-list-count@text",
+      "coverUrl": "tag.img@src",
+      "bookUrl": "href@js: String(result||'').indexOf('http')===0?result:('https://x-novel.com'+result)"
+    },
+    "searchUrl": "https://x-novel.com/search?q={{key}}&page={{page}}",
+    "ruleSearch": {
+      "bookList": "class.list-card",
+      "name": "class.list-card-title@text",
+      "author": "class.list-card-author@text",
+      "intro": "class.tooltip-brief@text",
+      "coverUrl": "tag.img@src",
+      "bookUrl": "href@js: String(result||'').indexOf('http')===0?result:('https://x-novel.com'+result)"
+    },
+    "ruleBookInfo": {
+      "name": "class.tk-h1@text",
+      "author": "@regex:作者：</span>\\s*(?:<a[^>]*>([^<]+)</a>|<span[^>]*>([^<]+)</span>)##$1$2",
+      "coverUrl": "meta[property=og:image]@content",
+      "intro": "meta[property=og:description]@content",
+      "tocUrl": "@js:baseUrl"
+    },
+    "ruleToc": {
+      "chapterList": "class.space-y-0@tag.li",
+      "chapterName": "tag.span.1@text",
+      "chapterUrl": "tag.a@href\n@js:\nvar mode='novel'; try{var m=java.get('mode'); if(m&&m!='null')mode=String(m)}catch(e){}\nif(mode==='audio'){book.type=32}\nelse if(mode==='comic'){book.type=64}\nelse{book.type=8}\njava.put('b',book.type)\nString(result||'').indexOf('http')===0?result:('https://x-novel.com'+result)"
+    },
+    "ruleContent": {
+      "title": "class.read-page-chapter-title@text",
+      "content": "@js:\nvar mode = 'novel';\ntry { var m = java.get(\"mode\"); if (m && m != 'null' && m != '') mode = String(m); } catch(e) {}\ntry {\n    if (mode === 'audio') {\n        var au = java.getElements(\"#read-audio\");\n        if (au && au.length > 0) {\n            var src = au[0].attr(\"src\");\n            src ? src : java.getString(\".read-body p@text\");\n        } else { java.getString(\".read-body p@text\"); }\n    } else if (mode === 'comic') {\n        var imgs = java.getElements(\".read-body p img\");\n        var r = [];\n        if (imgs && imgs.length > 0) {\n            for (var i = 0; i < imgs.length; i++) {\n                var s = imgs[i].attr(\"src\");\n                if (s && (s.indexOf(\"gallery\") > -1 || s.indexOf(\"upload.xchina\") > -1)) r.push('<img src=\"' + s + '\">');\n            }\n        }\n        r.length > 0 ? r.join(\"\\n\") : java.getString(\".read-body p@text\");\n    } else {\n        java.getString(\".read-body p@text\");\n    }\n} catch(e) { \"<p>正文解析失败: \" + e + \"</p>\"; }",
+      "replaceRegex": "##阅读提示：[\\s\\S]*?情节。##"
+    },
+    "loginUrl": "function switchMode(mode) {\n    java.put(\"mode\", mode);\n    java.put(\"sub\", \"cat\");\n    try { infoMap[\"sub\"] = \"分类\"; infoMap.save(); } catch(e) {}\n    var names = {novel:'小说', audio:'有声', comic:'漫画'};\n    java.longToast('已切换到：' + names[mode] + '模式');\n    java.refreshExplore();\n}",
+    "loginUi": "[{\"name\": \"小说模式\", \"type\": \"button\", \"action\": \"switchMode('novel')\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"name\": \"有声模式\", \"type\": \"button\", \"action\": \"switchMode('audio')\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"name\": \"漫画模式\", \"type\": \"button\", \"action\": \"switchMode('comic')\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}]",
+    "comment": "夜读小说三合一(小说/有声/漫画)。登录UI按钮切换模式，java.put/get全局变量联动。正文按mode返回：小说=文字,有声=mp3,漫画=图片。header带Referer绕防盗链。"
+  }
+]
