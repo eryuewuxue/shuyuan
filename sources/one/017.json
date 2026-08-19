@@ -1,0 +1,50 @@
+[
+  {
+    "bookSourceComment": "云书屋书源（https://www.yunshuwu.cn）。站点需移动端UA访问，已内置全局header。支持搜索、详情、目录分页（select option）、正文净化及12分类+排行榜发现。",
+    "bookSourceGroup": "",
+    "bookSourceName": "云书屋",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.yunshuwu.cn",
+    "enabled": true,
+    "enabledExplore": true,
+    "exploreUrl": "古典名著::https://www.yunshuwu.cn/gdmz/page/{{page}}.html\n古典小说::https://www.yunshuwu.cn/gdxs/page/{{page}}.html\n其他古典文学::https://www.yunshuwu.cn/qtgdwx/page/{{page}}.html\n散文::https://www.yunshuwu.cn/sw/page/{{page}}.html\n文学小说::https://www.yunshuwu.cn/wxxs/page/{{page}}.html\n古代诗词::https://www.yunshuwu.cn/gdsc/page/{{page}}.html\n文学作品::https://www.yunshuwu.cn/wxzp/page/{{page}}.html\n校园文学::https://www.yunshuwu.cn/xywx/page/{{page}}.html\n外国名著::https://www.yunshuwu.cn/wgmz/page/{{page}}.html\n人物传记::https://www.yunshuwu.cn/rwcj/page/{{page}}.html\n现代诗词::https://www.yunshuwu.cn/xdsc/page/{{page}}.html\n经典语录::https://www.yunshuwu.cn/jdyl/page/{{page}}.html\n排行榜::https://www.yunshuwu.cn/books/page/{{page}}.html",
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (Linux; Android 11; SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36\"}",
+    "loginUrl": "",
+    "ruleBookInfo": {
+      "author": "class.bintro@tag.p@text##.*作者:\\s*(\\S+)[\\s\\S]*##$1",
+      "coverUrl": "class.bcover@tag.img@src",
+      "intro": "class.intro@text##^简介：##",
+      "kind": "class.tname@tag.a@text",
+      "lastChapter": "class.bname@tag.a@text##^\\s*最新章节：\\s*",
+      "name": "class.btitle@text##\\s*\\(全本\\)\\s*",
+      "tocUrl": "class.blink@tag.a.2@href"
+    },
+    "ruleContent": {
+      "content": "id.chapter@html##<p\\s+class=\"chapname\"[^>]*>[\\s\\S]*?</p>|<p\\s+id=\"chapcont\"[^>]*>[\\s\\S]*?</p>",
+      "nextContentUrl": "id.t-next@tag.a@href"
+    },
+    "ruleExplore": {
+      "author": "class.bintro@tag.p@text##^.*?\\.\\s*|\\s*\\.\\s*.*$",
+      "bookList": "class.blist@tag.li",
+      "bookUrl": "tag.a@href",
+      "coverUrl": "",
+      "intro": "",
+      "name": "class.bintro@tag.h4@text"
+    },
+    "ruleSearch": {
+      "author": "class.bintro@tag.p@text##^.*?\\.\\s*|\\s*\\.\\s*.*$",
+      "bookList": "class.section.0@class.box@class.blist@tag.li",
+      "bookUrl": "tag.a@href",
+      "coverUrl": "",
+      "intro": "",
+      "name": "class.bintro@tag.h4@text"
+    },
+    "ruleToc": {
+      "chapterList": "class.dir_list@tag.ul@tag.li",
+      "chapterName": "class.bname@tag.a@text",
+      "chapterUrl": "class.bname@tag.a@href",
+      "nextTocUrl": "class.page_num@tag.select@tag.option@value"
+    },
+    "searchUrl": "https://www.yunshuwu.cn/stack/book/search.html?kw={{key}}"
+  }
+]
