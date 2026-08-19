@@ -1,0 +1,380 @@
+[
+ {
+  "id": "001",
+  "name": "夜读小说（三合一）",
+  "host": "x-novel.com",
+  "group": "novel"
+ },
+ {
+  "id": "002",
+  "name": "淘小说书城",
+  "host": "betam.taoyuewenhua.com",
+  "group": "novel"
+ },
+ {
+  "id": "003",
+  "name": "网阅小说",
+  "host": "book15.net",
+  "group": "novel"
+ },
+ {
+  "id": "004",
+  "name": "手打书",
+  "host": "www.shoudashu.com",
+  "group": "novel"
+ },
+ {
+  "id": "005",
+  "name": "搜笔趣阁",
+  "host": "www.sobqg.com",
+  "group": "novel"
+ },
+ {
+  "id": "006",
+  "name": "22笔趣阁",
+  "host": "m.22biqu.net",
+  "group": "novel"
+ },
+ {
+  "id": "007",
+  "name": "新笔趣阁wap",
+  "host": "wap.t965.com",
+  "group": "novel"
+ },
+ {
+  "id": "008",
+  "name": "笔趣阁bqquge",
+  "host": "www.bqquge.com",
+  "group": "novel"
+ },
+ {
+  "id": "009",
+  "name": "笔趣阁zdzn",
+  "host": "m.zdzn.net",
+  "group": "novel"
+ },
+ {
+  "id": "010",
+  "name": "顶点小说网",
+  "host": "www.2dingdian.net",
+  "group": "novel"
+ },
+ {
+  "id": "011",
+  "name": "顶点小说",
+  "host": "www.xsbook.org",
+  "group": "novel"
+ },
+ {
+  "id": "012",
+  "name": "无极书院",
+  "host": "m.wjzxchina.com",
+  "group": "novel"
+ },
+ {
+  "id": "013",
+  "name": "速读谷",
+  "host": "www.sudugu.org",
+  "group": "novel"
+ },
+ {
+  "id": "014",
+  "name": "奇书网",
+  "host": "www.qishuxia.com",
+  "group": "novel"
+ },
+ {
+  "id": "015",
+  "name": "星星小说网",
+  "host": "m.xiifan.com",
+  "group": "novel"
+ },
+ {
+  "id": "016",
+  "name": "零点看书",
+  "host": "www.0162.net",
+  "group": "novel"
+ },
+ {
+  "id": "017",
+  "name": "云书屋",
+  "host": "www.yunshuwu.cn",
+  "group": "novel"
+ },
+ {
+  "id": "018",
+  "name": "八一中文网",
+  "host": "www.wangshuwx.com",
+  "group": "novel"
+ },
+ {
+  "id": "019",
+  "name": "得奇小说网",
+  "host": "www.deqixs.org",
+  "group": "novel"
+ },
+ {
+  "id": "020",
+  "name": "燃文小说API",
+  "host": "m.ranwen.net",
+  "group": "novel"
+ },
+ {
+  "id": "021",
+  "name": "飞库文学网",
+  "host": "feiku6.com",
+  "group": "novel"
+ },
+ {
+  "id": "022",
+  "name": "篱笆好文学",
+  "host": "m.libahao.com",
+  "group": "novel"
+ },
+ {
+  "id": "023",
+  "name": "爱腐文",
+  "host": "ifuwen2026.com",
+  "group": "novel"
+ },
+ {
+  "id": "024",
+  "name": "66成人小说",
+  "host": "66story.com",
+  "group": "novel"
+ },
+ {
+  "id": "025",
+  "name": "XO福利小说",
+  "host": "zgog-wxuk-netu.xoxiaoshuo-107.com",
+  "group": "novel"
+ },
+ {
+  "id": "026",
+  "name": "不良小说网",
+  "host": "www.buliangxiaoshuowang.com",
+  "group": "novel"
+ },
+ {
+  "id": "027",
+  "name": "爱丽丝书屋🔞",
+  "host": "xn--vcsx64d.als1010.space",
+  "group": "novel"
+ },
+ {
+  "id": "028",
+  "name": "爱站书海棠文学",
+  "host": "www.izhanshu.com",
+  "group": "novel"
+ },
+ {
+  "id": "029",
+  "name": "环安小说网",
+  "host": "www.haxs.me",
+  "group": "novel"
+ },
+ {
+  "id": "030",
+  "name": "禁漫天堂小说",
+  "host": "4702.zejfxszmh.cc",
+  "group": "novel"
+ },
+ {
+  "id": "031",
+  "name": "xyushuwu5书源",
+  "host": "www.xyushuwu5.com",
+  "group": "novel"
+ },
+ {
+  "id": "032",
+  "name": "御宅屋",
+  "host": "blnovelw.com",
+  "group": "novel"
+ },
+ {
+  "id": "033",
+  "name": "露西弗俱乐部",
+  "host": "lucifer-club.com",
+  "group": "novel"
+ },
+ {
+  "id": "034",
+  "name": "露西弗同人站",
+  "host": "slash.newlucifer.com",
+  "group": "novel"
+ },
+ {
+  "id": "035",
+  "name": "麻豆传媒AI",
+  "host": "mdcmai4.xyz",
+  "group": "novel"
+ },
+ {
+  "id": "036",
+  "name": "18禁书屋",
+  "host": "today.18jsw.wiki",
+  "group": "novel"
+ },
+ {
+  "id": "037",
+  "name": "69小说吧",
+  "host": "69xsb.com",
+  "group": "novel"
+ },
+ {
+  "id": "038",
+  "name": "第一版主网",
+  "host": "www.diyibanzhu.me",
+  "group": "novel"
+ },
+ {
+  "id": "039",
+  "name": "AAA小说",
+  "host": "www.aaawz.cc",
+  "group": "novel"
+ },
+ {
+  "id": "040",
+  "name": "七猫小说",
+  "host": "api-bc.wtzw.com",
+  "group": "qifei"
+ },
+ {
+  "id": "041",
+  "name": "番茄小说",
+  "host": "api5-normal-sinfonlinea.fqnovel.com",
+  "group": "qifei"
+ },
+ {
+  "id": "042",
+  "name": "米读小说",
+  "host": "api.midureader.com",
+  "group": "qifei"
+ },
+ {
+  "id": "043",
+  "name": "爱书库（rrssk完整目录）",
+  "host": "www.ishuku.com",
+  "group": "qifei"
+ },
+ {
+  "id": "044",
+  "name": "书音FM",
+  "host": "m.shuyinfm.com",
+  "group": "audio"
+ },
+ {
+  "id": "045",
+  "name": "听友FM",
+  "host": "www.tingyou.fm",
+  "group": "audio"
+ },
+ {
+  "id": "046",
+  "name": "有声骚麦",
+  "host": "www.yssm5.xyz",
+  "group": "audio"
+ },
+ {
+  "id": "047",
+  "name": "看漫画",
+  "host": "m.kanman.com",
+  "group": "comic"
+ },
+ {
+  "id": "048",
+  "name": "图库漫画",
+  "host": "www.tuku.cc",
+  "group": "comic"
+ },
+ {
+  "id": "049",
+  "name": "秘密韩漫",
+  "host": "mimihanman.com",
+  "group": "comic"
+ },
+ {
+  "id": "050",
+  "name": "老司机禁漫",
+  "host": "www.laosijix.com",
+  "group": "comic"
+ },
+ {
+  "id": "051",
+  "name": "JoyACG漫画动漫二合一",
+  "host": "joyacg.top",
+  "group": "comic"
+ },
+ {
+  "id": "052",
+  "name": "三四娱乐",
+  "host": "www.san421.com",
+  "group": "comic"
+ },
+ {
+  "id": "053",
+  "name": "电影先生",
+  "host": "silidm.com",
+  "group": "video"
+ },
+ {
+  "id": "054",
+  "name": "ISVOD明星影院",
+  "host": "isvod.com",
+  "group": "video"
+ },
+ {
+  "id": "055",
+  "name": "520短剧",
+  "host": "520story.net",
+  "group": "video"
+ },
+ {
+  "id": "056",
+  "name": "GScenes短剧",
+  "host": "www.gscenes.com",
+  "group": "video"
+ },
+ {
+  "id": "057",
+  "name": "绮梦短剧",
+  "host": "shorttv.online",
+  "group": "video"
+ },
+ {
+  "id": "058",
+  "name": "🍉西瓜短剧·真人/AI",
+  "host": "www.xgshort.com",
+  "group": "video"
+ },
+ {
+  "id": "059",
+  "name": "黄豆短剧",
+  "host": "hddj.tv",
+  "group": "video"
+ },
+ {
+  "id": "060",
+  "name": "七猫短剧",
+  "host": "www.qmao.net",
+  "group": "video"
+ },
+ {
+  "id": "061",
+  "name": "华剧",
+  "host": "www.huaju.app",
+  "group": "video"
+ },
+ {
+  "id": "062",
+  "name": "AcFun七合一",
+  "host": "1.acfan.com",
+  "group": "mix"
+ },
+ {
+  "id": "063",
+  "name": "101Minc",
+  "host": "www.101minc.com",
+  "group": "mix"
+ }
+]
