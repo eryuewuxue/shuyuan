@@ -1,0 +1,60 @@
+[
+  {
+    "bookSourceComment": "66成人小说(66story.com)，MCCMS系统纯文字小说站。发现和搜索使用JSON API /api/data/book 接口。发现页带select切换分类/排行，参考爱丽丝书屋风格。API需带Referer。详情页规则兼容移动版和桌面版。正文混入评论数span已用replaceRegex清理。",
+    "bookSourceName": "66成人小说",
+    "bookSourceGroup": "小说,成人",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://66story.com",
+    "enabled": true,
+    "enabledExplore": true,
+    "exploreUrl": "<js>\nvar result=[];\nvar tab=infoMap[\"分类\"]||\"分类\";\nvar cats=[[\"校园春色\",\"cid=3\"],[\"东方玄幻\",\"cid=4\"],[\"乡村爱情\",\"cid=5\"],[\"都市激情\",\"cid=6\"],[\"家庭乱伦\",\"cid=7\"],[\"娱乐明星\",\"cid=8\"]];\nvar ranks=[[\"人气榜\",\"order=hits\"],[\"收藏榜\",\"order=shits\"],[\"最新更新\",\"order=addtime\"]];\nresult.push({title:\"分类\",type:\"select\",chars:[\"分类\",\"排行\"],default:tab,action:\"java.refreshExplore()\",style:{layout_flexGrow:1,layout_flexBasisPercent:1}});\nif(tab==\"分类\"){for(var i=0;i<cats.length;i++){result.push({title:cats[i][0],url:\"/index.php/api/data/book?order=addtime&\"+cats[i][1]+\"&page={{page}}\",style:{layout_flexGrow:1,layout_flexBasisPercent:0.333}})}}else if(tab==\"排行\"){for(var i=0;i<ranks.length;i++){result.push({title:ranks[i][0],url:\"/index.php/api/data/book?\"+ranks[i][1]+\"&page={{page}}\",style:{layout_flexGrow:1,layout_flexBasisPercent:0.333}})}}\nJSON.stringify(result);\n</js>",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Linux; Android 12; SM-G991B) AppleWebKit/537.36\",\"Referer\":\"https://66story.com/\"}",
+    "lastUpdateTime": 1722988800000,
+    "order": 0,
+    "ruleBookInfo": {
+      "author": "div.author@text||dl.author a@text",
+      "coverUrl": "div.cover-wrapper img@data-src||div.cover img@data-src",
+      "intro": "div.desc@text||div.j-info-desc span@text",
+      "kind": "div.multi@text||ul.tags li@text",
+      "lastChapter": "",
+      "name": "div.story-detail__info div.title@text||h1.text@text",
+      "tocUrl": "",
+      "wordCount": ""
+    },
+    "ruleContent": {
+      "content": "div#chapter-content@html",
+      "nextContentUrl": "",
+      "prevContentUrl": "",
+      "replaceRegex": "##<span class=\"comment_icon\">\\d+</span>##"
+    },
+    "ruleExplore": {
+      "author": "$.author",
+      "bookList": "$.data[*]",
+      "bookUrl": "$.url",
+      "coverUrl": "$.pic",
+      "intro": "$.content",
+      "kind": "$.tags##\\|\\|\\|",
+      "lastChapter": "$.chapter_name",
+      "name": "$.name"
+    },
+    "ruleSearch": {
+      "author": "$.author",
+      "bookList": "$.data[*]",
+      "bookUrl": "$.url",
+      "coverUrl": "$.pic",
+      "intro": "$.content",
+      "kind": "$.tags##\\|\\|\\|",
+      "lastChapter": "$.chapter_name",
+      "name": "$.name"
+    },
+    "ruleToc": {
+      "chapterList": "a.j-catalog-link",
+      "chapterName": "text##\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}##",
+      "chapterUrl": "href",
+      "nextTocUrl": ""
+    },
+    "searchUrl": "https://66story.com/index.php/api/data/book?key={{key}}&page={{page}}",
+    "userAgent": "Mozilla/5.0 (Linux; Android 12; SM-G991B) AppleWebKit/537.36",
+    "weight": 0
+  }
+]
