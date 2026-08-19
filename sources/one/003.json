@@ -1,0 +1,60 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "101Minc",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.101minc.com/",
+    "customButton": false,
+    "customOrder": 13,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar result = [];\n\nvar rankMap = {\n    \"排行\": \"allvisit\",\n    \"收藏\": \"goodnum\",\n    \"字数\": \"size\",\n    \"连载\": \"lastupdate\",\n    \"人气\": \"monthvisit\",\n    \"推荐\": \"monthvote\",\n    \"新书\": \"postdate\",\n    \"热门\": \"allvote\"\n};\n\nvar rankType = infoMap[\"榜单\"] || \"排行\";\nvar rankParam = rankMap[rankType];\n\n// 榜单选择器（权重1，独占一行）\nresult.push({\n    \"title\": \"榜单\",\n    \"type\": \"select\",\n    \"chars\": [\"排行\",\"收藏\",\"字数\",\"连载\",\"人气\",\"推荐\",\"新书\",\"热门\"],\n    \"default\": rankType,\n    \"action\": \"java.refreshExplore()\",\n    \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\n\n// 当前榜单的“全部”入口（权重1）\nresult.push({\n    \"title\": rankType,\n    \"url\": \"/noveltop_\" + rankParam + \"_{{page}}.html\",\n    \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\n\n// 9个分类（权重0.25，4个一行）\nvar cats = [\"玄幻\",\"仙侠\",\"都市\",\"军事\",\"网游\",\"科幻\",\"悬疑\",\"女生\",\"其他\"];\nfor (var i = 0; i < cats.length; i++) {\n    result.push({\n        \"title\": cats[i],\n        \"url\": \"/noveltop_\" + rankParam + \"_\" + (i + 1) + \"_{{page}}.html\",\n        \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.25}\n    });\n}\n\nJSON.stringify(result);\n</js>",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\",\"Referer\":\"https://www.101minc.com/\",\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\",\"Accept-Language\":\"zh-CN,zh;q=0.9\"}",
+    "lastUpdateTime": 1784642953138,
+    "loginCheckJs": "if (result.body().includes(\"访问验证\")) {\n\tjava.longToast(\"触发人机验证，请在弹出的浏览器中完成验证，完成后请点击手机返回键返回阅读APP\");\n\tjava.startBrowserAwait(result.url(), \"人机验证 - 完成后请点击返回键返回\");\n\tresult = java.connect(result.url());\n}\nresult",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "class.booknav2@tag.p.0@text##作者：",
+      "intro": "class.navtxt@tag.p@text&&class.booknav2@tag.p.4@text##更新：##更新时间：",
+      "kind": "class.booknav2@tag.p.1@text##分类：",
+      "lastChapter": "class.qustime@tag.li.0@tag.a@text",
+      "name": "class.booknav2@tag.h1@text",
+      "tocUrl": "text.完整目录@href",
+      "wordCount": "class.booknav2@tag.p.3@text##字数："
+    },
+    "ruleContent": {
+      "content": "id.article@html##<script[\\s\\S]*?</script>|<p id=\"br_tip\">[\\s\\S]*?</p>|<div class=\"baocuo\">[\\s\\S]*?</div>|<p>[^<]*当前浏览器转码失败[^<]*</p>",
+      "title": "class.txtnav@tag.h1@text"
+    },
+    "ruleExplore": {
+      "author": "class.labelbox@tag.label.0@text",
+      "bookList": "id.article_list_content@tag.li",
+      "bookUrl": "class.newnav@tag.h3@tag.a@href",
+      "coverUrl": "class.imgbox@tag.img@data-imgurl",
+      "intro": "class.ellipsis_2@text",
+      "kind": "class.labelbox@tag.label.1@text",
+      "lastChapter": "class.zxzj@tag.a@text",
+      "name": "class.newnav@tag.h3@tag.a@text"
+    },
+    "ruleSearch": {
+      "author": "class.labelbox@tag.label.0@text",
+      "bookList": "id.article_list_content@tag.li",
+      "bookUrl": "class.newnav@tag.h3@tag.a@href##javascript:sovote\\(\\d+,'([^']+)'.*##$1",
+      "coverUrl": "class.imgbox@tag.img@data-imgurl",
+      "intro": "class.ellipsis_2@text",
+      "kind": "class.labelbox@tag.label.1@text",
+      "lastChapter": "class.zxzj@tag.a@text",
+      "name": "class.newnav@tag.h3@tag.a@text"
+    },
+    "ruleToc": {
+      "chapterList": "id.allchapter@class.infoad",
+      "chapterName": "@text",
+      "chapterUrl": "@href"
+    },
+    "searchUrl": "/modules/article/search.php?searchkey={{key}}&searchtype=all",
+    "weight": 0
+  }
+]
