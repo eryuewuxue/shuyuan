@@ -253,7 +253,7 @@
         <img class="head-avatar" src="assets/icon.png" alt="二月无雪头像">
       </div>
       <div class="head-btns">
-        <button class="icon-btn" id="btnSubscription" title="一键导入阅读订阅源">
+        <button class="icon-btn" id="btnSubscription" title="打开订阅源二维码">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
           订阅源
         </button>
@@ -366,6 +366,7 @@
   function isFile(){ return location.protocol === "file:"; }
   function asciiUrl(u){ return /[^\x00-\x7F]/.test(u) ? encodeURIComponent(u) : u; }
   function deepLink(url){ return "legado://import/bookSource?src=" + asciiUrl(url); }
+  function subscriptionDeepLink(url){ return "legado://import/rssSource?src=" + asciiUrl(url); }
   function toast(msg){
     var t = $("toast");
     t.textContent = msg;
@@ -561,9 +562,9 @@
 
 
   var currentQR = null;
-  function openQR(name, url){
+  function openQR(name, url, type){
     $("qrTitle").textContent = name;
-    $("qrSub").textContent = "扫码打开链接，即可网络导入";
+    $("qrSub").textContent = type === "subscription" ? "扫码打开链接，即可导入订阅源" : "扫码打开链接，即可网络导入";
     $("qrUrl").textContent = url;
     var box = $("qrBox");
     box.innerHTML = "";
@@ -574,7 +575,7 @@
       box.innerHTML = '<div style="font-size:12px;color:#9AA3AF;padding-top:66px">二维码生成失败<br>请复制链接使用</div>';
     }
     $("qrMask").classList.add("show");
-    currentQR = {url:url};
+    currentQR = {url:url, type:type};
   }
 
   document.addEventListener("click", function(e){
@@ -598,7 +599,7 @@
     copyText(absUrl(ALL_FILE), "已复制全部书源导入地址");
   });
   $("btnSubscription").addEventListener("click", function(){
-    window.location.href = deepLink(absUrl("subscription.json"));
+    openQR("订阅源", absUrl("subscription.json"), "subscription");
   });
   $("btnQQ").addEventListener("click", function(){
     copyText("1097919737", "已复制Q群号 1097919737");
@@ -612,7 +613,8 @@
     if (currentQR) copyText(currentQR.url, "已复制网络导入链接");
   });
   $("qrOpen").addEventListener("click", function(){
-    if (currentQR) window.location.href = deepLink(currentQR.url);
+    if (!currentQR) return;
+    window.location.href = currentQR.type === "subscription" ? subscriptionDeepLink(currentQR.url) : deepLink(currentQR.url);
   });
   $("searchInput").addEventListener("input", function(){ state.search = this.value; renderContent(); });
 
