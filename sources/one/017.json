@@ -1,0 +1,61 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：1097919737",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "西瓜短剧",
+    "bookSourceType": 4,
+    "bookSourceUrl": "https://www.xgshort.com",
+    "customButton": false,
+    "customOrder": 10,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "@js:\neval(String(source.loginUrl));\n\nvar list = [];\nfunction push(title, url, size, extra) {\n  var item = {title: title, url: url, style: {layout_flexGrow: 1, layout_flexBasisPercent: size}};\n  if (extra) { for (var k in extra) { item[k] = extra[k]; } }\n  list.push(item);\n}\n\nvar modeTitle = mode == 'ai' ? 'AI短剧' : '真人短剧';\nvar sortKey = mode == 'ai' ? 'sortAi' : 'sortRen';\nvar chan = channeId();\nvar sort = curSort();\n\npush(modeTitle, '', 1, {\n  type: 'select',\n  chars: ['最近上传', '人气最高', '评分最高'],\n  default: sortName(sort),\n  action: \"var v = String(infoMap.get('\" + modeTitle + \"') || '最近上传'); source.put('\" + sortKey + \"', v == '人气最高' ? '1' : (v == '评分最高' ? '2' : '0')); java.refreshExplore();\"\n});\n\nvar catsRen = [\n  [0, \"全部类型\"],\n  [1, \"男频\"],\n  [2, \"女频\"],\n  [3, \"逆袭\"],\n  [4, \"都市\"],\n  [5, \"穿越\"],\n  [6, \"战神\"],\n  [7, \"赘婿\"],\n  [8, \"霸总\"],\n  [9, \"甜宠\"],\n  [10, \"悬疑\"],\n  [11, \"奇幻\"],\n  [13, \"家庭\"],\n  [14, \"搞笑\"],\n  [15, \"重生\"],\n  [16, \"乡村\"],\n  [17, \"热血\"],\n  [19, \"剧情\"],\n  [20, \"爱情\"],\n  [21, \"罪案\"],\n  [22, \"古装\"],\n  [23, \"宫廷\"],\n  [24, \"动作\"],\n  [25, \"青春\"],\n  [26, \"武侠\"],\n  [27, \"玄幻\"],\n  [28, \"喜剧\"],\n  [29, \"言情\"],\n  [30, \"科幻\"],\n  [31, \"警匪\"],\n  [32, \"惊悚\"],\n  [33, \"商战\"],\n  [34, \"偶像\"],\n  [35, \"其他\"],\n  [37, \"冒险\"],\n  [38, \"犯罪\"],\n  [44, \"经典\"],\n  [45, \"逆 袭\"],\n  [46, \"年代\"],\n  [47, \"总裁\"],\n  [48, \"群像\"],\n  [49, \"民国\"],\n  [50, \"古风\"],\n  [51, \"校园\"],\n  [52, \"女强\"],\n  [55, \"谍战\"],\n  [56, \"反转\"],\n  [57, \"现代\"],\n  [58, \"豪门\"],\n  [59, \"闪婚\"],\n  [60, \"马甲\"],\n  [61, \"架空\"],\n  [62, \"系统\"],\n  [63, \"萌宝\"],\n  [64, \"亲情\"],\n  [65, \"古代\"],\n  [66, \"职场\"],\n  [67, \"神豪\"],\n  [68, \"龙王\"],\n  [69, \"直播\"],\n  [70, \"异能\"],\n  [71, \"皇后\"],\n  [72, \"黑道\"],\n  [73, \"逼婚\"],\n  [74, \"王妃\"],\n  [75, \"虐恋\"],\n  [76, \"追妻\"],\n  [77, \"神医\"],\n  [78, \"团宠\"],\n  [79, \"太子\"],\n  [84, \"医生\"],\n  [85, \"皇子\"],\n  [86, \"律师\"],\n  [87, \"福宝\"],\n  [88, \"御姐\"],\n  [89, \"朝堂\"],\n  [90, \"仙尊\"],\n  [91, \"替嫁\"],\n  [92, \"少帅\"],\n  [93, \"志怪\"],\n  [94, \"女帝\"],\n  [95, \"穿书\"],\n  [96, \"王爷\"],\n  [97, \"校花\"],\n  [98, \"帝王\"],\n  [99, \"玄学\"],\n  [100, \"皇帝\"],\n  [101, \"末世\"],\n  [102, \"天才\"],\n  [103, \"军阀\"],\n  [104, \"大叔\"],\n  [105, \"病娇\"],\n  [106, \"太后\"],\n  [107, \"萌宠\"],\n  [108, \"荒岛\"],\n  [109, \"综艺\"],\n  [110, \"锦鲤\"],\n  [111, \"远古\"],\n  [112, \"公主\"],\n  [113, \"异界\"],\n  [114, \"婆媳\"],\n  [115, \"快穿\"],\n  [116, \"厨娘\"],\n  [118, \"暴富\"],\n  [119, \"影后\"],\n  [120, \"海岛\"],\n  [121, \"世子\"],\n  [122, \"嫔妃\"],\n  [123, \"将军\"],\n  [124, \"后妈\"],\n  [125, \"腹黑\"],\n  [126, \"盗墓\"],\n  [127, \"替身\"],\n  [128, \"特工\"],\n  [129, \"校草\"],\n  [130, \"方言\"],\n  [131, \"黑客\"],\n  [132, \"逃婚\"],\n  [133, \"书生\"],\n  [134, \"甜妹\"],\n  [135, \"作精\"],\n  [136, \"争霸\"],\n  [137, \"年下\"],\n  [138, \"医疗\"],\n  [139, \"未来\"],\n  [140, \"主播\"],\n  [141, \"痞少\"],\n  [142, \"法医\"],\n  [143, \"丧尸\"],\n  [144, \"戏精\"],\n  [147, \"修真\"],\n  [148, \"脑洞\"],\n  [149, \"错爱\"],\n  [150, \"神童\"],\n  [158, \"毒舌\"],\n  [160, \"恋爱\"],\n  [162, \"校霸\"],\n  [163, \"战斗\"],\n  [164, \"种田\"],\n  [165, \"求生\"],\n  [167, \"家族\"],\n  [168, \"诡秘\"],\n  [169, \"高冷\"],\n  [170, \"成长\"],\n  [171, \"赌石\"],\n  [172, \"后宫\"],\n  [173, \"空间\"],\n  [174, \"宠妻\"],\n  [175, \"亲人\"],\n  [176, \"年上\"],\n  [177, \"男强\"],\n  [178, \"虐渣\"],\n];\nvar catsAi = [\n  [0, \"全部类型\"],\n  [1, \"男频\"],\n  [2, \"女频\"],\n  [3, \"逆袭\"],\n  [4, \"都市\"],\n  [5, \"穿越\"],\n  [6, \"战神\"],\n  [10, \"悬疑\"],\n  [11, \"奇幻\"],\n  [13, \"家庭\"],\n  [14, \"搞笑\"],\n  [15, \"重生\"],\n  [16, \"乡村\"],\n  [17, \"热血\"],\n  [19, \"剧情\"],\n  [23, \"宫廷\"],\n  [25, \"青春\"],\n  [26, \"武侠\"],\n  [27, \"玄幻\"],\n  [28, \"喜剧\"],\n  [30, \"科幻\"],\n  [35, \"其他\"],\n  [37, \"冒险\"],\n  [46, \"年代\"],\n  [47, \"总裁\"],\n  [49, \"民国\"],\n  [50, \"古风\"],\n  [51, \"校园\"],\n  [56, \"反转\"],\n  [58, \"豪门\"],\n  [60, \"马甲\"],\n  [61, \"架空\"],\n  [62, \"系统\"],\n  [63, \"萌宝\"],\n  [65, \"古代\"],\n  [66, \"职场\"],\n  [69, \"直播\"],\n  [70, \"异能\"],\n  [79, \"太子\"],\n  [95, \"穿书\"],\n  [101, \"末世\"],\n  [113, \"异界\"],\n  [115, \"快穿\"],\n  [147, \"修真\"],\n  [148, \"脑洞\"],\n  [157, \"灾难\"],\n  [160, \"恋爱\"],\n  [163, \"战斗\"],\n  [164, \"种田\"],\n  [165, \"求生\"],\n  [167, \"家族\"],\n  [168, \"诡秘\"],\n  [179, \"3D\"],\n];\nvar cats = mode == 'ai' ? catsAi : catsRen;\nfor (var i = 0; i < cats.length; i++) {\n  push(cats[i][1], '/api/list/getfiltersdata?channeid=' + chan + '&ids=' + sort + ',' + cats[i][0] + ',0,0,0,0&page={{page}}&size=20', 0.25);\n}\n\nJSON.stringify(list);",
+    "header": "@js:\nvar __t = source.get('token') || '';\nif (!__t) {\n  try {\n    var __body = '{\"deviceId\":\"legado_' + java.randomUUID() + '\"}';\n    var __resp = java.post('https://www.xgshort.com/api/auth/guest-login', __body, {'Content-Type':'application/json'}).body();\n    var __j = JSON.parse(__resp);\n    if (__j && __j.access_token) { __t = __j.access_token; source.put('token', __t); }\n  } catch (e) { java.log('西瓜短剧游客登录失败: ' + e); }\n}\nvar __h = {\n  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',\n  'Referer': 'https://www.xgshort.com/'\n};\nif (__t) { __h['Authorization'] = 'Bearer ' + __t; }\nJSON.stringify(__h);",
+    "lastUpdateTime": 1786514171944,
+    "loginUi": "[{\"name\": \"真人短剧模式\", \"type\": \"button\", \"action\": \"setMode('ren')\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexShrink\": 1, \"layout_flexBasisPercent\": 0.4}}, {\"name\": \"AI短剧模式\", \"type\": \"button\", \"action\": \"setMode('ai')\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexShrink\": 1, \"layout_flexBasisPercent\": 0.4}}, {\"name\": \"网页登录\", \"type\": \"button\", \"action\": \"java.startBrowser('https://www.xgshort.com/', '西瓜短剧网页登录')\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexShrink\": 1, \"layout_flexBasisPercent\": 0.4}}, {\"name\": \"获取Token\", \"type\": \"button\", \"action\": \"var __t = guestLogin(); if (__t) { java.longToast('Token获取成功，小宝宝放心用哦 🥰'); } else { java.longToast('Token获取失败，请检查网络后重试'); }\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexShrink\": 1, \"layout_flexBasisPercent\": 0.4}}]",
+    "loginUrl": "// ===== 西瓜短剧 · 真人/AI 模式 =====\nvar mode = source.get('mode');\nif (!mode || mode == '') { mode = 'ren'; source.put('mode', mode); }\nvar sortRen = source.get('sortRen');\nif (!sortRen || sortRen == '') { sortRen = '0'; source.put('sortRen', sortRen); }\nvar sortAi = source.get('sortAi');\nif (!sortAi || sortAi == '') { sortAi = '0'; source.put('sortAi', sortAi); }\nfunction guestLogin() {\n  try {\n    var __body = '{\"deviceId\":\"legado_' + java.randomUUID() + '\"}';\n    var __resp = java.post('https://www.xgshort.com/api/auth/guest-login', __body, {'Content-Type':'application/json'}).body();\n    var __j = JSON.parse(__resp);\n    if (__j && __j.access_token) { source.put('token', __j.access_token); return __j.access_token; }\n  } catch (e) { java.log('西瓜短剧游客登录失败: ' + e); }\n  return '';\n}\nvar token = source.get('token');\nif (!token || token == '') { token = guestLogin(); }\nfunction sortId(name) { return name == '人气最高' ? '1' : (name == '评分最高' ? '2' : '0'); }\nfunction sortName(id) { return id == '1' ? '人气最高' : (id == '2' ? '评分最高' : '最近上传'); }\nfunction setMode(m) {\n  mode = m;\n  source.put('mode', m);\n  var msg = (m == 'ai' ? '已切换为AI短剧模式' : '已切换为真人短剧模式') + '\\n小宝宝请刷新发现解锁切换效果哦 🥰';\n  java.longToast(msg);\n  return m;\n}\nfunction getMode() {\n  java.longToast('当前模式：' + (mode == 'ai' ? 'AI短剧模式' : '真人短剧模式'));\n  return mode;\n}\nfunction channeId() { return mode == 'ai' ? 71 : 1; }\nfunction curSort() { return mode == 'ai' ? sortAi : sortRen; }\nfunction login() {\n  guestLogin();\n  java.longToast('登录成功：' + (mode == 'ai' ? 'AI短剧模式' : '真人短剧模式'));\n  return true;\n}\n'https://www.xgshort.com';",
+    "respondTime": 30000,
+    "ruleBookInfo": {
+      "author": "$.data.seriesInfo.actor",
+      "coverUrl": "$.data.seriesInfo.coverUrl",
+      "intro": "$.data.seriesInfo.description",
+      "kind": "{{$.data.seriesInfo.channeName}}\n👀{{$.data.seriesInfo.playCount}}播放\n{{$.data.seriesInfo.updateStatus}}\n{{$.data.seriesInfo.tags##[\\[\\]]}}",
+      "lastChapter": "{{$.data.seriesInfo.updateStatus}}",
+      "name": "$.data.seriesInfo.title"
+    },
+    "ruleContent": {
+      "content": "$.data.urls[0].cdnUrl||$.data.urls[0].ossUrl"
+    },
+    "ruleExplore": {
+      "author": "$.author",
+      "bookList": "$.data.list",
+      "bookUrl": "https://www.xgshort.com/api/video/episodes?seriesShortId={{$.shortId}}&page=1&size=200",
+      "coverUrl": "$.coverUrl",
+      "intro": "$.description",
+      "kind": "{{$.type}}\n🔥{{$.score}}分\n👀{{$.playCount}}播放\n{{$.upStatus}}\n{{$.tags##[\\[\\]]}}",
+      "lastChapter": "{{$.upStatus}}",
+      "name": "$.title",
+      "wordCount": "{{$.playCount}}"
+    },
+    "ruleSearch": {
+      "author": "author",
+      "bookList": "<js>\nvar __kw = '';\ntry { var __km = String(baseUrl || '').match(/keyword=([^&]*)/); if (__km) __kw = decodeURIComponent(__km[1]); } catch (e) {}\nfunction __getPage(p) {\n  try {\n    var __u = 'https://www.xgshort.com/api/list/fuzzysearch?keyword=' + java.encodeURI(__kw) + '&page=' + p + '&size=50';\n    return JSON.parse(java.ajax(__u));\n  } catch (e) { return null; }\n}\nvar __cur = 1;\ntry { var __pm = String(baseUrl || '').match(/[?&]page=(\\d+)/); if (__pm) __cur = parseInt(__pm[1]) || 1; } catch (e) {}\nvar __start = (__cur - 1) * 2 + 1;\nvar __mode = source.get('mode') || 'ren';\nvar __want = __mode == 'ai' ? '71' : '1';\nvar __all = [];\nfor (var __p = __start; __p <= __start + 1; __p++) {\n  var __d = __getPage(__p);\n  if (!__d || !__d.data || !__d.data.list) break;\n  __all = __all.concat(__d.data.list);\n  if (__d.data.list.length < 50) break;\n}\nresult = __all.filter(function (__it) {\n  var __c = String(__it.cidMapper != null ? __it.cidMapper : __it.cid);\n  return __c == __want;\n}).map(function (__it) {\n  return {\n    name: __it.title || '',\n    author: __it.author || '',\n    intro: __it.description || '',\n    coverUrl: __it.coverUrl || '',\n    bookUrl: 'https://www.xgshort.com/api/video/episodes?seriesShortId=' + (__it.shortId || '') + '&page=1&size=200',\n    kind: (__it.type || '') + '\\n🔥' + (__it.score || '') + '分\\n👀' + (__it.playCount || '') + '播放\\n' + (__it.upStatus || '') + '\\n' + ((__it.tags || []).join(' ')),\n    lastChapter: __it.upStatus || '',\n    wordCount: String(__it.playCount == null ? '' : __it.playCount)\n  };\n});\n</js>",
+      "bookUrl": "bookUrl",
+      "coverUrl": "coverUrl",
+      "intro": "intro",
+      "kind": "kind",
+      "lastChapter": "lastChapter",
+      "name": "name",
+      "wordCount": "wordCount"
+    },
+    "ruleToc": {
+      "chapterList": "$.data.list",
+      "chapterName": "$.episodeTitle\n@js:'第'+parseInt(result)+'集'",
+      "chapterUrl": "https://www.xgshort.com/api/video/url/query,{\"method\":\"POST\",\"body\":\"{\\\"type\\\":\\\"episode\\\",\\\"accessKey\\\":\\\"{{$.episodeAccessKey}}\\\"}\",\"headers\":{\"Content-Type\":\"application/json\"}}"
+    },
+    "searchUrl": "https://www.xgshort.com/api/list/fuzzysearch?keyword={{key}}&page={{page}}&size=50",
+    "weight": 0
+  }
+]
