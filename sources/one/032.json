@@ -1,0 +1,43 @@
+[
+  {
+    "bookSourceName": "御宅屋",
+    "bookSourceUrl": "https://blnovelw.com",
+    "bookSourceType": 0,
+    "bookSourceComment": "包含耽美、高辣文、言情、百合等多种分类的小说网站",
+    "enabled": true,
+    "enabledExplore": true,
+    "exploreUrl": "耽美::/booksort/1/{{page}}.html\n高辣文::/booksort/6/{{page}}.html\n言情::/booksort/5/{{page}}.html\n百合::/booksort/2/{{page}}.html\n玄幻::/booksort/3/{{page}}.html\n修仙::/booksort/4/{{page}}.html\n种田::/booksort/8/{{page}}.html\n网游::/booksort/10/{{page}}.html\n其他::/booksort/11/{{page}}.html\n腹黑::/booksort/7/{{page}}.html\n高干::/booksort/9/{{page}}.html\n科幻::/booksort/13/{{page}}.html",
+    "searchUrl": "/search/,{\"method\":\"POST\",\"body\":\"searchkey={{key}}&searchtype=all\"}",
+    "ruleSearch": {
+      "bookList": ".SHsectionThree-middle p",
+      "name": "tag.span.1@tag.a@text",
+      "bookUrl": "tag.span.1@tag.a@href",
+      "author": "tag.span.2@tag.a@text",
+      "kind": "tag.span.0@tag.a@text"
+    },
+    "ruleExplore": {
+      "bookList": ".common-bookele",
+      "name": "h3 a@text",
+      "bookUrl": "h3 a@href",
+      "author": "p@text##作者：##",
+      "lastChapter": ".lastupdate time@text",
+      "intro": ".abstract a@text##^[^\\s]*?\\（.*?\\）|^ |…$##"
+    },
+    "ruleBookInfo": {
+      "name": "",
+      "author": ".article_info_td h2 a@text",
+      "intro": "",
+      "tocUrl": "a.btn@href##开始阅读.*##"
+    },
+    "ruleToc": {
+      "chapterList": "ul.list_li li",
+      "chapterName": "a@text##^[^\\u4e00-\\u9fa5]*?\\s|.*_(\\d+)$##第$1章",
+      "chapterUrl": "a@href",
+      "nextTocUrl": "option@value"
+    },
+    "ruleContent": {
+      "content": "#nr1@html",
+      "nextContentUrl": ".next a@href"
+    }
+  }
+]
