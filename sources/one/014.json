@@ -1,0 +1,48 @@
+[
+  {
+    "bookSourceName": "奇书网",
+    "bookSourceUrl": "https://www.qishuxia.com",
+    "bookSourceType": 0,
+    "bookSourceComment": "奇书网 www.qishuxia.com | GBK编码(charset:gbk) | POST搜索(searchkey={{key}}) | 网站有30秒搜索间隔限制(已配置concurrentRate:30) | 反爬需session cookie(Legado自动保持) | 发现页8大分类(div.item含封面) | 详情页含完整章节列表(ul#section-list) | 正文id.content用<br/>分隔 | 章节URL相对路径(Legado自动补全) | 搜索结果:ul.txt-list-row5>li(s1分类+s2书名+s3最新章节+s4作者+s5时间),表头li无a标签自动过滤",
+    "enabled": true,
+    "enabledExplore": true,
+    "concurrentRate": "30",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\",\"Referer\":\"https://www.qishuxia.com/\",\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\",\"Accept-Language\":\"zh-CN,zh;q=0.9,en;q=0.8\"}",
+    "searchUrl": "/modules/article/search.php,{\"method\":\"POST\",\"body\":\"searchkey={{key}}\",\"charset\":\"gbk\"}",
+    "exploreUrl": "[{\"title\":\"📚 书库分类\",\"url\":\"\",\"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":1}},\n{\"title\":\"玄幻奇幻\",\"url\":\"/xuanhuanxiaoshuo/?page={{page}}\",\"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":0.25}},\n{\"title\":\"武侠仙侠\",\"url\":\"/xiuzhenxiaoshuo/?page={{page}}\",\"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":0.25}},\n{\"title\":\"都市言情\",\"url\":\"/dushixiaoshuo/?page={{page}}\",\"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":0.25}},\n{\"title\":\"历史军事\",\"url\":\"/lishixiaoshuo/?page={{page}}\",\"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":0.25}},\n{\"title\":\"科幻灵异\",\"url\":\"/kehuanxiaoshuo/?page={{page}}\",\"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":0.25}},\n{\"title\":\"网游竞技\",\"url\":\"/wangyouxiaoshuo/?page={{page}}\",\"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":0.25}},\n{\"title\":\"女生频道\",\"url\":\"/nvshengxiaoshuo/?page={{page}}\",\"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":0.25}}]",
+    "ruleSearch": {
+      "bookList": "class.txt-list-row5@tag.li",
+      "name": "class.s2@tag.a@text",
+      "author": "class.s4@text",
+      "bookUrl": "class.s2@tag.a@href",
+      "kind": "class.s1@text##\\[|\\]",
+      "lastChapter": "class.s3@tag.a@text",
+      "intro": ""
+    },
+    "ruleExplore": {
+      "bookList": "class.item",
+      "name": "tag.dt@tag.a@text",
+      "author": "tag.dt@tag.span@text",
+      "bookUrl": "class.image@tag.a@href",
+      "coverUrl": "class.image@tag.img@src",
+      "intro": "tag.dd@tag.a@text##^\\\\s*关于|\\\\s"
+    },
+    "ruleBookInfo": {
+      "name": "class.detail-box@class.info@class.top@tag.h1@text",
+      "author": "class.detail-box@class.info@class.top@class.fix@tag.p.0@text##作者：",
+      "coverUrl": "class.detail-box@class.imgbox@tag.img@src",
+      "intro": "class.detail-box@class.info@class.desc@text",
+      "kind": "class.detail-box@class.info@class.top@class.fix@tag.p.1@text##类别：",
+      "lastChapter": "class.section-list.0@tag.li.0@tag.a@text"
+    },
+    "ruleToc": {
+      "chapterList": "id.section-list@tag.li",
+      "chapterName": "tag.a@text",
+      "chapterUrl": "tag.a@href"
+    },
+    "ruleContent": {
+      "content": "id.content@html##&nbsp;## ",
+      "nextContentUrl": ""
+    }
+  }
+]
