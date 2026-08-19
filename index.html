@@ -28,7 +28,17 @@
 
   /* ===== 头部 ===== */
   header{padding:34px 6px 6px}
-  .title{font-size:26px;font-weight:800;letter-spacing:.5px}
+  .head-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .head-btns{display:flex;gap:8px;flex-shrink:0}
+  .icon-btn{
+    display:flex;align-items:center;gap:5px;border:none;cursor:pointer;text-decoration:none;
+    font-family:inherit;font-size:12px;font-weight:600;color:var(--text);border-radius:99px;
+    padding:8px 13px;background:var(--glass);border:1px solid var(--glass-border);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  }
+  .icon-btn svg{width:15px;height:15px}
+  .icon-btn:active{transform:scale(.95)}
+  .title{font-size:24px;font-weight:800;letter-spacing:.5px}
   .sub{font-size:12.5px;color:var(--muted);margin-top:5px}
   .stats{
     display:inline-flex;gap:6px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--muted);
@@ -77,6 +87,7 @@
 
   /* ===== 内容 ===== */
   main{padding:6px 0 10px}
+  .upd-line{text-align:center;font-size:12px;color:var(--muted);margin:4px 0 2px}
   .group-head{display:flex;align-items:center;gap:9px;margin:18px 2px 10px}
   .group-head .g-name{font-size:16px;font-weight:800}
   .group-head .g-count{font-size:12px;color:var(--muted)}
@@ -177,7 +188,20 @@
     font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;
   }
   footer .linkline{word-break:break-all}
-  footer .ver{margin-top:8px;font-size:11px;opacity:.85}
+  footer .disclaimer{
+    text-align:left;font-size:11.5px;color:var(--muted);line-height:1.7;margin:0 0 12px;
+    background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);
+    padding:12px 14px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  }
+  footer .foot-links{display:flex;justify-content:center;gap:10px;margin-top:4px}
+  footer .foot-link{
+    display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--text);
+    font-size:12.5px;font-weight:600;border:none;cursor:pointer;font-family:inherit;
+    background:var(--glass);border:1px solid var(--glass-border);border-radius:99px;padding:8px 15px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  }
+  footer .foot-link svg{width:15px;height:15px}
+  footer .ver{margin-top:12px;font-size:11px;opacity:.85}
 </style>
 </head>
 <body>
@@ -185,8 +209,21 @@
 
   <!-- 头部 -->
   <header>
-    <div class="title">二月无雪书源发布页</div>
-    <div class="sub">Legado 阅读 · 免服务器 · 一键导入</div>
+    <div class="head-top">
+      <div>
+        <div class="title">二月无雪书源发布页</div>
+        <div class="sub">Legado 阅读 · 一键导入</div>
+      </div>
+      <div class="head-btns">
+        <button class="icon-btn" id="btnQQ" title="交流群 1097919737">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Q群
+        </button>
+        <a class="icon-btn" href="https://github.com/eryuewuxue" target="_blank" rel="noopener" title="GitHub">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+      </div>
+    </div>
     <div class="stats">
       <span>📚 共 <b id="statTotal">--</b> 个书源</span>
       <span>🗂 <b id="statGroups">--</b> 个分组</span>
@@ -219,7 +256,15 @@
       </ol>
     </div>
     <div class="linkline">网络导入地址：<span id="baseUrl"></span></div>
-    <div class="ver">二月无雪书源发布页 v1.3 · 部分书源含成人内容，请自行甄别</div>
+    <div class="disclaimer">免责声明：本站书源均整理自网络，仅供学习交流使用，请勿用于商业用途；部分书源含成人内容，请自行甄别。</div>
+    <div class="foot-links">
+      <button class="foot-link" id="footQQ">交流群 1097919737</button>
+      <a class="foot-link" href="https://github.com/eryuewuxue" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+    <div class="ver">更新时间：<span id="footTime"></span></div>
   </footer>
 </div>
 
@@ -379,6 +424,7 @@
   function renderContent(){
     var main = $("content");
     main.innerHTML = "";
+    main.appendChild(htmlToNode('<div class="upd-line">🕒 更新时间：' + BUILD_DATE + '</div>'));
     var q = state.search.trim().toLowerCase();
     var visible = 0;
     function filter(list){
@@ -410,6 +456,7 @@
       var filtered = filter(state.data[g.key] || []);
       if (filtered.length === 0){ main.appendChild(htmlToNode(emptyHTML(q))); return; }
       visible = filtered.length;
+      main.appendChild(htmlToNode(groupHeadHTML(g, filtered)));
       var grid = document.createElement("div");
       grid.className = "grid";
       filtered.forEach(function(s, i){
@@ -477,6 +524,12 @@
   $("btnCopyAll").addEventListener("click", function(){
     copyText(absUrl(ALL_FILE), "已复制全部书源导入地址");
   });
+  $("btnQQ").addEventListener("click", function(){
+    copyText("1097919737", "已复制Q群号 1097919737");
+  });
+  $("footQQ").addEventListener("click", function(){
+    copyText("1097919737", "已复制Q群号 1097919737");
+  });
   $("qrClose").addEventListener("click", function(){ $("qrMask").classList.remove("show"); });
   $("qrMask").addEventListener("click", function(e){ if (e.target === this) this.classList.remove("show"); });
   $("qrCopyUrl").addEventListener("click", function(){
@@ -495,6 +548,7 @@
     $("statTotal").textContent = totalCount();
     $("statGroups").textContent = GROUPS.length;
     $("statTime").textContent = BUILD_DATE;
+    $("footTime").textContent = BUILD_DATE;
     renderTabs();
     renderContent();
     if (isFile()){
