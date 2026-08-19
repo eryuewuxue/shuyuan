@@ -1,0 +1,75 @@
+[
+  {
+    "bookSourceGroup": "视频",
+    "bookSourceName": "GScenes短剧",
+    "bookSourceType": 4,
+    "bookSourceUrl": "https://www.gscenes.com",
+    "bookSourceComment": "GScenes 短剧站（BL 短剧，真人+AI 混排）。发现页为平铺 tab（不依赖新版 select/refreshExplore，兼容所有版本）：🎬真人短剧/🤖AI短剧（按类型）、真人·标签/AI·标签（类型+标签过滤，标签URL用原始中文由Legado自动编码）、🏆月榜/周榜/日榜。API 走 /api/works(type+tag过滤, offset分页, limit=50)、/api/search(limit=50一页抓全, page兜底)、/api/rankings(window=month|week|day)、/api/works/{id}/episodes(目录)、/api/works/{id}/episodes/{eid}/playback(正文→play_url m3u8，签名约3小时)。bookList 用 $.items%%$.items[*].work 兼容作品/榜单结构；详情页 intro/kind/lastChapter/tocUrl 用 @js:JSON.parse(result)。全站 is_free 均为 false(VIP付费)，但播放接口当前免鉴权直接返回签名 m3u8；若站点后续加登录/鉴权/验证码，正文将失效，需更新。",
+    "bookUrlPattern": "",
+    "customOrder": 0,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "[{\"title\": \"🎬 真人短剧\", \"url\": \"https://www.gscenes.com/api/works?type=real&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·甜虐\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=甜虐&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·都市\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=都市&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·校园\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=校园&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·豪门\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=豪门&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·高甜\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=高甜&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·娱乐圈\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=娱乐圈&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·职场\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=职场&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"真人·误会拉扯\", \"url\": \"https://www.gscenes.com/api/works?type=real&tag=误会拉扯&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"🤖 AI短剧\", \"url\": \"https://www.gscenes.com/api/works?type=ai&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·甜虐\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=甜虐&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·都市\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=都市&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·校园\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=校园&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·豪门\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=豪门&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·高甜\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=高甜&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·娱乐圈\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=娱乐圈&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·职场\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=职场&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AI·误会拉扯\", \"url\": \"https://www.gscenes.com/api/works?type=ai&tag=误会拉扯&sort=hot&limit=50&offset={{(page-1)*50}}\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"🏆 月榜\", \"url\": \"https://www.gscenes.com/api/rankings?board=overall&window=month\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"🏆 周榜\", \"url\": \"https://www.gscenes.com/api/rankings?board=overall&window=week\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"🏆 日榜\", \"url\": \"https://www.gscenes.com/api/rankings?board=overall&window=day\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}]",
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\", \"Referer\": \"https://www.gscenes.com/\"}",
+    "lastUpdateTime": 0,
+    "loginUrl": "",
+    "respondTime": 30000,
+    "ruleBookInfo": {
+      "author": "",
+      "coverUrl": "$.cover_url",
+      "init": "",
+      "intro": "@js:(function(){var d=(typeof result==='string')?JSON.parse(result):result;var s=d.synopsis||'';if(d.tags&&d.tags.length){s+='\\n\\n标签：'+d.tags.join(' / ');}return s;})()",
+      "kind": "@js:(function(){var d=(typeof result==='string')?JSON.parse(result):result;var s=(d.type==='ai'?'AI短剧':'真人短剧');if(d.tags&&d.tags.length){s+=' · '+d.tags.join(' · ');}return s;})()",
+      "lastChapter": "@js:(function(){var d=(typeof result==='string')?JSON.parse(result):result;return d.status==='complete'?'全'+d.total_episodes+'集':'更新至第'+d.total_episodes+'集';})()",
+      "name": "$.title",
+      "tocUrl": "@js:'/api/works/' + JSON.parse(result).id + '/episodes'",
+      "updateTime": "",
+      "wordCount": ""
+    },
+    "ruleContent": {
+      "content": "$.play_url",
+      "nextContentUrl": "",
+      "sourceRegex": "",
+      "webJs": ""
+    },
+    "ruleExplore": {
+      "author": "",
+      "bookList": "$.items%%$.items[*].work",
+      "bookUrl": "https://www.gscenes.com/api/works/{{$.id}}",
+      "checkKeyWord": "",
+      "coverUrl": "$.cover_url",
+      "intro": "@js:(result.tags || []).join(' / ')",
+      "kind": "@js:(result.type === 'ai' ? 'AI' : '真人') + ' · ' + result.total_episodes + '集'",
+      "lastChapter": "",
+      "name": "$.title",
+      "updateTime": "",
+      "wordCount": ""
+    },
+    "ruleSearch": {
+      "author": "@js:(function(){var a = result.actors || ''; if (a === '—' || a === '-') a = ''; return a;})()",
+      "bookList": "$.items",
+      "bookUrl": "https://www.gscenes.com/api/works/{{$.id}}",
+      "checkKeyWord": "",
+      "coverUrl": "$.cover_url",
+      "intro": "@js:(result.tags || []).join(' / ')",
+      "kind": "@js:(result.type === 'ai' ? 'AI短剧' : '真人短剧') + ' · ' + result.total_episodes + '集' + (result.is_free ? ' · 免费' : ' · VIP')",
+      "lastChapter": "",
+      "name": "$.title",
+      "updateTime": "",
+      "wordCount": ""
+    },
+    "ruleToc": {
+      "volumeList": "",
+      "volumeName": "",
+      "chapterList": "$.items",
+      "chapterName": "@js:'第' + result.no + '集'",
+      "chapterUrl": "https://www.gscenes.com/api/works/{{$.work_id}}/episodes/{{$.id}}/playback",
+      "nextTocUrl": "",
+      "reverseTocUrl": ""
+    },
+    "searchUrl": "https://www.gscenes.com/api/search?q={{key}}&limit=50&page={{page}}",
+    "weight": 0
+  }
+]
