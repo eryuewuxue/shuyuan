@@ -1,0 +1,56 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "速读谷",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.sudugu.org",
+    "customButton": false,
+    "customOrder": 16,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "玄幻小说::/xuanhuan/{{page}}.html\n仙侠小说::/xianxia/{{page}}.html\n都市小说::/dushi/{{page}}.html\n历史小说::/lishi/{{page}}.html\n军事小说::/junshi/{{page}}.html\n科幻小说::/kehuan/{{page}}.html\n言情小说::/yanqing/{{page}}.html\n最新更新::/zuixin/{{page}}.html",
+    "lastUpdateTime": 1784812675369,
+    "respondTime": 5035,
+    "ruleBookInfo": {
+      "author": "class.itemtxt@tag.p.1@tag.a@text##作者：##",
+      "coverUrl": "class.item@tag.img@src",
+      "intro": "class.des@text",
+      "kind": "class.itemtxt@tag.p.0@tag.span.1@text",
+      "lastChapter": "class.itemtxt@tag.ul@tag.li.0@tag.a@text",
+      "name": "class.itemtxt@tag.h1@tag.a@text"
+    },
+    "ruleContent": {
+      "content": "class.con@html",
+      "nextContentUrl": "text.下一页@href",
+      "replaceRegex": "##<p>|</p>##\n"
+    },
+    "ruleExplore": {
+      "author": "tag.h3@tag.a.0@text##作者：##",
+      "bookList": "tag.h3",
+      "bookUrl": "tag.h3@tag.a.0@href",
+      "coverUrl": "@css:img[src*='doubaocdn']@src",
+      "lastChapter": "tag.ul@tag.li.0@tag.a@text",
+      "name": "tag.h3@tag.a.0@text"
+    },
+    "ruleSearch": {
+      "author": "class.itemtxt@tag.p.1@tag.a@text##作者：##",
+      "bookList": "class.item",
+      "bookUrl": "class.itemtxt@tag.h3@tag.a@href",
+      "coverUrl": "tag.img@src",
+      "kind": "class.itemtxt@tag.p.0@tag.span.1@text",
+      "lastChapter": "class.itemtxt@tag.ul@tag.li.0@tag.a@text",
+      "name": "class.itemtxt@tag.h3@tag.a@text"
+    },
+    "ruleToc": {
+      "chapterList": "id.list@tag.ul@tag.li@tag.a",
+      "chapterName": "text",
+      "chapterUrl": "href",
+      "nextTocUrl": "text.下一页@href"
+    },
+    "searchUrl": "/i/sor.aspx?key={{key}}",
+    "weight": 0
+  }
+]
