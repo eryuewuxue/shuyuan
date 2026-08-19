@@ -1,0 +1,56 @@
+[
+  {
+    "bookSourceName": "看漫画",
+    "bookSourceUrl": "https://m.kanman.com",
+    "bookSourceGroup": "漫画",
+    "bookSourceType": 2,
+    "bookSourceComment": "看漫画（https://m.kanman.com/）\n\n【发现】移动版分类页 /sort/{拼音}.html，30+分类\n  列表: #js_comicSortList li.comic-item\n  封面: .thumbnail img@data-src，正则补全https:\n  最新章节: .chapter@text\n【搜索】/api/getComicList/ 获取全站漫画，JS前端过滤\n【详情】og:meta标签提取书名/作者/分类/状态/封面/简介/最新章节\n【目录】.chapter_list li，章节名用a的title属性\n【正文】JS提取chapter_img_list数组中的图片URL\n  ⚠️ 必须用移动版m.kanman.com获取正文，PC版auth_key会过期导致图片403\n  图片URL含auth_key防盗链token（移动版返回新鲜token）\n  bookSourceType=2(图片类型)，content返回<img>标签列表\n【注意】\n  1. 使用移动版UA和域名\n  2. 搜索为前端过滤(全站漫画列表)\n  3. 部分VIP/付费章节可能无法获取图片",
+    "enabled": true,
+    "enabledExplore": true,
+    "enabledCookieJar": true,
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36\", \"Referer\": \"https://m.kanman.com/\", \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\", \"Accept-Language\": \"zh-CN,zh;q=0.9\"}",
+    "loginUrl": "",
+    "exploreUrl": "冒险::/sort/maoxian.html\n神魔::/sort/shenmo.html\n漫改::/sort/mangai.html\n穿越::/sort/chuanyue.html\n热血::/sort/rexue.html\n搞笑::/sort/gaoxiao.html\n战争::/sort/zhanzhen.html\n悬疑::/sort/xuanyi.html\n恋爱::/sort/lianai.html\n萝莉::/sort/luoli.html\n御姐::/sort/yujie.html\n霸总::/sort/bazong.html\n玄幻::/sort/xuanhuan.html\n古风::/sort/gufeng.html\n历史::/sort/lishi.html\n游戏::/sort/youxi.html\n恐怖::/sort/kongbu.html\n科幻::/sort/kehuan.html\n都市::/sort/dushi.html\n武侠::/sort/wuxia.html\n动作::/sort/dongzuo.html\n欧美::/sort/oumei.html\n竞技::/sort/jingji.html\n推理::/sort/tuili.html\n忍者::/sort/renzhe.html\n社会::/sort/shehui.html\n宠物::/sort/chongwu.html\n吸血::/sort/xixue.html\n真人::/sort/zhenren.html\n完结::/sort/wanjie.html\n全彩::/sort/quancai.html\n精品::/sort/jingpin.html",
+    "ruleExplore": {
+      "bookList": "@CSS:#js_comicSortList>li",
+      "name": "@CSS:.title@text",
+      "author": "",
+      "intro": "",
+      "coverUrl": "@CSS:.thumbnail img@data-src##^//##https://",
+      "bookUrl": "@CSS:a@href",
+      "kind": "",
+      "lastChapter": "@CSS:.chapter@text"
+    },
+    "searchUrl": "/api/getComicList/?keyword={{key}}",
+    "ruleSearch": {
+      "bookList": "<js>\nvar keyMatch = baseUrl.match(/keyword=([^&]+)/);\nvar key = keyMatch ? decodeURIComponent(keyMatch[1]) : \"\";\nvar data = JSON.parse(result);\nvar list = data.data || [];\nvar filtered = [];\nfor (var i = 0; i < list.length; i++) {\n    var name = list[i].comic_name || \"\";\n    var author = list[i].cartoon_author_list_name || \"\";\n    if (name.indexOf(key) > -1 || author.indexOf(key) > -1) {\n        filtered.push(list[i]);\n    }\n}\nJSON.stringify(filtered);\n</js>\n$.[*]",
+      "name": "$.comic_name",
+      "author": "$.cartoon_author_list_name",
+      "intro": "$.comic_feature",
+      "coverUrl": "https://image.yqmh.com/mh/{{$.comic_id}}.jpg",
+      "bookUrl": "https://m.kanman.com/{{$.comic_id}}/",
+      "kind": "$.sort_typelist",
+      "lastChapter": "$.latest_cartoon_topic_name"
+    },
+    "ruleBookInfo": {
+      "name": "@CSS:meta[property=\"og:novel:book_name\"]@content",
+      "author": "@CSS:meta[property=\"og:novel:author\"]@content",
+      "category": "@CSS:meta[property=\"og:novel:category\"]@content",
+      "coverUrl": "@CSS:meta[property=\"og:image\"]@content##^//##https://",
+      "intro": "@CSS:meta[property=\"og:description\"]@content",
+      "lastChapter": "@CSS:.comic-update-status@text##.*最后更新于\\d{4}-\\d{2}-\\d{2} ",
+      "status": "@CSS:meta[property=\"og:novel:status\"]@content",
+      "tocUrl": ""
+    },
+    "ruleToc": {
+      "chapterList": "@CSS:#js_chapter_list li",
+      "chapterName": "@CSS:a@title",
+      "chapterUrl": "@CSS:a@href",
+      "nextTocUrl": ""
+    },
+    "ruleContent": {
+      "content": "<js>\nvar s = String(result);\nvar out = s;\nvar m = 'chapter_img_list:[\"';\nvar i = s.indexOf(m);\nif (i > -1) {\n    var j = s.indexOf('\"]', i + m.length);\n    if (j > -1) {\n        var t = s.substring(i + m.length, j);\n        var urls = t.split('\",\"');\n        var imgs = [];\n        for (var k = 0; k < urls.length; k++) {\n            imgs.push('<img src=\"' + urls[k] + '\">');\n        }\n        out = imgs.join(\"\\n\");\n    }\n}\nout;\n</js>",
+      "imageStyle": "FULL"
+    }
+  }
+]
