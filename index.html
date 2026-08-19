@@ -101,6 +101,23 @@
   .tab.active{background:#000;color:#fff;border-color:#000}
   .tab.active em{color:rgba(255,255,255,.7)}
 
+  /* ===== 分组滑动选择条 ===== */
+  .tabs{
+    position:sticky;top:0;z-index:50;display:flex;gap:8px;overflow-x:auto;margin:14px -4px 4px;
+    padding:10px 4px;scrollbar-width:none;-ms-overflow-style:none;
+    background:rgba(238,241,245,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  }
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{
+    flex-shrink:0;border:none;cursor:pointer;border-radius:99px;padding:8px 14px;
+    font-size:13px;font-weight:600;color:#3A3F47;background:var(--glass);font-family:inherit;
+    border:1px solid var(--glass-border);display:flex;align-items:center;gap:5px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all .15s;
+  }
+  .tab em{font-style:normal;font-size:10.5px;color:#9AA3AF}
+  .tab.active{background:#000;color:#fff;border-color:#000}
+  .tab.active em{color:rgba(255,255,255,.7)}
+
   /* ===== 内容 ===== */
   main{padding:6px 0 10px}
   .upd-line{text-align:center;font-size:12px;color:var(--muted);margin:4px 0 2px}
@@ -256,6 +273,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input id="searchInput" type="search" placeholder="搜索书源" autocomplete="off">
     </div>
+    <nav class="tabs" id="tabs"></nav>
   </header>
 
 
@@ -421,6 +439,32 @@
       '</div>';
   }
 
+  function renderTabs(){
+    var el = $("tabs"); if (!el) return;
+    el.innerHTML = "";
+    function tab(label, key, icon, count, active){
+      var b = document.createElement("button");
+      b.className = "tab" + (active ? " active" : "");
+      b.dataset.group = key;
+      b.innerHTML = '<span>' + icon + '</span>' + '<em>' + count + '</em>' + '<span>' + label + '</span>';
+      b.addEventListener("click", function(){ switchTab(key); });
+      el.appendChild(b);
+    }
+    var total = 0;
+    GROUPS.forEach(function(g){ total += (state.data[g.key]||[]).length; });
+    tab("全部", "all", "🏠", total, state.cur === "all");
+    GROUPS.forEach(function(g){
+      tab(g.name, g.key, g.icon, (state.data[g.key]||[]).length, state.cur === g.key);
+    });
+  }
+  function switchTab(key){
+    state.cur = key;
+    try{ history.replaceState(null, "", "#" + (key === "all" ? "" : key)); }catch(e){}
+    renderTabs();
+    renderContent();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
   function renderContent(){
     var main = $("content");
     main.innerHTML = "";
@@ -446,8 +490,30 @@
       });
       main.appendChild(grid);
     }
-    GROUPS.forEach(renderGroup);
-    if (visible === 0) main.appendChild(htmlToNode(emptyHTML(q)));
+    if (state.cur === "all"){
+      GROUPS.forEach(renderGroup);
+      if (visible === 0) main.appendChild(htmlToNode(emptyHTML(q)));
+    } else {
+      var g = null;
+      GROUPS.forEach(function(x){ if (x.key === state.cur) g = x; });
+      if (g){
+        var filtered = filter(state.data[g.key] || []);
+        if (filtered.length === 0){ main.appendChild(htmlToNode(emptyHTML(q))); }
+        else {
+          visible = filtered.length;
+          main.appendChild(htmlToNode(groupHeadHTML(g, filtered)));
+          var grid = document.createElement("div");
+          grid.className = "grid";
+          filtered.forEach(function(s, i){
+            grid.insertAdjacentHTML("beforeend", cardHTML(s, g, i, oneUrlOf(s)));
+          });
+          main.appendChild(grid);
+        }
+      } else {
+        GROUPS.forEach(renderGroup);
+        if (visible === 0) main.appendChild(htmlToNode(emptyHTML(q)));
+      }
+    }
     renderFooter();
   }
   function emptyHTML(q){
@@ -532,9 +598,14 @@
   $("searchInput").addEventListener("input", function(){ state.search = this.value; renderContent(); });
 
   loadAll().then(function(){
+    var hash = (location.hash||"").replace("#","");
+    if (hash){
+      GROUPS.forEach(function(g){ if (g.key === hash) state.cur = g.key; });
+    }
     $("statGroups").textContent = GROUPS.map(function(g){ return g.name; }).join(" · ");
     $("statTime").textContent = BUILD_DATE;
     $("footTime").textContent = BUILD_DATE;
+    renderTabs();
     renderContent();
     if (isFile()){
       var n = document.createElement("div");
