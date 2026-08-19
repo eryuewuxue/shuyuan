@@ -3,330 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#FF4E2E">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%93%9A%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#F2F4F7">
 <title>二月无雪书源发布页 · Legado 阅读</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%93%9A%3C/text%3E%3C/svg%3E">
 <style>
   :root{
-    --c1:#FF5E3A; --c2:#FF2E63;
-    --mint:#00C9A7; --sky:#0AA5F0;
-    --bg:#F4F6FB; --card:#FFFFFF;
-    --text:#20242E; --muted:#8A94A6; --line:#EEF1F7;
-    --shadow:0 8px 22px rgba(31,45,61,.07);
-    --shadow-lg:0 20px 48px rgba(31,45,61,.16);
+    --text:#000000; --muted:#6B7280; --line:rgba(0,0,0,.07);
+    --glass:rgba(255,255,255,.55); --glass-border:rgba(255,255,255,.75);
+    --bg:#EEF1F5; --radius:16px;
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html{scroll-behavior:smooth}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",sans-serif;
-    background:var(--bg); color:var(--text); line-height:1.6;-webkit-font-smoothing:antialiased;
+    background:var(--bg); color:var(--text); line-height:1.5;-webkit-font-smoothing:antialiased;
+    min-height:100vh;
   }
-  .page{max-width:760px;margin:0 auto;min-height:100vh;padding-bottom:env(safe-area-inset-bottom,0)}
+  /* 背景光斑（极淡） */
+  body::before,body::after{
+    content:"";position:fixed;border-radius:50%;filter:blur(60px);z-index:0;pointer-events:none;
+  }
+  body::before{width:340px;height:340px;background:rgba(255,160,140,.16);top:-100px;right:-80px}
+  body::after{width:300px;height:300px;background:rgba(150,200,255,.14);bottom:-120px;left:-80px}
+  .page{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:0 14px 40px}
 
-  /* ================= Hero：详情页头部 ================= */
-  .hero{
-    position:relative; overflow:hidden; color:#fff;
-    background:linear-gradient(155deg,#FF8A3D 0%,#FF4E2E 38%,#FF2E63 78%,#C43DE0 128%);
-    padding:20px 20px 0; border-radius:0 0 32px 32px;
-    box-shadow:0 14px 40px rgba(255,46,99,.30);
+  /* ===== 头部 ===== */
+  header{padding:34px 6px 6px}
+  .title{font-size:26px;font-weight:800;letter-spacing:.5px}
+  .sub{font-size:12.5px;color:var(--muted);margin-top:5px}
+  .stats{
+    display:inline-flex;gap:6px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--muted);
   }
-  .hero::before,.hero::after{
-    content:""; position:absolute; border-radius:50%; opacity:.32; filter:blur(2px);
+  .stats span{
+    background:var(--glass);border:1px solid var(--glass-border);border-radius:99px;padding:4px 11px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   }
-  .hero::before{width:210px;height:210px;background:radial-gradient(circle,#FFE2A8,transparent 68%);top:-80px;right:-60px}
-  .hero::after{width:170px;height:170px;background:radial-gradient(circle,#7DFFE6,transparent 68%);bottom:-70px;left:-60px}
-  .hero-inner{display:flex;gap:14px;align-items:flex-start;position:relative;z-index:1}
-  .hero-cover{
-    width:98px;height:138px;border-radius:15px;flex-shrink:0;position:relative;
-    background:linear-gradient(165deg,#fff 0%,#FFE9E4 60%,#FFD3CE 100%);
-    display:flex;align-items:center;justify-content:center;font-size:44px;
-    box-shadow:0 20px 42px rgba(0,0,0,.30); transform:rotate(-3deg);
-    border:1px solid rgba(255,255,255,.7); overflow:hidden;
-  }
-  .hero-cover::after{
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(160deg,rgba(255,255,255,.0),rgba(255,46,99,.10));
-  }
-  .hero-cover .hc-badge{
-    position:absolute; right:6px; bottom:6px; font-size:9px; font-weight:800; color:#fff;
-    background:linear-gradient(135deg,var(--c1),var(--c2)); padding:2px 7px; border-radius:7px; z-index:1;
-  }
-  .hero-info{flex:1;min-width:0;padding-top:4px}
-  .hero-title h1{font-size:23px;font-weight:900;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,.15)}
-  .hero-title p{font-size:12.5px;opacity:.9;margin-top:3px}
-  .hero-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-  .chip{
-    display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;
-    padding:3px 10px;border-radius:99px;background:rgba(255,255,255,.2);
-    border:1px solid rgba(255,255,255,.38);backdrop-filter:blur(3px);
-  }
-  .chip.mint{background:rgba(0,201,167,.3);border-color:rgba(125,255,230,.5)}
-  .hero-actions{display:flex;gap:10px;margin-top:14px}
+  .actions{display:flex;gap:10px;margin-top:16px}
   .btn{
-    flex:1;border:none;border-radius:99px;font-size:14.5px;font-weight:800;padding:12px 10px;
-    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;
-    transition:transform .15s,box-shadow .2s;font-family:inherit;letter-spacing:.5px;
+    flex:1;border:none;border-radius:99px;font-size:14px;font-weight:700;padding:13px 10px;
+    cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;
+    transition:transform .15s;
   }
-  .btn:active{transform:scale(.96)}
-  .btn-primary{background:#fff;color:#FF2E63;box-shadow:0 12px 26px rgba(0,0,0,.20)}
-  .btn-ghost{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.42)}
-  .hero-info-row{
-    display:flex;margin:14px -2px 0;background:rgba(255,255,255,.14);
-    border:1px solid rgba(255,255,255,.26);border-radius:16px;padding:10px 4px;
-    position:relative;z-index:1;backdrop-filter:blur(4px);
+  .btn:active{transform:scale(.97)}
+  .btn-dark{background:#000;color:#fff;box-shadow:0 8px 20px rgba(0,0,0,.18)}
+  .btn-glass{
+    background:var(--glass);color:var(--text);border:1px solid var(--glass-border);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   }
-  .info-item{flex:1;text-align:center}
-  .info-item + .info-item{border-left:1px solid rgba(255,255,255,.22)}
-  .info-item b{display:block;font-size:17px;font-weight:800}
-  .info-item span{font-size:11px;opacity:.85}
-  .search-wrap{
-    display:flex;align-items:center;gap:9px;margin:0 -0 18px;position:relative;z-index:2;
-    background:#fff;border-radius:99px;padding:11px 16px;box-shadow:0 12px 30px rgba(0,0,0,.16);
-    transform:translateY(14px);
+  .search{
+    display:flex;align-items:center;gap:9px;margin-top:14px;
+    background:var(--glass);border:1px solid var(--glass-border);border-radius:99px;padding:12px 17px;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   }
-  .search-wrap svg{width:18px;height:18px;color:#B6BECB;flex-shrink:0}
-  .search-wrap input{
-    flex:1;border:none;outline:none;font-size:14px;background:transparent;color:var(--text);font-family:inherit;
-  }
-  .search-wrap input::placeholder{color:#B6BECB}
+  .search svg{width:17px;height:17px;color:#9AA3AF;flex-shrink:0}
+  .search input{flex:1;border:none;outline:none;font-size:14px;background:transparent;color:var(--text);font-family:inherit}
+  .search input::placeholder{color:#9AA3AF}
 
-  /* ================= Tabs ================= */
+  /* ===== 分组 Tab ===== */
   .tabs{
-    position:sticky;top:0;z-index:50;display:flex;gap:8px;overflow-x:auto;
-    padding:14px 14px 12px;background:rgba(244,246,251,.86);backdrop-filter:blur(12px);
-    scrollbar-width:none;-ms-overflow-style:none;
+    position:sticky;top:0;z-index:50;display:flex;gap:8px;overflow-x:auto;margin:16px -4px 6px;
+    padding:10px 4px;scrollbar-width:none;-ms-overflow-style:none;
+    background:rgba(238,241,245,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   }
   .tabs::-webkit-scrollbar{display:none}
   .tab{
     flex-shrink:0;border:none;cursor:pointer;border-radius:99px;padding:8px 14px;
-    font-size:13.5px;font-weight:700;color:#5B6574;background:#fff;font-family:inherit;
-    display:flex;align-items:center;gap:5px;box-shadow:0 3px 10px rgba(31,45,61,.06);transition:all .18s;
+    font-size:13px;font-weight:600;color:#3A3F47;background:var(--glass);font-family:inherit;
+    border:1px solid var(--glass-border);display:flex;align-items:center;gap:5px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all .15s;
   }
-  .tab em{
-    font-style:normal;font-size:11px;background:#F0F3F9;color:#8A94A6;border-radius:99px;
-    padding:0 7px;line-height:17px;
-  }
-  .tab.active{color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 8px 18px rgba(255,46,99,.34)}
-  .tab.active em{background:rgba(255,255,255,.24);color:#fff}
+  .tab em{font-style:normal;font-size:10.5px;color:#9AA3AF}
+  .tab.active{background:#000;color:#fff;border-color:#000}
+  .tab.active em{color:rgba(255,255,255,.7)}
 
-  /* ================= Content ================= */
-  main{padding:4px 14px 30px}
-  .group-head{display:flex;align-items:center;gap:11px;margin:20px 2px 13px}
-  .group-ico{
-    width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;
-    font-size:22px;color:#fff;flex-shrink:0;box-shadow:0 8px 16px rgba(31,45,61,.16);
-  }
-  .group-head .g-name{font-size:17.5px;font-weight:900}
-  .group-head .g-desc{font-size:11.5px;color:var(--muted)}
+  /* ===== 内容 ===== */
+  main{padding:6px 0 10px}
+  .group-head{display:flex;align-items:center;gap:9px;margin:18px 2px 10px}
+  .group-head .g-name{font-size:16px;font-weight:800}
+  .group-head .g-count{font-size:12px;color:var(--muted)}
   .group-head .g-spacer{flex:1}
-  .mini-btn{
-    border:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;
-    padding:8px 13px;border-radius:99px;background:#fff;color:#4A5568;
-    box-shadow:0 3px 10px rgba(31,45,61,.07);display:flex;align-items:center;gap:4px;transition:transform .15s;
+  .g-link{
+    border:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;color:#3A3F47;
+    background:var(--glass);border:1px solid var(--glass-border);border-radius:99px;padding:6px 12px;
+    display:flex;align-items:center;gap:4px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   }
-  .mini-btn:active{transform:scale(.94)}
-  .mini-btn.grad{color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2))}
-  .mini-btn.ghost{background:transparent;box-shadow:none;border:1px solid var(--line);color:var(--muted)}
+  .g-link:active{transform:scale(.95)}
 
-  /* ================= 卡片：迷你详情页 ================= */
+  /* ===== 书源卡片：两列 ===== */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .card{
-    display:flex;gap:14px;background:var(--card);border-radius:20px;padding:14px;
-    margin-bottom:12px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .2s;
-    animation:fadeUp .4s ease both;
+    position:relative;display:flex;align-items:center;gap:8px;min-width:0;
+    background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);
+    padding:13px 12px;cursor:pointer;user-select:none;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:0 2px 10px rgba(0,0,0,.03);
+    transition:transform .15s,box-shadow .15s;
+    animation:fadeUp .35s ease both;
   }
-  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-  .cover{
-    width:66px;height:96px;border-radius:13px;flex-shrink:0;color:#fff;position:relative;
-    display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;
-    box-shadow:0 10px 20px rgba(31,45,61,.18);overflow:hidden;
+  .card:active{transform:scale(.97)}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .card-txt{flex:1;min-width:0}
+  .card-name{font-size:14px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .card-host{font-size:11px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .card-qr{
+    flex-shrink:0;width:34px;height:34px;border-radius:11px;border:1px solid rgba(0,0,0,.08);
+    background:rgba(255,255,255,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:transform .15s;
   }
-  .cover::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(160deg,rgba(255,255,255,.32),transparent 46%);
-  }
-  .cover .c-type{
-    position:absolute;left:5px;bottom:5px;font-size:8.5px;font-weight:800;letter-spacing:.5px;
-    background:rgba(0,0,0,.34);padding:1.5px 6px;border-radius:6px;z-index:1;
-  }
-  .c-起飞{background:linear-gradient(160deg,#FF7A3D,#FF2E63)}
-  .c-小说{background:linear-gradient(160deg,#3AA6FF,#0A6CFF)}
-  .c-听书{background:linear-gradient(160deg,#00D2A0,#00A878)}
-  .c-漫画{background:linear-gradient(160deg,#9B6BFF,#6C3CFF)}
-  .c-视频{background:linear-gradient(160deg,#FF9F3D,#FF6A00)}
-  .c-综合{background:linear-gradient(160deg,#00C9A7,#0AA5F0)}
-  .card-main{flex:1;min-width:0}
-  .card-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-  .card-name{font-size:16px;font-weight:900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .badge{font-size:10px;font-weight:800;padding:2px 8px;border-radius:7px;flex-shrink:0;line-height:17px}
-  .b-小说{background:#E8F3FF;color:#0A6CFF}
-  .b-听书{background:#E3FBF3;color:#00A878}
-  .b-漫画{background:#F0EAFF;color:#6C3CFF}
-  .b-视频{background:#FFF1E2;color:#FF6A00}
-  .b-综合{background:#E1F8F4;color:#00997E}
-  .b-adult{background:#FFE9F0;color:#E02D62}
-  .b-api{background:#EFF3F7;color:#5B6574}
-  .card-url{
-    font-size:11.5px;color:var(--muted);margin-top:2px;overflow:hidden;
-    text-overflow:ellipsis;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;
-  }
-  .card-desc{
-    font-size:12px;color:#6B7686;margin-top:5px;
-    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-  }
-  .card-foot{display:flex;align-items:center;gap:8px;margin-top:11px}
-  .act{
-    border:none;cursor:pointer;font-family:inherit;font-size:13px;font-weight:800;
-    border-radius:99px;padding:9px 0;display:flex;align-items:center;justify-content:center;gap:6px;
-    transition:transform .15s;letter-spacing:.5px;
-  }
-  .act:active{transform:scale(.95)}
-  .act-import{
-    flex:1;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));
-    box-shadow:0 6px 16px rgba(255,46,99,.32);
-  }
-  .act-round{
-    width:38px;height:38px;border-radius:50%;background:#F1F4FA;color:#4A5568;flex-shrink:0;
-    font-size:16px;padding:0;
-  }
-  .empty{text-align:center;color:var(--muted);padding:60px 0;font-size:14px}
-  .empty .e-ico{font-size:46px;display:block;margin-bottom:12px}
+  .card-qr:active{transform:scale(.9)}
+  .card-qr svg{width:17px;height:17px;color:#000}
 
-  /* ================= Modal ================= */
+  .empty{text-align:center;color:var(--muted);padding:52px 0;font-size:13px}
+  .empty .e-ico{font-size:40px;display:block;margin-bottom:10px}
+  .notice{
+    margin:14px 2px;padding:11px 14px;border-radius:14px;font-size:12px;line-height:1.7;
+    background:rgba(255,247,232,.8);border:1px solid #F2E0B8;color:#8A6A1F;display:none;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  }
+
+  /* ===== 弹窗 ===== */
   .mask{
-    position:fixed;inset:0;background:rgba(18,22,33,.56);z-index:100;
-    display:none;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(3px);
+    position:fixed;inset:0;background:rgba(20,24,32,.4);z-index:100;display:none;
+    align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   }
   .mask.show{display:flex}
   .modal{
-    width:100%;max-width:360px;background:#fff;border-radius:24px;padding:22px;text-align:center;
-    box-shadow:var(--shadow-lg);animation:pop .22s ease both;
+    width:100%;max-width:340px;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.8);
+    border-radius:22px;padding:22px;text-align:center;position:relative;
+    backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+    box-shadow:0 24px 60px rgba(0,0,0,.16);animation:pop .2s ease both;
   }
-  @keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
-  .modal h3{font-size:17px;font-weight:900}
-  .modal .m-sub{font-size:12px;color:var(--muted);margin-top:3px}
+  @keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+  .m-close{
+    position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;border:none;
+    background:rgba(0,0,0,.05);color:#3A3F47;font-size:15px;cursor:pointer;font-family:inherit;
+  }
+  .modal h3{font-size:16px;font-weight:800}
+  .modal .m-sub{font-size:11.5px;color:var(--muted);margin-top:3px}
   .qr-box{
-    width:212px;height:212px;margin:18px auto 12px;padding:10px;background:#fff;
-    border:1px solid var(--line);border-radius:16px;
+    width:200px;height:200px;margin:16px auto 12px;padding:10px;background:#fff;
+    border:1px solid rgba(0,0,0,.06);border-radius:14px;
   }
-  .qr-box img,.qr-box canvas,.qr-box svg{width:100% !important;height:100% !important;border-radius:6px}
+  .qr-box img,.qr-box canvas,.qr-box svg{width:100% !important;height:100% !important;border-radius:4px}
   .qr-url{
-    font-size:11.5px;color:#4A5568;background:#F4F6FB;border-radius:10px;padding:9px 10px;
+    font-size:11px;color:#3A3F47;background:rgba(0,0,0,.04);border-radius:10px;padding:8px 10px;
     word-break:break-all;margin-bottom:16px;font-family:ui-monospace,Consolas,monospace;
   }
   .m-actions{display:flex;gap:9px}
   .m-btn{
-    flex:1;border:none;cursor:pointer;font-family:inherit;border-radius:99px;padding:11px 4px;
-    font-size:13px;font-weight:800;transition:transform .15s;
+    flex:1;border:none;cursor:pointer;font-family:inherit;border-radius:99px;padding:12px 6px;
+    font-size:13px;font-weight:700;transition:transform .15s;
   }
   .m-btn:active{transform:scale(.96)}
-  .m-btn.primary{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff}
-  .m-btn.plain{background:#F1F4FA;color:#4A5568}
-  .modal-wrap{position:relative}
-  .m-close{
-    position:absolute;top:14px;right:14px;border:none;background:#F1F4FA;color:#4A5568;
-    width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;font-family:inherit;
-  }
+  .m-btn.dark{background:#000;color:#fff}
+  .m-btn.plain{background:rgba(0,0,0,.05);color:var(--text)}
 
-  /* ================= Toast / Notice / Footer ================= */
+  /* ===== Toast / 底部 ===== */
   .toast{
-    position:fixed;left:50%;bottom:56px;transform:translateX(-50%) translateY(20px);
-    background:rgba(24,28,38,.92);color:#fff;font-size:13px;padding:10px 20px;border-radius:99px;
-    z-index:200;opacity:0;pointer-events:none;transition:all .25s;box-shadow:0 10px 26px rgba(0,0,0,.25);
-    white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis;
+    position:fixed;left:50%;bottom:52px;transform:translateX(-50%) translateY(20px);
+    background:rgba(0,0,0,.88);color:#fff;font-size:13px;padding:10px 20px;border-radius:99px;
+    z-index:200;opacity:0;pointer-events:none;transition:all .25s;max-width:88vw;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   }
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-  .notice{
-    margin:14px 2px;padding:11px 14px;border-radius:14px;font-size:12px;line-height:1.7;
-    background:#FFF7E8;color:#9A6B00;border:1px solid #FFE4B3;display:none;
-  }
-  footer{text-align:center;color:var(--muted);font-size:12px;padding:24px 20px 40px;line-height:1.9}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:26px 6px 10px;line-height:1.9}
   footer .steps{
-    text-align:left;background:#fff;border-radius:20px;box-shadow:var(--shadow);
-    padding:18px 18px 14px;margin-bottom:18px;
+    text-align:left;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);
+    padding:16px 16px 12px;margin-bottom:16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   }
-  footer .steps h4{font-size:14.5px;font-weight:900;margin-bottom:11px;color:var(--text)}
-  footer .steps li{list-style:none;display:flex;gap:10px;font-size:12.5px;color:#5B6574;margin-bottom:9px}
+  footer .steps h4{font-size:14px;font-weight:800;margin-bottom:9px;color:var(--text)}
+  footer .steps li{list-style:none;display:flex;gap:9px;font-size:12.5px;color:#3A3F47;margin-bottom:8px}
   footer .steps .num{
-    width:20px;height:20px;border-radius:50%;flex-shrink:0;color:#fff;font-size:11.5px;font-weight:800;
-    display:flex;align-items:center;justify-content:center;margin-top:2px;
-    background:linear-gradient(135deg,var(--c1),var(--c2));
+    width:19px;height:19px;border-radius:50%;flex-shrink:0;background:#000;color:#fff;font-size:11px;
+    font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;
   }
-  footer .linkline a{color:#0A6CFF;text-decoration:none;word-break:break-all}
-  footer .ver{margin-top:10px;font-size:11px;opacity:.85}
+  footer .linkline{word-break:break-all}
+  footer .ver{margin-top:8px;font-size:11px;opacity:.85}
 </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- ================= Hero：详情页风格 ================= -->
-  <header class="hero">
-    <div class="hero-inner">
-      <div class="hero-cover">📚<span class="hc-badge">书源</span></div>
-      <div class="hero-info">
-        <div class="hero-title">
-          <h1>二月无雪书源发布页</h1>
-          <p>Legado 阅读 · 免服务器 · 一键导入</p>
-        </div>
-        <div class="hero-tags">
-          <span class="chip">🆓 免费</span>
-          <span class="chip mint">🚀 免服务器</span>
-          <span class="chip">⚡ 一键导入</span>
-          <span class="chip">🎨 七猫×番茄风格</span>
-        </div>
-      </div>
+  <!-- 头部 -->
+  <header>
+    <div class="title">二月无雪书源发布页</div>
+    <div class="sub">Legado 阅读 · 免服务器 · 一键导入</div>
+    <div class="stats">
+      <span>📚 共 <b id="statTotal">--</b> 个书源</span>
+      <span>🗂 <b id="statGroups">--</b> 个分组</span>
+      <span>🕒 <b id="statTime">--</b></span>
     </div>
-    <div class="hero-actions">
-      <button class="btn btn-primary" id="btnImportAll">⚡ 开始导入</button>
-      <button class="btn btn-ghost" id="btnCopyAll">📋 复制全部链接</button>
+    <div class="actions">
+      <button class="btn btn-dark" id="btnImportAll">一键导入全部</button>
+      <button class="btn btn-glass" id="btnCopyAll">复制全部链接</button>
     </div>
-    <div class="hero-info-row">
-      <div class="info-item"><b id="statTotal">--</b><span>书源总数</span></div>
-      <div class="info-item"><b id="statGroups">--</b><span>全部分组</span></div>
-      <div class="info-item"><b id="statTime">--</b><span>更新时间</span></div>
-    </div>
-    <div class="search-wrap">
+    <div class="search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="searchInput" type="search" placeholder="搜索书源名称 / 网址 / 分组" autocomplete="off">
+      <input id="searchInput" type="search" placeholder="搜索书源" autocomplete="off">
     </div>
   </header>
 
-  <!-- ================= Tabs ================= -->
+  <!-- 分组 Tab -->
   <nav class="tabs" id="tabs"></nav>
 
-  <!-- ================= Content ================= -->
+  <!-- 内容 -->
   <main id="content"></main>
 
-  <!-- ================= Footer ================= -->
+  <!-- 底部 -->
   <footer>
     <div class="steps">
-      <h4>📌 使用方法</h4>
+      <h4>📌 使用</h4>
       <ol>
-        <li><span class="num">1</span><span>手机浏览器打开发布页，找到需要的分组 / 书源。</span></li>
-        <li><span class="num">2</span><span>点击「一键导入」，自动唤起阅读 App 导入；或点「二维码 / 复制」用网络导入。</span></li>
-        <li><span class="num">3</span><span>导入后在「书源管理」中启用即可开始搜索阅读。</span></li>
+        <li><span class="num">1</span><span>点书源卡片上的二维码，或直接点卡片复制网络导入链接。</span></li>
+        <li><span class="num">2</span><span>打开 阅读 → 我的 → 书源管理 → 右上角 ⋮ → 网络导入，粘贴即可。</span></li>
+        <li><span class="num">3</span><span>也可以直接在弹窗里点「一键导入」唤起阅读 App。</span></li>
       </ol>
     </div>
-    <div class="linkline">当前网络导入地址：<span id="baseUrl"></span></div>
-    <div class="ver">二月无雪书源发布页 v1.1 · 七猫 × 番茄详情页美化风格 · 部分书源含成人内容，请自行甄别</div>
+    <div class="linkline">网络导入地址：<span id="baseUrl"></span></div>
+    <div class="ver">二月无雪书源发布页 v1.3 · 部分书源含成人内容，请自行甄别</div>
   </footer>
 </div>
 
-<!-- ================= QR Modal ================= -->
+<!-- 二维码弹窗 -->
 <div class="mask" id="qrMask">
-  <div class="modal modal-wrap">
+  <div class="modal">
     <button class="m-close" id="qrClose">×</button>
     <h3 id="qrTitle">二维码</h3>
-    <div class="m-sub" id="qrSub">用手机扫码后打开链接即可网络导入</div>
+    <div class="m-sub" id="qrSub">扫码打开链接，即可网络导入</div>
     <div class="qr-box" id="qrBox"></div>
     <div class="qr-url" id="qrUrl"></div>
     <div class="m-actions">
-      <button class="m-btn primary" id="qrCopyUrl">复制网址</button>
-      <button class="m-btn plain" id="qrCopyLink">复制导入链接</button>
-    </div>
-    <div class="m-actions" style="margin-top:9px">
-      <button class="m-btn plain" id="qrOpen">打开导入(legado)</button>
-      <button class="m-btn plain" id="qrYuedu">旧版导入(yuedu)</button>
+      <button class="m-btn plain" id="qrCopyUrl">复制网络导入链接</button>
+      <button class="m-btn dark" id="qrOpen">一键导入</button>
     </div>
   </div>
 </div>
@@ -336,20 +243,13 @@
 <script>
 (function(){
   "use strict";
-  /* ================= 分组配置 ================= */
   var GROUPS = [
-    {key:"novel",  name:"小说源", icon:"📖", type:"小说", file:"sources/novel.json",
-     desc:"全网小说 · 文学 · 成人", c1:"#3AA6FF", c2:"#0A6CFF"},
-    {key:"qifei",  name:"起飞源", icon:"🚀", type:"起飞", file:"sources/qifei.json",
-     desc:"精选主力 · 官方API", c1:"#FF5E3A", c2:"#FF2E63"},
-    {key:"audio",  name:"听书源", icon:"🎧", type:"听书", file:"sources/audio.json",
-     desc:"有声小说 · 广播剧 · 评书", c1:"#00D2A0", c2:"#00A878"},
-    {key:"comic",  name:"漫画源", icon:"🎨", type:"漫画", file:"sources/comic.json",
-     desc:"漫画 · 韩漫 · 动漫", c1:"#9B6BFF", c2:"#6C3CFF"},
-    {key:"video",  name:"视频源", icon:"🎬", type:"视频", file:"sources/video.json",
-     desc:"影视 · 短剧", c1:"#FF9F3D", c2:"#FF6A00"},
-    {key:"mix",    name:"综合源", icon:"🧩", type:"综合", file:"sources/mix.json",
-     desc:"聚合 · 多合一", c1:"#00C9A7", c2:"#0AA5F0"}
+    {key:"novel",  name:"小说源", icon:"📖", file:"sources/novel.json"},
+    {key:"qifei",  name:"起飞源", icon:"🚀", file:"sources/qifei.json"},
+    {key:"audio",  name:"听书源", icon:"🎧", file:"sources/audio.json"},
+    {key:"comic",  name:"漫画源", icon:"🎨", file:"sources/comic.json"},
+    {key:"video",  name:"视频源", icon:"🎬", file:"sources/video.json"},
+    {key:"mix",    name:"综合源", icon:"🧩", file:"sources/mix.json"}
   ];
   var BUILD_DATE = "2026-08-19";
   var ALL_FILE = "sources/all.json";
@@ -359,7 +259,6 @@
   var $ = function(id){ return document.getElementById(id); };
   var toastTimer = null;
 
-  /* ================= 工具 ================= */
   function absUrl(rel){
     var base = location.href.split("#")[0].split("?")[0];
     var i = base.lastIndexOf("/");
@@ -371,13 +270,12 @@
   function isFile(){ return location.protocol === "file:"; }
   function asciiUrl(u){ return /[^\x00-\x7F]/.test(u) ? encodeURIComponent(u) : u; }
   function deepLink(url){ return "legado://import/bookSource?src=" + asciiUrl(url); }
-  function deepLinkYuedu(url){ return "yuedu://booksource/importonline?src=" + asciiUrl(url); }
   function toast(msg){
     var t = $("toast");
     t.textContent = msg;
     t.classList.add("show");
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 1800);
+    toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 1700);
   }
   function copyText(text, okMsg){
     function fallback(){
@@ -392,8 +290,6 @@
       navigator.clipboard.writeText(text).then(function(){ toast(okMsg||"已复制"); }, fallback);
     } else fallback();
   }
-
-  /* ================= 数据加载 ================= */
   function fetchJson(url){
     return fetch(url, {cache:"no-cache"}).then(function(r){
       if (!r.ok) throw new Error("HTTP " + r.status);
@@ -419,37 +315,22 @@
     }));
     return Promise.all(jobs);
   }
-
-  /* ================= 单源地址 ================= */
+  function hostOf(s){
+    var u = String(s.bookSourceUrl||"").split("#")[0];
+    try{ return new URL(u).host; }catch(e){ return u.replace(/^https?:\/\//,"").split("/")[0]; }
+  }
   function oneUrlOf(s){
     var id = state.oneMap[(s.bookSourceName||"") + "\u0001" + hostOf(s)];
     if (!id) return null;
     return absUrl("sources/one/" + id + ".json");
   }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+  }); }
 
-  /* ================= 源信息 ================= */
-  function isAdult(s){
-    var hay = (s.bookSourceName||"") + "|" + (s.bookSourceGroup||"") + "|" + (s.bookSourceComment||"");
-    return /🔞|成人|18禁|禁漫|老司机|骚麦|麻豆/.test(hay);
-  }
-  function isApi(s){
-    return /api/i.test(s.bookSourceUrl||"");
-  }
-  function hostOf(s){
-    var u = String(s.bookSourceUrl||"").split("#")[0];
-    try{ return new URL(u).host; }catch(e){ return u.replace(/^https?:\/\//,"").split("/")[0]; }
-  }
-  function firstChar(name){
-    var t = String(name||"").trim();
-    if (!t) return "源";
-    return t.charAt(0);
-  }
-  function descOf(s){
-    var c = String(s.bookSourceComment||"").trim();
-    return c || ("来自 " + hostOf(s));
-  }
+  /* 二维码图标（内联 SVG） */
+  var QR_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h7v7H3V3zm2 2v3h3V5H5zm9-2h7v7h-7V3zm2 2v3h3V5h-3zM3 14h7v7H3v-7zm2 2v3h3v-3H5zm7-3h2v2h-2v-2zm4 0h2v2h-2v-2zm-2 3h2v2h-2v-2zm4 0h2v2h-2v-2zm-4 3h2v2h-2v-2zm4 0h2v2h-2v-2z"/></svg>';
 
-  /* ================= 渲染 Tabs ================= */
   function renderTabs(){
     var el = $("tabs"); el.innerHTML = "";
     function tab(label, key, icon, count, active){
@@ -470,73 +351,55 @@
     if (activeTab) activeTab.scrollIntoView({inline:"center", block:"nearest", behavior:"smooth"});
   }
 
-  /* ================= 渲染 卡片 ================= */
   function cardHTML(s, g, index, oneUrl){
-    var adult = isAdult(s), api = isApi(s);
-    var badges = '<span class="badge b-' + g.type + '">' + g.type + '</span>';
-    if (adult) badges += '<span class="badge b-adult">🔞 成人</span>';
-    if (api) badges += '<span class="badge b-api">API</span>';
     var url = oneUrl || absUrl(g.file);
-    var dl = deepLink(url);
     return '' +
-      '<div class="card" style="animation-delay:' + Math.min(index*35, 420) + 'ms">' +
-        '<div class="cover c-' + g.type + '">' +
-          '<span>' + firstChar(s.bookSourceName) + '</span>' +
-          '<span class="c-type">' + g.icon + ' ' + g.type + '</span>' +
+      '<div class="card" style="animation-delay:' + Math.min(index*25, 300) + 'ms" data-copy="' + escAttr(url) + '">' +
+        '<div class="card-txt">' +
+          '<div class="card-name">' + esc(s.bookSourceName) + '</div>' +
+          '<div class="card-host">' + esc(hostOf(s)) + '</div>' +
         '</div>' +
-        '<div class="card-main">' +
-          '<div class="card-top">' +
-            '<span class="card-name" title="' + esc(s.bookSourceName) + '">' + esc(s.bookSourceName) + '</span>' + badges +
-          '</div>' +
-          '<div class="card-url" title="' + esc(hostOf(s)) + '">' + esc(hostOf(s)) + '</div>' +
-          '<div class="card-desc">' + esc(descOf(s)) + '</div>' +
-          '<div class="card-foot">' +
-            '<button class="act act-import" data-import="' + escAttr(dl) + '">⚡ 一键导入</button>' +
-            '<button class="act act-round" data-qr="' + escAttr(url) + '" data-name="' + escAttr(s.bookSourceName) + '" title="二维码">📱</button>' +
-            '<button class="act act-round" data-copy="' + escAttr(url) + '" title="复制链接">🔗</button>' +
-          '</div>' +
-        '</div>' +
+        '<button class="card-qr" data-qr="' + escAttr(url) + '" data-name="' + escAttr(s.bookSourceName) + '" title="二维码">' + QR_ICON + '</button>' +
       '</div>';
   }
-  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){
-    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
-  }); }
   function escAttr(s){ return esc(s); }
 
   function groupHeadHTML(g, list){
     var url = absUrl(g.file);
     return '' +
-      '<div class="group-head" style="--c1:' + g.c1 + ';--c2:' + g.c2 + '">' +
-        '<div class="group-ico" style="background:linear-gradient(135deg,' + g.c1 + ',' + g.c2 + ')">' + g.icon + '</div>' +
-        '<div><div class="g-name">' + g.name + ' <span style="font-size:12px;color:#8A94A6;font-weight:700">' + list.length + ' 个</span></div>' +
-        '<div class="g-desc">' + g.desc + '</div></div>' +
+      '<div class="group-head">' +
+        '<span class="g-name">' + g.icon + ' ' + g.name + '</span>' +
+        '<span class="g-count">' + list.length + ' 个</span>' +
         '<div class="g-spacer"></div>' +
-        '<button class="mini-btn grad" style="background:linear-gradient(135deg,' + g.c1 + ',' + g.c2 + ')" data-gimport="' + escAttr(url) + '">一键导入</button>' +
-        '<button class="mini-btn" data-gqr="' + escAttr(url) + '" data-gname="' + escAttr(g.name) + '">二维码</button>' +
+        '<button class="g-link" data-gqr="' + escAttr(url) + '" data-gname="' + escAttr(g.name) + '">二维码</button>' +
+        '<button class="g-link" data-gcopy="' + escAttr(url) + '">复制</button>' +
       '</div>';
   }
 
-  /* ================= 渲染 主内容 ================= */
   function renderContent(){
     var main = $("content");
     main.innerHTML = "";
     var q = state.search.trim().toLowerCase();
     var visible = 0;
-
-    function renderGroup(g){
-      var list = state.data[g.key] || [];
-      var filtered = q ? list.filter(function(s){
-        var hay = ((s.bookSourceName||"") + " " + (s.bookSourceGroup||"") + " " + (s.bookSourceComment||"") + " " + hostOf(s)).toLowerCase();
+    function filter(list){
+      if (!q) return list;
+      return list.filter(function(s){
+        var hay = ((s.bookSourceName||"") + " " + (s.bookSourceGroup||"") + " " + hostOf(s)).toLowerCase();
         return hay.indexOf(q) >= 0;
-      }) : list;
+      });
+    }
+    function renderGroup(g){
+      var filtered = filter(state.data[g.key] || []);
       if (filtered.length === 0) return;
       visible += filtered.length;
       main.appendChild(htmlToNode(groupHeadHTML(g, filtered)));
-      var wrap = document.createElement("div");
-      filtered.forEach(function(s, i){ wrap.insertAdjacentHTML("beforeend", cardHTML(s, g, i, oneUrlOf(s))); });
-      main.appendChild(wrap);
+      var grid = document.createElement("div");
+      grid.className = "grid";
+      filtered.forEach(function(s, i){
+        grid.insertAdjacentHTML("beforeend", cardHTML(s, g, i, oneUrlOf(s)));
+      });
+      main.appendChild(grid);
     }
-
     if (state.cur === "all"){
       GROUPS.forEach(renderGroup);
       if (visible === 0) main.appendChild(htmlToNode(emptyHTML(q)));
@@ -544,22 +407,21 @@
       var g = null;
       GROUPS.forEach(function(x){ if (x.key === state.cur) g = x; });
       if (!g) return;
-      var list = state.data[g.key] || [];
-      var filtered = q ? list.filter(function(s){
-        var hay = ((s.bookSourceName||"") + " " + (s.bookSourceGroup||"") + " " + (s.bookSourceComment||"") + " " + hostOf(s)).toLowerCase();
-        return hay.indexOf(q) >= 0;
-      }) : list;
+      var filtered = filter(state.data[g.key] || []);
       if (filtered.length === 0){ main.appendChild(htmlToNode(emptyHTML(q))); return; }
       visible = filtered.length;
-      var wrap = document.createElement("div");
-      filtered.forEach(function(s, i){ wrap.insertAdjacentHTML("beforeend", cardHTML(s, g, i, oneUrlOf(s))); });
-      main.appendChild(wrap);
+      var grid = document.createElement("div");
+      grid.className = "grid";
+      filtered.forEach(function(s, i){
+        grid.insertAdjacentHTML("beforeend", cardHTML(s, g, i, oneUrlOf(s)));
+      });
+      main.appendChild(grid);
     }
     renderFooter();
   }
   function emptyHTML(q){
     return '<div class="empty"><span class="e-ico">🔍</span>' +
-      (q ? '没有找到与「' + esc(q) + '」相关的书源' : '该分组暂未添加书源，敬请期待') + '</div>';
+      (q ? '没有找到「' + esc(q) + '」' : '该分组暂无书源') + '</div>';
   }
   function htmlToNode(html){
     var t = document.createElement("template");
@@ -570,7 +432,6 @@
     $("baseUrl").textContent = absUrl(ALL_FILE);
   }
 
-  /* ================= 交互 ================= */
   function switchTab(key){
     state.cur = key;
     try{ history.replaceState(null, "", "#" + (key === "all" ? "" : key)); }catch(e){}
@@ -578,37 +439,36 @@
     renderContent();
     window.scrollTo({top:0, behavior:"smooth"});
   }
+
+  var currentQR = null;
   function openQR(name, url){
     $("qrTitle").textContent = name;
-    $("qrSub").textContent = "扫码后浏览器打开，即可网络导入";
+    $("qrSub").textContent = "扫码打开链接，即可网络导入";
     $("qrUrl").textContent = url;
     var box = $("qrBox");
     box.innerHTML = "";
     try{
-      new QRCode(box, {text:url, width:190, height:190, correctLevel:QRCode.CorrectLevel.M});
+      new QRCode(box, {text:url, width:180, height:180, correctLevel:QRCode.CorrectLevel.M});
     }catch(e){
       console.warn("QRCode 生成失败:", e);
-      box.innerHTML = '<div style="font-size:12px;color:#8A94A6;padding-top:70px">二维码生成失败<br>请复制网址使用</div>';
+      box.innerHTML = '<div style="font-size:12px;color:#9AA3AF;padding-top:66px">二维码生成失败<br>请复制链接使用</div>';
     }
     $("qrMask").classList.add("show");
     currentQR = {url:url};
   }
-  var currentQR = null;
 
   document.addEventListener("click", function(e){
     var t = e.target.closest ? e.target : null;
     if (!t) return;
     if (t.classList.contains("tab")) return;
-    var imp = t.closest("[data-import]");
-    if (imp){ window.location.href = imp.getAttribute("data-import"); return; }
-    var copy = t.closest("[data-copy]");
-    if (copy){ copyText(copy.getAttribute("data-copy")); return; }
     var qr = t.closest("[data-qr]");
     if (qr){ openQR(qr.getAttribute("data-name"), qr.getAttribute("data-qr")); return; }
-    var gimp = t.closest("[data-gimport]");
-    if (gimp){ window.location.href = gimp.getAttribute("data-gimport"); return; }
     var gqr = t.closest("[data-gqr]");
     if (gqr){ openQR(gqr.getAttribute("data-gname"), gqr.getAttribute("data-gqr")); return; }
+    var gcopy = t.closest("[data-gcopy]");
+    if (gcopy){ copyText(gcopy.getAttribute("data-gcopy"), "已复制分组导入地址"); return; }
+    var card = t.closest("[data-copy]");
+    if (card){ copyText(card.getAttribute("data-copy"), "已复制该书源网络导入链接"); return; }
   });
 
   $("btnImportAll").addEventListener("click", function(){
@@ -619,13 +479,14 @@
   });
   $("qrClose").addEventListener("click", function(){ $("qrMask").classList.remove("show"); });
   $("qrMask").addEventListener("click", function(e){ if (e.target === this) this.classList.remove("show"); });
-  $("qrCopyUrl").addEventListener("click", function(){ if (currentQR) copyText(currentQR.url, "已复制网络导入网址"); });
-  $("qrCopyLink").addEventListener("click", function(){ if (currentQR) copyText(deepLink(currentQR.url), "已复制一键导入链接"); });
-  $("qrOpen").addEventListener("click", function(){ if (currentQR) window.location.href = deepLink(currentQR.url); });
-  $("qrYuedu").addEventListener("click", function(){ if (currentQR) window.location.href = deepLinkYuedu(currentQR.url); });
+  $("qrCopyUrl").addEventListener("click", function(){
+    if (currentQR) copyText(currentQR.url, "已复制网络导入链接");
+  });
+  $("qrOpen").addEventListener("click", function(){
+    if (currentQR) window.location.href = deepLink(currentQR.url);
+  });
   $("searchInput").addEventListener("input", function(){ state.search = this.value; renderContent(); });
 
-  /* ================= 启动 ================= */
   loadAll().then(function(){
     var hash = (location.hash||"").replace("#","");
     if (hash){
@@ -640,12 +501,12 @@
       var n = document.createElement("div");
       n.className = "notice";
       n.style.display = "block";
-      n.textContent = "⚠️ 当前为本地预览（file://），一键导入与二维码需将本目录部署到 GitHub Pages / Gitee Pages 等静态托管后使用。";
+      n.textContent = "⚠️ 当前为本地预览，一键导入与二维码需部署后使用。";
       var main = $("content");
       main.parentNode.insertBefore(n, main);
     }
   }).catch(function(e){
-    $("content").innerHTML = '<div class="empty"><span class="e-ico">😵</span>书源加载失败，请确认已部署到静态托管<br><span style="font-size:11px">' + esc(e && e.message) + '</span></div>';
+    $("content").innerHTML = '<div class="empty"><span class="e-ico">😵</span>书源加载失败<br><span style="font-size:11px">' + esc(e && e.message) + '</span></div>';
   });
 
   function totalCount(){
