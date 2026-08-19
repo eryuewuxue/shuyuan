@@ -39,15 +39,19 @@
   }
   .icon-btn svg{width:15px;height:15px}
   .icon-btn:active{transform:scale(.95)}
-  .title{font-size:24px;font-weight:800;letter-spacing:.5px}
+  .title{font-size:14px;font-weight:800;letter-spacing:.5px;line-height:1.4}
   .sub{font-size:12.5px;color:var(--muted);margin-top:5px}
-  .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+  .stats{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .stat-row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .stat{
     background:var(--glass);border:1px solid var(--glass-border);border-radius:14px;
     padding:9px 14px;text-align:center;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   }
   .stat .lbl{display:block;font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .stat b{display:block;font-size:16px;font-weight:800;color:var(--text);margin-top:1px}
+  .stat-horiz{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;padding:10px 12px}
+  .stat-horiz .lbl{display:inline;font-size:12px;white-space:normal;overflow:visible;text-overflow:clip}
+  .stat-horiz b{display:inline;font-size:13px;margin-top:0}
   footer .friendlinks{
     text-align:left;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);
     padding:14px 16px;margin-bottom:16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
@@ -237,10 +241,12 @@
       </div>
     </div>
     <div class="stats">
-      <div class="stat"><span class="lbl">总访问量</span><b id="busuanzi_site_pv">--</b></div>
-      <div class="stat"><span class="lbl">今日访问量</span><b id="busuanzi_today_pv">--</b></div>
-      <div class="stat"><span class="lbl">最近更新时间</span><b id="statTime">--</b></div>
-      <div class="stat"><span class="lbl">分组</span><b id="statGroups">--</b></div>
+      <div class="stat-row2">
+        <div class="stat"><span class="lbl">总访问量</span><b id="busuanzi_site_pv">--</b></div>
+        <div class="stat"><span class="lbl">今日访问量</span><b id="busuanzi_today_pv">--</b></div>
+      </div>
+      <div class="stat stat-horiz"><span class="lbl">最近更新时间：</span><b id="statTime">--</b></div>
+      <div class="stat stat-horiz"><span class="lbl">分组：</span><b id="statGroups">--</b></div>
     </div>
     <div class="actions">
       <button class="btn btn-dark" id="btnImportAll">一键导入全部</button>
@@ -252,8 +258,6 @@
     </div>
   </header>
 
-  <!-- 分组 Tab -->
-  <nav class="tabs" id="tabs"></nav>
 
   <!-- 内容 -->
   <main id="content"></main>
@@ -312,7 +316,7 @@
     {key:"comic",  name:"漫画源", icon:"🎨", file:"sources/comic.json"},
     {key:"video",  name:"视频源", icon:"🎬", file:"sources/video.json"}
   ];
-  var BUILD_DATE = "2026-08-19";
+  var BUILD_DATE = "2026-08-19 16:07";
   var ALL_FILE = "sources/all.json";
   var MANIFEST_FILE = "sources/one/manifest.json";
 
@@ -392,26 +396,6 @@
   /* 二维码图标（内联 SVG） */
   var QR_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h7v7H3V3zm2 2v3h3V5H5zm9-2h7v7h-7V3zm2 2v3h3V5h-3zM3 14h7v7H3v-7zm2 2v3h3v-3H5zm7-3h2v2h-2v-2zm4 0h2v2h-2v-2zm-2 3h2v2h-2v-2zm4 0h2v2h-2v-2zm-4 3h2v2h-2v-2zm4 0h2v2h-2v-2z"/></svg>';
 
-  function renderTabs(){
-    var el = $("tabs"); el.innerHTML = "";
-    function tab(label, key, icon, count, active){
-      var b = document.createElement("button");
-      b.className = "tab" + (active ? " active" : "");
-      b.dataset.group = key;
-      b.innerHTML = '<span>' + icon + '</span>' + '<em>' + count + '</em>' + '<span>' + label + '</span>';
-      b.addEventListener("click", function(){ switchTab(key); });
-      el.appendChild(b);
-    }
-    var total = 0;
-    GROUPS.forEach(function(g){ total += (state.data[g.key]||[]).length; });
-    tab("全部", "all", "🏠", total, state.cur === "all");
-    GROUPS.forEach(function(g){
-      tab(g.name, g.key, g.icon, (state.data[g.key]||[]).length, state.cur === g.key);
-    });
-    var activeTab = el.querySelector(".tab.active");
-    if (activeTab) activeTab.scrollIntoView({inline:"center", block:"nearest", behavior:"smooth"});
-  }
-
   function cardHTML(s, g, index, oneUrl){
     var url = oneUrl || absUrl(g.file);
     return '' +
@@ -462,24 +446,8 @@
       });
       main.appendChild(grid);
     }
-    if (state.cur === "all"){
-      GROUPS.forEach(renderGroup);
-      if (visible === 0) main.appendChild(htmlToNode(emptyHTML(q)));
-    } else {
-      var g = null;
-      GROUPS.forEach(function(x){ if (x.key === state.cur) g = x; });
-      if (!g) return;
-      var filtered = filter(state.data[g.key] || []);
-      if (filtered.length === 0){ main.appendChild(htmlToNode(emptyHTML(q))); return; }
-      visible = filtered.length;
-      main.appendChild(htmlToNode(groupHeadHTML(g, filtered)));
-      var grid = document.createElement("div");
-      grid.className = "grid";
-      filtered.forEach(function(s, i){
-        grid.insertAdjacentHTML("beforeend", cardHTML(s, g, i, oneUrlOf(s)));
-      });
-      main.appendChild(grid);
-    }
+    GROUPS.forEach(renderGroup);
+    if (visible === 0) main.appendChild(htmlToNode(emptyHTML(q)));
     renderFooter();
   }
   function emptyHTML(q){
@@ -509,13 +477,6 @@
     renderFriendLinks();
   }
 
-  function switchTab(key){
-    state.cur = key;
-    try{ history.replaceState(null, "", "#" + (key === "all" ? "" : key)); }catch(e){}
-    renderTabs();
-    renderContent();
-    window.scrollTo({top:0, behavior:"smooth"});
-  }
 
   var currentQR = null;
   function openQR(name, url){
@@ -571,14 +532,9 @@
   $("searchInput").addEventListener("input", function(){ state.search = this.value; renderContent(); });
 
   loadAll().then(function(){
-    var hash = (location.hash||"").replace("#","");
-    if (hash){
-      GROUPS.forEach(function(g){ if (g.key === hash) state.cur = g.key; });
-    }
     $("statGroups").textContent = GROUPS.map(function(g){ return g.name; }).join(" · ");
     $("statTime").textContent = BUILD_DATE;
     $("footTime").textContent = BUILD_DATE;
-    renderTabs();
     renderContent();
     if (isFile()){
       var n = document.createElement("div");
