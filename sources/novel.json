@@ -1,1 +1,738 @@
-[]
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：1097919737",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "露西弗同人站",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://slash.newlucifer.com",
+    "concurrentRate": "1000",
+    "customButton": false,
+    "customOrder": 5,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar result = [];\nfunction push(t, u, w){\n\tresult.push({\"title\": t, \"url\": u, \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": (w || 0.4)}});\n}\nfunction sUrl(extra, sort){\n\treturn 'https://api.newlucifer.com/s/Index/search,{\"method\":\"POST\",\"body\":\"keywords=%25&page={{page}}&limit=20&sort=' + (sort || 0) + (extra ? '&' + extra : '') + '&token={{source.get(\"token\")}}\"}';\n}\nfunction kwUrl(kw, sort){\n\treturn 'https://api.newlucifer.com/s/Index/search,{\"method\":\"POST\",\"body\":\"keywords=' + encodeURIComponent(kw) + '&page={{page}}&limit=20&sort=' + (sort || 1) + '&token={{source.get(\"token\")}}\"}';\n}\nvar groups = [\"首页\",\"我的收藏\",\"性向\",\"类型\",\"分级\",\"状态\",\"字数\",\"更新\",\"区域\",\"性质\",\"标签\",\"排序\",\"热门CP\",\"热门原作\"];\nvar tab = infoMap[\"发现分组\"] || \"首页\";\nresult.push({\"title\":\"发现分组\",\"type\":\"select\",\"chars\":groups,\"default\":tab,\"action\":\"java.refreshExplore()\",\"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":1}});\n\nif(tab == \"首页\"){\n\t// 国产/欧美/亚洲 × 不限/影视/动漫/小说/游戏/其他\n\tvar areas = [\"国产\", \"欧美\", \"亚洲\"];\n\tvar gs = [[\"不限\",0],[\"影视\",1],[\"动漫\",2],[\"小说\",3],[\"游戏\",4],[\"其他\",5]];\n\tfor(var a=1;a<=3;a++){\n\t\tfor(var g=0;g<gs.length;g++){\n\t\t\tpush(\"🏠 \" + areas[a-1] + \"·\" + gs[g][0], 'https://api.newlucifer.com/s/Index/index_list,{\"method\":\"POST\",\"body\":\"page={{page}}&limit=20&group=' + gs[g][1] + '&area=' + a + '&token={{source.get(\"token\")}}\"}', 0.4);\n\t\t}\n\t}\n}else if(tab == \"我的收藏\"){\n\tpush(\"⭐ 我的收藏（需登录）\", 'https://api.newlucifer.com/s/User/article_collection_list,{\"method\":\"POST\",\"body\":\"token={{source.get(\"token\")}}\"}', 1);\n}else if(tab == \"性向\"){\n\tvar so = [[\"BL\",\"1\"],[\"GL\",\"2\"],[\"BG\",\"3\"],[\"GB\",\"6\"],[\"无CP\",\"4\"],[\"混合\",\"5\"]];\n\tfor(var i=0;i<so.length;i++){ push(\"❤️ \" + so[i][0], sUrl(\"sexual_orientation=\" + so[i][1]), 0.4); }\n}else if(tab == \"类型\"){\n\tpush(\"🎭 原著向\", sUrl(\"type=1\"), 0.4);\n\tpush(\"🎭 AU向\", sUrl(\"type=2\"), 0.4);\n}else if(tab == \"分级\"){\n\tvar gr = [[\"全年龄\",\"1\"],[\"辅导级\",\"2\"],[\"限制级\",\"3\"]];\n\tfor(var i=0;i<gr.length;i++){ push(\"📊 \" + gr[i][0], sUrl(\"grade=\" + gr[i][1]), 0.4); }\n}else if(tab == \"状态\"){\n\tvar st = [[\"连载\",\"1\"],[\"完结\",\"2\"],[\"停更\",\"3\"]];\n\tfor(var i=0;i<st.length;i++){ push(\"📌 \" + st[i][0], sUrl(\"finish_status=\" + st[i][1]), 0.4); }\n}else if(tab == \"字数\"){\n\tvar wc = [[\"1万以下\",\"1\"],[\"5万以下\",\"2\"],[\"10万以下\",\"3\"],[\"10万以上\",\"4\"]];\n\tfor(var i=0;i<wc.length;i++){ push(\"📝 \" + wc[i][0], sUrl(\"words_number=\" + wc[i][1]), 0.4); }\n}else if(tab == \"更新\"){\n\tvar tm = [[\"3个月内\",\"1\"],[\"半年内\",\"2\"],[\"1年内\",\"3\"],[\"1年以上\",\"4\"]];\n\tfor(var i=0;i<tm.length;i++){ push(\"🕒 \" + tm[i][0], sUrl(\"time=\" + tm[i][1]), 0.4); }\n}else if(tab == \"区域\"){\n\tvar ar = [[\"国产\",\"1\"],[\"欧美\",\"2\"],[\"亚洲\",\"3\"]];\n\tfor(var i=0;i<ar.length;i++){ push(\"🗺 \" + ar[i][0], sUrl(\"area=\" + ar[i][1]), 0.4); }\n}else if(tab == \"性质\"){\n\tvar pt = [[\"原创\",\"1\"],[\"转载\",\"2\"],[\"原创翻译\",\"3\"],[\"转载翻译\",\"4\"]];\n\tfor(var i=0;i<pt.length;i++){ push(\"🏷 \" + pt[i][0], sUrl(\"publish_type=\" + pt[i][1]), 0.4); }\n}else if(tab == \"标签\"){\n\ttry{\n\t\tvar tk = source.get(\"token\") || \"\";\n\t\tif(tk){\n\t\t\tvar hl = String(java.ajax(\"https://api.newlucifer.com/s/Index/hot_label?token=\" + tk) || \"\");\n\t\t\tvar hd = JSON.parse(hl);\n\t\t\tif(hd && hd.data){\n\t\t\t\tfor(var i=0;i<hd.data.length && i<20;i++){ push(\"# \" + hd.data[i].name, sUrl(\"label=\" + hd.data[i].id), 0.4); }\n\t\t\t}\n\t\t}\n\t}catch(e){}\n}else if(tab == \"排序\"){\n\tvar sr = [[\"最新回复\",\"0\"],[\"作品点击\",\"1\"],[\"作品赞赏\",\"2\"],[\"最新发布\",\"3\"]];\n\tfor(var i=0;i<sr.length;i++){ push(\"🔀 \" + sr[i][0], sUrl(\"\", sr[i][1]), 0.4); }\n}else if(tab == \"热门CP\" || tab == \"热门原作\"){\n\ttry{\n\t\tvar tk = source.get(\"token\") || \"\";\n\t\tif(tk){\n\t\t\tvar rk = String(java.ajax('https://api.newlucifer.com/s/Index/ranking,{\"method\":\"POST\",\"body\":\"area=1&group=1&hot=0&token=' + tk + '\"}') || \"\");\n\t\t\tvar rd = JSON.parse(rk);\n\t\t\tif(rd && rd.data){\n\t\t\t\tif(tab == \"热门CP\"){\n\t\t\t\t\tvar hc = rd.data.hot_cp || [];\n\t\t\t\t\tfor(var i=0;i<hc.length && i<8;i++){ push(\"🔥 \" + hc[i].name, kwUrl(hc[i].name), 0.4); }\n\t\t\t\t}else{\n\t\t\t\t\tvar ho = rd.data.hot_original_name || [];\n\t\t\t\t\tfor(var i=0;i<ho.length && i<8;i++){ push(\"🔥 \" + ho[i].name, kwUrl(ho[i].name), 0.4); }\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}catch(e){}\n}\nJSON.stringify(result);\n</js>",
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36\", \"Referer\": \"https://slash.newlucifer.com/\"}",
+    "lastUpdateTime": 1786622515916,
+    "loginCheckJs": "(function(a){\n\ttry{\n\t\tvar o = String(a.body() || \"\");\n\t\tif(o && o.indexOf(\"\\\"code\\\":-1\") >= 0 && (o.indexOf(\"token\") >= 0 || o.indexOf(\"登录\") >= 0)){\n\t\t\tvar c = Number(source.get(\"lc_count\") || 0);\n\t\t\tif(c < 2){\n\t\t\t\tsource.put(\"lc_count\", c + 1);\n\t\t\t\tjava.longToast(\"⚠️ 露西弗同人站需要登录：长按书源 → 登录（邮箱+密码）\");\n\t\t\t}\n\t\t}else{\n\t\t\ttry{ source.put(\"lc_count\", 0); }catch(e){}\n\t\t}\n\t}catch(e){}\n\treturn a;\n})(result)",
+    "loginUi": "@js:\nvar all = [];\nall.push({\"name\": \"🔍 搜作品\", \"type\": \"button\", \"action\": \"setSearchMode('work')\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.4}});\nall.push({\"name\": \"👤 搜作者\", \"type\": \"button\", \"action\": \"setSearchMode('author')\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.4}});\nall.push({\"name\": \"邮箱\", \"type\": \"text\", \"default\": \"\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nall.push({\"name\": \"密码\", \"type\": \"password\", \"default\": \"\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nall.push({\"name\": \"👤 登录\", \"type\": \"button\", \"action\": \"doLogin()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nall.push({\"name\": \"📝 注册账号\", \"type\": \"button\", \"action\": \"toRegister()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.5}});\nall.push({\"name\": \"🔍 检查登录状态\", \"type\": \"button\", \"action\": \"checkLogin()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nall.push({\"name\": \"🔑 退出登录\", \"type\": \"button\", \"action\": \"logoff()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.5}});\nall.push({\"name\": \"💬 交流QQ群 1097919737（点击跳转）\", \"type\": \"button\", \"action\": \"joinQQGroup()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nresult = JSON.stringify(all);\n",
+    "loginUrl": "function login(){ doLogin(); }\n\n// ===== 搜索模式切换（搜作品 / 搜作者）=====\nfunction setSearchMode(m){\n\tsource.put(\"searchMode\", m);\n\tjava.longToast(m == \"author\" ? \"✅ 已切换到：搜作者（输入作者名）\" : \"✅ 已切换到：搜作品（作品名/CP/原作名）\");\n}\n\n\n// ===== 读取登录输入 =====\nfunction gv(m, k){\n\tvar v = \"\";\n\ttry{ var a = m[k]; if(a !== undefined && a !== null) v = String(a); }catch(e){}\n\tif(!v){ try{ var b = m.get(k); if(b !== undefined && b !== null) v = String(b); }catch(e2){} }\n\treturn v;\n}\nfunction readAcc(){\n\ttry{ java.upLoginData(); }catch(e){}\n\tvar map = result;\n\ttry{ if(!map) map = source.getLoginInfoMap(); }catch(e){}\n\treturn {u: gv(map, \"邮箱\"), p: gv(map, \"密码\")};\n}\n\n// ===== 登录（邮箱+密码 → token）=====\nfunction doLogin(){\n\tvar r = readAcc();\n\tvar email = String(r.u || \"\").trim();\n\tvar pwd = String(r.p || \"\");\n\tif(!email || !pwd){ java.longToast(\"请先填写邮箱和密码\"); return; }\n\ttry{\n\t\tvar body = \"email=\" + encodeURIComponent(email) + \"&password=\" + encodeURIComponent(pwd);\n\t\tvar resp = String(java.post(\"https://api.newlucifer.com/s/User/login\", body, {\"Content-Type\": \"application/x-www-form-urlencoded\"}).body() || \"\");\n\t\tvar d = {}; try{ d = JSON.parse(resp); }catch(e){}\n\t\tif(d && d.code == 200 && d.data && d.data.token){\n\t\t\tsource.put(\"token\", String(d.data.token));\n\t\t\tif(d.data.nickname) source.put(\"nickname\", String(d.data.nickname));\n\t\t\tif(d.data.uid) source.put(\"uid\", String(d.data.uid));\n\t\t\tjava.longToast(\"✅ 登录成功：\" + (d.data.nickname || email));\n\t\t}else{\n\t\t\tsource.put(\"token\", \"\");\n\t\t\tjava.longToast(\"⚠️ 登录失败：\" + (d && d.msg ? d.msg : \"未知错误\"));\n\t\t}\n\t}catch(e){ java.longToast(\"登录失败：\" + e); }\n}\n\n// ===== 注册账号（打开网站注册页）=====\nfunction toRegister(){\n\ttry{\n\t\tjava.startBrowserAwait(\"https://slash.newlucifer.com/register\", \"注册露西弗同人站账号\");\n\t\tjava.longToast(\"注册完成后，请回到这里填写邮箱和密码登录\");\n\t}catch(e){ java.longToast(\"打开注册页失败：\" + e); }\n}\n\n// ===== 检查登录状态 =====\nfunction checkLogin(){\n\tvar tk = source.get(\"token\") || \"\";\n\tif(!tk){ java.longToast(\"❌ 未登录：请填写邮箱和密码后点「👤 登录」\"); return; }\n\ttry{\n\t\tvar resp = String(java.post(\"https://api.newlucifer.com/s/User/info\", \"token=\" + encodeURIComponent(tk), {\"Content-Type\": \"application/x-www-form-urlencoded\"}).body() || \"\");\n\t\tvar d = {}; try{ d = JSON.parse(resp); }catch(e){}\n\t\tif(d && d.code == 200 && d.data){\n\t\t\tvar nm = source.get(\"nickname\") || d.data.nickname || d.data.penname || d.data.email || \"\";\n\t\t\tjava.longToast(\"✅ 已登录：\" + (nm || \"账号正常\"));\n\t\t}else{\n\t\t\tsource.put(\"token\", \"\");\n\t\t\tjava.longToast(\"❌ 登录已失效，请重新登录：\" + (d && d.msg ? d.msg : \"\"));\n\t\t}\n\t}catch(e){ java.toast(\"检查登录状态失败：\" + e); }\n}\n\n// ===== 退出登录 =====\nfunction logoff(){\n\ttry{\n\t\tvar tk = source.get(\"token\") || \"\";\n\t\tif(tk){ try{ java.post(\"https://api.newlucifer.com/s/User/logout\", \"token=\" + encodeURIComponent(tk), {\"Content-Type\": \"application/x-www-form-urlencoded\"}); }catch(e){} }\n\t\tsource.put(\"token\", \"\");\n\t\tsource.put(\"nickname\", \"\");\n\t\tsource.put(\"uid\", \"\");\n\t\tjava.toast(\"已退出登录\");\n\t}catch(e){ java.toast(\"退出失败：\" + e); }\n}\n\n// ===== 交流QQ群（点击申请入群）=====\nfunction joinQQGroup(){\n\tvar u = \"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=group&uin=1097919737\";\n\ttry{\n\t\tjava.openUrl(u);\n\t\tjava.toast(\"已尝试打开QQ加群页面，若未跳转请手动搜索群号 1097919737\");\n\t}catch(e){\n\t\tjava.longToast(\"请手动在QQ中搜索群号 1097919737\");\n\t}\n}\n",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "@JSon:$.data.penname",
+      "coverUrl": "@JSon:$.data.cover_image",
+      "intro": "@js:\nvar o = {};\ntry{ o = JSON.parse(src || '{}'); }catch(e){}\nvar d = o.data || {};\nvar c = d.introduction || '';\nif(d.warning){ c = c + '\\n\\n⚠️ 分级提示：' + d.warning; }\n\n// ===== 书评（仿老站模式，分页抓取，最多100条）=====\nvar bid = (baseUrl.match(/article_id=(\\d+)/) || [])[1];\nvar tk = source.get(\"token\") || \"\";\nvar cmts = [];\nvar note = \"\";\ntry{\n\tif(bid){\n\t\tvar p1 = String(java.ajax('https://api.newlucifer.com/s/Reader/comment_list,{\"method\":\"POST\",\"body\":\"article_id=' + bid + '&page=1&limit=100&token=' + tk + '\"}') || '');\n\t\tvar d1 = JSON.parse(p1);\n\t\tif(d1 && d1.data && d1.data.list){ cmts = cmts.concat(d1.data.list); }\n\t\tvar tp = (d1 && d1.data && d1.data.pages) ? Number(d1.data.pages.total) : 1;\n\t\tif(tp > 1 && cmts.length < 100){\n\t\t\tvar p2 = String(java.ajax('https://api.newlucifer.com/s/Reader/comment_list,{\"method\":\"POST\",\"body\":\"article_id=' + bid + '&page=2&limit=100&token=' + tk + '\"}') || '');\n\t\t\tvar d2 = JSON.parse(p2);\n\t\t\tif(d2 && d2.data && d2.data.list){ cmts = cmts.concat(d2.data.list); }\n\t\t}\n\t\tif(tp > 1){ note = ' / 共' + tp + '页'; }\n\t}\n}catch(e){}\nif(cmts.length < 1 && d.comment && d.comment.list){ cmts = d.comment.list; }\nif(cmts.length){\n\tc = c + '\\n\\n💬 书评（显示' + cmts.length + '条' + note + '）：\\n';\n\tfor(var i = 0; i < cmts.length; i++){\n\t\tvar cm = cmts[i];\n\t\tvar nm = cm.nickname || cm.penname || '匿名';\n\t\tvar tm = String(cm.create_date || '').replace(/\\s+/, ' ');\n\t\tvar ti = cm.title ? '《' + cm.title + '》' : '';\n\t\tc = c + '🌺 #' + (cm.floor || '') + ' ' + nm + ' 于' + tm + (ti ? ' 在' + ti : '') + '说：' + cm.content + '\\n';\n\t\t// 回复（↳ 缩进显示）\n\t\tif(cm.reply_list && cm.reply_list.length){\n\t\t\tfor(var j = 0; j < cm.reply_list.length; j++){\n\t\t\t\tvar r = cm.reply_list[j];\n\t\t\t\tvar rn = r.nickname || r.penname || '匿名';\n\t\t\t\tvar rt = String(r.create_date || '').replace(/\\s+/, ' ');\n\t\t\t\tc = c + '  ↳ ' + rn + ' 于' + rt + '回复：' + r.content + '\\n';\n\t\t\t}\n\t\t}\n\t}\n}\nresult = c;",
+      "kind": "@js:\nvar o = {};\ntry{ o = JSON.parse(src || '{}'); }catch(e){}\nvar d = o.data || {};\nvar p = [];\nvar m = {\n\tsexual_orientation: {1:'BL', 2:'GL', 3:'BG', 6:'GB', 4:'无CP', 5:'混合'},\n\ttype: {1:'原著向', 2:'AU向'},\n\tgrade: {1:'全年龄', 2:'辅导级', 3:'限制级', 4:'成人向'},\n\tfinish_status: {1:'连载', 2:'完结', 3:'停更', 5:'一章完'},\n\tpublish_type: {1:'原创', 2:'转载', 3:'原创翻译', 4:'转载翻译'}\n};\nfor(var k in m){ if(m[k][d[k]]) p.push(m[k][d[k]]); }\nfunction a2s(a){ try{ if(a && a.length){ return (a.join ? a.join(' ') : String(a)); } }catch(e){} return ''; }\nvar lb = a2s(d.label); if(lb) p.push(lb);\nvar cp = a2s(d.cp); if(cp) p.push('CP:' + cp);\nvar on = a2s(d.original_name); if(on) p.push('原作:' + on);\nresult = p.join(' | ');",
+      "lastChapter": "@js:\nvar o = {};\ntry{ o = JSON.parse(src || '{}'); }catch(e){}\nvar l = ((o.data && o.data.chapter && o.data.chapter.list) || []);\nresult = l.length ? l[l.length - 1].title : '';",
+      "name": "@JSon:$.data.name",
+      "tocUrl": "@js:var m = (baseUrl.match(/article_id=(\\d+)/) || [])[1] || '';result = 'https://api.newlucifer.com/s/Reader/chapter_list,{\"method\":\"POST\",\"body\":\"article_id=' + m + '&limit=9999&token={{source.get(\"token\")}}\"}';",
+      "wordCount": "@JSon:$.data.all_word_number"
+    },
+    "ruleContent": {
+      "content": "@js:\nvar o = {};\ntry{ o = JSON.parse(src || '{}'); }catch(e){}\nvar d = o.data || {};\nvar c = String(d.content || '').replace(/^[\\s\\u3000]+/, '');\nvar w = d.whisper || '';\nif(w){ c = c + '\\n\\n——作者的话——\\n' + w; }\nresult = c;"
+    },
+    "ruleExplore": {
+      "author": "author",
+      "bookList": "@js:\nfunction a2s(a){ try{ if(a && a.length){ return (a.join ? a.join(' ') : String(a)); } }catch(e){} return ''; }\nvar SO = {1:'BL',2:'GL',3:'BG',6:'GB',4:'无CP',5:'混合'};\nvar AT = {1:'原著向',2:'AU向'};\nvar GR = {1:'全年龄',2:'辅导级',3:'限制级',4:'成人向'};\nvar ST = {1:'连载',2:'完结',3:'停更',5:'一章完'};\nvar PT = {1:'原创',2:'转载',3:'原创翻译',4:'转载翻译'};\nfunction disp(map, v){\n\tif(v === undefined || v === null || v === '') return '';\n\tif(map[v]) return map[v];\n\treturn String(v);\n}\nfunction build(it){\n\tvar p = [];\n\tvar so = disp(SO, it.sexual_orientation); if(so) p.push(so);\n\tvar at = disp(AT, it.type); if(at) p.push(at);\n\tvar gr = disp(GR, it.grade); if(gr) p.push(gr);\n\tvar st = disp(ST, it.finish_status); if(st) p.push(st);\n\tvar pt = disp(PT, it.publish_type); if(pt) p.push(pt);\n\tvar lb = a2s(it.label); if(lb) p.push(lb);\n\tvar cp = a2s(it.cp); if(cp) p.push('CP:' + cp);\n\tvar on = a2s(it.original_name); if(on) p.push('原作:' + on);\n\treturn {\n\t\tname: it.name || '',\n\t\tauthor: it.penname || it.author_display_name || '',\n\t\tintro: it.introduction || '',\n\t\tcoverUrl: it.cover_image || '',\n\t\tkind: p.join(' | '),\n\t\twordCount: it.all_word_number || '',\n\t\tbookUrl: 'https://api.newlucifer.com/s/Reader/article_info,{\"method\":\"POST\",\"body\":\"article_id=' + (it.article_id || it.id) + '&token={{source.get(\"token\")}}\"}'\n\t};\n}\nvar d = {};\ntry{ d = JSON.parse(src || '{}'); }catch(e){}\nvar root = (d && d.data) ? d.data : {};\nvar out = [];\nif(root.article_yc_list || root.article_zz_list || root.article_fy_list || (root.article_last_up && root.article_last_up.id)){\n\t// 作者作品列表（author_info）\n\tvar seen = {};\n\tfunction addOne(w){\n\t\tvar id = w.article_id || w.id;\n\t\tif(id && seen[id]) return;\n\t\tif(id) seen[id] = 1;\n\t\tout.push(build(w));\n\t}\n\tfunction addSeries(series){\n\t\tif(!series) return;\n\t\tfor(var k in series){\n\t\t\tvar works = series[k];\n\t\t\tif(works && works.length){\n\t\t\t\tfor(var j = 0; j < works.length; j++){ addOne(works[j]); }\n\t\t\t}\n\t\t}\n\t}\n\taddSeries(root.article_yc_list);\n\taddSeries(root.article_zz_list);\n\taddSeries(root.article_fy_list);\n\tif(root.article_last_up && root.article_last_up.id){ addOne(root.article_last_up); }\n}else{\n\tvar list = root.list || [];\n\tif(/collection_list/.test(baseUrl)){\n\t\tfor(var i = 0; i < list.length; i++){\n\t\t\tvar s = list[i];\n\t\t\tif(s && s.article_list){\n\t\t\t\tfor(var j = 0; j < s.article_list.length; j++){ out.push(build(s.article_list[j])); }\n\t\t\t}\n\t\t}\n\t}else{\n\t\tfor(var i = 0; i < list.length; i++){ out.push(build(list[i])); }\n\t}\n}\nresult = out;",
+      "bookUrl": "bookUrl",
+      "coverUrl": "coverUrl",
+      "intro": "intro",
+      "kind": "kind",
+      "name": "name",
+      "wordCount": "wordCount"
+    },
+    "ruleSearch": {
+      "author": "author",
+      "bookList": "@js:\nfunction a2s(a){ try{ if(a && a.length){ return (a.join ? a.join(' ') : String(a)); } }catch(e){} return ''; }\nvar SO = {1:'BL',2:'GL',3:'BG',6:'GB',4:'无CP',5:'混合'};\nvar AT = {1:'原著向',2:'AU向'};\nvar GR = {1:'全年龄',2:'辅导级',3:'限制级',4:'成人向'};\nvar ST = {1:'连载',2:'完结',3:'停更',5:'一章完'};\nvar PT = {1:'原创',2:'转载',3:'原创翻译',4:'转载翻译'};\nfunction disp(map, v){\n\tif(v === undefined || v === null || v === '') return '';\n\tif(map[v]) return map[v];\n\treturn String(v);\n}\nfunction build(it){\n\tvar p = [];\n\tvar so = disp(SO, it.sexual_orientation); if(so) p.push(so);\n\tvar at = disp(AT, it.type); if(at) p.push(at);\n\tvar gr = disp(GR, it.grade); if(gr) p.push(gr);\n\tvar st = disp(ST, it.finish_status); if(st) p.push(st);\n\tvar pt = disp(PT, it.publish_type); if(pt) p.push(pt);\n\tvar lb = a2s(it.label); if(lb) p.push(lb);\n\tvar cp = a2s(it.cp); if(cp) p.push('CP:' + cp);\n\tvar on = a2s(it.original_name); if(on) p.push('原作:' + on);\n\treturn {\n\t\tname: it.name || '',\n\t\tauthor: it.penname || it.author_display_name || '',\n\t\tintro: it.introduction || '',\n\t\tcoverUrl: it.cover_image || '',\n\t\tkind: p.join(' | '),\n\t\twordCount: it.all_word_number || '',\n\t\tbookUrl: 'https://api.newlucifer.com/s/Reader/article_info,{\"method\":\"POST\",\"body\":\"article_id=' + (it.article_id || it.id) + '&token={{source.get(\"token\")}}\"}'\n\t};\n}\nvar d = {};\ntry{ d = JSON.parse(src || '{}'); }catch(e){}\nvar root = (d && d.data) ? d.data : {};\nvar out = [];\nif(root.article_yc_list || root.article_zz_list || root.article_fy_list || (root.article_last_up && root.article_last_up.id)){\n\t// 作者作品列表（author_info）\n\tvar seen = {};\n\tfunction addOne(w){\n\t\tvar id = w.article_id || w.id;\n\t\tif(id && seen[id]) return;\n\t\tif(id) seen[id] = 1;\n\t\tout.push(build(w));\n\t}\n\tfunction addSeries(series){\n\t\tif(!series) return;\n\t\tfor(var k in series){\n\t\t\tvar works = series[k];\n\t\t\tif(works && works.length){\n\t\t\t\tfor(var j = 0; j < works.length; j++){ addOne(works[j]); }\n\t\t\t}\n\t\t}\n\t}\n\taddSeries(root.article_yc_list);\n\taddSeries(root.article_zz_list);\n\taddSeries(root.article_fy_list);\n\tif(root.article_last_up && root.article_last_up.id){ addOne(root.article_last_up); }\n}else{\n\tvar list = root.list || [];\n\tif(/collection_list/.test(baseUrl)){\n\t\tfor(var i = 0; i < list.length; i++){\n\t\t\tvar s = list[i];\n\t\t\tif(s && s.article_list){\n\t\t\t\tfor(var j = 0; j < s.article_list.length; j++){ out.push(build(s.article_list[j])); }\n\t\t\t}\n\t\t}\n\t}else{\n\t\tfor(var i = 0; i < list.length; i++){ out.push(build(list[i])); }\n\t}\n}\nresult = out;",
+      "bookUrl": "bookUrl",
+      "coverUrl": "coverUrl",
+      "intro": "intro",
+      "kind": "kind",
+      "name": "name",
+      "wordCount": "wordCount"
+    },
+    "ruleToc": {
+      "chapterList": "@JSon:$.data.list",
+      "chapterName": "@JSon:$.title",
+      "chapterUrl": "@js:var id = java.getString('@JSon:$.id');result = 'https://api.newlucifer.com/s/Reader/chapter_info,{\"method\":\"POST\",\"body\":\"chapter_id=' + id + '&token={{source.get(\"token\")}}\"}';"
+    },
+    "searchUrl": "<js>\nvar tk = source.get(\"token\") || \"\";\nvar st = source.get(\"searchMode\") == \"author\" ? 1 : 0;\nif(st == 1){\n\t// 作者模式：先按作者名找到 user_no，再返回该作者作品列表页\n\tvar un = \"\";\n\ttry{\n\t\tvar kw = encodeURIComponent(key);\n\t\tvar r1 = String(java.ajax(\"https://api.newlucifer.com/s/Index/search,{\\\"method\\\":\\\"POST\\\",\\\"body\\\":\\\"keywords=\" + kw + \"&page=1&limit=10&search_type=1&token=\" + tk + \"\\\"}\") || \"\");\n\t\tvar d1 = JSON.parse(r1);\n\t\tif(d1 && d1.data && d1.data.list && d1.data.list.length){ un = d1.data.list[0].user_no || \"\"; }\n\t}catch(e){}\n\tif(un){\n\t\tresult = \"https://api.newlucifer.com/s/Reader/author_info,{\\\"method\\\":\\\"POST\\\",\\\"body\\\":\\\"user_no=\" + un + \"&token=\" + tk + \"\\\"}\";\n\t}else{\n\t\tresult = \"https://api.newlucifer.com/s/Index/search,{\\\"method\\\":\\\"POST\\\",\\\"body\\\":\\\"keywords=__none__&page=1&limit=1&token=\" + tk + \"\\\"}\";\n\t}\n}else{\n\tresult = \"https://api.newlucifer.com/s/Index/search,{\\\"method\\\":\\\"POST\\\",\\\"body\\\":\\\"keywords={{key}}&page={{page}}&limit=20&sort=0&search_type=0&token=\" + tk + \"\\\"}\";\n}\n</js>",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：1097919737",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "露西弗俱乐部",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://lucifer-club.com",
+    "concurrentRate": "1000",
+    "customButton": false,
+    "customOrder": 6,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar ts = Date.now();\nvar result = [];\nfunction push(t,u,w){\n\tvar sep = (String(u).indexOf(\"?\") >= 0) ? \"&\" : \"?\";\n\tu = String(u) + sep + \"_t=\" + ts;\n\tresult.push({\"title\":t,\"url\":u,\"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":(w||0.4)}});\n}\nfunction sUrl(extra){\n\treturn \"https://lucifer-club.com/search.php?action=search&kw=&by=title&\"+extra+\"&page={{page}}\";\n}\n// ===== 我的（占一行）=====\npush(\"⭐ 我的收藏（需登录）\",\"https://lucifer-club.com/my_favorite.php\",1);\n// ===== 文库（占一行）=====\npush(\"📚 原创文库（按更新）\",\"https://lucifer-club.com/novelsort.php?style=yc&page={{page}}\",1);\npush(\"📚 同人文库（按更新）\",\"https://lucifer-club.com/novelsort.php?style=tr&page={{page}}\",1);\n// ===== 排行（占一行一项 + 两列）=====\npush(\"🏆 全站最受欢迎\",\"https://lucifer-club.com/top.php?page={{page}}\",1);\npush(\"👁 点击·原创·日\",\"https://lucifer-club.com/hit-click-day-yc.html\",0.4);\npush(\"👁 点击·原创·周\",\"https://lucifer-club.com/hit-click-lastweek-yc.html\",0.4);\npush(\"👁 点击·原创·月\",\"https://lucifer-club.com/hit-click-lastmonth-yc.html\",0.4);\npush(\"👁 点击·同人·日\",\"https://lucifer-club.com/hit-click-day-tr.html\",0.4);\npush(\"👁 点击·同人·周\",\"https://lucifer-club.com/hit-click-lastweek-tr.html\",0.4);\npush(\"👁 点击·同人·月\",\"https://lucifer-club.com/hit-click-lastmonth-tr.html\",0.4);\npush(\"⭐ 收藏·原创·日\",\"https://lucifer-club.com/hit-favo-day-yc.html\",0.4);\npush(\"⭐ 收藏·原创·周\",\"https://lucifer-club.com/hit-favo-lastweek-yc.html\",0.4);\npush(\"⭐ 收藏·原创·月\",\"https://lucifer-club.com/hit-favo-lastmonth-yc.html\",0.4);\npush(\"⭐ 收藏·同人·日\",\"https://lucifer-club.com/hit-favo-day-tr.html\",0.4);\npush(\"⭐ 收藏·同人·周\",\"https://lucifer-club.com/hit-favo-lastweek-tr.html\",0.4);\npush(\"⭐ 收藏·同人·月\",\"https://lucifer-club.com/hit-favo-lastmonth-tr.html\",0.4);\n// ===== 分类：性质 =====\npush(\"🏷 原创·连载\",\"https://lucifer-club.com/subsort.php?style=1&state=1&page={{page}}\",0.4);\npush(\"🏷 原创·完结\",\"https://lucifer-club.com/subsort.php?style=1&state=3&page={{page}}\",0.4);\npush(\"🏷 衍生·连载\",\"https://lucifer-club.com/subsort.php?style=2&state=1&page={{page}}\",0.4);\npush(\"🏷 衍生·完结\",\"https://lucifer-club.com/subsort.php?style=2&state=3&page={{page}}\",0.4);\npush(\"🏷 翻译·连载\",\"https://lucifer-club.com/subsort.php?style=3&state=1&page={{page}}\",0.4);\npush(\"🏷 翻译·完结\",\"https://lucifer-club.com/subsort.php?style=3&state=3&page={{page}}\",0.4);\n// ===== 分类：性向 =====\npush(\"❤️ B L\",sUrl(\"subject=51&rank=lastupdate&order=desc\"),0.4);\npush(\"❤️ G L\",sUrl(\"subject=52&rank=lastupdate&order=desc\"),0.4);\npush(\"❤️ B G\",sUrl(\"subject=53&rank=lastupdate&order=desc\"),0.4);\npush(\"❤️ G B\",sUrl(\"subject=54&rank=lastupdate&order=desc\"),0.4);\npush(\"❤️ 女尊\",sUrl(\"subject=55&rank=lastupdate&order=desc\"),0.4);\npush(\"❤️ 综合\",sUrl(\"subject=56&rank=lastupdate&order=desc\"),0.4);\npush(\"❤️ 无CP\",sUrl(\"subject=57&rank=lastupdate&order=desc\"),0.4);\n// ===== 分类：时代 =====\npush(\"⏳ 古代\",sUrl(\"content=2&rank=lastupdate&order=desc\"),0.4);\npush(\"⏳ 现代\",sUrl(\"content=3&rank=lastupdate&order=desc\"),0.4);\npush(\"⏳ 未来\",sUrl(\"content=4&rank=lastupdate&order=desc\"),0.4);\npush(\"⏳ 跨时代\",sUrl(\"content=5&rank=lastupdate&order=desc\"),0.4);\npush(\"⏳ 幻想\",sUrl(\"content=7&rank=lastupdate&order=desc\"),0.4);\n// ===== 分类：风格 =====\npush(\"🎬 正剧\",sUrl(\"sty=1&rank=lastupdate&order=desc\"),0.4);\npush(\"🎬 悲剧\",sUrl(\"sty=3&rank=lastupdate&order=desc\"),0.4);\npush(\"🎬 搞笑\",sUrl(\"sty=4&rank=lastupdate&order=desc\"),0.4);\npush(\"🎬 暗黑\",sUrl(\"sty=5&rank=lastupdate&order=desc\"),0.4);\n// ===== 分类：状态 =====\npush(\"📌 连载\",sUrl(\"state=1&rank=lastupdate&order=desc\"),0.4);\npush(\"📌 完结\",sUrl(\"state=3&rank=lastupdate&order=desc\"),0.4);\npush(\"📌 暂停\",sUrl(\"state=2&rank=lastupdate&order=desc\"),0.4);\n// ===== 标签 =====\nvar tags=[\"短篇\",\"强强\",\"情有独钟\",\"都市情缘\",\"年下\",\"校园\",\"欢喜冤家\",\"穿越\",\"生子\",\"虐\",\"灵异神怪\",\"兄弟\",\"青梅竹马\",\"温馨\"];\nfor(var i=0;i<tags.length;i++){\n\tpush(\"# \"+tags[i],\"https://lucifer-club.com/search.php?action=search&kw=\"+tags[i]+\"&by=tag&rank=click&order=desc&page={{page}}\",0.4);\n}\n// ===== 排序 =====\npush(\"🔀 按更新·倒序\",sUrl(\"rank=lastupdate&order=desc\"),0.4);\npush(\"🔀 按更新·正序\",sUrl(\"rank=lastupdate&order=asc\"),0.4);\npush(\"🔀 按发表·倒序\",sUrl(\"rank=dateline&order=desc\"),0.4);\npush(\"🔀 按发表·正序\",sUrl(\"rank=dateline&order=asc\"),0.4);\npush(\"🔀 按点击·倒序\",sUrl(\"rank=click&order=desc\"),0.4);\npush(\"🔀 按点击·正序\",sUrl(\"rank=click&order=asc\"),0.4);\npush(\"🔀 按收藏·倒序\",sUrl(\"rank=favo&order=desc\"),0.4);\npush(\"🔀 按收藏·正序\",sUrl(\"rank=favo&order=asc\"),0.4);\nJSON.stringify(result);\n</js>",
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36\", \"Referer\": \"https://lucifer-club.com/\"}",
+    "lastUpdateTime": 1786527901315,
+    "loginCheckJs": "(function(a){\n\ttry{\n\t\tvar o = a.body();\n\t\tif(o && o.indexOf(\"luf_forget\") >= 0 && o.indexOf(\"用户登录\") >= 0){\n\t\t\tvar c = Number(source.get(\"lc_count\") || 0);\n\t\t\tif(c < 1){\n\t\t\t\tsource.put(\"lc_count\", 1);\n\t\t\t\tjava.longToast(\"⚠️ 露西弗俱乐部需要登录：长按书源 → 登录\");\n\t\t\t}\n\t\t}else{\n\t\t\ttry{ source.put(\"lc_count\", 0); }catch(e){}\n\t\t}\n\t}catch(e){}\n\treturn a;\n})(result)",
+    "loginUi": "@js:\nvar all = [];\nall.push({\n\t\"name\": \"👤 登录/重新登录\",\n\t\"type\": \"button\",\n\t\"action\": \"toLogin()\",\n\t\"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\nall.push({\n\t\"name\": \"🔑 退出登录\",\n\t\"type\": \"button\",\n\t\"action\": \"logoff()\",\n\t\"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.5}\n});\nall.push({\n\t\"name\": \"🔍 检查登录状态\",\n\t\"type\": \"button\",\n\t\"action\": \"checkLogin()\",\n\t\"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\nall.push({\n\t\"name\": \"💬 交流QQ群 1097919737\",\n\t\"type\": \"button\",\n\t\"action\": \"joinQQGroup()\",\n\t\"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\nresult = JSON.stringify(all);\n",
+    "loginUrl": "function login(){ toLogin(); }\n\n// ===== 登录头辅助 =====\nfunction getHeaderMap(_){\n\tvar src = (_ && _.source) ? _.source : source;\n\tvar infomap = \"\";\n\ttry{ infomap = String(src.getLoginHeader()).replace(/^#/,''); }catch(e){}\n\tinfomap = (infomap!=\"null\"&&infomap!=\"\"&&infomap!=null)?infomap:\"{}\";\n\ttry{ return JSON.parse(infomap); }catch(e){ return {}; }\n}\nfunction setHeaders(){\n\tvar map = getHeaderMap(this);\n\tfor(var i=0;i<arguments.length;i++){\n\t\tvar k = String(arguments[i]).split(\"=\")[0];\n\t\tvar v = String(arguments[i]).split(\"=\")[1];\n\t\tmap[k] = v;\n\t}\n\tsource.putLoginHeader(\"#\"+JSON.stringify(map));\n}\n// ===== 登录 =====\nfunction toLogin(){\n\ttry{\n\t\tvar url = \"https://lucifer-club.com/login.php\";\n\t\ttry{ cookie.setCookie(url,\"\"); }catch(e){}\n\t\tjava.longToast(\"请在打开的网页中登录，登录完成后点右上角✓\");\n\t\ttry{\n\t\t\tjava.startBrowserAwait(url,\"登录露西弗俱乐部\");\n\t\t\tvar co = \"\";\n\t\t\tfor(var i=0;i<5;i++){\n\t\t\t\ttry{ co = String(cookie.getCookie(url)); }catch(e){}\n\t\t\t\tif(co && co.indexOf(\"lnfo\") >= 0) break;\n\t\t\t\ttry{ java.sleep(300); }catch(e){}\n\t\t\t}\n\t\t\tif(co && co.indexOf(\"lnfo\") >= 0){\n\t\t\t\ttry{ setHeaders(\"cookie=\"+encodeURIComponent(co)); }catch(e){}\n\t\t\t\ttry{ cookie.setCookie(url, co); }catch(e){}\n\t\t\t\tvar ok = false;\n\t\t\t\ttry{\n\t\t\t\t\tvar chk = String(java.ajax(\"https://lucifer-club.com/my_favorite.php\") || \"\");\n\t\t\t\t\tok = chk.indexOf(\"luf_forget\") < 0 && chk.indexOf(\"书架列表\") >= 0;\n\t\t\t\t}catch(e){}\n\t\t\t\tif(ok){\n\t\t\t\t\ttry{ source.refreshExplore(); }catch(e){}\n\t\t\t\t\tjava.longToast(\"✅ 登录成功！请下拉刷新【发现】页（我的收藏/分类）\");\n\t\t\t\t}else{\n\t\t\t\t\tjava.longToast(\"⚠️ Cookie 已保存但未生效，请再点一次登录重试\");\n\t\t\t\t}\n\t\t\t}else{\n\t\t\t\tjava.longToast(\"⚠️ 未检测到登录状态，请重新登录\");\n\t\t\t}\n\t\t}catch(e){\n\t\t\tjava.longToast(\"登录未完成，请重新尝试\");\n\t\t}\n\t}catch(e){\n\t\tjava.longToast(\"登录失败：\"+e);\n\t}\n}\nfunction logoff(){\n\ttry{\n\t\ttry{ java.ajax(\"https://lucifer-club.com/login.php?action=logoff\"); }catch(e){}\n\t\ttry{ cookie.removeCookie(\"https://lucifer-club.com\"); }catch(e){}\n\t\tjava.toast(\"已退出登录\");\n\t}catch(e){ java.toast(\"退出失败：\"+e); }\n}\n\n// ===== 交流QQ群（点击申请入群）=====\nfunction joinQQGroup(){\n\tvar u = \"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=group&uin=1097919737\";\n\ttry{\n\t\tjava.openUrl(u);\n\t\tjava.toast(\"已尝试打开QQ，若未跳转请手动搜索群号 1097919737\");\n\t}catch(e){\n\t\tjava.longToast(\"请手动在QQ中搜索群号 1097919737\");\n\t}\n}\n\n// ===== 检查登录状态 =====\nfunction checkLogin(){\n\ttry{\n\t\tvar co = String(cookie.getCookie(\"https://lucifer-club.com\"));\n\t\tif(co.indexOf(\"lnfo\") < 0){\n\t\t\tjava.longToast(\"❌ 未登录：请先点「👤 登录/重新登录」\");\n\t\t\treturn;\n\t\t}\n\t\tvar m = co.match(/lnfo=([^;]+)/);\n\t\tvar name = \"\";\n\t\tif(m){\n\t\t\ttry{\n\t\t\t\tvar s = java.base64Decode(decodeURIComponent(m[1]));\n\t\t\t\tvar um = String(s).match(/s:\\d+:\"([^\"]+)\"/);\n\t\t\t\tname = um ? um[1] : \"\";\n\t\t\t}catch(e){}\n\t\t}\n\t\tif(name){\n\t\t\tjava.longToast(\"✅ 已登录，当前账号：「\" + name + \"」\");\n\t\t}else{\n\t\t\tjava.longToast(\"✅ 已登录（Cookie有效）\");\n\t\t}\n\t}catch(e){\n\t\tjava.toast(\"检查登录状态失败：\" + e);\n\t}\n}\n",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "@CSS:ul.luf_book_info a[href*=\"userinfo-\"]@text",
+      "coverUrl": "@CSS:ul.luf_user_info li.luf_book_img img@src",
+      "intro": "@js:function fmt(h){\n\tvar s=String(h||'');\n\ts=s.replace(/<br\\s*\\/?\\s*>/gi,'\\n').replace(/<\\/p>/gi,'\\n').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'\"');\n\ts=s.replace(/[ \\t]+\\n/g,'\\n').replace(/\\n{3,}/g,'\\n\\n').replace(/^\\s+|\\s+$/g,'');\n\treturn s;\n}\nvar quotes=String(src).match(/<li class=\"luf_book_quote\">[\\s\\S]*?<\\/li>/g)||[];\nvar cont='';\nif(quotes.length){\n\tcont+='📖【作品简介】\\n'+fmt(quotes[0]);\n\tif(quotes.length>1&&fmt(quotes[1]).length>0){\n\t\tcont+='\\n📝【絮言絮语】\\n'+fmt(quotes[1]);\n\t}\n}\nfunction cleanT(h){return String(h).replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/\\s+/g,' ').trim();}\nfunction cleanC(h){return String(h).replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/\\s+/g,' ').trim();}\nfunction parseC(html,arr,cap){\n\tvar blks=String(html).match(/<ul class=\"luf_comment\">[\\s\\S]*?<\\/ul>/g)||[];\n\tfor(var i=0;i<blks.length&&arr.length<cap;i++){\n\t\tvar b=blks[i];\n\t\tvar tm=b.match(/<li class=\"luf_comment_title\">([\\s\\S]*?)<\\/li>/);\n\t\tvar cm=b.match(/<li class=\"luf_comment_contents\">([\\s\\S]*?)<\\/li>/);\n\t\tif(!tm||!cm)continue;\n\t\tvar t=cleanT(tm[1]).replace(/《\\s+/g,'《').replace(/\\s+》/g,'》').replace(/\\s+说/g,'说');\n\t\tvar c=cleanC(cm[1]);\n\t\tif(t&&c)arr.push({'t':t,'c':c});\n\t}\n}\nfunction maxPage(html){\n\tvar pg=String(html).match(/<div class=\"pages\">([\\s\\S]*?)<\\/div>/);\n\tif(!pg)return 1;\n\tvar ns=pg[1].match(/page=(\\d+)/g)||[];\n\tvar mx=1;\n\tfor(var i=0;i<ns.length;i++){var n=Number((String(ns[i]).match(/\\d+/)||[])[0]||1);if(n>mx)mx=n;}\n\treturn mx;\n}\nvar cmts=[];\nvar note='';\nvar bid=(baseUrl.match(/novel-(\\d+)/)||[])[1];\ntry{\n\tif(bid){\n\t\tvar p1=String(java.ajax(\"https://lucifer-club.com/novel.php?id=\"+bid+\"&morecomment=1&page=1\")||'');\n\t\tparseC(p1,cmts,100);\n\t\tvar mp=maxPage(p1);\n\t\tif(mp>1){\n\t\t\tnote=\" / 共\"+mp+\"页\";\n\t\t\tif(cmts.length<100){\n\t\t\t\ttry{\n\t\t\t\t\tvar p2=String(java.ajax(\"https://lucifer-club.com/novel.php?id=\"+bid+\"&morecomment=1&page=2\")||'');\n\t\t\t\t\tparseC(p2,cmts,100);\n\t\t\t\t}catch(e){}\n\t\t\t}\n\t\t}\n\t}\n}catch(e){}\nif(cmts.length<1){parseC(src,cmts,10);}\nif(cmts.length){\n\tcont+=\"\\n\\n💬 书评（显示\"+cmts.length+\"条\"+note+\"）：\\n\";\n\tfor(var i=0;i<cmts.length;i++){\n\t\tcont+=\"🌺 \"+cmts[i].t+\"\\n\"+cmts[i].c+\"\\n\\n\";\n\t}\n}\nresult=cont;",
+      "kind": "@js:var li=java.getString('@CSS:ul.luf_book_info li@text')||'';var a=li.split(/\\n+/),k=[];for(var i=0;i<a.length;i++){var s=a[i].replace(/^\\s+|\\s+$/g,'');if(/^性向：/.test(s)||/^时代：/.test(s)||/^风格：/.test(s))k.push(s.replace(/^[^：]+：/,''));}var st=(src.match(/创作状态：([^<\\n]+)/)||[])[1];if(st)k.push(st.trim());var w=(src.match(/字数：([\\d,]+)/)||[])[1];if(w)k.push(w.replace(/,/g,'')+'字');result=k.join(' | ');",
+      "lastChapter": "@CSS:ul.luf_user_info a[href*=\"chapter-\"]@text",
+      "name": "@CSS:ul.luf_book_info li.luf_book_title@text##^作品名称：《|》$##",
+      "wordCount": "@js:var w=(src.match(/字数：([\\d,]+)/)||[])[1];result=w?w.replace(/,/g,''):'';"
+    },
+    "ruleContent": {
+      "content": "@CSS:div.luf_news_contents@html##<font[^>]*>[\\s\\S]*?</font>|<script[\\s\\S]*?</script>|<style[\\s\\S]*?</style>|^\\s+|\\s+$##"
+    },
+    "ruleExplore": {
+      "author": "@CSS:a[href*=\"userinfo-\"]@text",
+      "bookList": "@CSS:table.luf_hit_list tr:not(.luf_hit_thead), div.rd8_fullborder table tr.rd8_col0",
+      "bookUrl": "@CSS:a[href*=\"novel-\"]@href",
+      "intro": "@CSS:a[href*=\"novel-\"]@title",
+      "kind": "@js:if(/my_favorite/.test(baseUrl)){result=java.getString('@CSS:td:nth-child(5)@text')}else if(/hit-|top/.test(baseUrl)){result=java.getString('@CSS:td:nth-child(4)@text')}else{result=java.getString('@CSS:td:nth-child(3)@text')}",
+      "lastChapter": "@js:if(/my_favorite/.test(baseUrl)){result=java.getString('@CSS:td:nth-child(3) a@text')}else{result=java.getString('@CSS:td:nth-child(8)@text')}",
+      "name": "@CSS:a[href*=\"novel-\"]@text",
+      "wordCount": "@js:if(/hit-|top/.test(baseUrl)){result=java.getString('@CSS:td:nth-child(6)@text')}else if(/my_favorite/.test(baseUrl)){result=''}else{result=java.getString('@CSS:td:nth-child(5)@text')}"
+    },
+    "ruleSearch": {
+      "author": "@CSS:a[href*=\"userinfo-\"]@text",
+      "bookList": "@CSS:table.luf_hit_list tr:not(.luf_hit_thead)",
+      "bookUrl": "@CSS:a[href*=\"novel-\"]@href",
+      "intro": "@CSS:a[href*=\"novel-\"]@title",
+      "kind": "@CSS:td:nth-child(3)@text",
+      "lastChapter": "@CSS:td:nth-child(8)@text",
+      "name": "@CSS:a[href*=\"novel-\"]@text",
+      "wordCount": "@CSS:td:nth-child(5)@text"
+    },
+    "ruleToc": {
+      "chapterList": "@CSS:table.luf_user_list a.novel_newadd_title",
+      "chapterName": "text##^[\\s\\u00a0]+|[\\s\\u00a0]+$##",
+      "chapterUrl": "href"
+    },
+    "searchUrl": "https://lucifer-club.com/search.php?action=search&kw={{key}}&by=title&style=0&subject=0&content=0&sty=0&state=0&rank=lastupdate&order=desc&page={{page}}",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "101Minc",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.101minc.com/",
+    "customButton": false,
+    "customOrder": 13,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar result = [];\n\nvar rankMap = {\n    \"排行\": \"allvisit\",\n    \"收藏\": \"goodnum\",\n    \"字数\": \"size\",\n    \"连载\": \"lastupdate\",\n    \"人气\": \"monthvisit\",\n    \"推荐\": \"monthvote\",\n    \"新书\": \"postdate\",\n    \"热门\": \"allvote\"\n};\n\nvar rankType = infoMap[\"榜单\"] || \"排行\";\nvar rankParam = rankMap[rankType];\n\n// 榜单选择器（权重1，独占一行）\nresult.push({\n    \"title\": \"榜单\",\n    \"type\": \"select\",\n    \"chars\": [\"排行\",\"收藏\",\"字数\",\"连载\",\"人气\",\"推荐\",\"新书\",\"热门\"],\n    \"default\": rankType,\n    \"action\": \"java.refreshExplore()\",\n    \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\n\n// 当前榜单的“全部”入口（权重1）\nresult.push({\n    \"title\": rankType,\n    \"url\": \"/noveltop_\" + rankParam + \"_{{page}}.html\",\n    \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\n\n// 9个分类（权重0.25，4个一行）\nvar cats = [\"玄幻\",\"仙侠\",\"都市\",\"军事\",\"网游\",\"科幻\",\"悬疑\",\"女生\",\"其他\"];\nfor (var i = 0; i < cats.length; i++) {\n    result.push({\n        \"title\": cats[i],\n        \"url\": \"/noveltop_\" + rankParam + \"_\" + (i + 1) + \"_{{page}}.html\",\n        \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.25}\n    });\n}\n\nJSON.stringify(result);\n</js>",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\",\"Referer\":\"https://www.101minc.com/\",\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\",\"Accept-Language\":\"zh-CN,zh;q=0.9\"}",
+    "lastUpdateTime": 1784642953138,
+    "loginCheckJs": "if (result.body().includes(\"访问验证\")) {\n\tjava.longToast(\"触发人机验证，请在弹出的浏览器中完成验证，完成后请点击手机返回键返回阅读APP\");\n\tjava.startBrowserAwait(result.url(), \"人机验证 - 完成后请点击返回键返回\");\n\tresult = java.connect(result.url());\n}\nresult",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "class.booknav2@tag.p.0@text##作者：",
+      "intro": "class.navtxt@tag.p@text&&class.booknav2@tag.p.4@text##更新：##更新时间：",
+      "kind": "class.booknav2@tag.p.1@text##分类：",
+      "lastChapter": "class.qustime@tag.li.0@tag.a@text",
+      "name": "class.booknav2@tag.h1@text",
+      "tocUrl": "text.完整目录@href",
+      "wordCount": "class.booknav2@tag.p.3@text##字数："
+    },
+    "ruleContent": {
+      "content": "id.article@html##<script[\\s\\S]*?</script>|<p id=\"br_tip\">[\\s\\S]*?</p>|<div class=\"baocuo\">[\\s\\S]*?</div>|<p>[^<]*当前浏览器转码失败[^<]*</p>",
+      "title": "class.txtnav@tag.h1@text"
+    },
+    "ruleExplore": {
+      "author": "class.labelbox@tag.label.0@text",
+      "bookList": "id.article_list_content@tag.li",
+      "bookUrl": "class.newnav@tag.h3@tag.a@href",
+      "coverUrl": "class.imgbox@tag.img@data-imgurl",
+      "intro": "class.ellipsis_2@text",
+      "kind": "class.labelbox@tag.label.1@text",
+      "lastChapter": "class.zxzj@tag.a@text",
+      "name": "class.newnav@tag.h3@tag.a@text"
+    },
+    "ruleSearch": {
+      "author": "class.labelbox@tag.label.0@text",
+      "bookList": "id.article_list_content@tag.li",
+      "bookUrl": "class.newnav@tag.h3@tag.a@href##javascript:sovote\\(\\d+,'([^']+)'.*##$1",
+      "coverUrl": "class.imgbox@tag.img@data-imgurl",
+      "intro": "class.ellipsis_2@text",
+      "kind": "class.labelbox@tag.label.1@text",
+      "lastChapter": "class.zxzj@tag.a@text",
+      "name": "class.newnav@tag.h3@tag.a@text"
+    },
+    "ruleToc": {
+      "chapterList": "id.allchapter@class.infoad",
+      "chapterName": "@text",
+      "chapterUrl": "@href"
+    },
+    "searchUrl": "/modules/article/search.php?searchkey={{key}}&searchtype=all",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "淘小说书城",
+    "bookSourceType": 0,
+    "bookSourceUrl": "http://betam.taoyuewenhua.com",
+    "customButton": false,
+    "customOrder": 15,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "@js: var result = []\nvar push = (title, url, size) => result.push({\n  title: title,\n  url: url,\n  style: {\n    layout_flexGrow: 1,\n    layout_flexBasisPercent: size\n  }\n})\npush(\"男生\", null, 1);\npush(\"玄幻\", \"/ajax/book_mall/categories/101000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"奇幻\", \"/ajax/book_mall/categories/102000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"武侠\", \"/ajax/book_mall/categories/103000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"仙侠\", \"/ajax/book_mall/categories/104000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"都市\", \"/ajax/book_mall/categories/105000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"历史\", \"/ajax/book_mall/categories/106000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"军事\", \"/ajax/book_mall/categories/107000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"奇闻怪谈\", \"/ajax/book_mall/categories/108000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"科幻\", \"/ajax/book_mall/categories/109000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"游戏\", \"/ajax/book_mall/categories/110000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"体育\", \"/ajax/book_mall/categories/111000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"N次元\", \"/ajax/book_mall/categories/112000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"现实\", \"/ajax/book_mall/categories/113000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"诸天无限\", \"/ajax/book_mall/categories/115000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"女生\", null, 1);\npush(\"玄幻言情\", \"/ajax/book_mall/categories/201000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"仙侠奇缘\", \"/ajax/book_mall/categories/202000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"古代言情\", \"/ajax/book_mall/categories/203000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"现代言情\", \"/ajax/book_mall/categories/204000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"浪漫青春\", \"/ajax/book_mall/categories/205000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"奇闻怪谈\", \"/ajax/book_mall/categories/206000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"科幻空间\", \"/ajax/book_mall/categories/207000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"游戏竞技\", \"/ajax/book_mall/categories/208000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"N次元\", \"/ajax/book_mall/categories/209000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"同人纯爱\", \"/ajax/book_mall/categories/210000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"短篇\", \"/ajax/book_mall/categories/211000?page={{page-1}}&pageSize=20\", 0.25);\nJSON.stringify(result);",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\",\"Accept\":\"application/json, text/plain, */*\",\"Referer\":\"http://betam.taoyuewenhua.com/\",\"X-Requested-With\":\"XMLHttpRequest\"}",
+    "lastUpdateTime": 1784812665630,
+    "loginUrl": "http://betam.taoyuewenhua.com",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "$.data.authorName",
+      "coverUrl": "$.data.coverUrl",
+      "intro": "$.data.intro",
+      "kind": "$.data.categoryName",
+      "lastChapter": "$.data.latestChapter",
+      "name": "$.data.title",
+      "tocUrl": "@js:var m = String(baseUrl).match(/sourceId=([^&]+)/); '/ajax/or/authopt/ty/chapter_list?sourceName=tf&sourceId=' + m[1] + '&page=0&pageSize=100'",
+      "wordCount": "$.data.allWords"
+    },
+    "ruleContent": {
+      "content": "$.data.content##本章未完.*|请收藏.*|看书.*|本章节未.*|\\n{3,}"
+    },
+    "ruleExplore": {
+      "author": "$.authorName",
+      "bookList": "$.data.bookList[*]",
+      "bookUrl": "/ajax/or/ty/book?sourceName={{$.sourceName}}&sourceId={{$.sourceId}}",
+      "coverUrl": "$.coverUrl",
+      "intro": "$.intro",
+      "kind": "$.categoryName",
+      "name": "$.title",
+      "wordCount": "$.allWords"
+    },
+    "ruleSearch": {
+      "author": "$.authorName",
+      "bookList": "$.data.bookList[*]",
+      "bookUrl": "/ajax/or/ty/book?sourceName={{$.sourceName}}&sourceId={{$.sourceId}}",
+      "coverUrl": "$.coverUrl",
+      "intro": "$.intro",
+      "kind": "$.categoryName",
+      "name": "$.title",
+      "wordCount": "$.allWords"
+    },
+    "ruleToc": {
+      "chapterList": "$.data.chapters[*]",
+      "chapterName": "$.chapterTitle",
+      "chapterUrl": "@js:var m = String(book.bookUrl).match(/sourceId=([^&]+)/); '/ajax/or/authopt/ty/chapter_content?sourceName=tf&sourceId=' + m[1] + '&chapterId=' + String(result.chapterId)",
+      "nextTocUrl": "@js:var json = JSON.parse(result); var chapters = json.data.chapters || []; if (chapters.length < 100) { ''; } else { var url = String(baseUrl); var pageMatch = url.match(/page=(\\d+)/); var currentPage = pageMatch ? parseInt(pageMatch[1]) : 0; url.replace(/page=\\d+/, 'page=' + (currentPage + 1)); }"
+    },
+    "searchUrl": "/ajax/or/authopt/ty/search_books?keywords={{key}}&page={{page-1}}&pageSize=20&ctype=1",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "速读谷",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.sudugu.org",
+    "customButton": false,
+    "customOrder": 16,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "玄幻小说::/xuanhuan/{{page}}.html\n仙侠小说::/xianxia/{{page}}.html\n都市小说::/dushi/{{page}}.html\n历史小说::/lishi/{{page}}.html\n军事小说::/junshi/{{page}}.html\n科幻小说::/kehuan/{{page}}.html\n言情小说::/yanqing/{{page}}.html\n最新更新::/zuixin/{{page}}.html",
+    "lastUpdateTime": 1784812675369,
+    "respondTime": 5035,
+    "ruleBookInfo": {
+      "author": "class.itemtxt@tag.p.1@tag.a@text##作者：##",
+      "coverUrl": "class.item@tag.img@src",
+      "intro": "class.des@text",
+      "kind": "class.itemtxt@tag.p.0@tag.span.1@text",
+      "lastChapter": "class.itemtxt@tag.ul@tag.li.0@tag.a@text",
+      "name": "class.itemtxt@tag.h1@tag.a@text"
+    },
+    "ruleContent": {
+      "content": "class.con@html",
+      "nextContentUrl": "text.下一页@href",
+      "replaceRegex": "##<p>|</p>##\n"
+    },
+    "ruleExplore": {
+      "author": "tag.h3@tag.a.0@text##作者：##",
+      "bookList": "tag.h3",
+      "bookUrl": "tag.h3@tag.a.0@href",
+      "coverUrl": "@css:img[src*='doubaocdn']@src",
+      "lastChapter": "tag.ul@tag.li.0@tag.a@text",
+      "name": "tag.h3@tag.a.0@text"
+    },
+    "ruleSearch": {
+      "author": "class.itemtxt@tag.p.1@tag.a@text##作者：##",
+      "bookList": "class.item",
+      "bookUrl": "class.itemtxt@tag.h3@tag.a@href",
+      "coverUrl": "tag.img@src",
+      "kind": "class.itemtxt@tag.p.0@tag.span.1@text",
+      "lastChapter": "class.itemtxt@tag.ul@tag.li.0@tag.a@text",
+      "name": "class.itemtxt@tag.h3@tag.a@text"
+    },
+    "ruleToc": {
+      "chapterList": "id.list@tag.ul@tag.li@tag.a",
+      "chapterName": "text",
+      "chapterUrl": "href",
+      "nextTocUrl": "text.下一页@href"
+    },
+    "searchUrl": "/i/sor.aspx?key={{key}}",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：1097919737",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "爱腐文（ifuwen）",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://ifuwen2026.com",
+    "concurrentRate": "1000",
+    "customButton": false,
+    "customOrder": 18,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar result = [];\nfunction push(t, u){ result.push({\"title\": t, \"url\": u, \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.4}}); }\nvar base = 'https://{{source.get(\"base\")||\"bl-novel.com\"}}';\nvar groups = [\"分类\", \"时间\", \"排行\", \"标签\"];\nvar tab = infoMap[\"发现分组\"] || \"分类\";\nresult.push({\"title\": \"发现分组\", \"type\": \"select\", \"chars\": groups, \"default\": tab, \"action\": \"java.refreshExplore()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nif(tab == \"分类\"){\n\tpush(\"📚 BL耽美\", base + '/sort/1/{{page}}.html');\n\tpush(\"📚 BG言情\", base + '/sort/2/{{page}}.html');\n\tpush(\"📚 GL百合\", base + '/sort/3/{{page}}.html');\n}else if(tab == \"时间\"){\n\tvar sorts = [[\"BL\",\"1\"],[\"BG\",\"2\"],[\"GL\",\"3\"]];\n\tvar times = [[\"今天\",\"today\"],[\"昨天\",\"yesterday\"],[\"7天\",\"7days\"],[\"30天\",\"30days\"]];\n\tfor(var i=0;i<sorts.length;i++){\n\t\tfor(var j=0;j<times.length;j++){\n\t\t\tpush(\"🕒 \" + sorts[i][0] + \"·\" + times[j][0], base + '/sort/' + sorts[i][1] + '/{{page}}-desc-' + times[j][1] + '.html');\n\t\t}\n\t}\n}else if(tab == \"排行\"){\n\tvar ranks = [[\"评分\",\"score\"],[\"点击\",\"click\"],[\"收藏\",\"collect\"]];\n\tvar cats = [[\"全部\",\"\"],[\"BL\",\"1\"],[\"BG\",\"2\"],[\"GL\",\"3\"]];\n\tfor(var i=0;i<ranks.length;i++){\n\t\tfor(var j=0;j<cats.length;j++){\n\t\t\tpush(\"🏆 \" + ranks[i][0] + \"榜·\" + cats[j][0], base + '/ranking/?type=' + ranks[i][1] + '&days=all' + (cats[j][1] ? '&cat=' + cats[j][1] : '') + '&page={{page}}');\n\t\t}\n\t}\n}else if(tab == \"标签\"){\n\ttry{\n\t\tvar lab = String(java.ajax(base + '/label/') || '');\n\t\tvar re = /<a[^>]*href=\"\\/label\\/list\\/(\\d+)\\/1\\/\"[^>]*data-tag-name=\"([^\"]*)\"[^>]*>/g;\n\t\tvar m, cnt = 0;\n\t\twhile((m = re.exec(lab)) && cnt < 15){\n\t\t\tvar nm = m[2].replace(/&nbsp;/g, ' ').trim();\n\t\t\tif(nm){ push(\"# \" + nm, base + '/label/list/' + m[1] + '/{{page}}/'); cnt++; }\n\t\t}\n\t}catch(e){}\n}\nJSON.stringify(result);\n</js>",
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36\"}",
+    "lastUpdateTime": 1786630911489,
+    "loginUi": "@js:\nvar doms = [\"bl-novel.com\",\"tinghao4.com\",\"yanyan1.com\",\"wushuku.org\",\"yanyan.life\",\"gfsdgx423.xyz\",\"jfwfd.xyz\",\"tinghao2026.com\",\"tinghaode6.xyz\",\"wushuku.info\",\"yanyan.one\",\"imomo.info\",\"yushuwu.xyz\"];\nvar cur = source.get(\"base\") || \"bl-novel.com\";\nvar all = [];\nall.push({\"name\": \"👤 登录\", \"type\": \"button\", \"action\": \"doLogin()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.4}});\nall.push({\"name\": \"🔑 退出登录\", \"type\": \"button\", \"action\": \"logoff()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.4}});\nall.push({\"name\": \"🔍 检查登录\", \"type\": \"button\", \"action\": \"checkLogin()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.4}});\nall.push({\"name\": \"🌐 检查域名\", \"type\": \"button\", \"action\": \"checkDomain()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.4}});\nall.push({\"name\": \"域名列表\", \"type\": \"select\", \"chars\": doms, \"default\": cur, \"action\": \"switchDomain()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.4}});\nall.push({\"name\": \"💬 交流分享群（点击跳转）\", \"type\": \"button\", \"action\": \"joinQQGroup()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nall.push({\"name\": \"🎨 联系制作人（点击跳转）\", \"type\": \"button\", \"action\": \"contactMaker()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nresult = JSON.stringify(all);\n",
+    "loginUrl": "var QQ_GROUP = \"1097919737\";\nvar MAKER_QQ = \"1820480783\";\nvar DEF_DOMAIN = \"bl-novel.com\";\nfunction base(){\n\tvar dom = source.get(\"base\") || \"\";\n\tif(!dom){ dom = DEF_DOMAIN; try{ source.put(\"base\", dom); }catch(e){} }\n\treturn \"https://\" + dom;\n}\nfunction isAlive(dom){\n\ttry{\n\t\tvar t = String(java.ajax(\"https://\" + dom + \"/\") || \"\");\n\t\treturn t.length > 200 && (t.indexOf(\"BL小说\") >= 0 || t.indexOf(\"耽美\") >= 0);\n\t}catch(e){ return false; }\n}\nfunction login(){\n\t// 右上角 ✓：只保存设置，不跳转\n\ttry{ java.upLoginData(); }catch(e){}\n\tjava.toast(\"设置已保存，需要登录请点「👤 登录」\");\n}\nfunction doLogin(){\n\t// 网页登录\n\ttry{\n\t\tjava.startBrowserAwait(base() + \"/user/\", \"BL小说 登录\");\n\t\tvar page = String(java.ajax(base() + \"/user/\") || \"\");\n\t\tif(page.indexOf(\"退出登录\") >= 0 || page.indexOf(\"个人中心\") >= 0 || page.indexOf(\"member/logout\") >= 0){\n\t\t\tjava.longToast(\"✅ 登录成功\");\n\t\t}else{\n\t\t\tjava.longToast(\"⚠️ 未检测到登录状态，请重新点「👤 登录」\");\n\t\t}\n\t}catch(e){ java.longToast(\"登录未完成：\" + e); }\n}\nfunction checkLogin(){\n\tvar login = false;\n\ttry{\n\t\tvar page = String(java.ajax(base() + \"/user/\") || \"\");\n\t\tlogin = page.indexOf(\"退出登录\") >= 0 || page.indexOf(\"个人中心\") >= 0 || page.indexOf(\"member/logout\") >= 0;\n\t}catch(e){}\n\tjava.longToast(login ? \"✅ 已登录\" : \"❌ 未登录\");\n}\nfunction checkDomain(){\n\tvar dom = source.get(\"base\") || DEF_DOMAIN;\n\tvar alive = isAlive(dom);\n\tjava.longToast(\"🌐 当前域名：\" + dom + (alive ? \"（可用）\" : \"（不可用，请在域名列表切换）\"));\n}\nfunction switchDomain(){\n\tvar sel = \"\";\n\ttry{ sel = String(result[\"域名列表\"] || (result.get && result.get(\"域名列表\")) || \"\"); }catch(e){}\n\tif(!sel){ java.longToast(\"请先在域名列表选择域名\"); return; }\n\tif(isAlive(sel)){\n\t\ttry{ source.put(\"base\", sel); }catch(e){}\n\t\tjava.longToast(\"🌐 已切换域名：\" + sel);\n\t\ttry{ java.refreshExplore(); }catch(e){}\n\t}else{\n\t\tjava.longToast(\"⚠️ 该域名不可用（证书/网络问题）：\" + sel);\n\t}\n}\nfunction logoff(){\n\ttry{\n\t\ttry{ java.ajax(base() + \"/member/logout\"); }catch(e){}\n\t\ttry{ cookie.removeCookie(base()); }catch(e){}\n\t\tjava.toast(\"已退出登录\");\n\t}catch(e){ java.toast(\"退出失败：\" + e); }\n}\nfunction joinQQGroup(){\n\tvar u = \"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=group&uin=\" + QQ_GROUP;\n\ttry{\n\t\tjava.openUrl(u);\n\t\tjava.toast(\"已尝试打开QQ，若未跳转请手动搜索群号 \" + QQ_GROUP);\n\t}catch(e){ java.longToast(\"请手动在QQ中搜索群号 \" + QQ_GROUP); }\n}\nfunction contactMaker(){\n\tvar u = \"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=friend&uin=\" + MAKER_QQ;\n\ttry{\n\t\tjava.openUrl(u);\n\t\tjava.toast(\"已尝试打开QQ，若未跳转请手动搜索 \" + MAKER_QQ);\n\t}catch(e){ java.longToast(\"请手动在QQ中搜索 \" + MAKER_QQ); }\n}",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "class.book-author@text",
+      "intro": "class.intro-text@html",
+      "kind": "class.result-badge@text||class.ranking-badge@text||class.sort-badge@text",
+      "lastChapter": "class.book-info-value.0@text",
+      "name": "class.book-title@text",
+      "tocUrl": "class.book-core-btn secondary@href@js:'https://{{source.get(\"base\")}}'+result"
+    },
+    "ruleContent": {
+      "content": "@js:result",
+      "webJs": "function decrypt() {\n    var container = document.getElementById('crypto-content');\n    if (!container) return;\n    var cryptoData = JSON.parse(container.dataset.crypto);\n    var cid = container.dataset.cid;\n    function hexToBuf(hex) {\n        var b = new Uint8Array(32);\n        for (var i = 0; i < 32; i++) b[i] = parseInt(hex.substr(i * 2, 2), 16);\n        return b.buffer;\n    }\n    function b64ToBuf(b64) {\n        b64 = b64.replace(/-/g, '+').replace(/_/g, '/');\n        while (b64.length % 4) b64 += '=';\n        var bin = atob(b64), out = new Uint8Array(bin.length);\n        for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);\n        return out.buffer;\n    }\n    async function extractKey(cid) {\n        var r = await fetch('/api/stats/' + cid + '/favicon.ico', { mode: 'cors', credentials: 'omit' });\n        if (!r.ok) throw new Error('HTTP ' + r.status);\n        var buf = await r.arrayBuffer();\n        var blob = new Blob([buf], { type: 'image/png' });\n        var bitmap = await createImageBitmap(blob);\n        var c = document.createElement('canvas');\n        c.width = bitmap.width; c.height = bitmap.height;\n        c.getContext('2d').drawImage(bitmap, 0, 0);\n        var d = c.getContext('2d').getImageData(0, 0, 8, 5).data;\n        if (d[0] !== 0xAB) throw new Error('magic mismatch');\n        var h = '';\n        for (var i = 4, cnt = 0; cnt < 32; i += 4, cnt++) {\n            var b = d[i].toString(16);\n            h += b.length < 2 ? '0' + b : b;\n        }\n        return h;\n    }\n    async function run() {\n        try {\n            var keyHex = await extractKey(cid);\n            var keyBuf = hexToBuf(keyHex);\n            var ivBuf = b64ToBuf(cryptoData.iv);\n            var payloadBuf = b64ToBuf(cryptoData.payload);\n            var p = window.crypto.subtle;\n            var ck = await p.importKey('raw', keyBuf, { name: 'AES-CBC' }, false, ['decrypt']);\n            var sk = await p.importKey('raw', keyBuf, { name: 'HMAC', hash: 'SHA-256' }, false, ['verify', 'sign']);\n            var sigOk = await p.verify('HMAC', sk, b64ToBuf(cryptoData.sig), payloadBuf);\n            if (!sigOk) return;\n            var pa = new Uint8Array(payloadBuf), ek = pa.slice(0, 48), xo = pa.slice(48);\n            var contentKey = await p.decrypt({ name: 'AES-CBC', iv: ivBuf }, ck, ek);\n            var sk2 = await p.sign('HMAC', sk, contentKey);\n            var sa = new Uint8Array(sk2);\n            var out = new Uint8Array(xo.length);\n            for (var i = 0; i < xo.length; i++) out[i] = xo[i] ^ sa[i % 32];\n            var text = new TextDecoder('utf-8').decode(out);\n            var parts = text.split('\\u0002');\n            var oi = b64ToBuf(cryptoData.order.i), od = b64ToBuf(cryptoData.order.d);\n            var os = await p.verify('HMAC', sk, b64ToBuf(cryptoData.order.s), od);\n            if (!os) return;\n            var od2 = await p.decrypt({ name: 'AES-CBC', iv: oi }, ck, od);\n            var order = JSON.parse(new TextDecoder('utf-8').decode(new Uint8Array(od2)).replace(/[\\x00-\\x1F]/g, '').trim());\n            var WM = '\\u200B作者说：\\u200B';\n            var reordered = new Array(parts.length);\n            for (var j = 0; j < order.length; j++) reordered[order[j]] = parts[j];\n            var result = reordered.filter(function (x) { return x && x.indexOf(WM) !== 0; }).join('\\n\\n');\n            var cccc = document.createElement('div');\n            cccc.id = 'cccc';\n            cccc.innerHTML = result;\n            document.body.appendChild(cccc);\n        } catch (e) {}\n    }\n    run();\n}\ndecrypt();\ndocument.querySelector('#cccc').innerHTML"
+    },
+    "ruleExplore": {
+      "author": "class.sort-novel-meta@span.0@text||class.meta-item.0@text",
+      "bookList": "class.ranking-list@children||a.sort-novel-card||class.book-list@children",
+      "bookUrl": "a.-1@href@js:'https://{{source.get(\"base\")}}'+result",
+      "intro": "class.sort-novel-intro@html||class.result-desc@html",
+      "kind": "class.ranking-badge@text||class.sort-badge@text||class.result-badge@text",
+      "name": "class.ranking-novel-title@ownText||class.sort-novel-title@text||class.book-title@text",
+      "wordCount": "class.sort-novel-meta@span.-1@text##,|字"
+    },
+    "ruleSearch": {
+      "author": "class.meta-item.0@text",
+      "bookList": "class.search-results@children",
+      "bookUrl": "a.0@href@js:'https://{{source.get(\"base\")}}'+result",
+      "intro": "class.result-desc@html",
+      "kind": "class.result-badge@text&&class.result-tag@text",
+      "name": "class.result-title@text"
+    },
+    "ruleToc": {
+      "chapterList": "class.chapter-grid@li@a",
+      "chapterName": "@js:var n=java.getString('class.chapter-name@text')||'';var h=java.getString('href')||'';result=(h.indexOf('javascript')>=0?'🔒 '+n+'（请登录）':n)",
+      "chapterUrl": "href@js:'https://{{source.get(\"base\")}}'+result+',{\"webView\":true}'",
+      "nextTocUrl": "class.section-list@li!0@a@href"
+    },
+    "searchUrl": "https://{{source.get('base')||'bl-novel.com'}}/search/?q={{key}}&mode=exact",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "手打书",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.shoudashu.com",
+    "customButton": false,
+    "customOrder": 19,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "玄幻奇幻::/fenlei/1.html\n武侠仙侠::/fenlei/2.html\n都市言情::/fenlei/3.html\n历史军事::/fenlei/4.html\n推理灵异::/fenlei/5.html\n科幻网游::/fenlei/6.html\n同人小说::/fenlei/7.html\n其他类型::/fenlei/8.html\n总点击榜::/paihang/allvisit/{{page}}.html\n月排行榜::/paihang/monthvisit/{{page}}.html\n周排行榜::/paihang/weekvisit/{{page}}.html\n日排行榜::/paihang/dayvisit/{{page}}.html\n新书排行::/paihang/postdate/{{page}}.html\n更新排行::/paihang/lastupdate/{{page}}.html",
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1\", \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\", \"Accept-Language\": \"zh-CN,zh;q=0.9\", \"Cookie\": \"user_active_token=c7e7c8b4d064e73d0ff8cae2fa57b61e\"}",
+    "lastUpdateTime": 1785027484569,
+    "loginCheckJs": "(function(a){var r=a.url(),o=a.body(),t=a.code();if(o&&(403===t||(200===t&&(o.includes('安全验证')||o.includes('请输入验证码继续阅读')||o.includes('captcha-ui'))))){var c=source.get('v_count')||'0';c=parseInt(c)+1;source.put('v_count',c);if(c<=2){try{var h=java.webView(r,r,'setTimeout(function(){window.legado.getHTML(document.documentElement.outerHTML);},3000);');if(h&&!h.includes('captcha-ui')&&!h.includes('安全验证')){source.put('v_count','0');return java.connect(r)}}catch(e){}}java.toast('请输入图形验证码');java.startBrowserAwait(r,'请输入验证码');source.put('v_count','0');return java.connect(r)}return a})(result)",
+    "loginUrl": "https://www.shoudashu.com/xiaoshuo/1rge/nf0ih.html",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": ".book-stats span.0 b@text",
+      "coverUrl": ".book-cover img@src",
+      "intro": ".book-intro@text##内容简介：",
+      "kind": ".book-stats span.1 b@text",
+      "lastChapter": ".book-stats span.3 b@text",
+      "name": "h1@text"
+    },
+    "ruleContent": {
+      "content": "<js>\nvar html = String(result);\nvar textMatch = html.match(/<div class=\"novel-start-text\">([\\s\\S]*?)<\\/div>/);\nvar result = textMatch ? textMatch[1] : '';\nvar saltMatch = html.match(/var\\s+js_salt\\s*=\\s*\"([^\"]+)\"/);\nvar salt = saltMatch ? saltMatch[1] : '';\nvar encMatch = html.match(/var\\s+encImgs\\s*=\\s*\\[([\\s\\S]*?)\\]/);\nif(encMatch && salt){\n    var encStr = encMatch[1];\n    var encList = encStr.match(/\"[A-Za-z0-9+\\/=]+\"/g);\n    if(encList){\n        var opt = {\"headers\":{\"User-Agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1\",\"Referrer\":\"https://www.shoudashu.com\"}};\n        var optStr = JSON.stringify(opt).replace(/\"/g, '&quot;');\n        for(var k = 0; k < encList.length; k++){\n            var e = encList[k].replace(/\"/g, '');\n            try {\n                var bytes = java.base64DecodeToByteArray(e);\n                var r = '';\n                for(var i = 0; i < bytes.length; i++){\n                    r += String.fromCharCode((bytes[i] & 0xFF) ^ salt.charCodeAt(i % salt.length));\n                }\n                if(r.indexOf('http') !== 0 && r.indexOf('/') === 0){\n                    r = 'https://www.shoudashu.com' + r;\n                }\n                result += '<img src=\"' + r + ',' + optStr + '\">\\n';\n            } catch(err){}\n        }\n    }\n}\nresult;\n</js>",
+      "nextContentUrl": "text.下一章@href"
+    },
+    "ruleExplore": {
+      "author": ".book-meta span@text##.*作者：||td.t-author@text",
+      "bookList": ".book-item, .rank-container tbody tr",
+      "bookUrl": ".book-info h5 a@href||a.b-name@href",
+      "coverUrl": ".book-cover a img@src",
+      "intro": ".book-intro@text",
+      "name": ".book-info h5 a@text||a.b-name@text"
+    },
+    "ruleSearch": {
+      "author": ".book-meta span@text##.*作者：",
+      "bookList": ".book-item",
+      "bookUrl": ".book-info h5 a@href",
+      "coverUrl": ".book-cover a img@src",
+      "intro": ".book-intro@text##内容简介：",
+      "name": ".book-info h5 a@text"
+    },
+    "ruleToc": {
+      "chapterList": "#chapter-list a",
+      "chapterName": "text",
+      "chapterUrl": "href"
+    },
+    "searchUrl": "/index.php?a=search&keyword={{key}}",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "得奇小说网",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.deqixs.org",
+    "customButton": false,
+    "customOrder": 25,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "最新更新::/top/lastupdate/{{page}}.html\n玄幻小说::/sort/1/{{page}}.html\n仙侠小说::/sort/2/{{page}}.html\n都市小说::/sort/3/{{page}}.html\n历史小说::/sort/4/{{page}}.html\n军事小说::/sort/5/{{page}}.html\n科幻小说::/sort/6/{{page}}.html\n言情小说::/sort/7/{{page}}.html\n完结小说::/quanben/{{page}}.html",
+    "lastUpdateTime": 1784812752632,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": ".itemtxt p a@text##作者：##",
+      "coverUrl": ".imga img@src",
+      "intro": ".des@text",
+      "kind": ".itemtxt p span.0@text",
+      "lastChapter": ".itemtxt ul li.0 a@text",
+      "name": "h1 a@text"
+    },
+    "ruleContent": {
+      "content": ".con@html##(本章完|PS：|PS:|求月票|更新不易|看最新章节|看最新无错|最新小说章节|本章节未完|请订阅|速.?读.?谷|章节内容不完整|得奇小说网|deqixs.org|<script[\\s\\S]*?</script>|<style[\\s\\S]*?</style>|&nbsp;|<!--[\\s\\S]*?-->)##",
+      "nextContentUrl": "text.下一页@href"
+    },
+    "ruleExplore": {
+      "author": "p.1 a@text##作者：##",
+      "bookList": ".item",
+      "bookUrl": "h3 a@href",
+      "coverUrl": "img@src",
+      "kind": "p.0 span.0@text",
+      "lastChapter": "ul li.0 a@text",
+      "name": "h3 a@text"
+    },
+    "ruleSearch": {
+      "author": ".author.0@text##作者：##",
+      "bookList": ".bookbox",
+      "bookUrl": ".bookname a@href",
+      "coverUrl": ".bookname a@href@js:let id=result.match(/\\/(\\d+)\\/$/)[1];let sid=Math.floor(parseInt(id)/1000);return '/files/article/image/'+sid+'/'+id+'/'+id+'s.jpg';",
+      "intro": ".update@text##简介：##",
+      "lastChapter": ".cat a@text",
+      "name": ".bookname a@text"
+    },
+    "ruleToc": {
+      "chapterList": "#list ul li a",
+      "chapterName": "text",
+      "chapterUrl": "href"
+    },
+    "searchUrl": "/modules/article/search.php?searchkey={{key}}&action=login",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "网阅小说",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://book15.net/",
+    "customButton": false,
+    "customOrder": 26,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar result = [];\nvar mainCat = infoMap[\"频道\"] || \"小说排行\";\n\nresult.push({\n    \"title\": \"频道\",\n    \"type\": \"select\",\n    \"chars\": [\"小说排行\", \"男生频道\", \"女生频道\", \"综合频道\", \"免费小说\"],\n    \"default\": mainCat,\n    \"action\": \"java.refreshExplore()\",\n    \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\n\nvar cats = {\n    \"小说排行\": [\n        [\"总人气榜\", \"/books/rank1.html\"],\n        [\"月人气榜\", \"/books/rank2.html\"],\n        [\"周人气榜\", \"/books/rank3.html\"]\n    ],\n    \"男生频道\": [\n        [\"玄幻奇幻\", \"/books/list-t-3.html?page={{page}}\"],\n        [\"武侠修真\", \"/books/list-t-8.html?page={{page}}\"],\n        [\"都市小说\", \"/books/list-t-21.html?page={{page}}\"],\n        [\"恐怖灵异\", \"/books/list-t-4.html?page={{page}}\"],\n        [\"乡村生活\", \"/books/list-t-9.html?page={{page}}\"],\n        [\"科幻末世\", \"/books/list-t-12.html?page={{page}}\"],\n        [\"历史军事\", \"/books/list-t-11.html?page={{page}}\"]\n    ],\n    \"女生频道\": [\n        [\"都市言情\", \"/books/list-t-5.html?page={{page}}\"],\n        [\"古代言情\", \"/books/list-t-6.html?page={{page}}\"],\n        [\"穿越小说\", \"/books/list-t-10.html?page={{page}}\"],\n        [\"浪漫青春\", \"/books/list-t-7.html?page={{page}}\"],\n        [\"二次元\", \"/books/list-t-17.html?page={{page}}\"]\n    ],\n    \"综合频道\": [\n        [\"现代文学\", \"/books/list-t-14.html?page={{page}}\"],\n        [\"外国文学\", \"/books/list-t-22.html?page={{page}}\"],\n        [\"古典文学\", \"/books/list-t-15.html?page={{page}}\"],\n        [\"侦探推理\", \"/books/list-t-23.html?page={{page}}\"],\n        [\"游戏竞技\", \"/books/list-t-16.html?page={{page}}\"]\n    ],\n    \"免费小说\": [\n        [\"免费排行\", \"/books/free.html\"]\n    ]\n};\n\nvar selected = cats[mainCat];\nfor (var i = 0; i < selected.length; i++) {\n    result.push({\n        \"title\": selected[i][0],\n        \"url\": selected[i][1],\n        \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.25}\n    });\n}\n\nJSON.stringify(result);\n</js>",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\",\"Referer\":\"https://book15.net/\",\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\",\"Accept-Language\":\"zh-CN,zh;q=0.9\"}",
+    "lastUpdateTime": 1784822238911,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": ".d-info-panel a[href*=author]@text",
+      "coverUrl": ".d-info-panel img@src",
+      "intro": ".d-info-panel .nowrap-3@text",
+      "kind": ".d-info-panel a[href*=list-t]@text",
+      "lastChapter": "meta[property=\"og:novel:latest_chapter_name\"]@content",
+      "name": "h1@text"
+    },
+    "ruleContent": {
+      "content": ".chapter-content@html##<!--[\\s\\S]*?-->##",
+      "nextContentUrl": "#after_link@href"
+    },
+    "ruleExplore": {
+      "author": "a.author@text||a[href*=author]@text",
+      "bookList": ".list-item-panel||li.fh-f1:has(h4)",
+      "bookUrl": "h3 a@href||h4 a@href",
+      "coverUrl": "img@src",
+      "intro": ".nowrap-2@text||.nowrap-3@text",
+      "kind": "a[href*=list-t]@text",
+      "name": "h3 a@text||h4 a@text"
+    },
+    "ruleSearch": {
+      "author": "a.author@text",
+      "bookList": ".list-item-panel",
+      "bookUrl": "h3 a@href",
+      "coverUrl": "img@src",
+      "intro": ".nowrap-2@text",
+      "kind": "a[href*=list-t]@text",
+      "name": "h3 a@text"
+    },
+    "ruleToc": {
+      "chapterList": ".d-chapter-list dd a",
+      "chapterName": "@text",
+      "chapterUrl": "@href"
+    },
+    "searchUrl": "/books/search.html?kw={{key}}",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "无极书院",
+    "bookSourceType": 0,
+    "bookSourceUrl": "http://m.wjzxchina.com",
+    "customButton": false,
+    "customOrder": 29,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "玄幻奇幻::/wuji345/\n仙侠武侠::/wuji342/\n都市重生::/wuji341/\n历史军事::/wuji348/\n科幻未来::/wuji343/\n灵异悬疑::/wuji349/\n女生言情::/wuji344/\n二次元::/wuji346/\n游戏竞技::/wuji347/",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36\",\"Referer\":\"http://m.wjzxchina.com/\",\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\",\"Accept-Language\":\"zh-CN,zh;q=0.9,en;q=0.8\"}",
+    "lastUpdateTime": 1784812684101,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "class.B.b0@tag.dd.1@tag.span.0@text##作者：",
+      "coverUrl": "class.B.b0@class.imgB@tag.img@src",
+      "intro": "class.nrjj@class.e@text",
+      "kind": "class.B.b0@tag.dd.2@tag.span.0@text##类别：",
+      "lastChapter": "class.B.b0@tag.dd.-1@tag.a@text",
+      "name": "class.VolumeTop@tag.h1@text"
+    },
+    "ruleContent": {
+      "content": "class.TxtContent@html##<script[\\s\\S]*?</script>|温馨提示：亲爱的读者[\\s\\S]*?追书阅读更方便。",
+      "nextContentUrl": "text.下一页@href"
+    },
+    "ruleExplore": {
+      "author": "tag.dd.1@tag.span.0@text##作者：",
+      "bookList": "class.B",
+      "bookUrl": "tag.dt@tag.a@href",
+      "coverUrl": "class.imgB@tag.img@src",
+      "intro": "class.d2@text##简介：",
+      "lastChapter": "tag.dd.-1@tag.a@text",
+      "name": "tag.dt@tag.a@text"
+    },
+    "ruleSearch": {
+      "author": "tag.dd.1@tag.span.0@text##作者：",
+      "bookList": "class.B",
+      "bookUrl": "tag.dt@tag.a@href",
+      "coverUrl": "class.imgB@tag.img@data-src",
+      "intro": "class.d2@text##简介：",
+      "lastChapter": "tag.dd.-1@tag.a@text",
+      "name": "tag.dt@tag.a@text"
+    },
+    "ruleToc": {
+      "chapterList": "class.MLlist@tag.li",
+      "chapterName": "tag.a@text",
+      "chapterUrl": "tag.a@href"
+    },
+    "searchUrl": "/search/?q={{key}}",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "苦读书",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://m.kudushu.org",
+    "customButton": false,
+    "customOrder": 30,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "玄幻魔法::/sort/1/{{page}}.html\n武侠修真::/sort/2/{{page}}.html\n都市言情::/sort/3/{{page}}.html\n历史军事::/sort/4/{{page}}.html\n侦探推理::/sort/5/{{page}}.html\n网游动漫::/sort/6/{{page}}.html\n科幻小说::/sort/7/{{page}}.html\n恐怖灵异::/sort/8/{{page}}.html\n言情小说::/sort/9/{{page}}.html\n其他类型::/sort/10/{{page}}.html\n日排行榜::/top/dayvisit/{{page}}.html\n周排行榜::/top/weekvisit/{{page}}.html\n月排行榜::/top/monthvisit/{{page}}.html\n总排行榜::/top/allvisit/{{page}}.html\n总收藏榜::/top/goodnum/{{page}}.html\n字数排行::/top/size/{{page}}.html\n日推荐榜::/top/dayvote/{{page}}.html\n周推荐榜::/top/weekvote/{{page}}.html\n月推荐榜::/top/monthvote/{{page}}.html\n总推荐榜::/top/allvote/{{page}}.html\n最新入库::/top/postdate/{{page}}.html\n最近更新::/top/lastupdate/{{page}}.html",
+    "lastUpdateTime": 1784812687514,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "class.infotype@tag.p.0@text##作者：",
+      "coverUrl": "class.infohead@class.pic@tag.img@src",
+      "intro": "class.intro@tag.p@text",
+      "kind": "class.infotype@tag.p.1@text##类型：",
+      "lastChapter": "class.infotype@tag.p.3@tag.a@text",
+      "name": "class.cataloginfo@tag.h3@text"
+    },
+    "ruleContent": {
+      "content": "id.novelcontent@html##<ul class=\"novelbutton\">[\\s\\S]*?</ul>|<div id=\"content_tip\">[\\s\\S]*?</div>|（本章未完.*?继续阅读）|\\(第\\d+/\\d+页\\)|第[\\d一二三四五六七八九十百千]+章[^<]*|<script[\\s\\S]*?</script>",
+      "nextContentUrl": "text.下—页@href"
+    },
+    "ruleExplore": {
+      "author": "class.author@tag.a@text||class.p3@tag.a@text",
+      "bookList": "class.article||class.articlegeneral",
+      "bookUrl": "class.content@tag.h6@tag.a@href||class.p2@tag.a@href",
+      "coverUrl": "class.pic@tag.img@src",
+      "intro": "class.simple@text",
+      "kind": "class.p1@text",
+      "name": "class.content@tag.h6@tag.a@text||class.p2@tag.a@text"
+    },
+    "ruleSearch": {
+      "author": "class.author@tag.a@text",
+      "bookList": "class.searchresult@class.sone",
+      "bookUrl": "tag.a.0@href",
+      "name": "tag.a.0@text"
+    },
+    "ruleToc": {
+      "chapterList": "class.info_menu1.1@class.list_xm@tag.li@tag.a",
+      "chapterName": "text",
+      "chapterUrl": "href",
+      "nextTocUrl": "text.下一页@href"
+    },
+    "searchUrl": "/modules/article/search.php,{\"method\":\"POST\",\"body\":\"searchkey={{key}}\"}",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：1097919737",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "米读小说",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://api.midureader.com",
+    "concurrentRate": "1000",
+    "customButton": false,
+    "customOrder": 34,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "@js:\nvar s = [];\nfunction p(t, u, w){ s.push({title:t, url:u, style:{layout_flexGrow:1, layout_flexBasisPercent:w}}); }\nfunction qs(k, u){ var m = (u || '').match(new RegExp('[?&]' + k + '=([^&]*)')); return m ? decodeURIComponent(m[1]) : ''; }\nvar config = {};\ntry { config = JSON.parse(source.getVariable() || '{}'); } catch(e) {}\nvar gender = config.gender || '男频';\ns.push({title:\"⚧ 频道\", type:\"select\", chars:[\"男频\",\"女频\"], default:gender,\n  action:\"(function(){var c={};try{c=JSON.parse(source.getVariable()||'{}');}catch(e){}c.gender=infoMap['⚧ 频道']||'男频';source.setVariable(JSON.stringify(c));java.refreshExplore();})()\",\n  style:{layout_flexGrow:1, layout_flexBasisPercent:1}});\ntry {\n  var sceneId = (gender === '女频') ? 282 : 281;\n  var catUrl = \"https://api.midureader.com/fiction/scene/getCategoryV4,\" + JSON.stringify({method:\"POST\", body:\"app=midu&id=\" + sceneId});\n  var catResp = String(java.ajax(catUrl) || '');\n  var catJson = JSON.parse(catResp);\n  var tags = (catJson && catJson.data && catJson.data.config && catJson.data.config.tagsV3) || [];\n  for (var i = 0; i < tags.length; i++) {\n    var t = tags[i] || {};\n    var name = String(t.name || '').trim();\n    var type = t.type;\n    if (!name || type === '2') continue;\n    var link = t.link || '';\n    var sc = qs('secondChannelId', link);\n    var tg = qs('tagId', link);\n    var url;\n    if (sc) {\n      // 主分类：分类书单接口（second_channel 过滤准确）\n      url = \"https://api.midureader.com/fiction/search/channel,\" + JSON.stringify({method:\"POST\", body:\"app=midu&second_channel=\" + sc + \"&status=&rank=&page={{page-1}}\"});\n    } else if (tg) {\n      // 流派/题材/风格/角色/热门 等标签：关键词搜索\n      url = \"https://api.midureader.com/fiction/search/search,\" + JSON.stringify({method:\"POST\", body:\"app=midu&keyword=\" + encodeURIComponent(name) + \"&page={{page-1}}\"});\n    } else {\n      continue;\n    }\n    p(name, url, 0.4);\n  }\n} catch(e) {}\nJSON.stringify(s);\n",
+    "header": "{\"User-Agent\": \"okhttp/3.12.1\"}",
+    "lastUpdateTime": 1786889684359,
+    "loginUi": "@js:\nvar all = [];\nall.push({\"name\": \"💬 联系交流（点击跳转）\", \"type\": \"button\", \"action\": \"joinQQGroup()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nall.push({\"name\": \"🎨 联系制作（点击跳转）\", \"type\": \"button\", \"action\": \"contactMaker()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nresult = JSON.stringify(all);\n",
+    "loginUrl": "var QQ_GROUP = \"1097919737\";\nvar MAKER_QQ = \"1820480783\";\nfunction login(){\n  try{ java.upLoginData(); }catch(e){}\n  java.toast(\"设置已保存\");\n}\nfunction joinQQGroup(){\n  var u = \"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=group&uin=\" + QQ_GROUP;\n  try{\n    java.openUrl(u);\n    java.toast(\"已尝试打开QQ，若未跳转请手动搜索群号 \" + QQ_GROUP);\n  }catch(e){ java.longToast(\"请手动在QQ中搜索群号 \" + QQ_GROUP); }\n}\nfunction contactMaker(){\n  var u = \"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=friend&uin=\" + MAKER_QQ;\n  try{\n    java.openUrl(u);\n    java.toast(\"已尝试打开QQ，若未跳转请手动添加 \" + MAKER_QQ);\n  }catch(e){ java.longToast(\"请手动在QQ中搜索 \" + MAKER_QQ); }\n}\n",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "$.author||$..emAuthor",
+      "coverUrl": "$..cover",
+      "init": "$.data",
+      "intro": "<useweb>\n<style>*{box-sizing:border-box;margin:0;padding:0}\nbody{background:transparent!important}\n.card{font-family:'Noto Sans CJK SC','Source Han Sans SC','PingFang SC','Microsoft YaHei',sans-serif;color:inherit;background:transparent!important;border-radius:18px;padding:18px;box-shadow:none}\n.card,.card *{color:inherit!important}\n.hero{display:flex;gap:16px;align-items:stretch}\n.cover{width:100px;height:138px;object-fit:cover;border-radius:12px;flex-shrink:0;border:1px solid rgba(127,127,127,.25)}\n.hero-main{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center}\n.title{font-size:21px;font-weight:800;line-height:1.35;margin-bottom:8px;background:linear-gradient(90deg,#0f766e,#0ea5a4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}\n.row{display:flex;align-items:baseline;gap:8px;margin-top:4px}\n.off{font-size:12px;font-weight:800;opacity:.6;letter-spacing:1px;flex-shrink:0}\n.hand{font-family:'Noto Serif CJK SC','Source Han Serif SC','SimSun','Songti SC','STSong',serif;font-size:14px;font-weight:700;line-height:1.9}\n.hand.cat{color:inherit!important;opacity:.85}\n.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}\n.badge{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(127,127,127,.12);font-weight:700}\n.badge.hot{background:linear-gradient(90deg,#0f766e,#0ea5a4);color:#fff!important}\n.stats{display:flex;margin:16px 0 4px;background:rgba(127,127,127,.08);border-radius:14px;padding:12px 0;text-align:center}\n.stat{flex:1;position:relative}\n.stat+.stat::before{content:'';position:absolute;left:0;top:22%;height:56%;width:1px;background:rgba(127,127,127,.25)}\n.stat b{display:block;font-size:17px;font-weight:800}\n.stat span{font-size:11px;opacity:.6;font-weight:800}\n.section{margin-top:14px}\n.section h3{font-size:14px;font-weight:800;margin-bottom:7px;display:flex;align-items:center;gap:7px;letter-spacing:1px}\n.section h3::before{content:'';width:4px;height:14px;border-radius:2px;background:linear-gradient(180deg,#0f766e,#0ea5a4)}\n.tags{display:flex;flex-wrap:wrap;gap:6px}\n.tag{font-size:12px;padding:3px 11px;border-radius:8px;background:rgba(127,127,127,.10);font-weight:700}\n.rank{font-size:13px;padding:9px 12px;border-radius:10px;background:rgba(127,127,127,.06);border:1px solid rgba(127,127,127,.22)}\n.rank b{font-weight:800}\n.intro-text{font-size:14px;line-height:2;text-align:justify;text-indent:2em;font-family:'Noto Serif CJK SC','Source Han Serif SC','SimSun','Songti SC','STSong',serif}\n/* 关键信息：灰青突出（作者/评分粉丝值万字/标签/声明四字/二月无雪/24小时内删除） */\n.hand,.stat b,.tag,.notice .off,.notice b{color:#0f766e!important}\nhtml.dark .hand,html.dark .stat b,html.dark .tag,html.dark .notice .off,html.dark .notice b{color:#5eead4!important}\n.notice .off{opacity:1}\n/* 底栏（书源声明）：透明，跟随阅读主题 */\n.notice{margin-top:16px;padding:10px 14px;border:1px dashed rgba(127,127,127,.4);border-radius:12px;font-size:12px;text-align:center;line-height:1.8;background:transparent}\n.notice .hand{font-size:12.5px}</style>\n<div class=\"card\">\n  <div class=\"hero\">\n    <img class=\"cover\" src=\"{{$.cover}}\" onerror=\"this.style.display='none'\"/>\n    <div class=\"hero-main\">\n      <div class=\"title\">{{$.title}}</div>\n      <div class=\"row\"><span class=\"off\">作者</span><span class=\"hand\">{{$.author}}</span></div>\n      <div class=\"row\"><span class=\"off\">分类</span><span class=\"hand cat\">{{$.category}}</span></div>\n      <div class=\"badges\">\n        <span class=\"badge\">{{java.getString('$.end_status')=='1'?'完结':'连载'}}</span>\n        <span class=\"badge hot\">🔥 {{$.hot}}{{$.hotLabel}} 热度</span>\n      </div>\n    </div>\n  </div>\n  <div class=\"stats\">\n    <div class=\"stat\"><b>{{$.score}}</b><span>评分</span></div>\n    <div class=\"stat\"><b>{{$.commentHscore.hscore}}{{$.commentHscore.hscore_unit}}</b><span>粉丝值</span></div>\n    <div class=\"stat\"><b>{{Number(java.getString('$.word_count'))>10000?(Number(java.getString('$.word_count'))/10000).toFixed(1):java.getString('$.word_count')}}</b><span>万字</span></div>\n  </div>\n    {{(function(){var t=String(java.getString('$.tags[*].name')||'');var a=t.split(/\\n+/).filter(function(x){return x&&x!='null'&&x!='undefined'});return a.length?('<div class=\"section\"><h3>作品标签</h3><div class=\"tags\">'+a.map(function(x){return '<span class=\"tag\">'+x+'</span>'}).join('')+'</div></div>'):'';})()}}\n    {{(function(){var n=String(java.getString('$.rankInfo.name')||''),o=String(java.getString('$.rankInfo.order')||''),t=String(java.getString('$.rankInfo.timeDimension')||'');if(!n||n=='null'||!o||o=='null'||o=='0')return '';return '<div class=\"section\"><h3>上榜信息</h3><div class=\"rank\">🏅 <b>'+n+'</b> 第 <b>'+o+'</b> 名（'+t+'）</div></div>';})()}}\n  <div class=\"section\">\n    <h3>内容简介</h3>\n    <div class=\"intro-text\">{{$.description}}</div>\n  </div>\n  <div class=\"notice\"><span class=\"off\">书源声明</span>：<span class=\"hand\">此书源由<b>二月无雪</b>所制，仅供交流学习，禁止分享与二创，请在使用<b>24小时内删除</b>，谢谢配合！</span></div>\n</div>\n</useweb>",
+      "kind": "{{java.getString('$.end_status')=='1'?'完结':'连载'}}\n{{$.category}}\n{{$.score}}分",
+      "name": "$.title",
+      "tocUrl": "@js:\ntry {\n  \"https://book.midureader.com/book/chapter_list/100/{{$.book_id}}.txt\"\n} catch(e) {\n  \"https://book-spare.midureader.com/book/chapter_list/100/{{$.book_id}}.txt\"\n}\n",
+      "wordCount": "$.word_count"
+    },
+    "ruleContent": {
+      "content": "$..content\n@js:\n   if(result!=\"\"){\tresult}\n      else{java.ajax(baseUrl)}"
+    },
+    "ruleExplore": {
+      "author": "$.author||$..leftTags..text## · .*",
+      "bookList": "$.data[*]",
+      "bookUrl": "https://api.midureader.com/fiction/book/getDetail,{\n  \"method\": \"POST\",\n  \"body\": \"app=midu&book_id={{$..book_id}}\"\n}",
+      "coverUrl": "$.cover",
+      "intro": "$.description",
+      "kind": "$..leftTags..text##.*? · (.*?) · .*##$1||$.category",
+      "name": "$.title",
+      "wordCount": "$..leftTags..text##.*·"
+    },
+    "ruleSearch": {
+      "author": "$..author||$..emAuthor",
+      "bookList": "$.data[*]",
+      "bookUrl": "https://api.midureader.com/fiction/book/getDetail,{\n  \"method\": \"POST\",\n  \"body\": \"app=midu&book_id={{$..book_id}}\"\n}",
+      "coverUrl": "$..cover",
+      "intro": "$..description",
+      "kind": "{{java.getString('$.end_status')=='1'?'完结':'连载'}}\n{{$.category}}",
+      "name": "$..title",
+      "wordCount": "$.word_count"
+    },
+    "ruleToc": {
+      "chapterList": "$.[*]",
+      "chapterName": "$.title",
+      "chapterUrl": "@js:\ntry {\n  \"https://book.midureader.com/book/chapter/segment/master/{{$.bookId}}/{{$.chapterId}}/{{$.content_md5}}.txt\"\n} catch(e) {\n  \"https://book.midureader.com/book/chapter/master/{{$.bookId}}_{{$.chapterId}}.txt\"\n}\n"
+    },
+    "searchUrl": "@js:\n\"https://api.midureader.com/fiction/search/search,\" + JSON.stringify({\"method\":\"POST\",\"body\":\"app=midu&keyword={{key}}&page={{page-1}}\"})\n",
+    "weight": 0
+  },
+  {
+    "bookSourceComment": "by二月无雪\n交流群：1097919737",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "爱书库（rrssk）",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.ishuku.com",
+    "concurrentRate": "1000",
+    "customButton": false,
+    "customOrder": 35,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "@js:\nvar base = \"https://www.ishuku.com\";\nvar out = [];\nfunction push(t,u,w){out.push({\"title\":t,\"url\":u,\"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":w}});}\npush(\"📚 男生\",base+\"/list-1-{{page}}/\",1);\npush(\"玄幻小说\",base+\"/list-4-{{page}}/\",0.4);push(\"奇幻小说\",base+\"/list-5-{{page}}/\",0.4);\npush(\"武侠小说\",base+\"/list-6-{{page}}/\",0.4);push(\"仙侠小说\",base+\"/list-7-{{page}}/\",0.4);\npush(\"都市小说\",base+\"/list-8-{{page}}/\",0.4);push(\"军事小说\",base+\"/list-9-{{page}}/\",0.4);\npush(\"历史小说\",base+\"/list-10-{{page}}/\",0.4);push(\"游戏小说\",base+\"/list-11-{{page}}/\",0.4);\npush(\"体育小说\",base+\"/list-12-{{page}}/\",0.4);push(\"科幻小说\",base+\"/list-13-{{page}}/\",0.4);\npush(\"诸天无限\",base+\"/list-14-{{page}}/\",0.4);push(\"悬疑小说\",base+\"/list-15-{{page}}/\",0.4);\npush(\"📚 女生\",base+\"/list-2-{{page}}/\",1);\npush(\"古代言情\",base+\"/list-16-{{page}}/\",0.4);push(\"仙侠奇缘\",base+\"/list-17-{{page}}/\",0.4);\npush(\"现代言情\",base+\"/list-18-{{page}}/\",0.4);push(\"浪漫青春\",base+\"/list-19-{{page}}/\",0.4);\npush(\"玄幻言情\",base+\"/list-20-{{page}}/\",0.4);push(\"悬疑推理\",base+\"/list-21-{{page}}/\",0.4);\npush(\"科幻空间\",base+\"/list-22-{{page}}/\",0.4);push(\"游戏竞技\",base+\"/list-23-{{page}}/\",0.4);\npush(\"短篇言情\",base+\"/list-24-{{page}}/\",0.4);push(\"耽美\",base+\"/list-40-{{page}}/\",0.4);\npush(\"百合\",base+\"/list-41-{{page}}/\",0.4);push(\"轻小说\",base+\"/list-42-{{page}}/\",0.4);\npush(\"📚 二次元\",base+\"/list-3-{{page}}/\",1);\npush(\"原生幻想\",base+\"/list-25-{{page}}/\",0.4);push(\"恋爱日常\",base+\"/list-26-{{page}}/\",0.4);\npush(\"衍生同人\",base+\"/list-27-{{page}}/\",0.4);push(\"搞笑吐槽\",base+\"/list-28-{{page}}/\",0.4);\nresult=JSON.stringify(out);\n",
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36\", \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8\", \"Accept-Language\": \"zh-CN,zh;q=0.9,en;q=0.8\"}",
+    "lastUpdateTime": 1786889657351,
+    "loginUi": "@js:\nvar all = [];\nall.push({\"name\": \"🌐 检验当前搜索\", \"type\": \"button\", \"action\": \"checkSearch()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.4}});\nall.push({\"name\": \"🌐 检验当前域名\", \"type\": \"button\", \"action\": \"checkSite()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.4}});\nall.push({\"name\": \"💬 联系交流（点击跳转）\", \"type\": \"button\", \"action\": \"joinQQGroup()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nall.push({\"name\": \"🎨 联系制作（点击跳转）\", \"type\": \"button\", \"action\": \"contactMaker()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nresult = JSON.stringify(all);\n",
+    "loginUrl": "var QQ_GROUP = \"1097919737\";\nvar MAKER_QQ = \"1820480783\";\nfunction siteBase(){ return \"https://www.ishuku.com\"; }\nfunction isAlive(u){\n  try{\n    var t = String(java.ajax(u) || \"\");\n    return t.length > 200;\n  }catch(e){ return false; }\n}\nfunction login(){\n  try{ java.upLoginData(); }catch(e){}\n  java.toast(\"设置已保存\");\n}\nfunction checkSite(){\n  var ok = isAlive(siteBase());\n  java.longToast(\"🌐 当前站点：\" + siteBase() + (ok ? \"（可用）\" : \"（不可用，可能被墙/换域名）\"));\n}\nfunction checkSearch(){\n  try{\n    var html = String(java.ajax(\"https://www.rrssk.com/005E.html\") || \"\");\n    var mt = html.match(/name=\"_t\" value=\"([a-f0-9]+)\"/);\n    var mv = html.match(/action=signJs&v=([^\"']+)/);\n    if(!mt || !mv){ java.longToast(\"❌ 搜索服务异常（无法获取搜索令牌）\"); return; }\n    java.longToast(\"✅ 当前搜索正常（爱书库 / 005E）\");\n  }catch(e){ java.longToast(\"❌ 搜索服务异常：\" + e); }\n}\nfunction joinQQGroup(){\n  var u = \"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=group&uin=\" + QQ_GROUP;\n  try{\n    java.openUrl(u);\n    java.toast(\"已尝试打开QQ，若未跳转请手动搜索群号 \" + QQ_GROUP);\n  }catch(e){ java.longToast(\"请手动在QQ中搜索群号 \" + QQ_GROUP); }\n}\nfunction contactMaker(){\n  var u = \"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=friend&uin=\" + MAKER_QQ;\n  try{\n    java.openUrl(u);\n    java.toast(\"已尝试打开QQ，若未跳转请手动添加 \" + MAKER_QQ);\n  }catch(e){ java.longToast(\"请手动在QQ中搜索 \" + MAKER_QQ); }\n}\n",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "meta[property='og:novel:author']@content||class.book@class.txtb@div.intro@div.item.0@a@text",
+      "coverUrl": "meta[property='og:image']@content||class.book@class.picb@img@src",
+      "intro": "<useweb>\n<style>*{box-sizing:border-box;margin:0;padding:0}\nbody{background:transparent!important}\n.card{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;color:inherit;background:transparent!important;border-radius:18px;padding:18px;box-shadow:none}\n.card,.card *{color:inherit!important}\n.hero{display:flex;gap:16px;align-items:stretch}\n.cover{width:100px;height:138px;object-fit:cover;border-radius:12px;flex-shrink:0;border:1px solid rgba(127,127,127,.25)}\n.hero-main{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center}\n.title{font-size:21px;font-weight:800;line-height:1.35;margin-bottom:8px;background:linear-gradient(90deg,#0f766e,#0ea5a4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}\n.meta{font-size:13px;line-height:2;display:flex;align-items:center;gap:6px}\n.meta b{font-weight:800}\n.meta b.plain{color:inherit!important;opacity:.85}\n.meta svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}\n.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}\n.badge{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(127,127,127,.12);font-weight:700}\n.badge.hot{background:linear-gradient(90deg,#0f766e,#0ea5a4);color:#fff!important}\n.stats{display:flex;margin:16px 0 4px;background:rgba(127,127,127,.08);border-radius:14px;padding:12px 0;text-align:center}\n.stat{flex:1;position:relative}\n.stat+.stat::before{content:'';position:absolute;left:0;top:22%;height:56%;width:1px;background:rgba(127,127,127,.25)}\n.stat b{display:block;font-size:17px;font-weight:800}\n.stat span{font-size:11px;opacity:.6;font-weight:800}\n.section{margin-top:14px}\n.section h3{font-size:14px;font-weight:800;margin-bottom:7px;display:flex;align-items:center;gap:7px;letter-spacing:1px}\n.section h3::before{content:'';width:4px;height:14px;border-radius:2px;background:linear-gradient(180deg,#0f766e,#0ea5a4)}\n.intro-text{font-size:13.5px;line-height:1.85;text-align:justify;text-indent:2em}\n.latest{background:rgba(127,127,127,.08);border:1px solid rgba(127,127,127,.22);border-radius:12px;padding:10px 14px;font-size:13.5px}\n.latest b{font-weight:800}\n.latest .time{display:block;font-size:11px;opacity:.6;margin-top:3px}\n/* 关键信息：灰青突出（作者/评分粉丝值万字/最新章节/声明四字/二月无雪） */\n.meta b,.stat b,.latest b,.notice b{color:#0f766e!important}\nhtml.dark .meta b,html.dark .stat b,html.dark .latest b,html.dark .notice b{color:#5eead4!important}\n/* 底栏（书源说明）：透明，跟随阅读主题 */\n.notice{margin-top:16px;padding:10px 14px;border:1px dashed rgba(127,127,127,.4);border-radius:12px;font-size:12px;text-align:center;line-height:1.7;background:transparent}</style>\n<div class=\"card\">\n  <div class=\"hero\">\n    <img class=\"cover\" src=\"{{java.getString('meta[property=\\'og:image\\']@content')}}\" onerror=\"this.style.display='none'\"/>\n    <div class=\"hero-main\">\n      <div class=\"title\">{{java.getString('meta[property=\\'og:novel:book_name\\']@content')}}</div>\n      <div class=\"meta\"><svg viewBox=\"0 0 24 24\"><path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/></svg>作者：<b>{{java.getString('meta[property=\\'og:novel:author\\']@content')}}</b></div>\n      <div class=\"meta\"><svg viewBox=\"0 0 24 24\"><path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20\"/><path d=\"M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z\"/></svg>分类：<b class=\"plain\">{{java.getString('meta[property=\\'og:novel:category\\']@content')}}</b></div>\n      <div class=\"badges\">\n        <span class=\"badge\">{{java.getString('meta[property=\\'og:novel:status\\']@content')}}</span>\n        <span class=\"badge hot\">📅 {{java.getString('meta[property=\\'og:novel:update_time\\']@content').split(' ')[0]}} 更新</span>\n      </div>\n    </div>\n  </div>\n  <div class=\"stats\">\n    <div class=\"stat\"><b>{{java.getString('class.book@class.txtb@class.about@span.0@b@text') || '—'}}</b><span>万字</span></div>\n    <div class=\"stat\"><b>{{java.getString('class.book@class.txtb@class.about@span.1@b@text') || '—'}}</b><span>次阅读</span></div>\n    <div class=\"stat\"><b>{{java.getString('class.bookM@class.about@span.2@b@text') || '—'}}</b><span>收藏</span></div>\n  </div>\n  <div class=\"section\">\n    <h3>内容简介</h3>\n    <div class=\"intro-text\">{{java.getString('meta[property=\\'og:description\\']@content')}}</div>\n  </div>\n  <div class=\"section\">\n    <h3>最新进度</h3>\n    <div class=\"latest\">📌 已更新至 <b>{{java.getString('meta[property=\\'og:novel:latest_chapter_name\\']@content')}}</b><span class=\"time\">⏱ 更新时间：{{java.getString('meta[property=\\'og:novel:update_time\\']@content')}}</span></div>\n  </div>\n  <div class=\"notice\">🔒 <b>书源说明</b>：本书源由<b>二月无雪</b>制作，未经允许禁止二传和二改。</div>\n</div>\n</useweb>",
+      "kind": "meta[property='og:novel:category']@content||class.book@class.txtb@class.label@span.2@text",
+      "lastChapter": "meta[property='og:novel:latest_chapter_name']@content",
+      "name": "meta[property='og:novel:book_name']@content||class.book@class.txtb@class.name@h1@text",
+      "tocUrl": "@js:\nvar u = '';\ntry { u = java.getString('class.btnGreen@href') || ''; } catch(e) {}\nif(u){\n  var d = baseUrl.match(/^https?:\\/\\/[^\\/]+/)[0];\n  result = (u.indexOf('http') == 0) ? u : d + u;\n} else {\n  result = baseUrl;\n}",
+      "wordCount": "class.book@class.txtb@class.about@span.0@b@text"
+    },
+    "ruleContent": {
+      "content": "class.content@html##<i class=\"icon[^\"]*\"></i>##",
+      "nextContentUrl": "text.下一页@href||text.下一章@href"
+    },
+    "ruleExplore": {
+      "author": "class.time@span.0@text",
+      "bookList": "class.chanIBox@class.list@li",
+      "bookUrl": "class.picb@a@href",
+      "coverUrl": "class.picb@img@src",
+      "intro": "class.intro@text",
+      "kind": "class.about@span.1@text",
+      "name": "class.name@a@text",
+      "wordCount": "class.about@span.-1@text"
+    },
+    "ruleSearch": {
+      "author": "class.book-card__meta@span.0@text##作者：##",
+      "bookList": "class.book-card",
+      "bookUrl": "class.book-card@onclick@js:\nvar m = result.match(/t=([^&']+)/);\nvar out = '';\nif(m){\n  var dec = '';\n  try { dec = java.base64Decode(decodeURIComponent(m[1])); } catch(e) {}\n  if(/^https?:\\/\\//.test(dec)){ out = dec; }\n  else { out = \"https://www.rrssk.com/?action=go&t=\" + m[1]; }\n} else {\n  var m2 = result.match(/window\\.open\\('([^']+)'/);\n  if(m2){\n    var rel = m2[1].replace(/&amp;/g, \"&\");\n    out = (/^https?:/i.test(rel)) ? rel : \"https://www.rrssk.com/\" + rel.replace(/^\\//, \"\");\n  }\n}\nresult = out;",
+      "coverUrl": "class.book-card__cover@img@src",
+      "intro": "class.book-card__desc@text",
+      "kind": "class.book-card__meta@span.1@text##分类：##",
+      "lastChapter": "class.book-card__update@text##更新：##",
+      "name": "class.book-card__title@text"
+    },
+    "ruleToc": {
+      "chapterList": "<js>\n// ===== 工具函数 =====\nfunction absUrl(u){\n  if(/^https?:/i.test(u)) return u;\n  var m = String(baseUrl || '').match(/^(https?:\\/\\/[^\\/]+)/);\n  return (m ? m[1] : '') + u;\n}\nfunction numOf(u){\n  var m = String(u).match(/-(\\d+)(?:-\\d+)?\\.html$/);\n  return m ? parseInt(m[1], 10) : 0;\n}\nfunction _p2(n){ return (n < 10 ? \"0\" : \"\") + n; }\nfunction edgeHeaders(){\n  var d = new Date();\n  var t = String(d.getFullYear()).slice(2) + _p2(d.getMonth()+1) + _p2(d.getDate());\n  return {\n    \"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0\",\n    \"X-Requested-With\": \"cn.mujiankeji.mbrowser\",\n    \"Cookie\": \"k=\" + t + \";\",\n    \"Upgrade-Insecure-Requests\": \"1\",\n    \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7\",\n    \"Content-Type\": \"application/x-www-form-urlencoded\"\n  };\n}\nfunction encBody(text, sk, iv){\n  try {\n    return java.createSymmetricCrypto(\"aes/cbc/pkcs7padding\", java.strToBytes(sk), java.strToBytes(iv)).encryptBase64(text);\n  } catch(e) {}\n  try {\n    var key = Packages.javax.crypto.spec.SecretKeySpec(java.strToBytes(sk), \"AES\");\n    var ivi = Packages.javax.crypto.spec.IvParameterSpec(java.strToBytes(iv));\n    var ci = Packages.javax.crypto.Cipher.getInstance(\"AES/CBC/PKCS5Padding\");\n    ci.init(Packages.javax.crypto.Cipher.ENCRYPT_MODE, key, ivi);\n    return Packages.java.util.Base64.getEncoder().encodeToString(ci.doFinal(java.strToBytes(text)));\n  } catch(e) { return \"\"; }\n}\nfunction ajaxPost(url, body){\n  // 与参考版一致：普通 java.ajax，不加特殊请求头（手机UA即可，被WAF拦会自动回退）\n  try {\n    return String(java.ajax(url + ',' + JSON.stringify({method: 'POST', body: body})) || '');\n  } catch(e) { return ''; }\n}\n\n// ===== 第1页章节：兼容 人人书城/爱书库(chapListBody) 与 书友社(chapterList) =====\nvar hrefs = [], names = [];\ntry { hrefs = java.getStringList('class.chapListBody@li@a@href') || []; } catch(e) {}\ntry { names = java.getStringList('class.chapListBody@li@a@text') || []; } catch(e) {}\nif(hrefs.length === 0){\n  try { hrefs = java.getStringList('class.chapterList@class.list@li@div.name@a@href') || []; } catch(e) {}\n  try { names = java.getStringList('class.chapterList@class.list@li@div.name@a@text') || []; } catch(e) {}\n}\nvar out = [];\nfor(var i = 0; i < hrefs.length; i++){\n  var u = absUrl(hrefs[i]);\n  out.push({name: names[i] || '', url: u, order: numOf(u)});\n}\n\n// ===== 解析 id / 分页数 / AES密钥 =====\nvar id = '';\ntry {\n  var mid = String(baseUrl || '').match(/\\/(?:chapter|book)\\/([^\\/.?]+?)(?:-\\d+)?\\.html/);\n  if(mid) id = mid[1];\n} catch(e) {}\nvar pageCount = 0;\ntry {\n  var opts = java.getElements('[data-aid=\"' + id + '\"]@option') || [];\n  if(opts.length === 0) opts = java.getElements('[data-aid=\"' + id + '\"]@li') || [];\n  pageCount = opts.length;\n} catch(e) {}\nvar secretKey = '', ivKey = '';\ntry {\n  var src = String(result || '');\n  var mjs = src.match(/<script[^>]*src=\"([^\"]*\\/([A-Za-z0-9]{32,})\\.js)\"[^>]*>/);\n  if(mjs){\n    var jsTxt = String(java.ajax(absUrl(mjs[1])) || '');\n    var mk = jsTxt.match(/AESCrypt\\('([^']+)'\\)/);\n    var mik = jsTxt.match(/parse\\('([^']+)'\\)/);\n    if(mk) secretKey = mk[1];\n    if(mik) ivKey = mik[1];\n  }\n} catch(e) {}\n\n// ===== 拉取其余页（java.post + Edge头） =====\nvar fetched = false;\nif(id && pageCount > 1 && secretKey && ivKey){\n  try {\n    var baseHost = String(baseUrl || '').match(/^(https?:\\/\\/[^\\/]+)/);\n    baseHost = baseHost ? baseHost[1] : '';\n    for(var p = 2; p <= pageCount; p++){\n      try {\n        var body = JSON.stringify({id: id, page: p});\n        var enc = encBody(body, secretKey, ivKey);\n        if(!enc) break;\n        var resp = ajaxPost(baseHost + '/index.php?action=loadChapterPage', 'data=' + encodeURIComponent(enc));\n        var obj = JSON.parse(resp);\n        if(obj && obj.code === 0 && obj.data && obj.data.length){\n          for(var j = 0; j < obj.data.length; j++){\n            var it = obj.data[j];\n            var u2 = absUrl(it.chapterurl || '');\n            out.push({name: it.chaptername || '', url: u2, order: parseInt(it.chapterorder, 10) || numOf(u2) || 0});\n          }\n          fetched = true;\n        } else { break; }\n      } catch(e) { break; }\n      try { Packages.java.lang.Thread.sleep(800 + Math.floor(Math.random() * 500)); } catch(e) {}\n    }\n  } catch(e) {}\n}\n\n// ===== 去重 + 升序 =====\nvar seen = {}, list = [];\nfor(var i = 0; i < out.length; i++){\n  var k = out[i].order || out[i].url;\n  if(seen[k]) continue;\n  seen[k] = 1;\n  list.push(out[i]);\n}\nlist.sort(function(a, b){ return (a.order || 0) - (b.order || 0); });\n\n// ===== 分页失败：用总章数占位补齐（不重复） =====\nif(!fetched && id && list.length > 0){\n  try {\n    var bu = (typeof book !== 'undefined' && book && book.bookUrl) ? book.bookUrl : absUrl('/book/' + id + '.html');\n    var detail = String(java.ajax(bu) || '');\n    var mt = detail.match(/og:novel:latest_chapter_name\"\\s+content=\"第(\\d+)章/);\n    if(!mt) mt = detail.match(/\\((\\d+)章节\\)/);\n    var total = mt ? parseInt(mt[1], 10) : 0;\n    var have = {};\n    for(var i = 0; i < list.length; i++){ have[list[i].order] = 1; }\n    for(var n = 1; n <= total; n++){\n      if(!have[n]){\n        list.push({name: '第' + n + '章', url: absUrl('/book/' + id + '-' + n + '.html'), order: n});\n      }\n    }\n    list.sort(function(a, b){ return (a.order || 0) - (b.order || 0); });\n  } catch(e) {}\n}\n\nvar res = [];\nfor(var i = 0; i < list.length; i++){\n  res.push(JSON.stringify({name: list[i].name, url: list[i].url, order: list[i].order}));\n}\nif(res.length === 0 && id){\n  res.push(JSON.stringify({name: '第1章', url: absUrl('/book/' + id + '-1.html'), order: 1}));\n}\nres;\n</js>\n",
+      "chapterName": "$.name",
+      "chapterUrl": "$.url"
+    },
+    "searchUrl": "@js:\nvar base = \"https://www.rrssk.com\";\nfunction encURI(s){ return encodeURIComponent(s).replace(/[!'()*]/g, function(c){ return '%' + c.charCodeAt(0).toString(16).toUpperCase(); }); }\nvar result = base + \"/005E.html\";\ntry {\n  var html = String(java.ajax(base + \"/005E.html\") || \"\");\n  var mt = html.match(/name=\"_t\" value=\"([a-f0-9]+)\"/);\n  var mv = html.match(/(?:src=\"[^\"]*|action=)signJs&v=([^\"']+)/) || html.match(/signJs[^\"']*?v=([^\"']+)/);\n  if(mt && mv){\n    var t = mt[1];\n    var sj = \"\";\n    try { sj = String(java.ajax(base + \"/?action=signJs&v=\" + mv[1]) || \"\"); } catch(e) {}\n    var mq = sj.match(/var q=function[^{]*\\{[\\s\\S]*?\\};/);\n    if(!mq){ mq = sj.match(/function\\s+\\w+\\(s,t,ts\\)\\{[\\s\\S]*?\\};/); }\n    if(mq){\n      try {\n        var fn = mq[0].replace(/^var q=/, \"\").replace(/;$/, \"\");\n        var qf = eval(\"(\" + fn + \")\");\n        var enc = encURI(key);\n        var ts = Math.floor(Date.now() / 1000);\n        var sig = qf(enc, t, ts);\n        var body = \"keyword=\" + encURI(key) + \"&_t=\" + t + \"&_ts=\" + ts + \"&_s=\" + sig;\n        var postUrl = base + \"/?action=search,\" + JSON.stringify({method: \"POST\", body: body});\n        var first = \"\";\n        try { first = String(java.ajax(postUrl) || \"\"); } catch(e) {}\n        var qm = first.match(/action=find&v=(\\d+)&q=([^&\"']+?)&page=/);\n        if(qm){\n          result = base + \"/?action=find&v=\" + qm[1] + \"&q=\" + qm[2] + \"&page={{page}}\";\n        } else {\n          result = postUrl;\n        }\n      } catch(e) {}\n    }\n  }\n} catch(e) {}\nresult;\n",
+    "weight": 0
+  }
+]
