@@ -1,0 +1,54 @@
+[
+  {
+    "bookSourceName": "淘小说书城",
+    "bookSourceUrl": "http://betam.taoyuewenhua.com",
+    "bookSourceType": 0,
+    "bookSourceComment": "淘小说书城 API 书源\\n网址: http://betam.taoyuewenhua.com\\n说明: Vue.js SPA 网站，通过 AJAX API 获取数据\\n\\n【API 端点】\\n- 搜索: /ajax/or/authopt/ty/search_books?keywords={{key}}&page={{page}}&pageSize=20&ctype=1\\n- 详情: /ajax/or/ty/book?sourceName=tf&sourceId={sourceId}\\n- 章节列表: /ajax/or/authopt/ty/chapter_list?sourceName=tf&sourceId={sourceId}&page={page}&pageSize=100\\n- 章节内容: /ajax/or/authopt/ty/chapter_content?sourceName=tf&sourceId={sourceId}&chapterId={chapterId}\\n- 分类书籍: /ajax/book_mall/categories/{categoryId}?page={page}&pageSize=20\\n\\n【bookUrl 格式】\\n- bookUrl 直接使用详情页 API URL: /ajax/or/ty/book?sourceName=tf&sourceId={sourceId}\\n- 例如: /ajax/or/ty/book?sourceName=tf&sourceId=zuoke_100332\\n- 所有 sourceName 均为 tf\\n- tocUrl/chapterUrl 通过正则从 bookUrl 中提取 sourceId\\n\\n【发现页结构】\\n- 使用 JS 生成带权重的发现页布局\\n- 男生/女生 tag 权重 1 (layout_flexBasisPercent=1, 占满整行作为分组标题)\\n- 各分类权重 0.25 (layout_flexBasisPercent=0.25, 每行4个)\\n- 男生: 14 个分类 (玄幻/奇幻/武侠/仙侠/都市/历史/军事/奇闻怪谈/科幻/游戏/体育/N次元/现实/诸天无限)\\n- 女生: 11 个分类 (玄幻言情/仙侠奇缘/古代言情/现代言情/浪漫青春/奇闻怪谈/科幻空间/游戏竞技/N次元/同人纯爱/短篇)\\n\\n【注意事项】\\n- 章节列表每页 100 章，需用 nextTocUrl 自动翻页\\n- 章节内容为纯文本，无 HTML 标签\\n- 搜索使用 keywords 参数（带 s）\\n- 搜索需指定 ctype 参数（1=男生, 2=女生），默认 ctype=1",
+    "enabled": true,
+    "enabledExplore": true,
+    "loginUrl": "http://betam.taoyuewenhua.com",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\",\"Accept\":\"application/json, text/plain, */*\",\"Referer\":\"http://betam.taoyuewenhua.com/\",\"X-Requested-With\":\"XMLHttpRequest\"}",
+    "searchUrl": "/ajax/or/authopt/ty/search_books?keywords={{key}}&page={{page-1}}&pageSize=20&ctype=1",
+    "exploreUrl": "@js: var result = []\nvar push = (title, url, size) => result.push({\n  title: title,\n  url: url,\n  style: {\n    layout_flexGrow: 1,\n    layout_flexBasisPercent: size\n  }\n})\npush(\"男生\", null, 1);\npush(\"玄幻\", \"/ajax/book_mall/categories/101000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"奇幻\", \"/ajax/book_mall/categories/102000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"武侠\", \"/ajax/book_mall/categories/103000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"仙侠\", \"/ajax/book_mall/categories/104000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"都市\", \"/ajax/book_mall/categories/105000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"历史\", \"/ajax/book_mall/categories/106000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"军事\", \"/ajax/book_mall/categories/107000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"奇闻怪谈\", \"/ajax/book_mall/categories/108000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"科幻\", \"/ajax/book_mall/categories/109000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"游戏\", \"/ajax/book_mall/categories/110000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"体育\", \"/ajax/book_mall/categories/111000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"N次元\", \"/ajax/book_mall/categories/112000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"现实\", \"/ajax/book_mall/categories/113000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"诸天无限\", \"/ajax/book_mall/categories/115000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"女生\", null, 1);\npush(\"玄幻言情\", \"/ajax/book_mall/categories/201000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"仙侠奇缘\", \"/ajax/book_mall/categories/202000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"古代言情\", \"/ajax/book_mall/categories/203000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"现代言情\", \"/ajax/book_mall/categories/204000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"浪漫青春\", \"/ajax/book_mall/categories/205000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"奇闻怪谈\", \"/ajax/book_mall/categories/206000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"科幻空间\", \"/ajax/book_mall/categories/207000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"游戏竞技\", \"/ajax/book_mall/categories/208000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"N次元\", \"/ajax/book_mall/categories/209000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"同人纯爱\", \"/ajax/book_mall/categories/210000?page={{page-1}}&pageSize=20\", 0.25);\npush(\"短篇\", \"/ajax/book_mall/categories/211000?page={{page-1}}&pageSize=20\", 0.25);\nJSON.stringify(result);",
+    "ruleSearch": {
+      "bookList": "$.data.bookList[*]",
+      "name": "$.title",
+      "author": "$.authorName",
+      "intro": "$.intro",
+      "coverUrl": "$.coverUrl",
+      "kind": "$.categoryName",
+      "wordCount": "$.allWords",
+      "bookUrl": "/ajax/or/ty/book?sourceName={{$.sourceName}}&sourceId={{$.sourceId}}"
+    },
+    "ruleExplore": {
+      "bookList": "$.data.bookList[*]",
+      "name": "$.title",
+      "author": "$.authorName",
+      "intro": "$.intro",
+      "coverUrl": "$.coverUrl",
+      "kind": "$.categoryName",
+      "wordCount": "$.allWords",
+      "bookUrl": "/ajax/or/ty/book?sourceName={{$.sourceName}}&sourceId={{$.sourceId}}"
+    },
+    "ruleBookInfo": {
+      "name": "$.data.title",
+      "author": "$.data.authorName",
+      "intro": "$.data.intro",
+      "coverUrl": "$.data.coverUrl",
+      "kind": "$.data.categoryName",
+      "wordCount": "$.data.allWords",
+      "lastChapter": "$.data.latestChapter",
+      "tocUrl": "@js:var m = String(baseUrl).match(/sourceId=([^&]+)/); '/ajax/or/authopt/ty/chapter_list?sourceName=tf&sourceId=' + m[1] + '&page=0&pageSize=100'"
+    },
+    "ruleToc": {
+      "chapterList": "$.data.chapters[*]",
+      "chapterName": "$.chapterTitle",
+      "chapterUrl": "@js:var m = String(book.bookUrl).match(/sourceId=([^&]+)/); '/ajax/or/authopt/ty/chapter_content?sourceName=tf&sourceId=' + m[1] + '&chapterId=' + String(result.chapterId)",
+      "nextTocUrl": "@js:var json = JSON.parse(result); var chapters = json.data.chapters || []; if (chapters.length < 100) { ''; } else { var url = String(baseUrl); var pageMatch = url.match(/page=(\\d+)/); var currentPage = pageMatch ? parseInt(pageMatch[1]) : 0; url.replace(/page=\\d+/, 'page=' + (currentPage + 1)); }"
+    },
+    "ruleContent": {
+      "content": "$.data.content##本章未完.*|请收藏.*|看书.*|本章节未.*|\\n{3,}",
+      "chapterName": "$.data.chapterTitle"
+    }
+  }
+]
