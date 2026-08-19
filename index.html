@@ -291,7 +291,7 @@
       </ol>
     </div>
     <div class="friendlinks">
-      <h4>🔗 友情链接</h4>
+      <h4>🔗 友情链接（点击跳转）</h4>
       <div class="fl-list" id="friendList"></div>
     </div>
     <div class="linkline">发布页地址：<span id="baseUrl"></span></div>
@@ -526,7 +526,10 @@
     return t.content.firstElementChild;
   }
   /* 友情链接（在此添加：{name:"名字", url:"https://..."}） */
-  var FRIEND_LINKS = [];
+  var FRIEND_LINKS = [
+    {name:"Syiism聚合", url:"https://loomproxy.dpdns.org/panel"},
+    {name:"阅读各分支汇总下载", url:"https://legado.ccccocccc.cc/index.php?i=1"}
+  ];
   function renderFriendLinks(){
     var el = $("friendList");
     if (!el) return;
