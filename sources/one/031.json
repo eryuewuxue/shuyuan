@@ -1,0 +1,56 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：1097919737",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "18禁书屋🔞",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://today.18jsw.wiki",
+    "bookUrlPattern": "https://today.18jsw.wiki/app.php/book/detail/id/\\d+\\.html",
+    "concurrentRate": "1000",
+    "customButton": false,
+    "customOrder": 84,
+    "enabled": true,
+    "enabledCookieJar": false,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "家庭乱伦::/app.php/book/search/wd/家庭乱伦/page/{{page}}.html\n多人群交::/app.php/book/search/wd/多人群交/page/{{page}}.html\n公司职场::/app.php/book/search/wd/公司职场/page/{{page}}.html\n露出暴露::/app.php/book/search/wd/露出暴露/page/{{page}}.html\n强暴性虐::/app.php/book/search/wd/强暴性虐/page/{{page}}.html\n西方主题::/app.php/book/search/wd/西方主题/page/{{page}}.html\n同性主题::/app.php/book/search/wd/同性主题/page/{{page}}.html\n绿帽主题::/app.php/book/search/wd/绿帽主题/page/{{page}}.html\n经典回忆::/app.php/book/search/wd/经典回忆/page/{{page}}.html\n人妻女友::/app.php/book/search/wd/人妻女友/page/{{page}}.html\n学生校园::/app.php/book/search/wd/学生校园/page/{{page}}.html\n伴侣交换::/app.php/book/search/wd/伴侣交换/page/{{page}}.html\n都市生活::/app.php/book/search/wd/都市生活/page/{{page}}.html\n动漫游戏::/app.php/book/search/wd/动漫游戏/page/{{page}}.html\n名人明星::/app.php/book/search/wd/名人明星/page/{{page}}.html\n经验故事::/app.php/book/search/wd/经验故事/page/{{page}}.html\n古典玄幻::/app.php/book/search/wd/古典玄幻/page/{{page}}.html\n编辑推荐::/app.php/book/search/wd/编辑推荐/page/{{page}}.html",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\"}",
+    "lastUpdateTime": 1785937077877,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "p.author@text##作者：",
+      "coverUrl": "img@src",
+      "init": "<js>\nvar enc = result.match(/var AesContent = \"([^\"]+)\"/);\nif (enc) {\n    var crypto = java.createSymmetricCrypto(\"AES/CBC/PKCS5Padding\", \"MBvRSW09wFy30Jlb\", \"p945PZ2aKmFOktpN\");\n    result = crypto.decryptStr(enc[1]);\n}\n</js>",
+      "intro": "p.intro@text",
+      "kind": "p a.layui-btn-radius@text",
+      "lastChapter": "p.new a@text",
+      "name": "p.name strong@text"
+    },
+    "ruleContent": {
+      "content": "@js:\nvar enc = result.match(/var AesContent = \"([^\"]+)\"/);\nif (enc) {\n    var crypto = java.createSymmetricCrypto(\"AES/CBC/PKCS5Padding\", \"MBvRSW09wFy30Jlb\", \"p945PZ2aKmFOktpN\");\n    result = crypto.decryptStr(enc[1]);\n}\n// 提取 div.content 内容\nvar m = result.match(/<div class=\"content\">([\\s\\S]*?)<\\/div>\\s*<div class=\"pager\">/);\nif (m) {\n    result = m[1];\n}\n// 清理广告和样式\nresult = result.replace(/<style>[\\s\\S]*?<\\/style>/g, \"\");\nresult = result.replace(/<div class=\"ydyym\">[\\s\\S]*?<\\/div>/g, \"\");\nresult = result.replace(/<a[^>]*data-id[^>]*>[\\s\\S]*?<\\/a>/g, \"\");\nresult = result.replace(/最新网址：[^<]*/g, \"\");\nresult = result.replace(/永久网址：[^<]*/g, \"\");\nresult = result.replace(/<!-- [\\s\\S]*?-->/g, \"\");\n"
+    },
+    "ruleExplore": {
+      "bookList": "<js>\nvar enc = result.match(/var AesContent = \"([^\"]+)\"/);\nif (enc) {\n    var crypto = java.createSymmetricCrypto(\"AES/CBC/PKCS5Padding\", \"MBvRSW09wFy30Jlb\", \"p945PZ2aKmFOktpN\");\n    result = crypto.decryptStr(enc[1]);\n}\n</js>\nul.list li",
+      "bookUrl": "p.bookname a@href",
+      "coverUrl": "img@data-original",
+      "intro": "p.intro@text",
+      "kind": "p.data span.layui-btn-danger@text",
+      "name": "p.bookname a@text"
+    },
+    "ruleSearch": {
+      "bookList": "<js>\nvar enc = result.match(/var AesContent = \"([^\"]+)\"/);\nif (enc) {\n    var crypto = java.createSymmetricCrypto(\"AES/CBC/PKCS5Padding\", \"MBvRSW09wFy30Jlb\", \"p945PZ2aKmFOktpN\");\n    result = crypto.decryptStr(enc[1]);\n}\n</js>\nul.list li",
+      "bookUrl": "p.bookname a@href",
+      "coverUrl": "img@data-original",
+      "intro": "p.intro@text",
+      "kind": "p.data span.layui-btn-danger@text",
+      "name": "p.bookname a@text"
+    },
+    "ruleToc": {
+      "chapterList": "<js>\nvar enc = result.match(/var AesContent = \"([^\"]+)\"/);\nif (enc) {\n    var crypto = java.createSymmetricCrypto(\"AES/CBC/PKCS5Padding\", \"MBvRSW09wFy30Jlb\", \"p945PZ2aKmFOktpN\");\n    result = crypto.decryptStr(enc[1]);\n}\n</js>\nul.read li",
+      "chapterName": "a@text",
+      "chapterUrl": "a@href"
+    },
+    "searchUrl": "/app.php/book/search/wd/{{key}}/page/{{page}}.html,{'charset':'utf-8'}",
+    "weight": 0
+  }
+]
