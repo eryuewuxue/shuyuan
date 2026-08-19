@@ -1,7 +1,7 @@
 [
   {
     "sourceName": "书源发布",
-    "sourceUrl": "https://eryuewuxue.github.io/shuyuan/",
+    "sourceUrl": "https://eryuewuxue.github.io/shuyuan/subscription.json",
     "sourceGroup": "书源发布",
     "sourceIcon": "https://eryuewuxue.github.io/shuyuan/assets/icon.png",
     "enabled": true,
@@ -11,6 +11,15 @@
     "loadWithBaseUrl": true,
     "articleStyle": 0,
     "singleUrl": true,
-    "bookSourceComment": "更新时间：2026-08-19 16:07；共 36 个书源。"
+    "sortUrl": "更新列表::https://eryuewuxue.github.io/shuyuan/subscription.html",
+    "headerMap": {},
+    "loginUrl": "",
+    "bookSourceComment": "更新时间：2026-08-19 18:51；共 37 个书源。",
+    "ruleArticles": "class.article",
+    "ruleTitle": "tag.h2@text",
+    "ruleLink": "tag.a@href",
+    "rulePubDate": "class.pub-date@text",
+    "ruleDescription": "class.description@text",
+    "ruleContent": "id.content@html"
   }
 ]
