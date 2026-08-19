@@ -253,7 +253,7 @@
         <img class="head-avatar" src="assets/icon.png" alt="二月无雪头像">
       </div>
       <div class="head-btns">
-        <button class="icon-btn" id="btnSubscription" title="打开订阅源二维码">
+        <button class="icon-btn" id="btnSubscription" title="打开订阅源页面">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
           订阅源
         </button>
@@ -599,7 +599,7 @@
     copyText(absUrl(ALL_FILE), "已复制全部书源导入地址");
   });
   $("btnSubscription").addEventListener("click", function(){
-    openQR("订阅源", absUrl("subscription.json"), "subscription");
+    window.location.href = "https://shuyuan.nyasama.net/shuyuan/e703bd3920b67f7b2ca6d58fbb23602f.json";
   });
   $("btnQQ").addEventListener("click", function(){
     copyText("1097919737", "已复制Q群号 1097919737");
