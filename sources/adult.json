@@ -1,5 +1,60 @@
 [
   {
+    "bookSourceName": "麻豆传媒AI🔞",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://mdcmai4.xyz",
+    "customButton": false,
+    "customOrder": 1,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "[{\"title\": \"🔥短剧热播榜\", \"url\": \"https://mdcmai4.xyz/api/v1/short-dramas?productId=1&sortBy=heat&page={{page}}&size=12\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"🔥短剧最新\", \"url\": \"https://mdcmai4.xyz/api/v1/short-dramas?productId=1&sortBy=latest&page={{page}}&size=12\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"每日更新\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=27&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"国产自拍（最新更新）\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=1&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AV - 中文字幕\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=2&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"AV - 无码流出\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=8&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"麻豆原创AI\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=6&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"麻豆传媒\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=9&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"麻豆x性吧联合原创\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=10&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"探花大神\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=4&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"91大神\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=7&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"黑料吃瓜\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=19&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"反差母狗\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=21&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"破解偷拍\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=20&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"重口调教\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=14&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"直播大秀\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=15&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"网红主播\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=16&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"媚黑母狗\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=17&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"白虎少女\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=18&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"白虎嫩妹\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=22&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"家庭乱伦\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=23&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"熟女偷情\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=24&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"网黄原创\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=25&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"清纯少女\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=13&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}, {\"title\": \"世界杯专栏\", \"url\": \"https://mdcmai4.xyz/api/v1/videos?categoryId=28&page={{page}}&size=60\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 0.33}}]",
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\", \"Referer\": \"https://mdcmai4.xyz/\"}",
+    "lastUpdateTime": 1787049768508,
+    "loginUi": "@js:\nvar all = [];\nall.push({\"name\": \"💬 交流群 1097919737（点击跳转）\", \"type\": \"button\", \"action\": \"joinQQGroup()\", \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}});\nresult = JSON.stringify(all);\n",
+    "loginUrl": "var QQ_GROUP = \"1097919737\";\nfunction login(){\n  try{ java.upLoginData(); }catch(e){}\n  java.toast(\"无需登录，直接使用\");\n}\nfunction joinQQGroup(){\n  var u = \"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=group&uin=\" + QQ_GROUP;\n  try{\n    java.openUrl(u);\n    java.toast(\"已尝试打开QQ，若未跳转请手动搜索群号 \" + QQ_GROUP);\n  }catch(e){ java.longToast(\"请手动在QQ中搜索群号 \" + QQ_GROUP); }\n}\n",
+    "respondTime": 60000,
+    "ruleBookInfo": {
+      "author": "$.data.authorName",
+      "coverUrl": "@js:result=(function(){var d=(typeof result==='string')?JSON.parse(result):result;var x=d.data||d;var u=x.coverUrl||'';if(!u)return '';if(u.indexOf('http')===0)return u;if(u.indexOf('/api/v1/')===0||u.indexOf('/uploads/')===0)return 'https://mdcmai4.xyz'+u;return 'https://mdcmai4.xyz/api/v1/image/proxy?path='+encodeURIComponent(u);})()",
+      "intro": "$.data.description",
+      "kind": "@js:result=(function(){var d=(typeof result==='string')?JSON.parse(result):result;var x=d.data||d;if(x.episodes)return 'AI短剧 · '+x.episodeCount+'集 · 🔥'+x.heatCount;return x.categoryName+' · '+x.durationSec+'秒 · 👀'+x.viewCount;})()",
+      "lastChapter": "@js:(function(){var d=(typeof result==='string')?JSON.parse(result):result;return d.data.publishedAt;})()",
+      "name": "$.data.title"
+    },
+    "ruleContent": {
+      "content": "@js:(function(){\n  var url=String(baseUrl||'');\n  if(url){\n    try{java.startBrowser(url,'');}catch(e){}\n  }\n  return url;\n})()"
+    },
+    "ruleExplore": {
+      "author": "$.authorName",
+      "bookList": "$.data.items",
+      "bookUrl": "@js:result=(function(){var d=(typeof result==='string')?JSON.parse(result):result;if(d.episodeCount!=null&&d.episodeCount!==undefined)return 'https://mdcmai4.xyz/api/v1/short-dramas/'+d.id+'?productId=1';return 'https://mdcmai4.xyz/api/v1/videos/'+d.id;})()",
+      "coverUrl": "@js:result=(function(){var d=(typeof result==='string')?JSON.parse(result):result;var u=d.coverUrl||'';if(!u)return '';if(u.indexOf('http')===0)return u;if(u.indexOf('/api/v1/')===0||u.indexOf('/uploads/')===0)return 'https://mdcmai4.xyz'+u;return 'https://mdcmai4.xyz/api/v1/image/proxy?path='+encodeURIComponent(u);})()",
+      "intro": "$.description",
+      "kind": "@js:result=(function(){var d=(typeof result==='string')?JSON.parse(result):result;if(d.episodeCount)return '短剧·'+d.episodeCount+'集·🔥'+d.heatCount;return d.categoryName+'·'+d.durationSec+'秒·👀'+d.viewCount;})()",
+      "lastChapter": "{{$.publishedAt}}",
+      "name": "$.title"
+    },
+    "ruleSearch": {
+      "author": "$.authorName",
+      "bookList": "$.data.items",
+      "bookUrl": "https://mdcmai4.xyz/api/v1/videos/{{$.id}}",
+      "coverUrl": "@js:result=(function(){var d=(typeof result==='string')?JSON.parse(result):result;var u=d.coverUrl||'';if(!u)return '';if(u.indexOf('http')===0)return u;if(u.indexOf('/api/v1/')===0||u.indexOf('/uploads/')===0)return 'https://mdcmai4.xyz'+u;return 'https://mdcmai4.xyz/api/v1/image/proxy?path='+encodeURIComponent(u);})()",
+      "intro": "$.description",
+      "kind": "{{$.categoryName}} · {{$.durationSec}}秒 · 👀{{$.viewCount}}",
+      "lastChapter": "{{$.publishedAt}}",
+      "name": "$.title"
+    },
+    "ruleToc": {
+      "chapterList": "@js:result=(function(){\n  var d=(typeof result==='string')?JSON.parse(result):result;\n  var data=d.data||d;\n  var out=[];\n  if(data.episodes&&data.episodes.length>0){\n    for(var i=0;i<data.episodes.length;i++){\n      var e=data.episodes[i];\n      out.push({title:e.title||('第'+(e.episodeNo||(i+1))+'集'),url:'https://mdcmai4.xyz/api/v1/m3u8/proxy?path='+encodeURIComponent(e.videoUrl||'')});\n    }\n  }else if(data.videoUrl){\n    out.push({title:data.title||'',url:'https://mdcmai4.xyz/api/v1/m3u8/proxy?path='+encodeURIComponent(data.videoUrl)});\n  }\n  return out;\n})()",
+      "chapterName": "title",
+      "chapterUrl": "url"
+    },
+    "searchUrl": "https://mdcmai4.xyz/api/v1/videos/search?q={{key}}&page={{page}}&size=60",
+    "weight": 0
+  },
+  {
     "bookSourceComment": "不解锁付费\nby二月无雪\n交流群：1097919737",
     "bookSourceGroup": "二月无雪",
     "bookSourceName": "黄豆短剧🔞",
