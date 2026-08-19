@@ -1,0 +1,55 @@
+[
+  {
+    "bookSourceComment": "手打书小说书源\n网站：https://www.shoudashu.com/\n\n规则说明：\n1. 搜索：GET到/index.php?a=search&keyword={{key}}\n2. 详情页：/info/{exid}.html 包含完整书籍信息和章节列表\n3. 章节列表：#chapter-list 下的a标签\n4. 正文：网站有图形验证码，必须用WebView加载让用户手动输入验证码\n5. 双重验证：首次访问需滑动屏幕，阅读正文需输入图形验证码\n6. 图片解密：用base64DecodeToByteArray获取原始字节再异或，避免UTF-8解码破坏密文\n7. 图片防盗链：使用Legado官方语法 src,JSON 让Glide带Referer下载\n8. 发现页：8个分类(单页) + 6个排行榜(可翻页)，分类用div.book-item，排行榜用table tbody tr\n\n使用说明：\n- 阅读章节时会弹出WebView显示验证码图片\n- 请手动输入验证码后提交\n- 验证后正文会显示完整内容\n- 图片由Legado内置Glide下载，带Referer绕过防盗链",
+    "bookSourceGroup": "小说",
+    "bookSourceName": "手打书",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.shoudashu.com",
+    "customButton": false,
+    "customOrder": -1,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1\", \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\", \"Accept-Language\": \"zh-CN,zh;q=0.9\", \"Cookie\": \"user_active_token=c7e7c8b4d064e73d0ff8cae2fa57b61e\"}",
+    "lastUpdateTime": 0,
+    "loginCheckJs": "(function(a){var r=a.url(),o=a.body(),t=a.code();if(o&&(403===t||(200===t&&(o.includes('安全验证')||o.includes('请输入验证码继续阅读')||o.includes('captcha-ui'))))){var c=source.get('v_count')||'0';c=parseInt(c)+1;source.put('v_count',c);if(c<=2){try{var h=java.webView(r,r,'setTimeout(function(){window.legado.getHTML(document.documentElement.outerHTML);},3000);');if(h&&!h.includes('captcha-ui')&&!h.includes('安全验证')){source.put('v_count','0');return java.connect(r)}}catch(e){}}java.toast('请输入图形验证码');java.startBrowserAwait(r,'请输入验证码');source.put('v_count','0');return java.connect(r)}return a})(result)",
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": ".book-stats span.0 b@text",
+      "coverUrl": ".book-cover img@src",
+      "intro": ".book-intro@text##内容简介：",
+      "kind": ".book-stats span.1 b@text",
+      "lastChapter": ".book-stats span.3 b@text",
+      "name": "h1@text"
+    },
+    "ruleContent": {
+      "content": "<js>\nvar html = String(result);\nvar textMatch = html.match(/<div class=\"novel-start-text\">([\\s\\S]*?)<\\/div>/);\nvar result = textMatch ? textMatch[1] : '';\nvar saltMatch = html.match(/var\\s+js_salt\\s*=\\s*\"([^\"]+)\"/);\nvar salt = saltMatch ? saltMatch[1] : '';\nvar encMatch = html.match(/var\\s+encImgs\\s*=\\s*\\[([\\s\\S]*?)\\]/);\nif(encMatch && salt){\n    var encStr = encMatch[1];\n    var encList = encStr.match(/\"[A-Za-z0-9+\\/=]+\"/g);\n    if(encList){\n        var opt = {\"headers\":{\"User-Agent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1\",\"Referrer\":\"https://www.shoudashu.com\"}};\n        var optStr = JSON.stringify(opt).replace(/\"/g, '&quot;');\n        for(var k = 0; k < encList.length; k++){\n            var e = encList[k].replace(/\"/g, '');\n            try {\n                var bytes = java.base64DecodeToByteArray(e);\n                var r = '';\n                for(var i = 0; i < bytes.length; i++){\n                    r += String.fromCharCode((bytes[i] & 0xFF) ^ salt.charCodeAt(i % salt.length));\n                }\n                if(r.indexOf('http') !== 0 && r.indexOf('/') === 0){\n                    r = 'https://www.shoudashu.com' + r;\n                }\n                result += '<img src=\"' + r + ',' + optStr + '\">\\n';\n            } catch(err){}\n        }\n    }\n}\nresult;\n</js>",
+      "nextContentUrl": "text.下一章@href"
+    },
+    "exploreUrl": "玄幻奇幻::/fenlei/1.html\n武侠仙侠::/fenlei/2.html\n都市言情::/fenlei/3.html\n历史军事::/fenlei/4.html\n推理灵异::/fenlei/5.html\n科幻网游::/fenlei/6.html\n同人小说::/fenlei/7.html\n其他类型::/fenlei/8.html\n总点击榜::/paihang/allvisit/{{page}}.html\n月排行榜::/paihang/monthvisit/{{page}}.html\n周排行榜::/paihang/weekvisit/{{page}}.html\n日排行榜::/paihang/dayvisit/{{page}}.html\n新书排行::/paihang/postdate/{{page}}.html\n更新排行::/paihang/lastupdate/{{page}}.html",
+    "ruleExplore": {
+      "author": ".book-meta span@text##.*作者：||td.t-author@text",
+      "bookList": ".book-item, .rank-container tbody tr",
+      "bookUrl": ".book-info h5 a@href||a.b-name@href",
+      "coverUrl": ".book-cover a img@src",
+      "intro": ".book-intro@text",
+      "name": ".book-info h5 a@text||a.b-name@text"
+    },
+    "ruleSearch": {
+      "author": ".book-meta span@text##.*作者：",
+      "bookList": ".book-item",
+      "bookUrl": ".book-info h5 a@href",
+      "coverUrl": ".book-cover a img@src",
+      "intro": ".book-intro@text##内容简介：",
+      "name": ".book-info h5 a@text"
+    },
+    "ruleToc": {
+      "chapterList": "#chapter-list a",
+      "chapterName": "text",
+      "chapterUrl": "href"
+    },
+    "searchUrl": "/index.php?a=search&keyword={{key}}",
+    "weight": 0
+  }
+]
