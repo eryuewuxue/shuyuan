@@ -41,16 +41,23 @@
   .title{font-size:24px;font-weight:800;letter-spacing:.5px}
   .sub{font-size:12.5px;color:var(--muted);margin-top:5px}
   .stats{display:flex;flex-direction:column;gap:8px;margin-top:14px}
-  .stat-row{display:flex;gap:8px}
   .stat{
-    flex:1;background:var(--glass);border:1px solid var(--glass-border);border-radius:14px;
-    padding:8px 12px;text-align:center;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    background:var(--glass);border:1px solid var(--glass-border);border-radius:14px;
+    padding:9px 14px;text-align:center;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   }
-  .stat.narrow{flex:0 0 1;min-width:0}
-  .stat.wide{flex:1.55}
-  .stat.mid{flex:1.1}
   .stat .lbl{display:block;font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .stat b{display:block;font-size:16px;font-weight:800;color:var(--text);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .stat b{display:block;font-size:16px;font-weight:800;color:var(--text);margin-top:1px}
+  footer .friendlinks{
+    text-align:left;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);
+    padding:14px 16px;margin-bottom:16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  }
+  footer .friendlinks h4{font-size:13.5px;font-weight:800;margin-bottom:9px;color:var(--text)}
+  footer .fl-list{display:flex;flex-wrap:wrap;gap:8px}
+  footer .fl-link{
+    display:inline-flex;align-items:center;text-decoration:none;color:#3A3F47;font-size:12.5px;
+    background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.06);border-radius:99px;padding:6px 14px;
+  }
+  footer .fl-empty{font-size:12px;color:var(--muted)}
   .actions{display:flex;gap:10px;margin-top:16px}
   .btn{
     flex:1;border:none;border-radius:99px;font-size:14px;font-weight:700;padding:13px 10px;
@@ -229,14 +236,10 @@
       </div>
     </div>
     <div class="stats">
-      <div class="stat-row">
-        <div class="stat narrow"><span class="lbl">分组</span><b id="statGroups">--</b></div>
-        <div class="stat narrow"><span class="lbl">最近更新时间</span><b id="statTime">--</b></div>
-      </div>
-      <div class="stat-row">
-        <div class="stat wide"><span class="lbl">总访问量</span><b id="statTotalVisits">--</b></div>
-        <div class="stat mid"><span class="lbl">今日访问量</span><b id="statTodayVisits">--</b></div>
-      </div>
+      <div class="stat"><span class="lbl">总访问量</span><b id="statTotalVisits">--</b></div>
+      <div class="stat"><span class="lbl">今日访问量</span><b id="statTodayVisits">--</b></div>
+      <div class="stat"><span class="lbl">最近更新时间</span><b id="statTime">--</b></div>
+      <div class="stat"><span class="lbl">分组</span><b id="statGroups">--</b></div>
     </div>
     <div class="actions">
       <button class="btn btn-dark" id="btnImportAll">一键导入全部</button>
@@ -264,7 +267,11 @@
         <li><span class="num">3</span><span>也可以直接在弹窗里点「一键导入」唤起阅读 App。</span></li>
       </ol>
     </div>
-    <div class="linkline">网络导入地址：<span id="baseUrl"></span></div>
+    <div class="friendlinks">
+      <h4>🔗 友情链接</h4>
+      <div class="fl-list" id="friendList"></div>
+    </div>
+    <div class="linkline">发布页地址：<span id="baseUrl"></span></div>
     <div class="disclaimer">免责声明：本站书源均整理自网络，仅供学习交流使用，请勿用于商业用途；部分书源含成人内容，请自行甄别。</div>
     <div class="foot-links">
       <button class="foot-link" id="footQQ">交流群 1097919737</button>
@@ -483,8 +490,22 @@
     t.innerHTML = html;
     return t.content.firstElementChild;
   }
+  /* 友情链接（在此添加：{name:"名字", url:"https://..."}） */
+  var FRIEND_LINKS = [];
+  function renderFriendLinks(){
+    var el = $("friendList");
+    if (!el) return;
+    if (!FRIEND_LINKS.length){
+      el.innerHTML = '<span class="fl-empty">敬请期待</span>';
+      return;
+    }
+    el.innerHTML = FRIEND_LINKS.map(function(l){
+      return '<a class="fl-link" href="' + escAttr(l.url) + '" target="_blank" rel="noopener">' + esc(l.name) + '</a>';
+    }).join("");
+  }
   function renderFooter(){
-    $("baseUrl").textContent = absUrl(ALL_FILE);
+    $("baseUrl").textContent = absUrl("");
+    renderFriendLinks();
   }
 
   function switchTab(key){
@@ -553,7 +574,7 @@
     if (hash){
       GROUPS.forEach(function(g){ if (g.key === hash) state.cur = g.key; });
     }
-    $("statGroups").textContent = GROUPS.length;
+    $("statGroups").textContent = GROUPS.map(function(g){ return g.name; }).join(" · ");
     $("statTime").textContent = BUILD_DATE;
     $("footTime").textContent = BUILD_DATE;
     initVisitCount();
