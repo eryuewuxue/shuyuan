@@ -1,0 +1,61 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "第一版主网🔞",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.diyibanzhu.me",
+    "customButton": false,
+    "customOrder": 94,
+    "enabled": true,
+    "enabledCookieJar": false,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar result = [];\nfunction add(title, url, w) {\n    result.push({title: title, url: url, style: {layout_flexGrow: 1, layout_flexBasisPercent: w}});\n}\nadd(\"排行榜\", \"/wap.php?action=list&type=top&id=8\", 0.3);\nadd(\"月榜\", \"/wap.php?action=shuku&tid=8&order=2&pageno={{page}}\", 0.3);\nadd(\"最后更新\", \"/wap.php?action=shuku&tid=8&pageno={{page}}\", 0.3);\nadd(\"总人气\", \"/wap.php?action=shuku&tid=8&order=1&pageno={{page}}\", 0.3);\nadd(\"月人气\", \"/wap.php?action=shuku&tid=8&order=2&pageno={{page}}\", 0.3);\nadd(\"新书\", \"/wap.php?action=shuku&tid=8&order=3&pageno={{page}}\", 0.3);\nadd(\"字数\", \"/wap.php?action=shuku&tid=8&order=4&pageno={{page}}\", 0.3);\nadd(\"点击榜\", \"/wap.php?action=top\", 0.3);\nadd(\"推荐榜\", \"/wap.php?action=top\", 0.3);\nadd(\"字数榜\", \"/wap.php?action=top\", 0.3);\nJSON.stringify(result);\n</js>",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\"}",
+    "lastUpdateTime": 1785904625766,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": ".info@text##.*作者：([^<\\s]+).*##$1",
+      "coverUrl": ".detail img@src",
+      "intro": ".book-intro .bd@text",
+      "kind": ".info@text##.*类型：([^<\\s]+).*##$1",
+      "lastChapter": ".update.chapter-list .bd ul.list li:first-child a@text",
+      "name": "h1@text",
+      "wordCount": ".info@text##.*字数：([0-9]+).*##$1"
+    },
+    "ruleContent": {
+      "content": "#nr1@html",
+      "nextContentUrl": ".curr + a@href",
+      "replaceRegex": "##<font color=\"blue\">本章未完.*?</font>|<center class=\"chapterPages\">.*?</center>|最新章节请访问[^\\s<]*##"
+    },
+    "ruleExplore": {
+      "author": "a.author@text||p.info@text##.*作者：([^\\s<]+).*##$1||dt@text##\\[|\\]",
+      "bookList": "li.column-2,.rank-switch ul.list li",
+      "bookUrl": "a.name@href||a[href*=list]@href",
+      "coverUrl": "img@src",
+      "intro": ".summary@text",
+      "kind": "span span@text##\\[|\\]",
+      "lastChapter": "a[href*=article]@text",
+      "name": "a.name@text||a[href*=list]@text",
+      "wordCount": ".words@text##字数："
+    },
+    "ruleSearch": {
+      "author": "p.info@text##.*作者：([^\\s<]+).*##$1",
+      "bookList": "li.column-2",
+      "bookUrl": "a.name@href",
+      "kind": "span@text##.*(连载中|已完结).*##$1",
+      "lastChapter": "a[href*=article]@text",
+      "name": "a.name@text",
+      "wordCount": ".words@text##字数："
+    },
+    "ruleToc": {
+      "chapterList": ".chapter-list:contains(章节列表) .bd ul.list li",
+      "chapterName": "a@text",
+      "chapterUrl": "a@href",
+      "nextTocUrl": ".nextPage@href"
+    },
+    "searchUrl": "/wap.php?action=search&type=top&wd={{key}}&totalresult=99999&pageno={{page}},{\"charset\":\"gbk\"}",
+    "weight": 0
+  }
+]
