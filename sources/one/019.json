@@ -1,0 +1,54 @@
+[
+  {
+    "bookSourceComment": "得奇小说网(deqixs.org) - 2026年7月修复版\n基于真实HTML源代码（2026-07-03获取）编写\n\n【搜索页面结构】\n- 容器：<div class=\"bookbox\">\n- 书名：<h4 class=\"bookname\"><a>书名</a></h4>\n- 作者：<div class=\"author\">作者：xxx</div>（第一个）\n- 阅读量：<div class=\"author\">阅读量：xxx</div>（第二个）\n- 最新章节：<div class=\"cat\"><a>章节名</a></div>\n- 简介：<div class=\"update\">简介：xxx</div>\n\n【分类页面结构】\n- 容器：<div class=\"item\">\n- 书名：<h3><a>书名</a></h3>\n- 封面：<img src=\"封面地址\" />\n- 作者：<p><a>作者：xxx</a></p>\n- 状态：<p><span>连载中/已完结</span><span>玄幻小说</span></p>\n- 最新章节：<ul><li><a>章节名</a></li></ul>",
+    "bookSourceGroup": "小说",
+    "bookSourceName": "得奇小说网",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.deqixs.org",
+    "customOrder": 20,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "最新更新::/top/lastupdate/{{page}}.html\n玄幻小说::/sort/1/{{page}}.html\n仙侠小说::/sort/2/{{page}}.html\n都市小说::/sort/3/{{page}}.html\n历史小说::/sort/4/{{page}}.html\n军事小说::/sort/5/{{page}}.html\n科幻小说::/sort/6/{{page}}.html\n言情小说::/sort/7/{{page}}.html\n完结小说::/quanben/{{page}}.html",
+    "ruleExplore": {
+      "bookList": ".item",
+      "name": "h3 a@text",
+      "bookUrl": "h3 a@href",
+      "author": "p.1 a@text##作者：##",
+      "coverUrl": "img@src",
+      "intro": "",
+      "lastChapter": "ul li.0 a@text",
+      "kind": "p.0 span.0@text"
+    },
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "name": "h1 a@text",
+      "author": ".itemtxt p a@text##作者：##",
+      "coverUrl": ".imga img@src",
+      "intro": ".des@text",
+      "kind": ".itemtxt p span.0@text",
+      "lastChapter": ".itemtxt ul li.0 a@text"
+    },
+    "ruleContent": {
+      "content": ".con@html##(本章完|PS：|PS:|求月票|更新不易|看最新章节|看最新无错|最新小说章节|本章节未完|请订阅|速.?读.?谷|章节内容不完整|得奇小说网|deqixs.org|<script[\\s\\S]*?</script>|<style[\\s\\S]*?</style>|&nbsp;|<!--[\\s\\S]*?-->)##",
+      "nextContentUrl": "text.下一页@href"
+    },
+    "ruleSearch": {
+      "bookList": ".bookbox",
+      "name": ".bookname a@text",
+      "bookUrl": ".bookname a@href",
+      "coverUrl": ".bookname a@href@js:let id=result.match(/\\/(\\d+)\\/$/)[1];let sid=Math.floor(parseInt(id)/1000);return '/files/article/image/'+sid+'/'+id+'/'+id+'s.jpg';",
+      "author": ".author.0@text##作者：##",
+      "lastChapter": ".cat a@text",
+      "intro": ".update@text##简介：##"
+    },
+    "ruleToc": {
+      "chapterList": "#list ul li a",
+      "chapterName": "text",
+      "chapterUrl": "href"
+    },
+    "searchUrl": "/modules/article/search.php?searchkey={{key}}&action=login",
+    "weight": 0
+  }
+]
