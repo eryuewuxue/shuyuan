@@ -1,0 +1,50 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "H禁漫画🔞",
+    "bookSourceType": 2,
+    "bookSourceUrl": "https://xn--drdgrjra-xx6n10qjm3s.cartoonav-01.top",
+    "bookUrlPattern": "https://xn--drdgrjra-xx6n10qjm3s.cartoonav-01.top/v/\\d+",
+    "customButton": false,
+    "customOrder": 61,
+    "enabled": true,
+    "enabledCookieJar": false,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar result = [];\nvar main = infoMap[\"主分类\"] || \"人妻\";\nvar base = \"https://xn--drdgrjra-xx6n10qjm3s.cartoonav-01.top\";\nvar cats = {\n  \"人妻\": 1,\n  \"校园\": 2,\n  \"乱伦\": 3,\n  \"异世界\": 4,\n  \"巨乳\": 5,\n  \"NTR\": 7,\n  \"制服\": 8,\n  \"动漫H\": 9\n};\nvar subs = {\n  \"人妻\": [[\"全部\",\"\"],[\"御手洗しお\",\"御手洗しお\"],[\"与你交往\",\"キミとだか\"],[\"45分钟男友\",\"45分で彼\"],[\"C96第5卷\",\"C96_5\"],[\"爱上陆\",\"愛上陸\"],[\"第4卷\",\"4_\"],[\"体验\",\"体験\"],[\"催眠\",\"催眠\"]],\n  \"校园\": [[\"全部\",\"\"],[\"配信女子\",\"配信女子ナ\"],[\"生出\",\"生出\"],[\"女子\",\"女子\"],[\"粉织绝食\",\"粉織_絶食\"],[\"食系\",\"食系\"],[\"1-3话\",\"1_3\"],[\"性欲\",\"性欲\"],[\"男子\",\"男子\"]],\n  \"乱伦\": [[\"全部\",\"\"],[\"我和叔叔\",\"私、叔父、\"],[\"母女的槛\",\"母娘の檻\"],[\"夏与阿姨\",\"夏とおばさ\"],[\"你的妈妈\",\"你的媽媽\"],[\"幻乐园\",\"幻樂園\"],[\"姐姐与父亲\",\"姉は親父に\"],[\"孕母第1\",\"孕母 第1\"],[\"爷爷与夜\",\"爺わら_夜\"]],\n  \"异世界\": [[\"全部\",\"\"],[\"Circle\",\"Circl\"],[\"自拍少女\",\"自撮り少女\"],[\"COMIC\",\"COMIC\"],[\"BAVEL\",\"BAVEL\"],[\"2017\",\"2017\"],[\"少女\",\"少女\"],[\"SYG\",\"SYG -\"],[\"Sell\",\"Sell\"]],\n  \"巨乳\": [[\"全部\",\"\"],[\"Passion\",\"Passi\"],[\"17\",\"17\"],[\"C93\",\"(C93)\"],[\"侍奉\",\"奉仕\"],[\"FateGO\",\"FateG\"],[\"Order\",\"Order\"],[\"性生活\",\"性生活\"],[\"气旋\",\"サイクロン\"]],\n  \"NTR\": [[\"全部\",\"\"],[\"不可视汉化\",\"【不可视汉\"],[\"催眠\",\"催眠\"],[\"汉化\",\"汉化\"],[\"不可\",\"不可\"],[\"偷窃湿身\",\"万引き濡れ\"],[\"NTR\",\"NTR\"],[\"双重\",\"デュアルス\"],[\"WEEKLY\",\"WEEKL\"]],\n  \"制服\": [[\"全部\",\"\"],[\"向日葵之夜\",\"向日葵ハ夜\"],[\"高潮不止\",\"イキ抜きホ\"],[\"2019\",\"2019\"],[\"仓田有稀子\",\"倉田有稀子\"],[\"仓田有\",\"倉田有\"],[\"稀子\",\"稀子\"],[\"冬日某天\",\"冬のある日\"],[\"令人虚脱\",\"令人虛脫的\"]],\n  \"动漫H\": [[\"全部\",\"\"],[\"微笑酱\",\"にこびぃ_\"],[\"不情愿\",\"不情\"],[\"汉化\",\"漢化\"],[\"组汉化\",\"組漢化組\"],[\"Digital\",\"_Digi\"],[\"小姐\",\"小姐\"],[\"强欲促进\",\"強欲促進株\"],[\"促进\",\"促進\"]]\n};\nvar mainChars = [\"人妻\",\"校园\",\"乱伦\",\"异世界\",\"巨乳\",\"NTR\",\"制服\",\"动漫H\"];\nresult.push({title:\"主分类\", type:\"select\", chars:mainChars, default:main, action:\"java.refreshExplore()\", style:{layout_flexGrow:1, layout_flexBasisPercent:1}});\nvar subList = subs[main] || [];\nvar cid = cats[main];\nfor (var i = 0; i < subList.length; i++) {\n    var name = subList[i][0];\n    var wd = subList[i][1];\n    var url;\n    if (wd == \"\") {\n        url = base + \"/show/\" + cid + \"/by/time/page/{{page}}/\";\n    } else {\n        url = base + \"/s/page/{{page}}/wd/\" + encodeURIComponent(wd) + \"/\";\n    }\n    result.push({title:name, url:url, style:{layout_flexGrow:1, layout_flexBasisPercent:0.25}});\n}\nJSON.stringify(result);\n</js>",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\",\"Referer\":\"https://xn--drdgrjra-xx6n10qjm3s.cartoonav-01.top/\"}",
+    "lastUpdateTime": 1785907714932,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "coverUrl": "div.book-pic img@src",
+      "intro": "div.content-item.custom-tag a@text",
+      "kind": "div.category a@text",
+      "name": "div.type-name@text"
+    },
+    "ruleContent": {
+      "content": "@js:\nvar m = src.match(/data-screenshots=\"([^\"]*)\"/);\nif (m) {\n    var imgs = m[1].split(/[#$]/).filter(function(s){return s.length>0});\n    imgs.map(function(u){return '<img src=\"' + u + '\">'}).join(\"\\n\");\n} else {\n    \"\";\n}"
+    },
+    "ruleExplore": {
+      "bookList": "a.video-item-col",
+      "bookUrl": "href",
+      "coverUrl": "img@data-src",
+      "name": ".video-desc-content@text",
+      "wordCount": ".video-desc-comment span.0@text##浏览"
+    },
+    "ruleSearch": {
+      "bookList": "a.video-item-col",
+      "bookUrl": "href",
+      "coverUrl": "img@data-src",
+      "name": ".video-desc-content@text",
+      "wordCount": ".video-desc-comment span.0@text##浏览"
+    },
+    "ruleToc": {
+      "chapterList": "<js>\n[\n  {\n    \"name\": \"正文\",\n    \"url\": baseUrl\n  }\n]\n</js>",
+      "chapterName": "name",
+      "chapterUrl": "url"
+    },
+    "searchUrl": "https://xn--drdgrjra-xx6n10qjm3s.cartoonav-01.top/s/page/{{page}}/wd/{{key}}/",
+    "weight": 0
+  }
+]
