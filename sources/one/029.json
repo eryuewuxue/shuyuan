@@ -1,0 +1,46 @@
+[
+  {
+    "bookSourceName": "环安小说网",
+    "bookSourceUrl": "https://www.haxs.me",
+    "bookSourceType": 0,
+    "enabled": true,
+    "enabledExplore": true,
+    "enabledCookieJar": true,
+    "charset": "utf-8",
+    "header": "{\"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\"}",
+    "respondTime": 180000,
+    "exploreUrl": "剧情::/tag/8/{{page}}.html\n调教::/tag/18/{{page}}.html\n奇幻::/tag/19/{{page}}.html\n完结::/tag/12/{{page}}.html\n乱伦::/tag/15/{{page}}.html",
+    "searchUrl": "/search/?searchkey={{key}}&searchtype=all&classid=0",
+    "ruleSearch": {
+      "bookList": ".bk",
+      "name": "h3@text",
+      "author": ".autor@text##作者：",
+      "bookUrl": "a@href",
+      "intro": "p@text",
+      "lastChapter": ".date@text"
+    },
+    "ruleExplore": {
+      "bookList": ".bk",
+      "name": "h3@text",
+      "author": ".autor@text##作者：",
+      "bookUrl": "a@href",
+      "intro": "p@text",
+      "lastChapter": ".date@text"
+    },
+    "ruleBookInfo": {
+      "name": ".infos h1@text",
+      "author": ".date a@text",
+      "intro": "",
+      "lastChapter": ".book_list ul li.-1 a@text"
+    },
+    "ruleToc": {
+      "chapterList": ".book_list ul li a",
+      "chapterName": "text",
+      "chapterUrl": "href"
+    },
+    "ruleContent": {
+      "content": ".read_chapterDetail@html<js>(function(){var m={1:'男',2:'人',3:'啊',4:'爱',5:'按',6:'暴',7:'臂',8:'逼',9:'擦',10:'潮',11:'操',12:'插',13:'吃',14:'抽',15:'处',16:'床',17:'春',18:'唇',19:'刺',20:'粗',21:'大',22:'洞',23:'逗',24:'硬',25:'儿',26:'反',27:'犯',28:'峰',29:'妇',30:'抚',31:'夫',32:'父',33:'干',34:'搞',35:'根',36:'公',37:'宫',38:'勾',39:'股',40:'狠',41:'花',42:'滑',43:'坏',44:'魂',45:'鸡',46:'激',47:'夹',48:'奸',49:'交',50:'叫',51:'娇',52:'姐',53:'禁',54:'精',55:'进',56:'紧',57:'菊',58:'渴',59:'口',60:'裤',61:'胯',62:'快',63:'浪',64:'力',65:'楼',66:'乱',67:'裸',68:'妈',69:'毛',70:'迷',71:'靡',72:'妹',73:'摸',74:'嫩',75:'母',76:'娘',77:'尿',78:'咛',79:'女',80:'哦',81:'趴',82:'喷',83:'婆',84:'屁',85:'气',86:'枪',87:'窃',88:'骑',89:'妻',90:'情',91:'亲',92:'群',93:'热',94:'日',95:'肉',96:'揉',97:'乳',98:'软',99:'润',100:'入',101:'塞',102:'骚',103:'色',104:'上',105:'舌',106:'射',107:'身',108:'深',109:'湿',110:'兽',111:'受',112:'舒',113:'爽',114:'水',115:'睡',116:'酥',117:'死',118:'烫',119:'痛',120:'舔',121:'天',122:'体',123:'挺',124:'头',125:'腿',126:'脱',127:'味',128:'慰',129:'吻',130:'握',131:'喔',132:'污',133:'下',134:'小',135:'性',136:'胸',137:'血',138:'穴',139:'阳',140:'痒',141:'药',142:'腰',143:'夜',144:'液',145:'野',146:'衣',147:'姨',148:'吟',149:'淫',150:'荫',151:'幽',152:'诱',153:'尤',154:'欲',155:'吁',156:'玉',157:'吮',158:'窄',159:'占',160:'征',161:'汁',162:'嘴',163:'，',164:'。',165:'…',166:'慾',167:'丢',168:'弄'};var h=result;h=h.replace(/<p[^>]*color:[^>]*>[\\s\\S]*?<\\/p>/g,'');h=h.replace(/<div class=\"show-app2\"[\\s\\S]*?<\\/div>/g,'');h=h.replace(/<script[\\s\\S]*?<\\/script>/g,'');h=h.replace(/<em class=\"n_(\\d+)\"><\\/em>/g,function(s,id){return m[id]||''});h=h.replace(/<br\\s*\\/?>(?:\\s|&nbsp;|<br\\s*\\/?>)+/gi,'\\n');h=h.replace(/<br\\s*\\/?>/gi,'\\n');h=h.replace(/<\\/?p[^>]*>/gi,'\\n');h=h.replace(/&nbsp;/g,' ');h=h.replace(/&[a-z]+;/g,'');h=h.replace(/<[^>]+>/g,'');h=h.replace(/[ \\t]+\\n/g,'\\n');h=h.replace(/\\n{3,}/g,'\\n\\n');h=h.replace(/请记住我们的网址[\\s\\S]*/,'');h=h.trim();return h;})()</js>",
+      "nextContentUrl": "text.下一页@href"
+    }
+  }
+]
