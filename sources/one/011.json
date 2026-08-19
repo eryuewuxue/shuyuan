@@ -1,0 +1,53 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "苦读书",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://m.kudushu.org",
+    "customButton": false,
+    "customOrder": 30,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "玄幻魔法::/sort/1/{{page}}.html\n武侠修真::/sort/2/{{page}}.html\n都市言情::/sort/3/{{page}}.html\n历史军事::/sort/4/{{page}}.html\n侦探推理::/sort/5/{{page}}.html\n网游动漫::/sort/6/{{page}}.html\n科幻小说::/sort/7/{{page}}.html\n恐怖灵异::/sort/8/{{page}}.html\n言情小说::/sort/9/{{page}}.html\n其他类型::/sort/10/{{page}}.html\n日排行榜::/top/dayvisit/{{page}}.html\n周排行榜::/top/weekvisit/{{page}}.html\n月排行榜::/top/monthvisit/{{page}}.html\n总排行榜::/top/allvisit/{{page}}.html\n总收藏榜::/top/goodnum/{{page}}.html\n字数排行::/top/size/{{page}}.html\n日推荐榜::/top/dayvote/{{page}}.html\n周推荐榜::/top/weekvote/{{page}}.html\n月推荐榜::/top/monthvote/{{page}}.html\n总推荐榜::/top/allvote/{{page}}.html\n最新入库::/top/postdate/{{page}}.html\n最近更新::/top/lastupdate/{{page}}.html",
+    "lastUpdateTime": 1784812687514,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "class.infotype@tag.p.0@text##作者：",
+      "coverUrl": "class.infohead@class.pic@tag.img@src",
+      "intro": "class.intro@tag.p@text",
+      "kind": "class.infotype@tag.p.1@text##类型：",
+      "lastChapter": "class.infotype@tag.p.3@tag.a@text",
+      "name": "class.cataloginfo@tag.h3@text"
+    },
+    "ruleContent": {
+      "content": "id.novelcontent@html##<ul class=\"novelbutton\">[\\s\\S]*?</ul>|<div id=\"content_tip\">[\\s\\S]*?</div>|（本章未完.*?继续阅读）|\\(第\\d+/\\d+页\\)|第[\\d一二三四五六七八九十百千]+章[^<]*|<script[\\s\\S]*?</script>",
+      "nextContentUrl": "text.下—页@href"
+    },
+    "ruleExplore": {
+      "author": "class.author@tag.a@text||class.p3@tag.a@text",
+      "bookList": "class.article||class.articlegeneral",
+      "bookUrl": "class.content@tag.h6@tag.a@href||class.p2@tag.a@href",
+      "coverUrl": "class.pic@tag.img@src",
+      "intro": "class.simple@text",
+      "kind": "class.p1@text",
+      "name": "class.content@tag.h6@tag.a@text||class.p2@tag.a@text"
+    },
+    "ruleSearch": {
+      "author": "class.author@tag.a@text",
+      "bookList": "class.searchresult@class.sone",
+      "bookUrl": "tag.a.0@href",
+      "name": "tag.a.0@text"
+    },
+    "ruleToc": {
+      "chapterList": "class.info_menu1.1@class.list_xm@tag.li@tag.a",
+      "chapterName": "text",
+      "chapterUrl": "href",
+      "nextTocUrl": "text.下一页@href"
+    },
+    "searchUrl": "/modules/article/search.php,{\"method\":\"POST\",\"body\":\"searchkey={{key}}\"}",
+    "weight": 0
+  }
+]
