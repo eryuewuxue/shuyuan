@@ -31,6 +31,8 @@
   /* ===== 头部 ===== */
   header{padding:34px 6px 6px}
   .head-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .head-brand{display:flex;align-items:center;gap:11px;min-width:0}
+  .head-avatar{width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--glass-border);box-shadow:0 6px 18px rgba(0,0,0,.08);background:#fff}
   .head-btns{display:flex;gap:8px;flex-shrink:0}
   .icon-btn{
     display:flex;align-items:center;gap:5px;border:none;cursor:pointer;text-decoration:none;
@@ -244,9 +246,12 @@
   <!-- 头部 -->
   <header>
     <div class="head-top">
-      <div>
-        <div class="title">二月无雪<br>书源发布页</div>
-        <div class="sub">Legado 阅读 · 一键导入</div>
+      <div class="head-brand">
+        <img class="head-avatar" src="assets/icon.png" alt="二月无雪头像">
+        <div>
+          <div class="title">二月无雪<br>书源发布页</div>
+          <div class="sub">Legado 阅读 · 一键导入</div>
+        </div>
       </div>
       <div class="head-btns">
         <button class="icon-btn" id="btnSubscription" title="复制阅读订阅源网络导入地址">
