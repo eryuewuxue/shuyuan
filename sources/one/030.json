@@ -1,0 +1,50 @@
+[
+  {
+    "bookSourceComment": "禁漫天堂小说 - 成人小说网站,包含14个分类、搜索功能和正文净化",
+    "bookSourceName": "禁漫天堂小说",
+    "bookSourceUrl": "https://4702.zejfxszmh.cc",
+    "bookSourceType": 0,
+    "enabled": true,
+    "enabledExplore": true,
+    "searchUrl": "/novel/all?key_word={{key}}&page={{page}}",
+    "exploreUrl": "全部小说::https://4702.zejfxszmh.cc/novel/all?page={{page}}\n都市激情::https://4702.zejfxszmh.cc/novel/all/dsjq?page={{page}}\n校园春色::https://4702.zejfxszmh.cc/novel/all/xycs?page={{page}}\n乡村爱情::https://4702.zejfxszmh.cc/novel/all/xcaq?page={{page}}\n系统异能::https://4702.zejfxszmh.cc/novel/all/xtyn?page={{page}}\n家庭乱伦::https://4702.zejfxszmh.cc/novel/all/jtll?page={{page}}\n穿越重生::https://4702.zejfxszmh.cc/novel/all/cycs?page={{page}}\n经典武侠::https://4702.zejfxszmh.cc/novel/all/jdwx?page={{page}}\n同人改编::https://4702.zejfxszmh.cc/novel/all/trgb?page={{page}}\n科学幻想::https://4702.zejfxszmh.cc/novel/all/kxhx?page={{page}}\n东方玄幻::https://4702.zejfxszmh.cc/novel/all/dfxh?page={{page}}\n娱乐明星::https://4702.zejfxszmh.cc/novel/all/ylmx?page={{page}}\n历史架空::https://4702.zejfxszmh.cc/novel/all/lsjk?page={{page}}\n西方魔幻::https://4702.zejfxszmh.cc/novel/all/xfmh?page={{page}}\n贤者小说::https://4702.zejfxszmh.cc/novel/all/xzxs?page={{page}}",
+    "ruleSearch": {
+      "bookList": "class.dx-novel-list@tag.li",
+      "name": "class.block@tag.h2@text",
+      "bookUrl": "tag.a.0@href",
+      "author": "class.block@class.flex@tag.span.0@tag.a@text",
+      "kind": "class.block@class.flex@tag.span.1@tag.a@text",
+      "coverUrl": "class.poster@tag.img@data-src",
+      "lastChapter": "class.block@tag.a.1@class.flex@tag.span@text",
+      "intro": ""
+    },
+    "ruleExplore": {
+      "bookList": "class.dx-novel-list@tag.li",
+      "name": "class.block@tag.h2@text",
+      "bookUrl": "tag.a.0@href",
+      "author": "class.block@class.flex@tag.span.0@tag.a@text",
+      "kind": "class.block@class.flex@tag.span.1@tag.a@text",
+      "coverUrl": "class.poster@tag.img@data-src",
+      "lastChapter": "class.block@tag.a.1@class.flex@tag.span@text",
+      "intro": ""
+    },
+    "ruleBookInfo": {
+      "name": "class.dx-breadcrumbs@tag.li.-1@tag.a@text",
+      "author": "class.detail-page__meta-item.0@tag.a@tag.span@text",
+      "kind": "class.detail-page__meta-text--accent@text",
+      "intro": "class.detail-intro__body@class.detail-intro__text.0@text",
+      "lastChapter": "class.detail-page__meta-item--chapter@tag.a@tag.span@text##第.*章 ",
+      "coverUrl": "class.detail-page__poster-frame@tag.img@data-src",
+      "tocUrl": ""
+    },
+    "ruleToc": {
+      "chapterList": "class.detail-page__catalog-item",
+      "chapterName": "class.detail-page__chapter-title@text",
+      "chapterUrl": "tag.a@href"
+    },
+    "ruleContent": {
+      "content": "class.article@class.line@text##^\\s+",
+      "nextContentUrl": "class.footer@tag.a.-1@href##下一章"
+    }
+  }
+]
