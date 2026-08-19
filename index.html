@@ -566,6 +566,7 @@
     try{
       new QRCode(box, {text:url, width:190, height:190, correctLevel:QRCode.CorrectLevel.M});
     }catch(e){
+      console.warn("QRCode 生成失败:", e);
       box.innerHTML = '<div style="font-size:12px;color:#8A94A6;padding-top:70px">二维码生成失败<br>请复制网址使用</div>';
     }
     $("qrMask").classList.add("show");
