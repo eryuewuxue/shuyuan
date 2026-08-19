@@ -1,0 +1,55 @@
+[
+  {
+    "bookSourceComment": "搜索间隔30s\nby二月无雪\n交流群：756138903",
+    "bookSourceGroup": "Ai",
+    "bookSourceName": "22笔趣阁",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://m.22biqu.net",
+    "customButton": true,
+    "customOrder": 16,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "玄幻魔法::/fenlei/1_{{page}}.html\n武侠修真::/fenlei/2_{{page}}.html\n都市言情::/fenlei/3_{{page}}.html\n历史军事::/fenlei/4_{{page}}.html\n科幻灵异::/fenlei/6_{{page}}.html\n游戏竞技::/fenlei/5_{{page}}.html\n女生耽美::/fenlei/7_{{page}}.html\n其他类型::/fenlei/8_{{page}}.html\n总排行::/rank/allvisit/\n全本::/quanben/fenlei/{{page}}.html",
+    "header": "{\"User-Agent\":\"Mozilla/5.0 (Linux; Android 13; SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36\",\"Referer\":\"https://m.22biqu.net/\",\"Content-Type\":\"application/x-www-form-urlencoded\"}",
+    "lastUpdateTime": 1784531515441,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "class.synopsisArea_detail@class.author@text##.*作者：##",
+      "coverUrl": "class.synopsisArea_detail@tag.img@src",
+      "intro": "class.review@html##最新章节推荐地址：[\\s\\S]*",
+      "kind": "class.synopsisArea_detail@class.sort@text##.*类别：##",
+      "lastChapter": "class.synopsisArea_detail@class.lastchapter@tag.a@text",
+      "name": "class.channelHeader@class.title@text"
+    },
+    "ruleContent": {
+      "content": "id.chaptercontent@html##<p class=\"chapter-page-info\">[\\s\\S]*?</p>|<div style=\"[^\"]*\">[\\s\\S]*?加入书签[\\s\\S]*?</div>|<script[\\s\\S]*?</script>|<p>\\s*第[\\d一二三四五六七八九十百千]+[章节话回][^<]*</p>",
+      "nextContentUrl": "text.下一页@href"
+    },
+    "ruleExplore": {
+      "author": "class.author@text##.*作者：| （\\d{4}-\\d{2}-\\d{2}）##",
+      "bookList": "class.hot_sale",
+      "bookUrl": "tag.a@href",
+      "intro": "class.review@text##.*简介：##",
+      "name": "class.title@text"
+    },
+    "ruleSearch": {
+      "author": "class.author.0@text##.*作者：##",
+      "bookList": "class.bookbox",
+      "bookUrl": "class.bookname@tag.a@href",
+      "coverUrl": "class.bookimg@tag.img@src##`##",
+      "kind": "class.author.1@text##.*类型：##",
+      "lastChapter": "class.update@tag.a@text",
+      "name": "class.bookname@tag.a@text"
+    },
+    "ruleToc": {
+      "chapterList": "class.recommend.1@class.directoryArea@tag.p",
+      "chapterName": "tag.a@text",
+      "chapterUrl": "tag.a@href",
+      "nextTocUrl": "text.下一页@href"
+    },
+    "searchUrl": "https://m.22biqu.net/ss/,{\"method\":\"POST\",\"body\":\"searchkey={{key}}\"}",
+    "weight": 0
+  }
+]
