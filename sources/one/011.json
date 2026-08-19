@@ -1,0 +1,46 @@
+[
+  {
+    "bookSourceComment": "by二月无雪\n交流群：756138903",
+    "bookSourceGroup": "Ai",
+    "bookSourceName": "顶点小说",
+    "bookSourceType": 0,
+    "bookSourceUrl": "http://www.xsbook.org",
+    "customButton": false,
+    "customOrder": 3,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "玄幻::/xclass/1/{{page}}.html\n武侠::/xclass/2/{{page}}.html\n女频::/xclass/3/{{page}}.html\n现代::/xclass/4/{{page}}.html\n历史::/xclass/5/{{page}}.html\n游戏::/xclass/6/{{page}}.html\n科幻::/xclass/7/{{page}}.html\n美文::/xclass/8/{{page}}.html\n其他::/xclass/9/{{page}}.html\n全本::/quanben/xclass/{{page}}.html\n总排行榜::/rank/allvisit/{{page}}.html\n月排行榜::/rank/monthvisit/{{page}}.html\n周排行榜::/rank/weekvisit/{{page}}.html\n收藏榜::/rank/goodnum/{{page}}.html",
+    "lastUpdateTime": 1784466707722,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "@css:#info p:eq(0) a@text",
+      "coverUrl": "@css:#fmimg img@data-original",
+      "intro": "@css:#intro@text",
+      "kind": "@css:.wppc p:eq(0)@text##类别：",
+      "lastChapter": "@css:#info p:eq(2) a@text",
+      "name": "@css:#info h1@text",
+      "wordCount": "@css:#info p:eq(1)@text##.*共(\\d+)章节.*##$1章"
+    },
+    "ruleContent": {
+      "content": "@css:#booktxt@html",
+      "nextContentUrl": "text.下一页@href"
+    },
+    "ruleExplore": {
+      "author": "@css:.btm a@text",
+      "bookList": "@css:.hotcontent .item",
+      "bookUrl": "@css:.image a@href",
+      "coverUrl": "@css:.image img@data-original",
+      "intro": "@css:dd@text",
+      "name": "@css:.image a@title"
+    },
+    "ruleSearch": {},
+    "ruleToc": {
+      "chapterList": "@css:#list dl a[rel=chapter]",
+      "chapterName": "text",
+      "chapterUrl": "href"
+    },
+    "weight": 0
+  }
+]
