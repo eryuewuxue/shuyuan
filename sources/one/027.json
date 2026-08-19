@@ -1,0 +1,42 @@
+[
+  {
+    "bookSourceComment": "二改源\nby二月无雪、qq951077\n交流群：756138903",
+    "bookSourceGroup": "二月无雪",
+    "bookSourceName": "69小说吧🔞",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://69xsb.com",
+    "customButton": false,
+    "customOrder": 64,
+    "enabled": true,
+    "enabledCookieJar": false,
+    "enabledExplore": true,
+    "eventListener": false,
+    "exploreUrl": "<js>\nvar result = [];\n\n\nvar statusMap = {\n    \"全部\": \"\",\n    \"全本\": \"/quanben/\"\n};\n\nvar statusType = infoMap[\"状态\"] || \"全部\";\nvar statusParam = statusMap[statusType];\nresult.push({\n    \"title\": \"状态\",\n    \"type\": \"select\",\n    \"chars\": [\"全部\",\"全本\"],\n    \"default\": statusType,\n    \"action\": \"java.refreshExplore()\",\n    \"style\": {\"layout_flexGrow\": 1, \"layout_flexBasisPercent\": 1}\n});\nresult.push({\n        \"title\":statusType,\n        \"url\":`${statusParam}/sort/{{page}}/`,\n        \"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":1}\n    });\n\nvar koreanItems = ['奇幻','武侠','都市','科幻','历史','耽美','游戏','其他','午夜',];\n\nfor(var i=0;i<koreanItems.length;i++){\n    result.push({\n        \"title\":koreanItems[i],\n        \"url\":`${statusParam}/sort/${i+1}/{{page}}/`,\n        \"style\":{\"layout_flexGrow\":1,\"layout_flexBasisPercent\":0.25}\n    });\n}\n\n// 输出 JSON 字符串\nJSON.stringify(result);\n</js>\n",
+    "lastUpdateTime": 1784812712792,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+      "author": "a[href*='/author/']@text",
+      "lastChapter": "a[href*='.html'][href*='/book/'].0@text",
+      "name": "h1@text"
+    },
+    "ruleContent": {
+      "content": "#rtext@html##最新地址.*|有声小说地址.*|AV视频地址.*|uxx123\\.com|uxxdizhi\\.com|本站永久域名.*|加入收藏.*|加入书签.*|作者有话要说：.*|新坑预告.*|文案还没想好.*|可以说说主角设定.*|直接搜书名吧.*|关于.*的第三部.*|微博.*同步更新.*|新文会准备.*|我会更更隔壁.*|要撸小说网.*|永久地址.*|上一章.*|书页.*|目录.*|书末页.*##"
+    },
+    "ruleExplore": {},
+    "ruleSearch": {
+      "author": "text.作者@text##作者：",
+      "bookList": ".bookbox",
+      "bookUrl": "a.0@href",
+      "lastChapter": "a.1@text",
+      "name": "a.0@text",
+      "wordCount": "text.字数@text##字数："
+    },
+    "ruleToc": {
+      "chapterList": "a[href*='.html'][href*='/book/']",
+      "chapterName": "@text",
+      "chapterUrl": "@href"
+    },
+    "searchUrl": "/search/,{\n  \"body\": \"searchkey={{key}}&&action=&&submit=\",\n  \"method\": \"POST\"\n}",
+    "weight": 0
+  }
+]
